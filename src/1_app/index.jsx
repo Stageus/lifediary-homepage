@@ -3,17 +3,17 @@ import { RouterProvider } from "react-router-dom";
 import { Router } from "./Router.jsx";
 import { theme } from "./theme";
 import { GlobalStyle } from "./GlobalStyle";
-export const App = ()=>{
-    const style = {
-        fontSize: theme.fontSize,
-        ...theme.light
-    };
-    return(
-        <>
-        <ThemeProvider theme={theme}>
-            <GlobalStyle/>
-            <RouterProvider router={Router}/>
-        </ThemeProvider>
-        </>
-    );
-}
+export const App = () => {
+  const style = {
+    fontSize: theme.fontSize,
+    ...theme.light,
+  };
+  return (
+    <>
+      <ThemeProvider theme={style}>
+        <GlobalStyle />
+        <RouterProvider router={Router} />
+      </ThemeProvider>
+    </>
+  );
+};
