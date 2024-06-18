@@ -1,0 +1,6 @@
+export const DefaultBtn = ()=>{
+    return(
+        <>
+        </>
+    );
+}
