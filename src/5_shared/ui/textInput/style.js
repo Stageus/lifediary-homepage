@@ -13,7 +13,7 @@ const TextInput = styled.input`
     $variant === "default" &&
     `
       background-color: ${theme.white};
-      border: 3px solid ${theme.majorColor};
+      border: 3px solid ${theme.major};
     `}
 
     ${({ $variant, theme }) =>
