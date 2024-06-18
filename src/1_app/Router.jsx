@@ -21,7 +21,7 @@ import { UserProfile } from "@pages/userProfile";
         </Route>
         <Route path="/" element={<HeaderAndAsideLayout/>}>
           <Route path="complain" element={<Complain/>}/>
-          <Route path="/diary" element={<Diary/>}/>
+          <Route path="diary" element={<Diary/>}/>
           <Route path="diaryCreate" element={<DiaryCreate/>}/>
           <Route path="diaryUpdate" element={<DiaryUpdate/>}/>
           <Route path="search" element={<Search/>}/>
