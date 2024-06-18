@@ -1,24 +1,29 @@
 import styled from "styled-components";
 
-export default {
-  textInput: styled.input`
-    ${({ $variant, theme }) =>
-      $variant === "select" &&
-      `
-    background-color: ${theme.major};
-    border: 1px solid ${theme.white};
-  `}
-    ${({ $variant, theme }) =>
-      $variant === "disabled" &&
-      `
-    background-color: ${theme.gray};
-    border: 1px solid ${theme.white};
-  `}
+const TextInput = styled.input`
+  ${({ theme }) => `
+    height: 40px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: ${theme.fontSize.base};
+    color: ${theme.black};
+    `}
+
   ${({ $variant, theme }) =>
-      $variant === "default" &&
-      `
-    background-color: ${theme.highlight};
-    border: 1px solid ${theme.white};
-  `}
-  `,
+    $variant === "default" &&
+    `
+      background-color: ${theme.white};
+      border: 3px solid ${theme.majorColor};
+    `}
+
+    ${({ $variant, theme }) =>
+    $variant === "error" &&
+    `
+      background-color: ${theme.white};
+      border: 3px solid ${theme.highlight};
+    `}
+`;
+
+export const S = {
+  TextInput,
 };
