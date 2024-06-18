@@ -3,7 +3,7 @@ import styled from "styled-components";
 const headerLayout = styled.div`
   height: 100%;
   display: grid;
-  grid-template-rows: 100px;
+  grid-template-rows: 80px;
   grid-template-areas:
     "header header header"
     "main main main"
@@ -13,7 +13,7 @@ const headerLayout = styled.div`
 const header = styled.div`
   position: fixed;
   width: 100%;
-  height: 100px;
+  height: 80px;
   grid-area: header;
   outline: 1px solid black;
 `;

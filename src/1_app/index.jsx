@@ -8,10 +8,9 @@ export const App = ()=>{
         fontSize: theme.fontSize,
         ...theme.light
     };
-
     return(
         <>
-        <ThemeProvider theme={style}>
+        <ThemeProvider theme={theme}>
             <GlobalStyle/>
             <RouterProvider router={Router}/>
         </ThemeProvider>
