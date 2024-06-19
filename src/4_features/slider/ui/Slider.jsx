@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { S } from "./style";
+import { useGetDiaryList } from "../api/useGetDiaryList";
 import { Icon } from "@shared/ui";
 export const Slider = () => {
-  const diaryData = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-  ];
+    const [diaryList] = useGetDiaryList();
   const [postionUnit, setPostionUnit] = useState(0);
 
   const onClickLeft = () => {
@@ -26,8 +23,8 @@ export const Slider = () => {
           ) : null}
         </S.Button>
         <S.ItemList>
-          {diaryData &&
-            diaryData.map((diaryList, idx) => {
+          {diaryList &&
+            diaryList.map((diaryList, idx) => {
               return (
                 <S.ItemContainer key={idx} $postionUnit={postionUnit}>
                   {diaryList.map((diary, idx) => {
