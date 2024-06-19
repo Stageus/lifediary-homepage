@@ -5,14 +5,15 @@ import { Icon } from "@shared/ui";
 export const Slider = () => {
     const [diaryList] = useGetDiaryList();
   const [postionUnit, setPostionUnit] = useState(0);
+  console.log(diaryList.length)
 
   const onClickLeft = () => {
     if (!postionUnit) {
       return;
     }
-    setPostionUnit(postionUnit + 100);
+    setPostionUnit(postionUnit + 1);
   };
-  const onClickRight = () => setPostionUnit(postionUnit - 100);
+  const onClickRight = () => setPostionUnit(postionUnit - 1);
 
   return (
     <>

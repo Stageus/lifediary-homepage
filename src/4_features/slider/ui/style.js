@@ -31,7 +31,7 @@ const ItemContainer = styled.div`
     gap: 10px;
     padding: 10px;
     transition: transform 0.5s ease;
-    transform: translateX(${({$postionUnit}) => $postionUnit}%)
+    transform: translateX(${({$postionUnit}) => $postionUnit * 100}%)
 `;
 
 const Item = styled.div`
