@@ -12,6 +12,7 @@ const Button = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 40px;
     border-radius: 50%;
     background-color: ${({theme})=> theme.major};
     cursor: pointer;
