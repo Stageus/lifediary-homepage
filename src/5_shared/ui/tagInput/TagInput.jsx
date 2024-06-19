@@ -9,9 +9,6 @@ export const TagInput = (props) => {
       setValue("#" + e.target.value);
     }
   };
-  const onChangeHandler = (e) => {
-    setValue(e.target.value);
-  };
 
   const onKeyDownEnter = (e) => {
     if (e.key === "Enter" && value.startsWith("#")) {
@@ -21,7 +18,7 @@ export const TagInput = (props) => {
 
   return (
     <>
-      <S.TagInput type="text" placeholder={props.placeholder} onKeyUp={onKeyUpEnter} onKeyDown={onKeyDownEnter} onChange={onChangeHandler} value={value} />
+      <S.TagInput type="text" placeholder={props.placeholder} onKeyUp={onKeyUpEnter} onKeyDown={onKeyDownEnter} value={value} />
     </>
   );
 };
