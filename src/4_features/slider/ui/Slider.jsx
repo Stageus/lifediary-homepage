@@ -3,17 +3,18 @@ import { S } from "./style";
 import { useGetDiaryList } from "../api/useGetDiaryList";
 import { Icon } from "@shared/ui";
 export const Slider = () => {
-    const [diaryList] = useGetDiaryList();
+    const [diaryList, page, setPage] = useGetDiaryList();
   const [postionUnit, setPostionUnit] = useState(0);
-  console.log(diaryList.length)
 
   const onClickLeft = () => {
-    if (!postionUnit) {
-      return;
-    }
+    if(!postionUnit) return;
     setPostionUnit(postionUnit + 1);
   };
-  const onClickRight = () => setPostionUnit(postionUnit - 1);
+
+  const onClickRight = () => {
+    if(diaryList.length - 1 === -postionUnit) setPage(page + 1);
+    setPostionUnit(postionUnit - 1)
+  };
 
   return (
     <>
@@ -25,10 +26,10 @@ export const Slider = () => {
         </S.Button>
         <S.ItemList>
           {diaryList &&
-            diaryList.map((diaryList, idx) => {
+            diaryList?.map((diaryContainer, idx) => {
               return (
                 <S.ItemContainer key={idx} $postionUnit={postionUnit}>
-                  {diaryList.map((diary, idx) => {
+                  {Array.isArray(diaryContainer) && diaryContainer?.map((diary, idx) => {
                     return (
                       <S.Item key={idx}>
                         <img src={diary.url} />
