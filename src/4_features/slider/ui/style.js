@@ -29,6 +29,8 @@ const ItemContainer = styled.div`
     display: flex;
     gap: 10px;
     padding: 10px;
+    transition: transform 0.5s ease;
+    transform: translateX(${({$postionUnit}) => $postionUnit}%)
 `;
 
 const Item = styled.div`
