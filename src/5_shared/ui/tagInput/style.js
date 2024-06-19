@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
 const TagInputBox = styled.input`
-  ${({ theme, px, py, fontSize }) => `
+  ${({ theme, px, fontSize }) => `
     width: 100%;
     height: 40px;
-    padding: ${px || "8px"} ${py || "8px"};
+    padding: 8px ${px || "8px"} ;
     font-size: ${fontSize || theme.fontSize.base};
     color: ${theme.black};
     background-color: ${theme.white};
     border: 3px solid ${theme.white};
+    &:focus {
+      outline: none;
+    }
   `}
 `;
 
@@ -33,7 +36,6 @@ const TagListBox = styled.div`
 
 const TagListName = styled.p`
   ${({ theme }) => `
-    padding: 0 8px;
     white-space: nowrap;
     font-size: ${theme.fontSize.base};
     color: ${theme.black};
@@ -42,7 +44,7 @@ const TagListName = styled.p`
 
 const TagListDeleteBtn = styled.button`
   ${({ theme }) => `
-    padding: 0 8px;
+    margin: 0 8px 0 8px;
     white-space: nowrap;
     background-color: ${theme.white};
     color: ${theme.black};
