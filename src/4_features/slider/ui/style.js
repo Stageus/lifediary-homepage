@@ -37,6 +37,7 @@ const ItemContainer = styled.div`
 const Item = styled.div`
     flex-grow: 1;
     flex-basis: 100px;
+    height: 200px;
     box-shadow: 3px 3px 7px gray;
     border-radius: 10px;
     display: flex;
