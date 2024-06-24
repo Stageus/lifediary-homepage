@@ -35,13 +35,13 @@ const ItemContainer = styled.div`
 `;
 
 const Item = styled.div`
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 100px;
     box-shadow: 3px 3px 7px gray;
     border-radius: 10px;
-    & > img {
-        border-radius: 10px;
-        width: 100%;
-    }
+    display: flex;
+    flex-direction: column;
+    
 `;
 
 const UserInfo = styled.div`
@@ -50,15 +50,17 @@ const UserInfo = styled.div`
         align-items: center;
         padding: 10px;
         gap: 10px;
-        & > img{
-            width: 25px;
+
+        & > div{
+        width: 25px;
+        height: 25px;
         }
+
         & > span{
             color: ${({theme}) => theme.black};
             font-size: ${({theme}) => theme.fontSize.medium};
         }
-`
-
+`;
 
 
 export const S = {
