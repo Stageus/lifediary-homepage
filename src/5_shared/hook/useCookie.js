@@ -10,8 +10,7 @@ export const useCookie = () => {
   };
 
   const handleGetCookie = () => {
-    const value = cookies.myCookie;
-    console.log(value);
+    return cookies.myCookie;
   };
 
   const handleRemoveCookie = (name) => {
