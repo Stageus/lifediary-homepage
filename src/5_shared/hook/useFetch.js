@@ -1,34 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export const useFetch = (url, method, autoFetch = false, body) => {
+export const useFetch = () => {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
-  const fetchData = async () => {
+  const baseFetch = async (url, options, token) => {
     try {
-      const response = await fetch(url, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const { method = "GET", headers = "aplication/json", data } = options;
 
-      if (response.ok) {
-        const result = await response.json();
-        setData(result);
-      } else {
-        console.error("Error:", response.statusText);
+      const requestInfo = {
+        method,
+        ...(headers ? { "Content-Type": headers } : {}),
+        ...(data && {
+          body: data instanceof FormData ? data : JSON.stringify(data),
+        }),
+        ...(token && { Authorization: `Bearer ${token}` }),
+      };
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, { ...requestInfo });
+
+      if (!response.ok) {
+        console.error(response.status);
+        setError(response.status);
+        return;
       }
-    } catch (error) {
-      console.error("Error:", error);
+
+      const result = await response.json();
+      setData(result);
+      console.log("통신성공 :", method, headers, data, token);
+    } catch (err) {
+      setError(err);
+      console.error(err);
     }
   };
 
-  useEffect(() => {
-    if (autoFetch) {
-      fetchData();
-    }
-  }, []);
-
-  return { data, fetchData };
+  return [data, error, baseFetch];
 };
