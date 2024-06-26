@@ -1,5 +1,6 @@
 import { S } from "./style";
-import { dayFilter } from "../lib/dayFilter";
+import { grassWrap } from "../lib/grassWrap";
+import { findFirstDay } from "../lib/findFirstDay";
 
 // 년도와 월을 받아 해당 월의 마지막 일을 반환
 const lastDay = (years, month)=>{
@@ -66,21 +67,10 @@ const createTestData = (years)=>{
     return grassList;
 };
 
-const firstDay = (TimeStemp)=>{
-    const dayFilter = new Date(TimeStemp);
-    const month = dayFilter.getMonth() + 1;
-    const day = dayFilter.getDate();
 
-    if(day !== 1){
-        return null;
-        }
-    return `${month}월`;
-}
 
 export const Grass = () => {
-        firstDay();
-        const grassList = dayFilter(createTestData());
-
+        const grassList = grassWrap(createTestData());
   return (
     <>
         <S.Grass>            
@@ -92,7 +82,7 @@ export const Grass = () => {
                                 {value[Object.keys(value)].map((value, idx)=>{
                                     return(
                                         <S.GrassItem $isExist={value} key={idx} data-date={value?.date}>
-                                            {firstDay(value?.date) ? <S.MonthItem>{firstDay(value?.date)}</S.MonthItem> : ""}
+                                            {findFirstDay(value?.date) ? <S.MonthItem>{findFirstDay(value?.date)}</S.MonthItem> : ""}
                                         </S.GrassItem>
                                     );
                                 })}
