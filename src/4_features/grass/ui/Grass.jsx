@@ -1,5 +1,5 @@
 import { S } from "./style";
-import { DefaultBtn } from "@shared/ui";
+import { dayFilter } from "../lib/dayFilter";
 
 // 년도와 월을 받아 해당 월의 마지막 일을 반환
 const lastDay = (years, month)=>{
@@ -23,7 +23,7 @@ const createTestData = (years)=>{
                     const dayLength = String(j).padStart(2,"0");
                     grassList.push({
                         idx: diaryIdx,
-                        date: `${allYears}-${mongthLength}-${dayLength}-14:00:00`,
+                        date: `${allYears}-${mongthLength}-${dayLength} 14:00:00`,
                         color: "blue",
                     });
                     diaryIdx++;
@@ -41,7 +41,7 @@ const createTestData = (years)=>{
                 const dayLength = String(j).padStart(2,"0");
                 grassList.push({
                     idx: diaryIdx,
-                    date: `${allYears}-${mongthLength}-${dayLength}-14:00:00`,
+                    date: `${allYears}-${mongthLength}-${dayLength} 14:00:00`,
                     color: "blue",
                 });
                 diaryIdx++;
@@ -56,7 +56,7 @@ const createTestData = (years)=>{
                 const dayLength = String(j).padStart(2,"0");
                 grassList.push({
                     idx: diaryIdx,
-                    date: `${selectYears}-${mongthLength}-${dayLength}-14:00:00`,
+                    date: `${selectYears}-${mongthLength}-${dayLength} 14:00:00`,
                     color: "blue",
                 });
                 diaryIdx++;
@@ -66,49 +66,41 @@ const createTestData = (years)=>{
     return grassList;
 };
 
-export const Grass = () => {
+const firstDay = (TimeStemp)=>{
+    const dayFilter = new Date(TimeStemp);
+    const month = dayFilter.getMonth() + 1;
+    const day = dayFilter.getDate();
 
-console.log(createTestData());
+    if(day !== 1){
+        return null;
+        }
+    return `${month}월`;
+}
+
+export const Grass = () => {
+        firstDay();
+        const grassList = dayFilter(createTestData());
 
   return (
     <>
-      <S.Container>
-        <S.YearsBtn>
-          <DefaultBtn text={2024} />
-          <DefaultBtn text={2023} />
-          <DefaultBtn text={2022} />
-        </S.YearsBtn>
-        <S.Grass>
-        <S.MonthList>
-              <div>1월</div>
-              <div>2월</div>
-              <div>3월</div>
-              <div>4월</div>
-              <div>5월</div>
-              <div>6월</div>
-              <div>7월</div>
-              <div>8월</div>
-              <div>9월</div>
-              <div>10월</div>
-              <div>11월</div>
-              <div>12월</div>
-        </S.MonthList>
-        <S.DaysList>
-            <S.DayItem>월</S.DayItem>
-            <S.DayItem>화</S.DayItem>
-            <S.DayItem>수</S.DayItem>
-            <S.DayItem>목</S.DayItem>
-            <S.DayItem>금</S.DayItem>
-            <S.DayItem>토</S.DayItem>
-            <S.DayItem>일</S.DayItem>
-          </S.DaysList>
-          <S.GrassList>
-              {/* {value.map((value,idx) => {
-                return <S.GrassItem $color={value.color} key={idx} />;
-              })} */}
-            </S.GrassList>
+        <S.Grass>            
+                {grassList.map((value, idx)=>{
+                    return (
+                        <S.DayOfWeekList key={idx}>
+                            <S.Dayofweek>{Object.keys(value)}</S.Dayofweek>
+                            <S.GrassList>
+                                {value[Object.keys(value)].map((value, idx)=>{
+                                    return(
+                                        <S.GrassItem $isExist={value} key={idx} data-date={value?.date}>
+                                            {firstDay(value?.date) ? <S.MonthItem>{firstDay(value?.date)}</S.MonthItem> : ""}
+                                        </S.GrassItem>
+                                    );
+                                })}
+                            </S.GrassList>
+                        </S.DayOfWeekList>
+                    );
+                })}
         </S.Grass>
-      </S.Container>
     </>
   );
 };

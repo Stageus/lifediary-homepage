@@ -1,80 +1,51 @@
 import styled from "styled-components";
 
-
-const Container = styled.div`
-    padding: 10px;
-
-    /*  */
-    margin: 0 auto;
-`;
-
-const YearsBtn = styled.div`
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-`;
-
 const Grass = styled.div`
-    display: grid;
-    grid-template-columns: 50px;
-    grid-template-rows: 50px;
-    
+    width: 100%;
+    max-width: fit-content;
+    padding-top: 30px;
+    overflow-x: scroll;
+    position: relative;
 
-
-
-    /*  */
-    background-color: gray;
-`;
-
-const MonthList = styled.div`
-    grid-column: 2;
-
-    display: flex;
-    justify-content: space-around;
-    
-`;
-
-const DaysList = styled.div`
-    grid-row: 2;
     display: flex;
     flex-direction: column;
+    gap: 3px;
+`;
+
+const DayOfWeekList = styled.div`
+    display: flex;
     align-items: center;
 `;
 
-const DayItem = styled.div`
-    padding: 10px;
+const Dayofweek = styled.p`
+    font-size: 14px;
+    padding-right: 20px;
 `;
 
 const GrassList = styled.div`
-    display: grid;
-    grid-template-rows: repeat(7, 1fr);
-    grid-auto-flow: column;
-    
-    /* max-height: 117px; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* flex-wrap: wrap; */
+    display: flex;
+    gap: 3px;    
 `;
 
 const GrassItem = styled.div`
-    border-radius: 2px;
-    padding: 10px;
     width: 15px;
     height: 15px;
-    background-color: ${({$color})=> $color ?? "black"};
-
-    /*  */
-    outline: 1px solid white;
+    border-radius: 2px;
+    background-color: ${({$isExist,theme}) => $isExist && theme.gray};
 `;
 
+const MonthItem = styled.div`
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    
+`;
 
 export const S = {
-    Container,
-    YearsBtn,
     Grass,
-    MonthList,
-    DaysList,
-    DayItem,
+    DayOfWeekList,
+    Dayofweek,
     GrassList,
     GrassItem,
+    MonthItem
 }
