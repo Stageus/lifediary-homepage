@@ -1,7 +1,18 @@
+import { useNavigate } from "react-router-dom";
+
+import { S } from "./style";
+
 export const Login = () => {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <div>로그인 페이지</div>
-    </>
+    <S.PageContainer>
+      <S.LoginContainer>
+        <S.Logo />
+        <S.LoginBtn onClick={() => navigate("/Complain")}>
+          <S.GoogleLogo />
+        </S.LoginBtn>
+      </S.LoginContainer>
+    </S.PageContainer>
   );
 };
