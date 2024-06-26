@@ -1,4 +1,4 @@
-export const dayFilter = (grassList)=>{
+export const grassWrap = (grassList)=>{
     const daysOfWeek = ["일","월","화","수","목","금","토"];
     const result = {
         "일":[],
