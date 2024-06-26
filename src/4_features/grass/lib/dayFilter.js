@@ -1,23 +1,26 @@
 export const dayFilter = (grassList)=>{
-    const days = ["일","월","화","수","목","금","토"];
-    const result = [
-        {"일":[]},
-        {"월":[]},
-        {"화":[]},
-        {"수":[]},
-        {"목":[]},
-        {"금":[]},
-        {"토":[]},
-    ];
+    const daysOfWeek = ["일","월","화","수","목","금","토"];
+    const result = {
+        "일":[],
+        "월":[],
+        "화":[],
+        "수":[],
+        "목":[],
+        "금":[],
+        "토":[],
+    };
+    
     for(let grass of grassList){
         const grassDay = new Date(grass.date).getDay();
-        const dayName = days[grassDay];
-        for(let obj of result){
-            if(obj[dayName]){
-                obj[dayName].push(grass);
-                break;
-            }
-        }
+        const dayName = daysOfWeek[grassDay];
+        result[dayName].push(grass);
     }
-    return result;
+    
+    for(let i = 0 ; i < daysOfWeek.length - 1 ; i++){
+        if(result[daysOfWeek[i]].length >= result[daysOfWeek[i + 1]].length) break;
+        result[daysOfWeek[i]].unshift(null);
+    }
+    
+    const resultWrap = Object.keys(result).map( day => ({[day]:result[day]}));
+    return resultWrap;
 };
