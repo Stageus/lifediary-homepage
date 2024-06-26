@@ -27,7 +27,6 @@ export const useFetch = () => {
 
       const result = await response.json();
       setData(result);
-      console.log("통신성공 :", method, headers, data, token);
     } catch (err) {
       setError(err);
       console.error(err);
