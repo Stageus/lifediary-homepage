@@ -20,11 +20,6 @@ const LoginContainer = styled.div`
   border-radius: 10px;
   padding: 120px 80px;
   max-width: 480px;
-
-  @media (max-width: 375px) {
-    gap: 40px;
-    padding: 80px 40px;
-  }
   `}
 `;
 
@@ -32,11 +27,8 @@ const Logo = styled.img.attrs({
   src: logo,
   alt: "logo",
 })`
-  width: 280px;
+  width: 160px;
   border-radius: 10px;
-  @media (max-width: 375px) {
-    width: 180px;
-  }
 `;
 
 const GoogleLogo = styled.img.attrs({
