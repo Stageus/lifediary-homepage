@@ -24,15 +24,15 @@ export const Grass = () => {
             })}
         </S.YearBtnList>
         <S.Grass>            
-                {grassList?.map((value, idx)=>{
+                {grassList?.map((dayOfWeek, idx)=>{
                     return (
                         <S.DayOfWeekList key={idx}>
-                            <S.Dayofweek>{Object.keys(value)}</S.Dayofweek>
+                            <S.Dayofweek>{Object.keys(dayOfWeek)}</S.Dayofweek>
                             <S.GrassList>
-                                {value[Object.keys(value)]?.map((value, idx)=>{
+                                {dayOfWeek[Object.keys(dayOfWeek)]?.map((day, idx)=>{
                                     return(
-                                        <S.GrassItem $isExist={value} key={idx} data-date={value?.date}>
-                                            {findFirstDay(value?.date) ? <S.MonthItem>{findFirstDay(value?.date)}</S.MonthItem> : ""}
+                                        <S.GrassItem $isExist={day?.color} key={idx} data-date={day?.date}>
+                                            {findFirstDay(day?.date) ? <S.MonthItem>{findFirstDay(day?.date)}</S.MonthItem> : ""}
                                         </S.GrassItem>
                                     );
                                 })}

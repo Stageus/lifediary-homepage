@@ -12,7 +12,6 @@ const YearBtnList = styled.div`
 `;
 
 const Grass = styled.div`
-    /* background-color: blue; */
     width: 100%;
     max-width: fit-content;
     padding-top: 30px;
@@ -43,7 +42,7 @@ const GrassItem = styled.div`
     width: 15px;
     height: 15px;
     border-radius: 2px;
-    background-color: ${({$isExist,theme}) => $isExist && theme.gray};
+    background-color: ${({$isExist,theme}) => $isExist ?? theme.gray};
 `;
 
 const MonthItem = styled.div`
