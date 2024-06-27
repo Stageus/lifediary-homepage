@@ -1,6 +1,18 @@
 import styled from "styled-components";
 
+const GrassContainer = styled.div`
+    width: fit-content;
+`;
+
+const YearBtnList = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 0 30px 0;
+`;
+
 const Grass = styled.div`
+    /* background-color: blue; */
     width: 100%;
     max-width: fit-content;
     padding-top: 30px;
@@ -42,6 +54,8 @@ const MonthItem = styled.div`
 `;
 
 export const S = {
+    GrassContainer,
+    YearBtnList,
     Grass,
     DayOfWeekList,
     Dayofweek,
