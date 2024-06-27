@@ -30,8 +30,11 @@ export const Grass = () => {
                             <S.Dayofweek>{Object.keys(dayOfWeek)}</S.Dayofweek>
                             <S.GrassList>
                                 {dayOfWeek[Object.keys(dayOfWeek)]?.map((day, idx)=>{
+                                    /*
+                                        api가 완성되고 난후에 day.idx로 key값으로 지정해야함,
+                                    */
                                     return(
-                                        <S.GrassItem $isExist={day?.color} key={idx} data-date={day?.date}>
+                                        <S.GrassItem $isExist={day?.color} key={idx} $date={day?.date}>
                                             {findFirstDay(day?.date) ? <S.MonthItem>{findFirstDay(day?.date)}</S.MonthItem> : ""}
                                         </S.GrassItem>
                                     );

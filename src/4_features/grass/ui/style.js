@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 
 const GrassContainer = styled.div`
     width: fit-content;
@@ -42,7 +42,14 @@ const GrassItem = styled.div`
     width: 15px;
     height: 15px;
     border-radius: 2px;
-    background-color: ${({$isExist,theme}) => $isExist ?? theme.gray};
+    ${({ $date, $isExist, theme }) => $date 
+    ? css`
+        background-color: ${$isExist ? $isExist : theme.gray};
+      `
+    : css`
+        background-color: transparent;
+      `
+    }
 `;
 
 const MonthItem = styled.div`
