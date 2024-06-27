@@ -3,6 +3,12 @@ const lastDay = (years, month)=>{
     return new Date(years, month, 0).getDate();
 }
 
+// 랜덤 색상을 선택하는 함수
+const getRandomColor = () => {
+    const colors = ["blue", "green", "red", "yellow"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
 // 임시 데이터 생성용
 export const createTestData = (years)=>{
     const selectYears = years ?? new Date().getFullYear();
@@ -21,7 +27,7 @@ export const createTestData = (years)=>{
                     grassList.push({
                         idx: diaryIdx,
                         date: `${allYears}-${mongthLength}-${dayLength} 14:00:00`,
-                        color: "blue",
+                        color: getRandomColor(),
                     });
                     diaryIdx++;
                 }
@@ -39,7 +45,7 @@ export const createTestData = (years)=>{
                 grassList.push({
                     idx: diaryIdx,
                     date: `${allYears}-${mongthLength}-${dayLength} 14:00:00`,
-                    color: "blue",
+                    color: getRandomColor(),
                 });
                 diaryIdx++;
             }
@@ -54,7 +60,7 @@ export const createTestData = (years)=>{
                 grassList.push({
                     idx: diaryIdx,
                     date: `${selectYears}-${mongthLength}-${dayLength} 14:00:00`,
-                    color: "blue",
+                    color: getRandomColor(),
                 });
                 diaryIdx++;
             }
