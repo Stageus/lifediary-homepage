@@ -9,7 +9,8 @@ export const Login = () => {
     <S.PageContainer>
       <S.LoginContainer>
         <S.Logo />
-        <S.LoginBtn onClick={() => navigate("/Complain")}>
+        {/* 임시로 회원가입페이지로 즉시 이동하도록 경로설정, 추후 수정예정 */}
+        <S.LoginBtn onClick={() => navigate("/SignUp")}>
           <S.GoogleLogo />
         </S.LoginBtn>
       </S.LoginContainer>
