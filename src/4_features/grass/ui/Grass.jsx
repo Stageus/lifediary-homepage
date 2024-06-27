@@ -1,7 +1,8 @@
 import { S } from "./style";
-import { findFirstDay } from "../lib/findFirstDay";
+import {GrassItem} from "./grassItem/GrassItem";
 import { useGetGrassList } from "../api/useGetGrassList";
 import { DefaultBtn } from "@shared/ui";
+
 
 export const Grass = () => {
         const [grassList, setSelectYear] = useGetGrassList();
@@ -31,12 +32,11 @@ export const Grass = () => {
                             <S.GrassList>
                                 {dayOfWeek[Object.keys(dayOfWeek)]?.map((day, idx)=>{
                                     /*
-                                        api가 완성되고 난후에 day.idx로 key값으로 지정해야함,
+                                    [추후 수정예정]
+                                    api가 완성되고 난후에 day.idx를 key값으로 지정해야함,
                                     */
-                                    return(
-                                        <S.GrassItem $isExist={day?.color} key={idx} $date={day?.date}>
-                                            {findFirstDay(day?.date) ? <S.MonthItem>{findFirstDay(day?.date)}</S.MonthItem> : ""}
-                                        </S.GrassItem>
+                                    return( 
+                                        <GrassItem day={day} key={idx}/>
                                     );
                                 })}
                             </S.GrassList>
@@ -48,3 +48,5 @@ export const Grass = () => {
     </>
   );
 };
+
+
