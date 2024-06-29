@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
     min-height: 100%;
-    width: fit-content;
+    width: 1080px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@ const Container = styled.div`
 const Introduction = styled.div`
     display: flex;
     gap: 10px;
-    width: 1080px;
+    width: 100%;
     padding: 20px;
     min-height: calc(100vh - 80px);
 `;
