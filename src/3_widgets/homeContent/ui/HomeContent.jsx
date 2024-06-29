@@ -6,6 +6,9 @@ import { Slider } from "@features/slider";
 import { DefaultBtn } from "@shared/ui";
 import { useCookie } from "@shared/hook";
 
+/*
+    1. 개발자창에 따라 이미지가 올라가는 현상이 일어남
+*/ 
 export const HomeContent = ()=>{
     const {handleGetCookie} = useCookie();
     return(
