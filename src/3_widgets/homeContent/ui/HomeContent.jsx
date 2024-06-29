@@ -4,15 +4,14 @@ import description from "../assets/description.png";
 import { Grass } from "@features/grass";
 import { Slider } from "@features/slider";
 import { DefaultBtn } from "@shared/ui";
+import { useCookie } from "@shared/hook";
 
 export const HomeContent = ()=>{
-    // 임시 테스트용
-    const TestCookie = false;
-
+    const {handleGetCookie} = useCookie();
     return(
         <>
             <S.Container>
-                {TestCookie 
+                {handleGetCookie() 
                 ? <Grass/>
                 : (<S.Introduction>
                     <S.SectionFirst $img={description}>
