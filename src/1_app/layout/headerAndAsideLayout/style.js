@@ -22,7 +22,6 @@ const header = styled.div`
 const aside = styled.div`
   width: 150px;
   grid-area: aside;
-  outline: 1px solid black;
 `;
 
 const main = styled.div`
