@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 const DefaultBtn = styled.button`
     display: block;
+    width: 100%;
     border-radius: 4px;
     border-width: 2px;
     border-style: solid;
     cursor: pointer;
-    padding: ${({px})=> px ?? "8px"} ${({py})=> py ?? "16px"};
+    padding: 8px 16px;
     font-size: ${({fontSize, theme}) => fontSize ?? theme.fontSize.base};
     color: ${({type, theme}) => type ? theme.white : theme.highlight};
     ${({type,theme}) => {
