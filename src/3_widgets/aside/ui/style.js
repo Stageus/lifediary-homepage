@@ -10,6 +10,10 @@ const BtnList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    & > button{
+        box-shadow: 0 2px 4px gray;
+    }
 `;
 
 const SubscribeInfo = styled.div`
@@ -37,7 +41,7 @@ const SubscribeItem = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 7px;
 
 
     & > img {
