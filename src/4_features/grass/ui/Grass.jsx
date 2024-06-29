@@ -16,11 +16,12 @@ export const Grass = () => {
         <S.YearBtnList>
             {yearsList.map((year,idx)=>{
                 return(
-                    <DefaultBtn
+                  <div key={idx}>
+                      <DefaultBtn
                     onClick={()=>onClickYears(year)}
-                    key={idx}
                     text={year}
                     />
+                  </div>
                 );
             })}
         </S.YearBtnList>
