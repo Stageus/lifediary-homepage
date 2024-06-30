@@ -3,11 +3,10 @@ import { S } from "./style";
 import { createTestData } from "../model/createTestData";
 import { DefaultBtn } from "@shared/ui";
 
-
 export const Aside = () => {
     const testData = createTestData();
     const test = useLocation();
-    
+
   return (
     <>
       <S.Aside>
