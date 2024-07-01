@@ -18,7 +18,7 @@ export const useGetAlarm = () => {
     useEffect(()=>{
         // 임시주석
         // getAlarm();
-
+        
         if(errorStatus){
             return "에러바운더리 대기";
         }
