@@ -1,4 +1,5 @@
 import styled from "styled-components";
+// 월을 표시하는 CSS가 컨테이터를 넘치는부분을 수정해야함
 
 const GrassContainer = styled.div`
     width: fit-content;
@@ -14,6 +15,7 @@ const YearBtnList = styled.div`
 const Grass = styled.div`
     width: 100%;
     max-width: fit-content;
+    padding: 10px;
     padding-top: 30px;
     overflow-x: scroll;
     position: relative;
