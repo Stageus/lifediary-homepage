@@ -3,17 +3,18 @@ import { S } from "./style";
 import { useGetDiaryList } from "../api/useGetDiaryList";
 import { Icon, DynamicImage } from "@shared/ui";
 
-export const Slider = () => {
-  const [diaryList, page, setPage] = useGetDiaryList();
-  const [postionUnit, setPostionUnit] = useState(0);
 
+
+export const Slider = () => {
+  const [diaryList, addPage] = useGetDiaryList();
+  const [postionUnit, setPostionUnit] = useState(0);
   const onClickLeft = () => {
     if (!postionUnit) return;
     setPostionUnit(postionUnit + 1);
   };
 
   const onClickRight = () => {
-    if (diaryList.length - 1 === -postionUnit) setPage(page + 1);
+    if (diaryList.length - 1 === -postionUnit) addPage();
     setPostionUnit(postionUnit - 1);
   };
 
@@ -26,21 +27,21 @@ export const Slider = () => {
           ) : null}
         </S.Button>
         <S.ItemList>
-          {diaryList &&
-            diaryList?.map((diaryContainer, idx) => {
+          { diaryList?.map((diaryContainer, idx) => {
               return (
                 <S.ItemContainer key={idx} $postionUnit={postionUnit}>
                   {Array.isArray(diaryContainer) &&
                     diaryContainer?.map((diary, idx) => {
                       return (
                         <S.Item key={idx}>
-                          <DynamicImage src={diary.url} />
+                          <S.ContentImgContainer>
+                            <DynamicImage src={diary.thumbnailImg} />
+                          </S.ContentImgContainer>
                           <S.UserInfo>
-                            <div>
-                              <DynamicImage src={diary.url} />
-                            </div>
-                            {/* <span>{diary.title}</span> */}
-                            <span>Test Name</span>
+                            <S.ProfileImgContainer>
+                              <DynamicImage src={diary.profileImg} />
+                            </S.ProfileImgContainer>
+                            <span>{diary.nickname}</span>
                           </S.UserInfo>
                         </S.Item>
                       );

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const Slider = styled.div`
-    width: 90%;
+    /* max-width: 1080px; */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +21,6 @@ const Button = styled.div`
 
 const ItemList = styled.div`
     display: flex;
-    flex: 1;
     overflow: hidden;
 `;
 
@@ -30,34 +30,40 @@ const ItemContainer = styled.div`
     display: flex;
     gap: 10px;
     padding: 10px;
-    transition: transform 0.5s ease;
+    transition: transform 0.2s ease;
     transform: translateX(${({$postionUnit}) => $postionUnit * 100}%);
 `;
 
 const Item = styled.div`
     flex-grow: 1;
-    flex-basis: 100px;
-    height: 200px;
     box-shadow: 3px 3px 7px gray;
     border-radius: 10px;
+
     display: flex;
     flex-direction: column;
-    
+    justify-content: space-between;
+    height: 300px;
+    overflow: hidden;
+`;
+
+const ContentImgContainer = styled.div`
+    flex-grow: 1;
+    max-height: 255px;
+    padding: 10px;
 `;
 
 const UserInfo = styled.div`
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 10px;
-        gap: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+`;
 
-        & > div{
-        width: 25px;
-        height: 25px;
-        }
 
-        & > span{
+const ProfileImgContainer = styled.div`
+    width: 25px;
+    height: 25px;
+    & > span{
             color: ${({theme}) => theme.black};
             font-size: ${({theme}) => theme.fontSize.medium};
         }
@@ -71,4 +77,6 @@ export const S = {
     ItemContainer,
     Item,
     UserInfo,
+    ProfileImgContainer,
+    ContentImgContainer
 }
