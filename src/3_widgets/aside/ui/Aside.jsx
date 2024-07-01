@@ -3,7 +3,6 @@ import { S } from "./style";
 import { createTestData } from "../model/createTestData";
 import { DefaultBtn } from "@shared/ui";
 
-
 export const Aside = () => {
     const testData = createTestData();
     const test = useLocation();
@@ -16,7 +15,7 @@ export const Aside = () => {
           <DefaultBtn text="둘러보기" />
           <DefaultBtn text="신고보기" />
         </S.BtnList>
-
+        
         <S.SubscribeInfo>
           <S.SubscribeTitle>구독목록</S.SubscribeTitle>
 
