@@ -16,7 +16,7 @@ export const Aside = () => {
           <DefaultBtn text="둘러보기" />
           <DefaultBtn text="신고보기" />
         </S.BtnList>
-
+        
         <S.SubscribeInfo>
           <S.SubscribeTitle>구독목록</S.SubscribeTitle>
 
