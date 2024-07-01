@@ -31,6 +31,7 @@ const GrassItemInfo = styled.div`
     color: ${({theme})=> theme.white};
     padding: 5px;
     width: fit-content;
+    z-index: 10;
 `;
 
 export const S = {
