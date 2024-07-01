@@ -1,19 +1,19 @@
 import { S } from "./style";
-import { createTestData } from "../model/createTestData";
+import { useGetSubscribeList } from "../api/useGetSubscribeList";
 
 export const SubscribeList = ()=>{
-    const testData = createTestData();
+    const [fetchData, getSubscribeList] = useGetSubscribeList();
     return(
         <>
             <S.SubscribeInfo>
           <S.SubscribeTitle>구독목록</S.SubscribeTitle>
 
           <S.SubscribeList>
-          {testData && testData.map((value)=>{
+          {fetchData && fetchData.map((item)=>{
             return(
-                <S.SubscribeItem key={value.idx}>
-                    <img src={value.profileImg} alt="#" />
-                    <span>{value.nickname}</span>
+                <S.SubscribeItem key={item.idx}>
+                    <img src={item.profileImg} alt="#" />
+                    <span>{item.nickname}</span>
                 </S.SubscribeItem>
             );
           })}
