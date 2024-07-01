@@ -1,5 +1,6 @@
 import { S } from "./style";
 import { DefaultBtn } from "@shared/ui";
+
 export const ComplainContent = ()=>{
     return(
         <>
