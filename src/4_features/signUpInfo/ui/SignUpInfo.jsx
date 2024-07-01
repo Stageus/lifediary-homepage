@@ -1,15 +1,18 @@
 import React, { useRef, useState, useCallback } from "react";
 
 import { S } from "./style";
+import { useFetch } from "@shared/hook/useFetch";
 import { DefaultBtn } from "@shared/ui/defaultBtn/DefaultBtn";
 import { TextInput } from "@shared/ui/textInput/TextInput";
 import Profile from "@shared/assets/imges/profile.png";
 
 export const SignUpInfo = () => {
-  const [inputValue, setInputValue] = useState("");
   const [inputType, setInputType] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [oauthGoogleId, setOauthGoogleId] = useState("");
   const [imagePreviewUrl, setImagePreviewUrl] = useState(Profile);
   const imageInput = useRef(null);
+  const [data, errorStatus, baseFetch] = useFetch();
 
   const handleChangeProfileImg = useCallback(() => {
     imageInput.current.click();
@@ -29,31 +32,27 @@ export const SignUpInfo = () => {
     }
   };
 
-  //useFetch 적용 예정
-  const handleUploadImage = async () => {
+  const handleUploadImage = () => {
     if (imageInput.current.files[0]) {
       const formData = new FormData();
-      formData.append("image", imageInput.current.files[0]);
+      formData.append("profileImg", imageInput.current.files[0]);
+      formData.append("nickname", nickname);
+      formData.append("oauthGoogleId", oauthGoogleId);
 
-      try {
-        const response = await fetch("YOUR_SERVER_ENDPOINT", {
-          method: "POST",
-          body: formData,
-        });
+      const response = baseFetch("account", {
+        method: "POST",
+        body: formData,
+      });
 
-        if (response.ok) {
-          console.log("업로드 성공");
-        } else {
-          console.error("업로드 실패");
-        }
-      } catch (error) {
-        console.error("업로드 중 에러 발생:", error);
+      if (!response) {
+        console.log("Error: ", errorStatus);
+      } else {
+        console.log("성공");
       }
     }
   };
-
   const handleChangeValue = (e) => {
-    setInputValue(e);
+    setNickname(e);
     if (e.length <= 5) {
       setInputType("error");
     } else {
@@ -77,7 +76,7 @@ export const SignUpInfo = () => {
           </S.SignUpInfoNicknameInputContainer>
         </S.SignUpInfoNicknameContainer>
         <S.SignUpInfoBtnContainer>
-          <DefaultBtn text="작성" />
+          <DefaultBtn text="작성" onClick={handleChangeValue} />
           <DefaultBtn text="취소" />
         </S.SignUpInfoBtnContainer>
       </S.SignUpInfoContainer>
