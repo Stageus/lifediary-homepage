@@ -1,8 +1,76 @@
 import { S } from "./style";
+import { DefaultBtn } from "@shared/ui";
 export const ComplainContent = ()=>{
     return(
         <>
-            <div>신고페이지</div>
+            <S.ComplainContent>
+            <S.Table>
+                <thead>
+                    <tr>
+                        <S.ThNumber>번호</S.ThNumber>
+                        <S.ThContent>사유</S.ThContent>
+                        <S.ThUser>작성자</S.ThUser>
+                        <S.ThDate>날짜</S.ThDate>
+                        <S.ThState>상태</S.ThState>
+                        <S.ThBtn/>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>해당내용이 너무 감동적 해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적</td>
+                        <td>기본요청으로인한최대20자의닉네임입니다</td>
+                        <td>2024-03-01</td>
+                        <td>대기중</td>
+                        <td>
+                        <S.BtnContainter>
+                            <div>
+                                <DefaultBtn
+                                text="상세보기"
+                                fontSize="12px"
+                            />
+                            </div>
+                            <div>
+                                <DefaultBtn
+                                text="통과"
+                                fontSize="12px"
+                            />
+                            </div>
+                            <div>
+                                <DefaultBtn
+                                text="삭제"
+                                fontSize="12px"
+                            />
+                            </div>
+                        </S.BtnContainter>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>100000</td>
+                        <td>내용이 너무없습니다</td>
+                        <td>피카츄</td>
+                        <td>2024-03-01</td>
+                        <td>통과</td>
+                        <td>
+                        <S.BtnContainter>
+                            <div>
+                                <DefaultBtn
+                                text="상세보기"
+                                fontSize="12px"
+                            />
+                            </div>
+                            <div>
+                                <DefaultBtn
+                                text="복구"
+                                fontSize="12px"
+                            />
+                            </div>
+                        </S.BtnContainter>
+                        </td>
+                    </tr>
+                </tbody>
+            </S.Table>
+            </S.ComplainContent>
         </>
     );
 }
