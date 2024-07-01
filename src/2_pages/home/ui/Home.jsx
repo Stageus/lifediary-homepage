@@ -1,7 +1,8 @@
+import { HomeContent } from "@widgets/homeContent";
 export const Home = ()=>{
     return(
         <>  
-            <div>홈 페이지</div>
+            <HomeContent/>
         </>
     );
 }
