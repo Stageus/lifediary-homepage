@@ -1,22 +1,24 @@
 import { S } from "./style";
 import { useFetch } from "@shared/hook/useFetch";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { GoogleLoginBtn } from "@react-oauth/google";
 
 export const GoogleLogin = () => {
   const [data, errorStatus, baseFetch] = useFetch();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    baseFetch("firstCommu"); // 임시로 firstCommu 경로로 요청, 추후 수정예정
-    if (errorStatus) {
-      console.log(`Error: ${errorStatus}`);
-      return;
-    }
+    const firstFetch = () => {
+      baseFetch("firstCommu");
+      if (errorStatus) {
+        console.log(`Error: ${errorStatus}`);
+        return;
+      }
+    };
+    firstFetch();
   }, []);
 
   const handleNaviLogin = () => {
-    navigate(`/${data.result.redirectUrl}`);
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}&redirect_uri=${data.result.redirectUrl}&response_type=token&scope=email profile`;
   };
 
   return (
