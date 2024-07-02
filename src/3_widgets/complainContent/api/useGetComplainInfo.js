@@ -1,24 +1,27 @@
-import { useFetch,useCookie } from "@shared/hooks";
 import { useEffect, useState } from "react";
+import {createTestData} from "../model/createTestData";
+import { useFetch, useCookie } from "@shared/hook";
+
 
 export const useGetComplainInfo = ()=>{
-    const [complainList, listErrorStatus, listFetch] = useFetch();
-    const [complainCount, countErrorStatus, countFetch] = useFetch();
+    const [complainInfo, setComplainInfo] = useState({
+        list: null,
+        count: null,
+    });
+
+    const [complainList, listErrorStatus, listFetch] = useFetch([]);
+    const [complainCount, countErrorStatus, countFetch] = useFetch(null);
     const [page, setPage] = useState(0);
     const { handleGetCookie } = useCookie();
 
 
-    const getComplainList = ()=>{
-        listFetch(`report?page=${page}`,{},handleGetCookie());
-    }
-
-    const getComplainCount = ()=>{
-        countFetch("report/count",{},handleGetCookie());
+    const getComplainInfo = ()=>{
+        // listFetch(`report?page=${page}`,{},handleGetCookie());
+        // countFetch("report/count",{},handleGetCookie());
     }
 
     useEffect(()=>{
-        getComplainList();
-        getComplainCount();
+        getComplainInfo();
         if(listErrorStatus){
             return "에러바운더리 대기";
         }
@@ -26,8 +29,25 @@ export const useGetComplainInfo = ()=>{
         if(countErrorStatus){
             return "에러바운더리 대기";
         }
+    },[listErrorStatus,countErrorStatus,page])
 
-    },[])
+    useEffect(()=>{
+        // 테스트 데이터
+        if(true){
+            setComplainInfo({
+                list: createTestData(),
+                count: 25
+            })
+        }
+        // 임시주석
+        // if(complainList && complainCount){
+        //     setComplainInfo({
+        //         list: complainList,
+        //         count: complainCount
+        //     })
+        // }
+    },[complainList, complainCount])
     
-    return [complainList, complainCount];
+    
+    return [complainInfo]
 }
