@@ -1,20 +1,21 @@
 import { S } from "./style";
 import { useFetch } from "@shared/hook/useFetch";
 import { useEffect } from "react";
-import { GoogleLoginBtn } from "@react-oauth/google";
 
 export const GoogleLogin = () => {
   const [data, errorStatus, baseFetch] = useFetch();
 
+  const firstFetch = () => {
+    baseFetch("firstCommu");
+  };
+
   useEffect(() => {
-    const firstFetch = () => {
-      baseFetch("firstCommu");
-      if (errorStatus) {
-        console.log(`Error: ${errorStatus}`);
-        return;
-      }
-    };
     firstFetch();
+
+    if (errorStatus) {
+      console.log(`Error: ${errorStatus}`);
+      return;
+    }
   }, []);
 
   const handleNaviLogin = () => {
