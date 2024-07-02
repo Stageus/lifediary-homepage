@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Slider = styled.div`
-    /* max-width: 1080px; */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -38,6 +37,7 @@ const Item = styled.div`
     flex-grow: 1;
     box-shadow: 3px 3px 7px gray;
     border-radius: 10px;
+    cursor: pointer;
 
     display: flex;
     flex-direction: column;
