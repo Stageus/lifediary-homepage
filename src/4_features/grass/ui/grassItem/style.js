@@ -3,11 +3,11 @@ import styled,{css} from "styled-components";
 const GrassItem = styled.div`
     width: 15px;
     height: 15px;
-    border-radius: 2px;
-    cursor: pointer;
+    border-radius: 2px;    
     ${({ $date, $isExist, theme }) => $date 
     ? css`
         background-color: ${$isExist ? $isExist : theme.gray};
+        cursor: pointer;
       `
     : css`
         background-color: transparent;
