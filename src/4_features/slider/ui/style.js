@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
 const Slider = styled.div`
+<<<<<<< HEAD
     max-width: 1080px;
+=======
+    /* max-width: 1080px; */
+    width: 100%;
+>>>>>>> 82cb1994aecb9ae7d13fc1116e1a837c13f07b53
     display: flex;
     justify-content: center;
     align-items: center;
