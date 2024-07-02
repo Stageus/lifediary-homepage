@@ -1,8 +1,14 @@
 import styled from "styled-components";
-// 월을 표시하는 CSS가 컨테이터를 넘치는부분을 수정해야함
 
 const GrassContainer = styled.div`
-    width: fit-content;
+    min-width: 500px;
+    width: 100%;
+    box-shadow: 0px 1px 5px gray;
+    padding: 10px;
+    border-radius: 3px;
+    border: 2px solid ${({theme})=> theme.major};
+    font-weight: bolder;
+    color: ${({theme}) => theme.gray};
 `;
 
 const YearBtnList = styled.div`

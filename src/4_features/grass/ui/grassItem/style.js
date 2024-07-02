@@ -27,11 +27,12 @@ const GrassItemInfo = styled.div`
     position: fixed;
     border-radius: 5px;
     transform: translate(0, -110%);
-    background-color: ${({theme}) => theme.gray};
+    background-color: ${({theme}) => theme.highlight};
     color: ${({theme})=> theme.white};
     padding: 5px;
     width: fit-content;
     z-index: 10;
+    white-space: nowrap;
 `;
 
 export const S = {
