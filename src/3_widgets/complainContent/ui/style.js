@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 const ComplainContent = styled.div`
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 `;
 
 const Table = styled.table`
@@ -52,6 +56,30 @@ const BtnContainter = styled.div`
     gap: 10px;
 `;
 
+const PageBtnContainer = styled.div`
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    gap: 10px;
+`;
+
+const PageNextBtn = styled.button`
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+`;
+
+const PageBtnList = styled.div`
+    display: flex;
+    gap: 10px;
+`;
+
+
+
+
 
 export const S = {
     ComplainContent,
@@ -63,4 +91,7 @@ export const S = {
     ThState,
     ThBtn,
     BtnContainter,
+    PageBtnContainer,
+    PageNextBtn,
+    PageBtnList,
 }

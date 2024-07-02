@@ -1,7 +1,18 @@
 import { S } from "./style";
-import { DefaultBtn } from "@shared/ui";
+import { useGetComplainInfo } from "../api/useGetComplainInfo";
+import { DefaultBtn, Icon } from "@shared/ui";
 
+
+/*
+    해당 widgets에서 필요한 요청
+
+    GET: report -> 신고리스트 반환
+    GET: report/count -> 신고 개수반환
+    PUT: report/:reportIdx/status -> 신고리스트 처리
+*/
 export const ComplainContent = ()=>{
+    const [complainInfo] = useGetComplainInfo();
+    console.log(complainInfo)
     return(
         <>
             <S.ComplainContent>
@@ -17,60 +28,93 @@ export const ComplainContent = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>해당내용이 너무 감동적 해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적해당내용이 너무 감동적</td>
-                        <td>기본요청으로인한최대20자의닉네임입니다</td>
-                        <td>2024-03-01</td>
-                        <td>대기중</td>
-                        <td>
-                        <S.BtnContainter>
-                            <div>
-                                <DefaultBtn
-                                text="상세보기"
-                                fontSize="12px"
-                            />
-                            </div>
-                            <div>
-                                <DefaultBtn
-                                text="통과"
-                                fontSize="12px"
-                            />
-                            </div>
-                            <div>
-                                <DefaultBtn
-                                text="삭제"
-                                fontSize="12px"
-                            />
-                            </div>
-                        </S.BtnContainter>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>100000</td>
-                        <td>내용이 너무없습니다</td>
-                        <td>피카츄</td>
-                        <td>2024-03-01</td>
-                        <td>통과</td>
-                        <td>
-                        <S.BtnContainter>
-                            <div>
-                                <DefaultBtn
-                                text="상세보기"
-                                fontSize="12px"
-                            />
-                            </div>
-                            <div>
-                                <DefaultBtn
-                                text="복구"
-                                fontSize="12px"
-                            />
-                            </div>
-                        </S.BtnContainter>
-                        </td>
-                    </tr>
+                    {complainInfo?.list?.map((list)=>{
+                        return(
+                            <tr key={list.idx}>
+                                <td>{list.idx + 1}</td>
+                                <td>{list.textContent}</td>
+                                <td>{list.nickname}</td>
+                                <td>{list.createdAt}</td>
+                                <td>
+                                    {list.isInvalid === true ? "삭제" : null}
+                                    {list.isInvalid === false ? "통과" : null}
+                                    {list.isInvalid === null ? "대기중" : null}
+                                </td>
+                                <td>
+                                <S.BtnContainter>
+                                    <div>
+                                        <DefaultBtn
+                                        text="상세보기"
+                                        fontSize="12px"
+                                        />
+                                    </div>
+                                    {list.isInvalid === true || list.isInvalid === false
+                                    ? (<div>
+                                            <DefaultBtn
+                                            text="복구"
+                                            fontSize="12px"
+                                            />
+                                        </div>) 
+                                    : null}
+                                    {list.isInvalid === null
+                                    ? (
+                                        <>
+                                        <div>
+                                            <DefaultBtn
+                                            text="통과"
+                                            fontSize="12px"
+                                            />
+                                        </div>
+                                        <div>
+                                            <DefaultBtn
+                                            text="삭제"
+                                            fontSize="12px"
+                                            />
+                                        </div>
+                                        </>
+                                        ) 
+                                    : null}
+                                </S.BtnContainter>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </S.Table>
+            <S.PageBtnContainer>
+                <S.PageNextBtn>
+                    <Icon
+                    type="leftArrow"
+                    color="#FF6767"
+                    size="30px"
+                    />
+                </S.PageNextBtn>
+                <S.PageBtnList>
+                    {/* DefaultBtn size Props추가 예정 */}
+                    <DefaultBtn
+                    text={"1"}
+                    />
+                    <DefaultBtn
+                    text={"2"}
+                    />
+                    <DefaultBtn
+                    text={"3"}
+                    />
+                    <DefaultBtn
+                    text={"4"}
+                    />
+                    <DefaultBtn
+                    text={"5"}
+                    />
+                </S.PageBtnList>
+                <S.PageNextBtn>
+                    <Icon
+                    type="rightArrow"
+                    color="#FF6767"
+                    size="30px"
+                    />
+                </S.PageNextBtn>
+            </S.PageBtnContainer>
             </S.ComplainContent>
         </>
     );
