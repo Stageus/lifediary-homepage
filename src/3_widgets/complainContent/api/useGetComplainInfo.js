@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {createTestData} from "../model/createTestData";
+import { divideToArray } from "../lib/divideToArray";
 import { useFetch, useCookie } from "@shared/hook";
 
 
@@ -8,20 +9,21 @@ export const useGetComplainInfo = ()=>{
         list: null,
         count: null,
     });
-
     const [complainList, listErrorStatus, listFetch] = useFetch([]);
     const [complainCount, countErrorStatus, countFetch] = useFetch(null);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const { handleGetCookie } = useCookie();
 
+    const changePage = (num)=> setPage(num);
 
     const getComplainInfo = ()=>{
-        // listFetch(`report?page=${page}`,{},handleGetCookie());
-        // countFetch("report/count",{},handleGetCookie());
-    }
+        listFetch(`report?page=${page}`,{},handleGetCookie());
+        countFetch("report/count",{},handleGetCookie());
+    };
 
     useEffect(()=>{
-        getComplainInfo();
+        // 임시주석
+        // getComplainInfo();
         if(listErrorStatus){
             return "에러바운더리 대기";
         }
@@ -29,25 +31,25 @@ export const useGetComplainInfo = ()=>{
         if(countErrorStatus){
             return "에러바운더리 대기";
         }
-    },[listErrorStatus,countErrorStatus,page])
+    },[listErrorStatus,countErrorStatus,page]);
 
     useEffect(()=>{
         // 테스트 데이터
         if(true){
             setComplainInfo({
                 list: createTestData(),
-                count: 25
-            })
+                count: divideToArray(24,5)
+            });
         }
         // 임시주석
         // if(complainList && complainCount){
         //     setComplainInfo({
         //         list: complainList,
-        //         count: complainCount
+        //         count: divideToArray(complainCount,5)
         //     })
         // }
-    },[complainList, complainCount])
+    },[complainList, complainCount]);
     
     
-    return [complainInfo]
+    return [complainInfo, changePage];
 }
