@@ -9,7 +9,6 @@ export const Grass = () => {
         const nowYears = new Date().getFullYear();
         const yearsList = Array(3).fill(nowYears).map( (value, idx) => value - idx);
         const onClickYears = (year)=> setSelectYear(year);
-
   return (
     <>
     <S.GrassContainer>

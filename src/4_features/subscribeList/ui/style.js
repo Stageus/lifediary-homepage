@@ -1,17 +1,5 @@
 import styled from "styled-components";
 
-const Aside = styled.div`
-    min-height: 100%;
-    background-color: ${({theme})=> theme.major};
-`;
-
-const BtnList = styled.div`
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-`;
-
 const SubscribeInfo = styled.div`
     display: flex;
     flex-direction: column;
@@ -55,8 +43,6 @@ const SubscribeItem = styled.div`
 `;
 
 export const S = {
-    Aside,
-    BtnList,
     SubscribeInfo,
     SubscribeTitle,
     SubscribeList,
