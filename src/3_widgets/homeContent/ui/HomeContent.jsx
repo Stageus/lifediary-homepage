@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { S } from "./style";
 import defaultDiary1 from "../assets/defaultDiary1.png";
 import description from "../assets/description.png";
@@ -6,11 +7,10 @@ import { Slider } from "@features/slider";
 import { DefaultBtn } from "@shared/ui";
 import { useCookie } from "@shared/hook";
 
-/*
-    1. 개발자창에 따라 이미지가 올라가는 현상이 일어남
-*/ 
 export const HomeContent = ()=>{
     const {handleGetCookie} = useCookie();
+    const navigate = useNavigate();
+    const onClickRoute = () => navigate("diary");
     return(
         <>
             <S.Container>
@@ -26,6 +26,7 @@ export const HomeContent = ()=>{
                             <DefaultBtn
                             text="일기둘러보기"
                             type="select"
+                            onClick={onClickRoute}
                             />
                         </div>
                     </S.SectionFirst>
