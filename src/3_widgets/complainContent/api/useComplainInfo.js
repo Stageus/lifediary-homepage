@@ -68,6 +68,7 @@ export const useGetComplainInfo = ()=>{
         if(changeErrorStatus){
             return "에러바운더리 대기";
         }
+        
     },[listErrorStatus,countErrorStatus,changeErrorStatus,page]);
 
     useEffect(()=>{
