@@ -1,15 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { S } from "./style";
 import { useGetComplainInfo } from "../api/useComplainInfo";
 import { DefaultBtn, Icon } from "@shared/ui";
 
 export const ComplainContent = ()=>{
     const [complainInfo, page, changePage, putComplainState] = useGetComplainInfo();
+    const navigate = useNavigate();
 
-    const onClickRoute = (diaryIdx) => changePage(diaryIdx);
+    const onClickRoute = (diaryIdx) => navigate(`diary/${diaryIdx}`);
 
-    const onClickNum = (num) => {
-        changePage(num);
-    };
+    const onClickNum = (num) => changePage(num);
 
     const onClickLeft = () => {
         if(page === 1) return;
