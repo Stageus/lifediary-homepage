@@ -5,7 +5,6 @@ const ComplainContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
 `;
 
 const Table = styled.table`
@@ -57,12 +56,12 @@ const BtnContainter = styled.div`
 `;
 
 const PageBtnContainer = styled.div`
-    width: fit-content;
+    width: 400px;
     margin: 0 auto;
+    padding-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
     gap: 10px;
 `;
 
@@ -70,6 +69,8 @@ const PageNextBtn = styled.button`
     border: none;
     background-color: transparent;
     cursor: pointer;
+    flex-basis: 50px;
+
 `;
 
 const PageBtnList = styled.div`

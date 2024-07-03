@@ -2,17 +2,22 @@ import { S } from "./style";
 import { useGetComplainInfo } from "../api/useGetComplainInfo";
 import { DefaultBtn, Icon } from "@shared/ui";
 
-
-/*
-    해당 widgets에서 필요한 요청
-
-    GET: report -> 신고리스트 반환
-    GET: report/count -> 신고 개수반환
-    PUT: report/:reportIdx/status -> 신고리스트 처리
-*/
 export const ComplainContent = ()=>{
-    const [complainInfo] = useGetComplainInfo();
-    console.log(complainInfo)
+    const [complainInfo, page, changePage] = useGetComplainInfo();
+
+    const onClickNum = (num) => changePage(num);
+
+    const onClickLeft = () => {
+        if(page === 1) return;
+        changePage(page - 1)
+    };
+
+    const onClickRight = () => {
+        if(complainInfo.count.length === page) return;
+        changePage(page + 1)
+    };
+   
+    
     return(
         <>
             <S.ComplainContent>
@@ -82,37 +87,41 @@ export const ComplainContent = ()=>{
                 </tbody>
             </S.Table>
             <S.PageBtnContainer>
+                
                 <S.PageNextBtn>
-                    <Icon
-                    type="leftArrow"
-                    color="#FF6767"
-                    size="30px"
-                    />
+                    {page !== 1 
+                    ? (<span onClick={onClickLeft}>
+                        <Icon
+                        type="leftArrow"
+                        color="#FF6767"
+                        size="30px"
+                        />
+                        </span>)
+                    : null}
                 </S.PageNextBtn>
                 <S.PageBtnList>
-                    {/* DefaultBtn size Props추가 예정 */}
-                    <DefaultBtn
-                    text={"1"}
-                    />
-                    <DefaultBtn
-                    text={"2"}
-                    />
-                    <DefaultBtn
-                    text={"3"}
-                    />
-                    <DefaultBtn
-                    text={"4"}
-                    />
-                    <DefaultBtn
-                    text={"5"}
-                    />
+                    {complainInfo?.count?.map((num)=>{
+                        return(
+                            <DefaultBtn
+                                text={num}
+                                key={num}
+                                type={ page === num ? "select" : null}
+                                onClick={()=>onClickNum(num)}
+                            />
+                        );
+                    })}
                 </S.PageBtnList>
                 <S.PageNextBtn>
-                    <Icon
-                    type="rightArrow"
-                    color="#FF6767"
-                    size="30px"
-                    />
+                    {complainInfo?.count?.length !== page 
+                    ? (<span onClick={onClickRight}>
+                        <Icon
+                        type="rightArrow"
+                        color="#FF6767"
+                        size="30px"
+                        />
+                        </span>)
+                    : null}
+                    
                 </S.PageNextBtn>
             </S.PageBtnContainer>
             </S.ComplainContent>
