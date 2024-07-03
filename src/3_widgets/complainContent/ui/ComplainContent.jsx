@@ -7,7 +7,7 @@ export const ComplainContent = ()=>{
     const [complainInfo, page, changePage, putComplainState] = useGetComplainInfo();
     const navigate = useNavigate();
 
-    const onClickRoute = (diaryIdx) => navigate(`diary/${diaryIdx}`);
+    const onClickRoute = (diaryIdx) => navigate(`/diary/${diaryIdx}`);
 
     const onClickNum = (num) => changePage(num);
 
