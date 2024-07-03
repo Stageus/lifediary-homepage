@@ -11,6 +11,7 @@ export const useGetComplainInfo = ()=>{
     });
     const [complainList, listErrorStatus, listFetch] = useFetch([]);
     const [complainCount, countErrorStatus, countFetch] = useFetch(null);
+    const [_, changeErrorStatus, putFetch] = useFetch();
     const [page, setPage] = useState(1);
     const { handleGetCookie } = useCookie();
 
@@ -20,6 +21,14 @@ export const useGetComplainInfo = ()=>{
         listFetch(`report?page=${page}`,{},handleGetCookie());
         countFetch("report/count",{},handleGetCookie());
     };
+
+    const putComplainState = (complainIdx,state)=>{
+        // 임시데이터
+        const changeData = complainInfo.list.map( value => value.idx === complainIdx ? {...value, isInvalid: state} : value);
+        setComplainInfo({...complainInfo, list:changeData})
+        // putFetch(`report/${complainIdx}/status`,{method:"PUT",data:{"isInvalid":state}},handleGetCookie());
+        // getComplainInfo()
+    }
 
     useEffect(()=>{
         // 임시주석
@@ -31,7 +40,11 @@ export const useGetComplainInfo = ()=>{
         if(countErrorStatus){
             return "에러바운더리 대기";
         }
-    },[listErrorStatus,countErrorStatus,page]);
+
+        if(changeErrorStatus){
+            return "에러바운더리 대기";
+        }
+    },[listErrorStatus,countErrorStatus,changeErrorStatus,page]);
 
     useEffect(()=>{
         // 테스트 데이터
@@ -51,5 +64,5 @@ export const useGetComplainInfo = ()=>{
     },[complainList, complainCount,page]);
     
     
-    return [complainInfo, page, changePage];
+    return [complainInfo, page, changePage,putComplainState];
 }
