@@ -57,11 +57,6 @@ export const useGetComplainInfo = ()=>{
     useEffect(()=>{
         // 임시주석
         // getComplainInfo();
-<<<<<<< HEAD
-
-        // 해당 부분에서 리스트가 없을경우를 따져줘야함
-=======
->>>>>>> bb272a27017afa11e8571e877842cb172dd55251
         if(listErrorStatus){
             return "에러바운더리 대기";
         }
