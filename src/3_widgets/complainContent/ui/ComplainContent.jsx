@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { S } from "./style";
-import { useGetComplainInfo } from "../api/useGetComplainInfo";
+import { useGetComplainInfo } from "../api/useComplainInfo";
 import { DefaultBtn, Icon } from "@shared/ui";
 
 export const ComplainContent = ()=>{
-    const [complainInfo, page, changePage] = useGetComplainInfo();
+    const [complainInfo, page, changePage, putComplainState] = useGetComplainInfo();
+    const navigate = useNavigate();
+
+    const onClickRoute = (diaryIdx) => navigate(`diary/${diaryIdx}`);
 
     const onClickNum = (num) => changePage(num);
 
@@ -16,6 +20,8 @@ export const ComplainContent = ()=>{
         if(complainInfo.count.length === page) return;
         changePage(page + 1)
     };
+
+    
    
     
     return(
@@ -51,6 +57,7 @@ export const ComplainContent = ()=>{
                                         <DefaultBtn
                                         text="상세보기"
                                         fontSize="12px"
+                                        onClick={()=>onClickRoute(list.diaryIdx)}
                                         />
                                     </div>
                                     {list.isInvalid === true || list.isInvalid === false
@@ -58,6 +65,7 @@ export const ComplainContent = ()=>{
                                             <DefaultBtn
                                             text="복구"
                                             fontSize="12px"
+                                            onClick={()=>putComplainState(list.diaryIdx,null)}
                                             />
                                         </div>) 
                                     : null}
@@ -68,12 +76,14 @@ export const ComplainContent = ()=>{
                                             <DefaultBtn
                                             text="통과"
                                             fontSize="12px"
+                                            onClick={()=>putComplainState(list.diaryIdx,false)}
                                             />
                                         </div>
                                         <div>
                                             <DefaultBtn
                                             text="삭제"
                                             fontSize="12px"
+                                            onClick={()=>putComplainState(list.diaryIdx,true)}
                                             />
                                         </div>
                                         </>
