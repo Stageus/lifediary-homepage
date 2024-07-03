@@ -37,7 +37,7 @@ export const useGetComplainInfo = ()=>{
         // 테스트 데이터
         if(true){
             setComplainInfo({
-                list: createTestData(),
+                list: createTestData(page),
                 count: divideToArray(24,5)
             });
         }
@@ -48,8 +48,8 @@ export const useGetComplainInfo = ()=>{
         //         count: divideToArray(complainCount,5)
         //     })
         // }
-    },[complainList, complainCount]);
+    },[complainList, complainCount,page]);
     
     
-    return [complainInfo, changePage];
+    return [complainInfo, page, changePage];
 }
