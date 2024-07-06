@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import googleLogo from "@pages/login/assets/googleLogo.png";
+import googleLogo from "../assets/googleLogo.png";
 
 const GoogleLogo = styled.img.attrs({
   src: googleLogo,
@@ -10,7 +10,7 @@ const GoogleLogo = styled.img.attrs({
   height: 20px;
 `;
 
-const LoginBtn = styled.button`
+const GoogleLoginBtn = styled.button`
   ${({ theme }) => `
   display: flex;
   align-items: center;
@@ -36,6 +36,6 @@ const LoginBtn = styled.button`
 `;
 
 export const S = {
-  LoginBtn,
+  GoogleLoginBtn,
   GoogleLogo,
 };
