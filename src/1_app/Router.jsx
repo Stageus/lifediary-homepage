@@ -10,7 +10,6 @@ import { MyProfile } from "@pages/myProfile";
 import { Search } from "@pages/search";
 import { SignUp } from "@pages/signUp";
 import { UserProfile } from "@pages/userProfile";
-import { Loading } from "@pages/loading";
 
 export const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +20,7 @@ export const Router = createBrowserRouter(
       <Route path="/" element={<HeaderAndAsideLayout />}>
         <Route path="complain" element={<Complain />} />
         <Route path="diary" element={<Diary />} />
+        <Route path="diary/:diaryidx" element={<Diary />} />
         <Route path="diaryCreate" element={<DiaryCreate />} />
         <Route path="diaryUpdate" element={<DiaryUpdate />} />
         <Route path="search" element={<Search />} />
@@ -29,7 +29,6 @@ export const Router = createBrowserRouter(
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signUp" element={<SignUp />} />
-      <Route path="/loading" element={<Loading />} />
     </>
   )
 );

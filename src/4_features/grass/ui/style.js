@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
 const GrassContainer = styled.div`
-    width: fit-content;
+    min-width: 500px;
+    width: 100%;
+    box-shadow: 0px 1px 5px gray;
+    padding: 10px;
+    border-radius: 3px;
+    border: 2px solid ${({theme})=> theme.major};
+    font-weight: bolder;
+    color: ${({theme}) => theme.gray};
 `;
 
 const YearBtnList = styled.div`
@@ -14,6 +21,7 @@ const YearBtnList = styled.div`
 const Grass = styled.div`
     width: 100%;
     max-width: fit-content;
+    padding: 10px;
     padding-top: 30px;
     overflow-x: scroll;
     position: relative;

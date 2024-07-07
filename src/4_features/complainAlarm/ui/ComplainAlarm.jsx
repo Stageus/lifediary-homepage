@@ -7,7 +7,7 @@ export const ComplainAlarm = () => {
     const isAlarm = useGetAlarm();
     const navigate = useNavigate();
     const location = useLocation();
-    const onClickRoute = () => navigate("complain");
+    const onClickRoute = () => navigate(`complain?page=1`,{state: 1});
 
     return(
         <>

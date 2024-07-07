@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { S } from "./style";
 import { useGetDiaryList } from "../api/useGetDiaryList";
 import { Icon, DynamicImage } from "@shared/ui";
@@ -8,6 +9,9 @@ import { Icon, DynamicImage } from "@shared/ui";
 export const Slider = () => {
   const [diaryList, addPage] = useGetDiaryList();
   const [postionUnit, setPostionUnit] = useState(0);
+  const navigate = useNavigate();
+  const onClickRoute = (diaryIdx) => navigate(`diary/${diaryIdx}`);
+
   const onClickLeft = () => {
     if (!postionUnit) return;
     setPostionUnit(postionUnit + 1);
@@ -33,7 +37,10 @@ export const Slider = () => {
                   {Array.isArray(diaryContainer) &&
                     diaryContainer?.map((diary, idx) => {
                       return (
-                        <S.Item key={idx}>
+                        <S.Item 
+                        key={idx}
+                        onClick={()=>onClickRoute(diary.idx)}
+                        >
                           <S.ContentImgContainer>
                             <DynamicImage src={diary.thumbnailImg} />
                           </S.ContentImgContainer>
