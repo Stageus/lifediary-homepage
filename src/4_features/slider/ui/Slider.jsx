@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { S } from "./style";
 import { useGetDiaryList } from "../api/useGetDiaryList";
 import { Icon, DynamicImage } from "@shared/ui";
 
+
+
 export const Slider = () => {
-  const [diaryList, page, setPage] = useGetDiaryList();
+  const [diaryList, addPage] = useGetDiaryList();
   const [postionUnit, setPostionUnit] = useState(0);
+  const navigate = useNavigate();
+  const onClickRoute = (diaryIdx) => navigate(`diary/${diaryIdx}`);
 
   const onClickLeft = () => {
     if (!postionUnit) return;
@@ -13,7 +18,7 @@ export const Slider = () => {
   };
 
   const onClickRight = () => {
-    if (diaryList.length - 1 === -postionUnit) setPage(page + 1);
+    if (diaryList.length - 1 === -postionUnit) addPage();
     setPostionUnit(postionUnit - 1);
   };
 
@@ -26,21 +31,24 @@ export const Slider = () => {
           ) : null}
         </S.Button>
         <S.ItemList>
-          {diaryList &&
-            diaryList?.map((diaryContainer, idx) => {
+          { diaryList?.map((diaryContainer, idx) => {
               return (
                 <S.ItemContainer key={idx} $postionUnit={postionUnit}>
                   {Array.isArray(diaryContainer) &&
                     diaryContainer?.map((diary, idx) => {
                       return (
-                        <S.Item key={idx}>
-                          <DynamicImage src={diary.url} />
+                        <S.Item 
+                        key={idx}
+                        onClick={()=>onClickRoute(diary.idx)}
+                        >
+                          <S.ContentImgContainer>
+                            <DynamicImage src={diary.thumbnailImg} />
+                          </S.ContentImgContainer>
                           <S.UserInfo>
-                            <div>
-                              <DynamicImage src={diary.url} />
-                            </div>
-                            {/* <span>{diary.title}</span> */}
-                            <span>Test Name</span>
+                            <S.ProfileImgContainer>
+                              <DynamicImage src={diary.profileImg} />
+                            </S.ProfileImgContainer>
+                            <span>{diary.nickname}</span>
                           </S.UserInfo>
                         </S.Item>
                       );
