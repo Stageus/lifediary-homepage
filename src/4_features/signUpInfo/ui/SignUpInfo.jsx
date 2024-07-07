@@ -6,33 +6,25 @@ import { TextInput } from "@shared/ui/textInput/TextInput";
 import Profile from "@shared/assets/imges/profile.png";
 import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg";
 import { handleCheckInputValue } from "../lib/checkInputValueLength";
-import { useFetch } from "@shared/hook/useFetch";
+import { usePostSignUpInfo } from "../api/usePostSignUpInfo";
 
 export const SignUpInfo = () => {
   const [inputType, setInputType] = useState("");
   const [nickname, setNickname] = useState("");
-  const [oauthGoogleId, setOauthGoogleId] = useState("1");
+  const [oauthGoogleId, setOauthGoogleId] = useState("1"); // 임시로 1 부여
   const [profileImg, setProfileImg] = useState(Profile);
   const imageInput = useRef(null); // imageInput이라는 참조 객체 생성
-  const [data, errorStatus, baseFetch] = useFetch();
+  const [, , baseFetch] = usePostSignUpInfo();
 
   const handleChangeProfileImgCall = handleChangeProfileImg(imageInput);
   const handleChangeImgBaseCall = handleChangeImgBase(setProfileImg);
   const handleCheckInputValueCall = handleCheckInputValue(setNickname, setInputType);
 
-  const handleUploadInfo = () => {
-    console.log(profileImg, nickname, oauthGoogleId);
-
-    const response = baseFetch("account", {
+  const handleUploadInfo = async () => {
+    baseFetch("account", {
       method: "POST",
       data: { profileImg, nickname, oauthGoogleId },
     });
-
-    if (!response) {
-      console.log("Error: ", errorStatus);
-    } else {
-      console.log("업로드 성공");
-    }
   };
 
   return (
