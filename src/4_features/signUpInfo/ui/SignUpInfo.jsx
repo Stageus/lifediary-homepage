@@ -4,80 +4,49 @@ import { S } from "./style";
 import { DefaultBtn } from "@shared/ui/defaultBtn/DefaultBtn";
 import { TextInput } from "@shared/ui/textInput/TextInput";
 import Profile from "@shared/assets/imges/profile.png";
+import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg";
+import { handleCheckInputValue } from "../lib/checkInputValueLength";
+import { usePostSignUpInfo } from "../api/usePostSignUpInfo";
 
 export const SignUpInfo = () => {
-  const [inputValue, setInputValue] = useState("");
   const [inputType, setInputType] = useState("");
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(Profile);
-  const imageInput = useRef(null);
+  const [nickname, setNickname] = useState("");
+  const [oauthGoogleId, setOauthGoogleId] = useState("1"); // 임시로 1 부여
+  const [profileImg, setProfileImg] = useState(Profile);
+  const imageInput = useRef(null); // imageInput이라는 참조 객체 생성
+  const [, , baseFetch] = usePostSignUpInfo();
 
-  const handleChangeProfileImg = useCallback(() => {
-    imageInput.current.click();
-  }, []);
+  const handleChangeProfileImgCall = handleChangeProfileImg(imageInput);
+  const handleChangeImgBaseCall = handleChangeImgBase(setProfileImg);
+  const handleCheckInputValueCall = handleCheckInputValue(setNickname, setInputType);
 
-  const handleImageChange = (e) => {
-    e.preventDefault();
-    let file = e.target.files[0];
-    let reader = new FileReader();
-
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
-  //useFetch 적용 예정
-  const handleUploadImage = async () => {
-    if (imageInput.current.files[0]) {
-      const formData = new FormData();
-      formData.append("image", imageInput.current.files[0]);
-
-      try {
-        const response = await fetch("YOUR_SERVER_ENDPOINT", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (response.ok) {
-          console.log("업로드 성공");
-        } else {
-          console.error("업로드 실패");
-        }
-      } catch (error) {
-        console.error("업로드 중 에러 발생:", error);
-      }
-    }
-  };
-
-  const handleChangeValue = (e) => {
-    setInputValue(e);
-    if (e.length <= 5) {
-      setInputType("error");
-    } else {
-      setInputType("");
-    }
+  const handleUploadInfo = async () => {
+    baseFetch("account", {
+      method: "POST",
+      data: { profileImg, nickname, oauthGoogleId },
+    });
   };
 
   return (
     <>
       <S.SignUpInfoContainer>
         <S.SignUpInfoProfileImgContainer>
-          <input type="file" multiple hidden ref={imageInput} onChange={handleImageChange} />
-          {imagePreviewUrl && <img src={imagePreviewUrl} alt="Image Preview" style={{ width: "100px", height: "100px" }} onClick={handleChangeProfileImg} />}
+          {/* ref속성으로 imageInput을 설정해 입력요소의 참조를 imageInput.current에 저장 */}
+          <input type="file" hidden ref={imageInput} onChange={handleChangeImgBaseCall} />
+          {profileImg && <S.SignUPInfoProfileImg src={profileImg} onClick={handleChangeProfileImgCall} />}
           <S.SignUpInfoMessage>프로필을 선택해 주세요(jpg, jpeg, gif, png)</S.SignUpInfoMessage>
         </S.SignUpInfoProfileImgContainer>
         <S.SignUpInfoNicknameContainer>
           <S.SignUpInfoNicknameLabel>닉네임</S.SignUpInfoNicknameLabel>
           <S.SignUpInfoNicknameInputContainer>
-            <TextInput type={inputType} placeholder="닉네임을 입력해주세요(최대 20자)" onBlur={handleChangeValue} />
+            <TextInput type={inputType} placeholder="닉네임을 입력해주세요(최대 20자)" onBlur={handleCheckInputValueCall} onChange={handleCheckInputValueCall}>
+              {nickname}
+            </TextInput>
             {inputType === "error" && <S.SignUpInfoMessage>5자 이상 입력해주세요.</S.SignUpInfoMessage>}
           </S.SignUpInfoNicknameInputContainer>
         </S.SignUpInfoNicknameContainer>
         <S.SignUpInfoBtnContainer>
-          <DefaultBtn text="작성" />
+          <DefaultBtn text="작성" onClick={handleUploadInfo} />
           <DefaultBtn text="취소" />
         </S.SignUpInfoBtnContainer>
       </S.SignUpInfoContainer>
