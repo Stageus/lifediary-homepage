@@ -16,6 +16,13 @@ const SignUpInfoProfileImgContainer = styled.div`
   gap: 8px;
 `;
 
+const SignUPInfoProfileImg = styled.img`
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 99px;
+`;
+
 const SignUpInfoNicknameContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -58,6 +65,7 @@ const SignUpInfoBtnContainer = styled.div`
 export const S = {
   SignUpInfoContainer,
   SignUpInfoProfileImgContainer,
+  SignUPInfoProfileImg,
   SignUpInfoNicknameContainer,
   SignUpInfoNicknameLabel,
   SignUpInfoMessage,
