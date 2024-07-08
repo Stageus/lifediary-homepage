@@ -9,7 +9,6 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   gap: 12px;
   padding: 20px;
 `;
@@ -20,6 +19,7 @@ const Logo = styled.img.attrs({
 })`
   width: 80px;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 const ProfileImg = styled.img`
