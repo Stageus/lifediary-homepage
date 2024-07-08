@@ -3,7 +3,7 @@ import { sliceArray } from "../lib/sliceArray";
 import { useFetch } from "@shared/hook";
 
 // 임시데이터
-import { createTestData } from "../model/createTestData";
+import { createTestData } from "../service/createTestData";
 
 
 export const useGetDiaryList = () =>{
