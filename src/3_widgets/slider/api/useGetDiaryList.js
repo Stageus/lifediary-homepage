@@ -8,7 +8,7 @@ import { createTestData } from "../service/createTestData";
 
 export const useGetDiaryList = () =>{
     const [diaryList, setDiaryList] = useState(null);
-    const [fetchData, errorStatus, baseFetch] = useFetch();
+    const [fetchData, status, baseFetch] = useFetch();
     const [page, setPage] = useState(0);
     
 
@@ -32,11 +32,19 @@ export const useGetDiaryList = () =>{
 
     useEffect(()=>{
         getDiaryList();
-        if(errorStatus){
-            return "에러 바운더리 대기";
+        if(status === 400){
+            return console.log("유효성 검사 실패");
+        }
+
+        if(status === 404){
+            return console.log("페이지기입 안했을경우, 일기리소스가 없을경우")
+        }
+
+        if(status === 500){
+            return console.log("서버 에러")
         }
         
-    },[page, errorStatus])
+    },[page, status])
 
     
     return [diaryList, addPage]
