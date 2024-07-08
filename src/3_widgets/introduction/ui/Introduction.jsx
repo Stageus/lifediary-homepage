@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useModel } from "../model/useModel";
 import { S } from "./style";
 import defaultDiary1 from "../assets/defaultDiary1.png";
 import description from "../assets/description.png";
@@ -6,8 +6,7 @@ import { DefaultBtn } from "@shared/ui";
 
 
 export const Introduction = ()=>{
-    const navigate = useNavigate();
-    const onClickRoute = () => navigate("diary");
+    const {onClickRoute} = useModel();
     return(
         <>
         <S.Introduction>
