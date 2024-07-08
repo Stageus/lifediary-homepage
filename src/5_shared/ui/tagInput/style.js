@@ -65,10 +65,10 @@ const TagInputBox = styled.input`
 `;
 
 export const S = {
-  TagInputBox,
+  TagBox,
   TagList,
   TagListBox,
   TagListName,
   TagListDeleteBtn,
-  TagBox,
+  TagInputBox,
 };
