@@ -2,13 +2,21 @@ import { useState, useEffect } from "react";
 
 import { S } from "./style";
 import { TagInput } from "@shared/ui/tagInput/TagInput";
-import Profile from "@shared/assets/imges/profile.png";
+import DefaultProfile from "@shared/assets/imges/profile.png";
 import { DefaultBtn } from "@shared/ui/defaultBtn/DefaultBtn";
 import { navigatePage } from "../lib/navigatePage";
+import { useGetProfileImage } from "../api/useGetProfileImg";
 
 export const Header = () => {
-  const [profileImg, setProfileImg] = useState(Profile);
+  const [profileImg, setProfileImg] = useState(DefaultProfile);
   const [navigateMyProfile, navigateDiaryCreate, navigateHome] = navigatePage();
+  const myProfileImg = useGetProfileImage();
+
+  useEffect(() => {
+    if (myProfileImg) {
+      setProfileImg(myProfileImg);
+    }
+  }, [myProfileImg]);
 
   return (
     <>
