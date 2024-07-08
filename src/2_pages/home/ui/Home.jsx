@@ -1,8 +1,19 @@
-import { HomeContent } from "@widgets/homeContent";
+import { S } from "./style"; 
+import { Introduction } from "@widgets/introduction";
+import { Grass } from "@features/grass";
+import { Slider } from "@features/slider";
+import { useCookie } from "@shared/hook";
+
 export const Home = ()=>{
+    const {handleGetCookie} = useCookie();
     return(
         <>  
-            <HomeContent/>
+            <S.Container>
+            {handleGetCookie()
+            ? <Grass/>
+            : <Introduction/>}
+            <Slider/>
+            </S.Container>
         </>
     );
 }
