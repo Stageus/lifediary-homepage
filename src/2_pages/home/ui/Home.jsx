@@ -1,6 +1,6 @@
 import { S } from "./style"; 
 import { Introduction } from "@widgets/introduction";
-import { Grass } from "@features/grass";
+import { Grass } from "@widgets/grass";
 import { Slider } from "@widgets/slider";
 import { useCookie } from "@shared/hook";
 

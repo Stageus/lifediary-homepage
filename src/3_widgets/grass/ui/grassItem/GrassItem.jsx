@@ -1,15 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { S } from "./style";
+import { useModel } from "./model/useModel";
 import { findFirstDay } from "../../lib/findFirstDay";
 
 export const GrassItem = (props)=>{
     const { day } = props;
-    const [hover, setHover] = useState(false);
-    const onMuouserOver = () => setHover(true);
-    const onMouserOut = ()=> setHover(false);
-    const navigate = useNavigate();
-    const onClickRoute = (diaryIdx)=> navigate(`diary/${diaryIdx}`);
+    const {hover, onMuouserOver, onMouserOut, onClickRoute} = useModel();
+
     return(
         <>
         {day?.idx ? (<S.GrassItem 

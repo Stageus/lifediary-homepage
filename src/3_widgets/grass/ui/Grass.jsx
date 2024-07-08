@@ -1,14 +1,12 @@
 import { S } from "./style";
 import {GrassItem} from "./grassItem/GrassItem";
-import { useGetGrassList } from "../api/useGetGrassList";
+import { useModel } from "../model/useModel";
 import { DefaultBtn } from "@shared/ui";
 
 
 export const Grass = () => {
-        const [grassList, setSelectYear] = useGetGrassList();
-        const nowYears = new Date().getFullYear();
-        const yearsList = Array(3).fill(nowYears).map( (value, idx) => value - idx);
-        const onClickYears = (year)=> setSelectYear(year);
+    const {grassList, yearsList, onClickYears} = useModel();
+    
   return (
     <>
     <S.GrassContainer>
