@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const useFetch = () => {
   const [data, setData] = useState(null);
-  const [errorStatus, setErrorStatus] = useState(null);
+  const [status, setStatus] = useState(null);
 
   const baseFetch = async (url, options, token) => {
     try {
@@ -20,18 +20,17 @@ export const useFetch = () => {
       };
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/${url}`, { ...requestInfo });
+      setStatus(response.status);
 
-      if (!response.ok) {
-        setErrorStatus(response.status);
-        return;
+      if(response.status === 201){
+        const result = await response.json();
+        setData(result);
       }
 
-      const result = await response.json();
-      setData(result);
-    } catch (error) {
-      setErrorStatus(error);
+    } catch(error) {
+      setStatus(error.status);
     }
   };
 
-  return [data, errorStatus, baseFetch];
+  return [data, status, baseFetch];
 };

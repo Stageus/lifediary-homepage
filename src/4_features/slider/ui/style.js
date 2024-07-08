@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 const Slider = styled.div`
 <<<<<<< HEAD
     /* max-width: 1080px; */
@@ -42,17 +43,16 @@ const Item = styled.div`
     box-shadow: 3px 3px 7px gray;
     border-radius: 10px;
     cursor: pointer;
-
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 300px;
+    justify-content: space-evenly;
+    height: 400px;
     overflow: hidden;
 `;
 
 const ContentImgContainer = styled.div`
     flex-grow: 1;
-    max-height: 255px;
+    max-height: 300px;
     padding: 10px;
 `;
 
