@@ -1,7 +1,13 @@
+import { S } from "./style";
+
 export const Search = () => {
-    return(
-        <>
-            <div>검색결과 페이지</div>
-        </>
-    );
-}
+  return (
+    <>
+      <S.SearchContainer>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+      </S.SearchContainer>
+    </>
+  );
+};
