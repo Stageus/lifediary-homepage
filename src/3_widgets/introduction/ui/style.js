@@ -1,18 +1,5 @@
 import styled from "styled-components";
 
-<<<<<<< HEAD:src/3_widgets/homeContent/ui/style.js
-const Container = styled.div`
-    min-height: 100%;
-    width: 1080px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-`;
-
-=======
->>>>>>> e4747ab2dd9e3c7a1e6d527ee62064061c28a735:src/3_widgets/introduction/ui/style.js
 const Introduction = styled.div`
     display: flex;
     gap: 10px;

@@ -4,7 +4,7 @@ import {useFetch, useCookie} from "@shared/hook";
 
 
 // 임시데이터
-import { createTestData } from "../model/createTestData";
+import { createTestData } from "../service/createTestData";
 
 export const useGetGrassList = ()=>{
     // 임시 데이터
