@@ -1,27 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { S } from "./style";
-import { useGetDiaryList } from "../api/useGetDiaryList";
+import { useModel } from "../model/useModel";
 import { Icon, DynamicImage } from "@shared/ui";
 
-
-
 export const Slider = () => {
-  const [diaryList, addPage] = useGetDiaryList();
-  const [postionUnit, setPostionUnit] = useState(0);
-  const navigate = useNavigate();
-  const onClickRoute = (diaryIdx) => navigate(`diary/${diaryIdx}`);
-
-  const onClickLeft = () => {
-    if (!postionUnit) return;
-    setPostionUnit(postionUnit + 1);
-  };
-
-  const onClickRight = () => {
-    if (diaryList.length - 1 === -postionUnit) addPage();
-    setPostionUnit(postionUnit - 1);
-  };
-
+  const {postionUnit, diaryList, onClickRoute, onClickLeft, onClickRight} = useModel();
   return (
     <>
       <S.Slider>
