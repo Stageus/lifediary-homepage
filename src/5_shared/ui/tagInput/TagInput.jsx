@@ -35,7 +35,6 @@ export const TagInput = (props) => {
 
   return (
     <>
-      <p>해시태그 인풋</p>
       <S.TagBox px={px}>
         <S.TagList>
           {tagList.map((tagItem, index) => {
