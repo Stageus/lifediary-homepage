@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const ComplainContent = styled.div`
+    width: 100%;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -8,51 +9,29 @@ const ComplainContent = styled.div`
 `;
 
 const Table = styled.table`
-    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
     padding: 10px;
     text-align: center;
     border-collapse: collapse;
 
     th{
-        padding: 20px;
+        padding: 15px 5px;
         border-bottom: 1px solid gray;
+        white-space: nowrap;
     }
 
     td{
-        padding: 20px 10px;
+        padding: 20px 8px;
         border-bottom: 1px solid gray;
+        font-size: 14px;
+        width: fit-content;
     }
 
 `;
 
-const ThNumber = styled.th`
-    min-width: 80px;
-`;
-
-const ThContent = styled.th`
-    min-width: 400px;
-`;
-
-const ThUser = styled.th`
-    min-width: 300px;
-`;
-
-const ThDate = styled.th`
-    min-width: 150px;
-`;
-
-const ThState = styled.th`
-    min-width: 80px;
-`;
-
-const ThBtn = styled.th`
-    min-width: 250px;
-`;
-
-const BtnContainter = styled.div`
-    display: flex;
-    gap: 10px;
+const Content = styled.th`
+    width: 400px;
 `;
 
 const PageBtnContainer = styled.div`
@@ -79,20 +58,11 @@ const PageBtnList = styled.div`
 `;
 
 
-
-
-
 export const S = {
     ComplainContent,
     Table,
-    ThNumber,
-    ThContent,
-    ThUser,
-    ThDate,
-    ThState,
-    ThBtn,
-    BtnContainter,
     PageBtnContainer,
     PageNextBtn,
     PageBtnList,
+    Content
 }

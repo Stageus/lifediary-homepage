@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const HeaderAndAsideLayout = styled.div`
+  width: 1080px;
+  margin: 0 auto;
   height: 100%;
   display: grid;
   grid-template-rows: 80px;
@@ -10,11 +12,11 @@ const HeaderAndAsideLayout = styled.div`
     "aside main main"
     "aside main main"
     "aside main main";
+    
 `;
 
 const header = styled.div`
-  position: fixed;
-  width: 1080px;
+  width: 100%;
   height: 80px;
   grid-area: header;
 `;
