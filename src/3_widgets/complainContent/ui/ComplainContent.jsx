@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { S } from "./style";
 import { useGetComplainInfo } from "../api/useComplainInfo";
@@ -9,19 +10,30 @@ export const ComplainContent = ()=>{
 
     const onClickRoute = (diaryIdx) => navigate(`/diary/${diaryIdx}`);
 
-    const onClickNum = (num) => changePage(num);
+    const onClickNum = (num) => {
+        changePage(num);
+        // navigate(`?page=${num}`,{ replace: true });
+    };
 
     const onClickLeft = () => {
         if(page === 1) return;
         changePage(page - 1)
+        // navigate(`?page=${page - 1}`);
     };
 
     const onClickRight = () => {
         if(complainInfo.count.length === page) return;
-        changePage(page + 1)
+        changePage(page + 1);
+        // navigate(`?page=${page + 1}`);
     };
 
-    
+    // useEffect(() => {
+    //     const queryParams = new URLSearchParams(location.search);
+    //     const pageNum = queryParams.get('page');
+    //     if (pageNum) {
+    //         changePage(parseInt(pageNum, 10));
+    //     }
+    // }, [location.search, changePage]);
    
     
     return(
