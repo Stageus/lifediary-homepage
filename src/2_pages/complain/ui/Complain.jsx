@@ -1,7 +1,7 @@
 import { S } from "./style";
 import { useModel } from "../model/useModel";
+import { divideToArray } from "../lib/divideToArray";
 import { ComplainItem } from "@widgets/complainItem";
-import { divideToArray } from "../../../2_pages/complain/lib/divideToArray";
 import { DefaultBtn, Icon } from "@shared/ui";
 
 export const Complain = () => {
@@ -29,7 +29,7 @@ export const Complain = () => {
         </S.Table>
         <S.PageBtnContainer>
           <S.PageNextBtn>
-            {currentPage() !== 1 ? (
+            {+currentPage() !== 1 ? (
               <span onClick={onClickLeft}>
                 <Icon type="leftArrow" color="#FF6767" size="30px" />
               </span>
@@ -42,14 +42,14 @@ export const Complain = () => {
                   <DefaultBtn
                     text={num}
                     key={num}
-                    type={currentPage() === String(num) ? "select" : null}
+                    type={+currentPage() === num ? "select" : null}
                     onClick={() => onClickNum(num)}
                   />
                 );
               })}
           </S.PageBtnList>
           <S.PageNextBtn>
-            {complainList?.reportCnt !== currentPage() ? (
+            {complainList.reportCnt && divideToArray(complainList?.reportCnt,5).length !== +currentPage() ? (
               <span onClick={onClickRight}>
                 <Icon type="rightArrow" color="#FF6767" size="30px" />
               </span>

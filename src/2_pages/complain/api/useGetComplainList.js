@@ -9,7 +9,7 @@ export const useGetComplainList = ()=>{
     const [complainList, setComplainList] = useState({});
     const [fetchData, status, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
-    const [searchParams, setSearchParams] = useSearchParams({page: "1"});
+    const [searchParams, setSearchParams] = useSearchParams();
     const currentPage = ()=> searchParams.get("page");
 
     const changePage = (pageNumber)=>{

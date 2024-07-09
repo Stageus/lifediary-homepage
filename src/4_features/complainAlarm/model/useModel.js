@@ -6,7 +6,7 @@ export const useModel = ()=>{
     const navigate = useNavigate();
     const location = useLocation();
     const pathName = location.pathname;
-    const onClickRoute = () => navigate("complain");
+    const onClickRoute = () => navigate("complain?page=1");
 
     return {isAlarm, onClickRoute, pathName};
 }
