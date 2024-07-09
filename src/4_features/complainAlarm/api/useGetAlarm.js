@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetAlarm = () => {
-    // 임시데이터
+    // 추후 false로 변경 -> 기본값
     const [alarm, setAlarm] = useState(true);
     const [fetchData, status, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
@@ -14,9 +14,13 @@ export const useGetAlarm = () => {
     useEffect(()=>{
         // 임시주석
         // getAlarm();
+    },[])
 
-        if(status === 201){
-            return setAlarm(fetchData.isNew)
+    useEffect(()=>{
+
+        if(status === 200){
+            setAlarm(fetchData.isNew);
+            return;
         }
         
         if(status === 401){
@@ -30,7 +34,6 @@ export const useGetAlarm = () => {
         if(status === 500){
             return console.log("서버 에러")
         }
-        
         // 알림은 페이지가 새로고침시에만 발생시키기 때문에
         // 의존성은 할당하지 않는다
     },[])
