@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { mapper } from "../lib/mapper";
 import { sliceDiaryCount } from "../lib/sliceDiaryCount";
 import { useFetch } from "@shared/hook";
+
 
 // 임시데이터
 import { createTestData } from "../service/createTestData";
@@ -16,18 +18,18 @@ export const useGetDiaryList = () =>{
     const getDiaryList = ()=>{
         if(page === 1){
             // 임시데이터
-            setDiaryList(sliceDiaryCount(createTestData(), 5));
+            setDiaryList(sliceDiaryCount(mapper(createTestData()), 5));
             // 임시주석
             // baseFetch("diary/home");
-            // setDiaryList(sliceDiaryCount(fetchData, 5));
+            // setDiaryList(sliceDiaryCount(mapper(fetchData), 5));
             return;
         }
 
         // 임시데이터
-        setDiaryList([...diaryList,...sliceDiaryCount(createTestData(page), 5)]);
+        setDiaryList([...diaryList,...sliceDiaryCount(mapper(createTestData(page)), 5)]);
         // 임시주석
         // baseFetch(`diary/home?page=${page}`);
-        // setDiaryList([...diaryList, ...sliceDiaryCount(fetchData, 5)]);
+        // setDiaryList([...diaryList, ...sliceDiaryCount(mapper(fetchData), 5)]);
     }
 
     useEffect(()=>{
