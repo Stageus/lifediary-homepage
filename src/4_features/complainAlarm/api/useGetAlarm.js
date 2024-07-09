@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-
-
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetAlarm = () => {
     // 임시데이터
-    const [testData, setTestData] = useState({
-		"isNew": true
-	});
+    const [alarm, setAlarm] = useState(true);
     const [fetchData, status, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
 
@@ -18,6 +14,10 @@ export const useGetAlarm = () => {
     useEffect(()=>{
         // 임시주석
         // getAlarm();
+
+        if(status === 201){
+            return setAlarm(fetchData.isNew)
+        }
         
         if(status === 401){
             return console.log("토큰이 잘못되거나 없는경우");
@@ -35,7 +35,5 @@ export const useGetAlarm = () => {
         // 의존성은 할당하지 않는다
     },[])
 
-    // 임시데이터
-    return testData.isNew;
-    // return fetchData.isNew;
+    return alarm;
 };
