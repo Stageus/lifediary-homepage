@@ -23,7 +23,7 @@ export const ComplainItem = (props) => {
             <div>
               <DefaultBtn
                 text="상세보기"
-                fontSize="12px"
+                size="medium"
                 onClick={() => onClickRoute(list.diaryIdx)}
               />
             </div>
@@ -31,7 +31,7 @@ export const ComplainItem = (props) => {
               <div>
                 <DefaultBtn
                   text="복구"
-                  fontSize="12px"
+                  size="medium"
                   onClick={() => changeState(list.diaryIdx, null)}
                 />
               </div>
@@ -41,14 +41,14 @@ export const ComplainItem = (props) => {
                 <div>
                   <DefaultBtn
                     text="통과"
-                    fontSize="12px"
+                    size="medium"
                     onClick={() => changeState(list.diaryIdx, false)}
                   />
                 </div>
                 <div>
                   <DefaultBtn
                     text="삭제"
-                    fontSize="12px"
+                    size="medium"
                     onClick={() => changeState(list.diaryIdx, true)}
                   />
                 </div>

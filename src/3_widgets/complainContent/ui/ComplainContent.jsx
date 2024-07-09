@@ -13,12 +13,12 @@ export const ComplainContent = () => {
         <S.Table>
           <thead>
             <tr>
-              <S.ThNumber>번호</S.ThNumber>
-              <S.ThContent>사유</S.ThContent>
-              <S.ThUser>작성자</S.ThUser>
-              <S.ThDate>날짜</S.ThDate>
-              <S.ThState>상태</S.ThState>
-              <S.ThBtn />
+              <th>번호</th>
+              <th>사유</th>
+              <th>작성자</th>
+              <th>날짜</th>
+              <th>상태</th>
+              <th/>
             </tr>
           </thead>
           <tbody>
