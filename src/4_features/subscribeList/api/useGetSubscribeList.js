@@ -17,21 +17,34 @@ export const useGetSubscribeList = ()=>{
         }else{
             setSubscribeList([...subscribeList,...createTestData(page)]);
         }
-
         // 임시주석
         // baseFetch(`subscription?page=${pageIndex}`,{},handleGetCookie());
         // setSubscribeList([...subscribeList,...fetchData]);
     }
-    
 
     useEffect(()=>{
         getSubscribeList();
+    },[isSubscribe])
+    
 
+    useEffect(()=>{
         if(status === 200){
-            return setSubscribeList(fetchData);
+            setSubscribeList(fetchData)
+            return ;
         }
-
-    },[isSubscribe,status])
+        if(status === 400){
+            return console.log("유효성검사 실패");
+        }
+        if(status === 401){
+            return console.log("토큰이 잘못되거나 없는경우");
+        }
+        if(status === 404){
+            return console.log("더이상 구독 계정이 없음");
+        }
+        if(status === 500){
+            return console.log("서버에러");
+        }
+    },[status])
 
     return [subscribeList, getSubscribeList];
 }
