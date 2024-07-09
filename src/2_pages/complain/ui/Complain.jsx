@@ -4,6 +4,7 @@ import { divideToArray } from "../lib/divideToArray";
 import { ComplainItem } from "@widgets/complainItem";
 import { DefaultBtn, Icon } from "@shared/ui";
 
+// merge 오류난곳
 export const Complain = () => {
   const { currentPage, complainList, onClickNum, onClickLeft, onClickRight } = useModel();
 
