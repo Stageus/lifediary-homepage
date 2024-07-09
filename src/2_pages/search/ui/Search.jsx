@@ -1,13 +1,9 @@
-import { S } from "./style";
+import { SearchContent } from "@widgets/searchContent/ui/SearchContent";
 
 export const Search = () => {
   return (
     <>
-      <S.SearchContainer>
-        <div>1</div>
-        <div>1</div>
-        <div>1</div>
-      </S.SearchContainer>
+      <SearchContent />
     </>
   );
 };
