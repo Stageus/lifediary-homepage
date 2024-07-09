@@ -5,8 +5,7 @@ import { ComplainAlarm  } from "@features/complainAlarm";
 import { SubscribeList } from "@features/subscribeList";
 
 export const Aside = () => {
-  const {pachName, onClickRoute} = useModel();
-  
+  const {pathname, onClickRoute} = useModel();
   return (
     <>
       <S.Aside>
@@ -18,7 +17,7 @@ export const Aside = () => {
           <DefaultBtn 
             text="둘러 보기"
             onClick={()=>onClickRoute("diary")}
-            type={pachName === "/diary" ? "select" : null}
+            type={pathname === "/diary" ? "select" : null}
              />
           <ComplainAlarm/>
         </S.BtnList>
