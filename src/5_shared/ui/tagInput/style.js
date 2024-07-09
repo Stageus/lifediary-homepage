@@ -1,17 +1,14 @@
 import styled from "styled-components";
 
-const TagInputBox = styled.input`
-  ${({ theme, px, fontSize }) => `
+const TagBox = styled.div`
+  ${({ theme, px }) => `
     width: 100%;
-    height: 40px;
-    padding: 8px ${px || "8px"} ;
-    font-size: ${fontSize || theme.fontSize.base};
-    color: ${theme.black};
+    max-width: 600px;
+    display: flex;
+    padding: 0px ${px || "8px"}; 
+    border-radius: 10px;
     background-color: ${theme.white};
-    border: 3px solid ${theme.white};
-    &:focus {
-      outline: none;
-    }
+    border: 3px solid ${theme.major};
   `}
 `;
 
@@ -52,21 +49,26 @@ const TagListDeleteBtn = styled.button`
   `}
 `;
 
-const TagBox = styled.div`
-  ${({ theme, px }) => `
-    display: flex;
-    padding: 0px ${px || "8px"}; 
-    border-radius: 10px;
+const TagInputBox = styled.input`
+  ${({ theme, px, fontSize }) => `
+    width: 100%;
+    height: 40px;
+    padding: 8px ${px || "8px"} ;
+    font-size: ${fontSize || theme.fontSize.base};
+    color: ${theme.black};
     background-color: ${theme.white};
-    border: 3px solid ${theme.major};
+    border: 3px solid ${theme.white};
+    &:focus {
+      outline: none;
+    }
   `}
 `;
 
 export const S = {
-  TagInputBox,
+  TagBox,
   TagList,
   TagListBox,
   TagListName,
   TagListDeleteBtn,
-  TagBox,
+  TagInputBox,
 };
