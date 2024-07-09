@@ -50,10 +50,6 @@ const ThBtn = styled.th`
     min-width: 250px;
 `;
 
-const BtnContainter = styled.div`
-    display: flex;
-    gap: 10px;
-`;
 
 const PageBtnContainer = styled.div`
     width: 400px;
@@ -91,7 +87,6 @@ export const S = {
     ThDate,
     ThState,
     ThBtn,
-    BtnContainter,
     PageBtnContainer,
     PageNextBtn,
     PageBtnList,

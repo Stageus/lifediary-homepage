@@ -17,5 +17,5 @@ export const createTestData = (page)=>{
         }
 
     
-    return {result: }
+    return {result: result, reportCnt: 24}
 }
