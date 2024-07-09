@@ -8,33 +8,38 @@ export const ComplainContent = ()=>{
     const [complainInfo, page, changePage, putComplainState] = useGetComplainInfo();
     const navigate = useNavigate();
 
+    console.log(complainInfo)
+
     const onClickRoute = (diaryIdx) => navigate(`/diary/${diaryIdx}`);
 
     const onClickNum = (num) => {
         changePage(num);
-        // navigate(`?page=${num}`,{ replace: true });
+        navigate(`?page=${num}`,{ replace: false });
     };
 
     const onClickLeft = () => {
         if(page === 1) return;
         changePage(page - 1)
-        // navigate(`?page=${page - 1}`);
+        navigate(`?page=${page - 1}`);
     };
 
     const onClickRight = () => {
         if(complainInfo.count.length === page) return;
         changePage(page + 1);
-        // navigate(`?page=${page + 1}`);
+        navigate(`?page=${page + 1}`);
     };
 
-    // useEffect(() => {
-    //     const queryParams = new URLSearchParams(location.search);
-    //     const pageNum = queryParams.get('page');
-    //     if (pageNum) {
-    //         changePage(parseInt(pageNum, 10));
-    //     }
-    // }, [location.search, changePage]);
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const pageNum = queryParams.get('page');
+        if (pageNum) {
+            changePage(parseInt(pageNum, 10));
+        }
+    }, [location.search, changePage]);
    
+    /*
+        리스트는 widgets단위로 만들고
+    */
     
     return(
         <>

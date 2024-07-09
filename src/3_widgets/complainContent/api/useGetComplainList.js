@@ -1,14 +1,15 @@
+import { useEffect, useState } from "react";
 import { useFetch,useCookie } from "@shared/hooks";
-import { useEffect } from "react";
 
 export const useGetComplainList = ()=>{
+    const [complainList, setComplainList] = useState({});
     const [fetchData, errorStatus, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
 
+    
 
     const getComplainList = (page)=>{
-        const pageIndex = page ?? 0;
-        baseFetch(`report?page=${pageIndex}`,{},handleGetCookie());
+        baseFetch(`report?page=${page}`,{},handleGetCookie());
     }
 
     useEffect(()=>{
