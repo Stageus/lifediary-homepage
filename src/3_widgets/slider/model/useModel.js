@@ -9,6 +9,7 @@ export const useModel = ()=>{
     const navigate = useNavigate();
     const onClickRoute = (diaryIdx) => navigate(`diary/${diaryIdx}`);
 
+    
     const onClickLeft = () => {
         if (!postionUnit) return;
         setPostionUnit(postionUnit + 1);
