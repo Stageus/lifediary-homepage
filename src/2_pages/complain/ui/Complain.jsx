@@ -29,11 +29,7 @@ export const Complain = () => {
         </S.Table>
         <S.PageBtnContainer>
           <S.PageNextBtn>
-<<<<<<< HEAD
-            {+currentPage() !== 1 ? (
-=======
             {currentPage() !== 1 ? (
->>>>>>> 1b2cff8728f04b157ebd87f11f8467f1707b69b5
               <span onClick={onClickLeft}>
                 <Icon type="leftArrow" color="#FF6767" size="30px" />
               </span>
@@ -46,22 +42,14 @@ export const Complain = () => {
                   <DefaultBtn
                     text={num}
                     key={num}
-<<<<<<< HEAD
-                    type={+currentPage() === num ? "select" : null}
-=======
                     type={currentPage() === String(num) ? "select" : null}
->>>>>>> 1b2cff8728f04b157ebd87f11f8467f1707b69b5
                     onClick={() => onClickNum(num)}
                   />
                 );
               })}
           </S.PageBtnList>
           <S.PageNextBtn>
-<<<<<<< HEAD
-            {complainList.reportCnt && divideToArray(complainList?.reportCnt,5).length !== +currentPage() ? (
-=======
             {complainList?.reportCnt !== currentPage() ? (
->>>>>>> 1b2cff8728f04b157ebd87f11f8467f1707b69b5
               <span onClick={onClickRight}>
                 <Icon type="rightArrow" color="#FF6767" size="30px" />
               </span>
