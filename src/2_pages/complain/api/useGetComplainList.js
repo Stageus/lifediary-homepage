@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useFetch, useCookie } from "@shared/hook";
+import { mapper } from "../lib/mapper";
 // 임시데이터
 import { createTestData } from "../service/createTestData";
 
@@ -9,7 +10,6 @@ export const useGetComplainList = ()=>{
     const [fetchData, status, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
     const [searchParams, setSearchParams] = useSearchParams({page: "1"});
-
     const currentPage = ()=> searchParams.get("page");
 
     const changePage = (pageNumber)=>{
@@ -23,18 +23,17 @@ export const useGetComplainList = ()=>{
     useEffect(()=>{
         // 임시데이터
         if(searchParams.size === 0){
-            setComplainList({...createTestData(1)});    
+            setComplainList({...mapper(createTestData(1))});    
         }else{
-            setComplainList({...createTestData(searchParams.get("page"))});
+            setComplainList({...mapper(createTestData(searchParams.get("page")))});
         }
         // 임시주석
         // getComplainList();
-        console.log("실행?");
     },[searchParams])
 
     useEffect(()=>{
         if(status === 200){
-            setComplainList(fetchData);
+            setComplainList(mapper(fetchData));
         }
 
         if(status === 400){
