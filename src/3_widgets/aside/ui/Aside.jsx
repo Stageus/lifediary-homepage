@@ -1,13 +1,11 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useModel } from "../model/useModel";
 import { S } from "./style";
 import { DefaultBtn } from "@shared/ui";
 import { ComplainAlarm  } from "@features/complainAlarm"; 
 import { SubscribeList } from "@features/subscribeList";
 
 export const Aside = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const onClickRoute = (path) => navigate(path)
+  const {pachName, onClickRoute} = useModel();
   
   return (
     <>
@@ -20,7 +18,7 @@ export const Aside = () => {
           <DefaultBtn 
             text="둘러 보기"
             onClick={()=>onClickRoute("diary")}
-            type={location.pathname === "/diary" ? "select" : null}
+            type={pachName === "/diary" ? "select" : null}
              />
           <ComplainAlarm/>
         </S.BtnList>
