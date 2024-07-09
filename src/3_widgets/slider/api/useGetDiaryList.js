@@ -9,12 +9,12 @@ import { createTestData } from "../service/createTestData";
 export const useGetDiaryList = () =>{
     const [diaryList, setDiaryList] = useState(null);
     const [fetchData, status, baseFetch] = useFetch();
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     
 
     const addPage = () => setPage(page + 1);
     const getDiaryList = ()=>{
-        if(!page){
+        if(page === 1){
             // 임시데이터
             setDiaryList(sliceDiaryCount(createTestData(), 5));
             // 임시주석
