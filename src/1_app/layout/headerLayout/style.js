@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const headerLayout = styled.div`
+  width: 1080px;
+  margin: 0 auto;
   height: 100%;
   display: grid;
   grid-template-rows: 80px;
@@ -12,8 +14,7 @@ const headerLayout = styled.div`
 `;
 
 const header = styled.div`
-  width: 1080px;
-  position: fixed;
+  width: 100%;
   height: 80px;
   grid-area: header;
 `;
