@@ -8,28 +8,37 @@ export const useGetSubscribeList = ()=>{
     const [fetchData, status, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
     const isSubscribe = useSubscribe( state => state.value);
-    const getSubscribeList = (page)=>{
-        const pageIndex = page ?? 1;
+    const [page, setPage] = useState(1);
+
+    // 무한스크롤에 사용할 함수
+    const addPage = ()=>{
+        setPage(page + 1)
+    }
+
+    const getSubscribeList = ()=>{
         
-        // 임시데이터
-        if(pageIndex === 1){
+        // 임시데이터 & 조건문
+        if(page === 1){
             setSubscribeList(createTestData());
         }else{
             setSubscribeList([...subscribeList,...createTestData(page)]);
         }
         // 임시주석
-        // baseFetch(`subscription?page=${pageIndex}`,{},handleGetCookie());
-        // setSubscribeList([...subscribeList,...fetchData]);
+        // baseFetch(`subscription?page=${page}`,{},handleGetCookie());
     }
 
     useEffect(()=>{
         getSubscribeList();
-    },[isSubscribe])
+    },[isSubscribe,page])
     
 
     useEffect(()=>{
         if(status === 200){
-            setSubscribeList(fetchData)
+            if(page === 1){
+                setSubscribeList(fetchData);
+            }else{
+                setSubscribeList([...subscribeList,...fetchData]);
+            }
             return ;
         }
         if(status === 400){
@@ -46,5 +55,5 @@ export const useGetSubscribeList = ()=>{
         }
     },[status])
 
-    return [subscribeList, getSubscribeList];
+    return [subscribeList, addPage];
 }
