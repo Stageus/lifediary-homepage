@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { useFetch, useCookie } from "@shared/hook";
-import { useActionData } from "react-router-dom";
 
 export const usePutComplain = () => {
     const { handleGetCookie } = useCookie();
     const [_, status, baseFetch] = useFetch();
 
     const putComplain = (complainIdx,isInvalid)=>{
-        // 임시주석
-        // baseFetch(`report/:${complainIdx}/status`,{isInvalid},handleGetCookie());
+        baseFetch(`report/:${complainIdx}/status`,{isInvalid},handleGetCookie());
     }
 
 useEffect(()=>{
