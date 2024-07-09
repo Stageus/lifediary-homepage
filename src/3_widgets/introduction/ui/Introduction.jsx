@@ -1,22 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useModel } from "../model/useModel";
 import { S } from "./style";
 import defaultDiary1 from "../assets/defaultDiary1.png";
 import description from "../assets/description.png";
-import { Grass } from "@features/grass";
-import { Slider } from "@features/slider";
 import { DefaultBtn } from "@shared/ui";
-import { useCookie } from "@shared/hook";
 
-export const HomeContent = ()=>{
-    const {handleGetCookie} = useCookie();
-    const navigate = useNavigate();
-    const onClickRoute = () => navigate("diary");
+
+export const Introduction = ()=>{
+    const {onClickRoute} = useModel();
     return(
         <>
-            <S.Container>
-                {handleGetCookie() 
-                ? <Grass/>
-                : (<S.Introduction>
+        <S.Introduction>
                     <S.SectionFirst $img={description}>
                         <S.SectionFirstContent>
                             <h1>인생일기</h1>
@@ -31,9 +24,7 @@ export const HomeContent = ()=>{
                         </div>
                     </S.SectionFirst>
                     <S.SectionSecond $img={defaultDiary1}/>
-                </S.Introduction>) }
-                <Slider/>
-            </S.Container>
+                </S.Introduction>
         </>
     );
 }

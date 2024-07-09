@@ -31,7 +31,6 @@ const ProfileImg = styled.img`
 
 const RightElemContainer = styled.div`
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
   gap: 12px;
 `;

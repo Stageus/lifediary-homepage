@@ -27,7 +27,6 @@ import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetComplainInfo = ()=>{
     const location = useLocation();
-    console.log(location.state);
 
     const [complainInfo, setComplainInfo] = useState({
         list: null,
