@@ -14,11 +14,6 @@ export const useGetAlarm = () => {
     useEffect(()=>{
         // 임시주석
         // getAlarm();
-<<<<<<< HEAD
-        
-        if(errorStatus){
-            return "에러바운더리 대기";
-=======
 
         if(status === 201){
             return setAlarm(fetchData.isNew)
@@ -34,7 +29,6 @@ export const useGetAlarm = () => {
 
         if(status === 500){
             return console.log("서버 에러")
->>>>>>> 9694e9f2a4fcd70113df83109e3dfdecb4beb974
         }
         
         // 알림은 페이지가 새로고침시에만 발생시키기 때문에

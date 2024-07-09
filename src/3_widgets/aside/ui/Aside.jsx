@@ -24,26 +24,7 @@ export const Aside = () => {
              />
           <ComplainAlarm/>
         </S.BtnList>
-<<<<<<< HEAD
-        
-        <S.SubscribeInfo>
-          <S.SubscribeTitle>구독목록</S.SubscribeTitle>
-
-          <S.SubscribeList>
-          {testData && testData.map((value)=>{
-            return(
-                <S.SubscribeItem key={value.idx}>
-                    <img src={value.profileImg} alt="#" />
-                    <span>{value.nickname}</span>
-                </S.SubscribeItem>
-            );
-          })}
-          </S.SubscribeList>
-          
-        </S.SubscribeInfo>
-=======
         <SubscribeList/>
->>>>>>> 9694e9f2a4fcd70113df83109e3dfdecb4beb974
       </S.Aside>
     </>
   );
