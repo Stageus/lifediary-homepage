@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Aside = styled.div`
     min-height: 100%;
-    background-color: ${({theme})=> theme.major};
+    background-color: ${({theme})=> theme.minor};
 `;
 
 const BtnList = styled.div`
