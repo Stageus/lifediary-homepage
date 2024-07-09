@@ -1,10 +1,10 @@
 export const mapper = (mapperData)=>{
 
-    const dataWrap = mapperData.map((data) => ({
+    const grassList = mapperData.map((data) => ({
         idx: data.idx,
         color: data.color,
         date: data.date
     }))
 
-    return dataWrap;
+    return grassList;
 }
