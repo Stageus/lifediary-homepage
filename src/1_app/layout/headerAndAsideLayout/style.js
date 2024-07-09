@@ -13,10 +13,10 @@ const HeaderAndAsideLayout = styled.div`
 `;
 
 const header = styled.div`
-  width: 100%;
+  position: fixed;
+  width: 1080px;
   height: 80px;
   grid-area: header;
-  /* outline: 1px solid black; */
 `;
 
 const aside = styled.div`
@@ -29,7 +29,7 @@ const main = styled.div`
 `;
 
 export const S = {
-HeaderAndAsideLayout,
+  HeaderAndAsideLayout,
   header,
   aside,
   main,
