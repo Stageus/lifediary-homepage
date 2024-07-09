@@ -14,7 +14,7 @@ export const ComplainContent = () => {
           <thead>
             <tr>
               <th>번호</th>
-              <th>사유</th>
+              <S.Content>사유</S.Content>
               <th>작성자</th>
               <th>날짜</th>
               <th>상태</th>

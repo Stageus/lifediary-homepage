@@ -16,16 +16,22 @@ const Table = styled.table`
     border-collapse: collapse;
 
     th{
-        padding: 20px;
+        padding: 15px 5px;
         border-bottom: 1px solid gray;
         white-space: nowrap;
     }
 
     td{
-        padding: 20px 10px;
+        padding: 20px 8px;
         border-bottom: 1px solid gray;
+        font-size: 14px;
+        width: fit-content;
     }
 
+`;
+
+const Content = styled.th`
+    width: 400px;
 `;
 
 const PageBtnContainer = styled.div`
@@ -58,4 +64,5 @@ export const S = {
     PageBtnContainer,
     PageNextBtn,
     PageBtnList,
+    Content
 }
