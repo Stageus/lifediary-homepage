@@ -4,13 +4,13 @@ import logo from "@shared/assets/imges/logo.png";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  max-width: 1080px;
   height: 80px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 12px;
   padding: 20px;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.major};
 `;
 
 const Logo = styled.img.attrs({
@@ -35,9 +35,14 @@ const RightElemContainer = styled.div`
   gap: 12px;
 `;
 
+const BtnContainer = styled.div`
+  white-space: nowrap;
+`;
+
 export const S = {
   HeaderContainer,
   Logo,
   ProfileImg,
   RightElemContainer,
+  BtnContainer,
 };

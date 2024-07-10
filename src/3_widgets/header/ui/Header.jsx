@@ -27,9 +27,15 @@ export const Header = () => {
         <TagInput />
         <S.RightElemContainer>
           {profileImg && <S.ProfileImg src={profileImg} onClick={navigateMyProfile} />}
-          <DefaultBtn text="일기업로드" onClick={navigateDiaryCreate} />
-          <DefaultBtn text="알림" />
-          <DefaultBtn text="로그아웃" onClick={logout} />
+          <S.BtnContainer>
+            <DefaultBtn text="일기업로드" onClick={navigateDiaryCreate} />
+          </S.BtnContainer>
+          <S.BtnContainer>
+            <DefaultBtn text="알림" />
+          </S.BtnContainer>
+          <S.BtnContainer>
+            <DefaultBtn text="로그아웃" onClick={logout} />
+          </S.BtnContainer>
         </S.RightElemContainer>
       </S.HeaderContainer>
     </>
