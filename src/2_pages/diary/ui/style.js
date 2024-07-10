@@ -56,36 +56,62 @@ const DiaryMain = styled.div`
 `;
 
 const DiaryMainWrap = styled.div`
+    position: relative;
     display: flex;
 `;
 
 const DiaryContainer = styled.div`
     display: flex;
+    gap:5px;
 `;
 
 const DiaryInfo = styled.div`
-
+    width: 350px;
+    height: 700px;
 `;
 
-const DiaryImages = styled.div`
-    width: 300px;
-    height: 350px;
-    outline: 1px solid black;
+const DiaryImgContainer = styled.div`
+    height: 300px;
+    position: relative;
 `;
 
 const DiaryContent = styled.div`
-    width: 300px;
-    height: 350px;
-    outline: 1px solid black;
+    margin: 0;
+    height: 400px;
+    white-space: pre-wrap;
+    padding: 10px;
+    overflow: scroll;
+    border: 4px solid ${({theme}) => theme.minor};
+    border-radius: 10px;
 `;
 const DiaryComment = styled.div`
-    width: 400px;
+    position: relative;
+    width: ${({$openModal}) => $openModal ? "400px" : "0px"};
     height: 700px;
-    outline: 1px solid black;
+    background-color: ${({theme}) => theme.minor};
+    border-radius: 10px;
+    transition: width 0.3s ease-out;
+    overflow: hidden;
 `;
 
+const Cancel = styled.div`
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+`;
+
+
 const DiarySideList = styled.div`
+    position: absolute;
     align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 10px;
+    right: 0;
+    transform: translate(100%, 0);
 `;
 
 export const S = {
@@ -101,8 +127,9 @@ export const S = {
     DiaryContainer,
     DiaryMain,
     DiaryInfo,
-    DiaryImages,
+    DiaryImgContainer,
     DiaryContent,
     DiaryComment,
-    DiarySideList
+    Cancel,
+    DiarySideList,
 }
