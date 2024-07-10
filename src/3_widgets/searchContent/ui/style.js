@@ -23,6 +23,7 @@ const UserInfoContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 `;
 
 const ProfileImgContainer = styled.div`
@@ -47,6 +48,7 @@ const ThumbnailImgContainer = styled.div`
   height: 240px;
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const ThumbnailImg = styled.img`
@@ -60,6 +62,7 @@ const TextContentContainer = styled.div`
   height: 240px;
   padding: 16px;
   border-radius: 10px;
+  cursor: pointer;
   border: ${({ theme }) => `3px solid ${theme.major}`};
 `;
 

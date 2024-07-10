@@ -2,9 +2,11 @@ import React from "react";
 
 import { S } from "./style";
 import { useGetSearchContent } from "../api/useGetSearchContent";
+import { navigatePage } from "../lib/navigatePage";
 
 export const SearchContent = () => {
   const searchData = useGetSearchContent();
+  const [navigateMyProfile, navigateDiary] = navigatePage();
 
   if (!searchData || searchData.length === 0) {
     return <div>로딩 중...</div>;
@@ -16,7 +18,7 @@ export const SearchContent = () => {
         {searchData.map((item) => (
           <S.SearchContentContainer key={item.idx}>
             <S.ContentInfoContainer>
-              <S.UserInfoContainer>
+              <S.UserInfoContainer onClick={navigateMyProfile}>
                 <S.ProfileImg src={item.profileImg} />
                 <p>{item.nickname}</p>
               </S.UserInfoContainer>
@@ -26,10 +28,10 @@ export const SearchContent = () => {
                 <p>{item.tags.map((tag) => "#" + tag)}</p>
               </S.DiaryInfoContainer>
             </S.ContentInfoContainer>
-            <S.ThumbnailImgContainer>
+            <S.ThumbnailImgContainer onClick={navigateDiary}>
               <S.ThumbnailImg src={item.thumbnailImg} />
             </S.ThumbnailImgContainer>
-            <S.TextContentContainer>
+            <S.TextContentContainer onClick={navigateDiary}>
               <p>{item.textContent}</p>
             </S.TextContentContainer>
           </S.SearchContentContainer>
