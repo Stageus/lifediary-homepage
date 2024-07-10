@@ -1,7 +1,9 @@
-export const DiaryCreate = ()=>{
-    return(
-        <>
-            <div>일기작성 페이지</div>
-        </>
-    );
-}
+import { DiaryCreateInfo } from "@features/diaryCreateInfo/ui/DiaryCreateInfo";
+
+export const DiaryCreate = () => {
+  return (
+    <>
+      <DiaryCreateInfo />
+    </>
+  );
+};
