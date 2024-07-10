@@ -6,6 +6,12 @@ const ContentContainer = styled.div`
   gap: 20px;
 `;
 
+const NameAndBtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+
 const ContentNameContainer = styled.p`
   white-space: nowrap;
   display: flex;
@@ -40,6 +46,7 @@ const ImgPreview = styled.img`
 
 export const S = {
   ContentContainer,
+  NameAndBtnContainer,
   ContentNameContainer,
   ImgPreviewContainer,
   ImgWithCancelIcon,

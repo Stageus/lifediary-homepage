@@ -27,11 +27,13 @@ export const CreateImg = () => {
   return (
     <>
       <S.ContentContainer>
-        <S.ContentNameContainer>이미지</S.ContentNameContainer>
-        <div>
-          <DefaultBtn text="선택(최대 3개)" onClick={handleButtonClick} />
-          <input type="file" hidden multiple onChange={handleFileChange} ref={fileInputRef} />
-        </div>
+        <S.NameAndBtnContainer>
+          <S.ContentNameContainer>이미지</S.ContentNameContainer>
+          <div>
+            <DefaultBtn text="선택(최대 3개)" onClick={handleButtonClick} />
+            <input type="file" hidden multiple onChange={handleFileChange} ref={fileInputRef} />
+          </div>
+        </S.NameAndBtnContainer>
         <S.ImgPreviewContainer>
           {selectedFile.map((file, index) => (
             <S.ImgWithCancelIcon key={index}>
