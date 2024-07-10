@@ -2,7 +2,7 @@ import { S } from "./style";
 import { useGetSubscribeList } from "../api/useGetSubscribeList";
 
 export const SubscribeList = ()=>{
-    const [fetchData, getSubscribeList] = useGetSubscribeList();
+    const [fetchData, addPage] = useGetSubscribeList();
     return(
         <>
             <S.SubscribeInfo>

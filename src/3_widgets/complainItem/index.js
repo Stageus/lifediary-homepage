@@ -1,0 +1,1 @@
+export { ComplainItem } from "./ui/ComplainItem"

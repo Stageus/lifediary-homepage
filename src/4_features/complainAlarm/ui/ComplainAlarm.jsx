@@ -1,13 +1,9 @@
-import { useNavigate, useLocation } from "react-router-dom";
 import { S } from "./style";
-import { useGetAlarm } from "../api/useGetAlarm";
+import { useModel } from "../model/useModel";
 import { DefaultBtn, Icon } from "@shared/ui";
 
 export const ComplainAlarm = () => {
-    const isAlarm = useGetAlarm();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const onClickRoute = () => navigate(`complain?page=1`,{state: 1});
+    const {isAlarm, onClickRoute, pathName} = useModel();
 
     return(
         <>
@@ -15,7 +11,7 @@ export const ComplainAlarm = () => {
                 <DefaultBtn
                 text="신고 보기"
                 onClick={onClickRoute}
-                type={ location.pathname === "/complain" ? "select" : null}
+                type={ pathName === "/complain" ? "select" : null}
                 />
                 {isAlarm 
                 ? <S.Alarm>
