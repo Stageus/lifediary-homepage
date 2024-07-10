@@ -3,9 +3,8 @@ import { useModel } from "../model/useModel";
 import { Icon, DynamicImage } from "@shared/ui";
 
 export const Slider = (props) => {
-    
     const {sliderList} = props;
-    const {positionUnit, onClickLeft, onClickRight} = useModel();
+    const {positionUnit, onClickLeft, onClickRight} = useModel(sliderList.length);
 
   return (
     <>
@@ -16,8 +15,8 @@ export const Slider = (props) => {
         <S.ItemContainer $positionUnit={positionUnit}>
           {sliderList?.map((img, idx) => {
             return (
-                <div>
-                    <DynamicImage src={img} key={idx} />
+                <div key={idx}>
+                    <DynamicImage src={img}/>
                 </div>
             );
           })}

@@ -1,5 +1,5 @@
 import {useState } from "react";
-export const useModel = ()=>{
+export const useModel = (listLength)=>{
     const [positionUnit, setPositionUnit] = useState(0);
 
     const onClickLeft = () => {
@@ -8,7 +8,7 @@ export const useModel = ()=>{
     };
 
     const onClickRight = () => {
-        if(-positionUnit === sliderList.length -1) return;
+        if(-positionUnit === listLength - 1) return;
         setPositionUnit(positionUnit - 1);
     };
 
