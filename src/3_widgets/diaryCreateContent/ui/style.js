@@ -13,12 +13,6 @@ const ContentContainer = styled.div`
   gap: 20px;
 `;
 
-const ImgContentContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-`;
-
 const ContentNameContainer = styled.p`
   white-space: nowrap;
   display: flex;
@@ -46,7 +40,6 @@ const BtnContainer = styled.div`
 export const S = {
   DiaryCreateContainer,
   ContentContainer,
-  ImgContentContainer,
   ContentNameContainer,
   textContent,
   BtnContainer,
