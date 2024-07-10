@@ -2,11 +2,11 @@ import { S } from "./style";
 import { useModel } from "../model/useModel";
 import { Icon, DynamicImage } from "@shared/ui";
 
-export const Slider = () => {
+export const Carousel = () => {
   const {postionUnit, diaryList, onClickRoute, onClickLeft, onClickRight} = useModel();
   return (
     <>
-      <S.Slider>
+      <S.Carousel>
         <S.Button onClick={onClickLeft}>
           {postionUnit ? (
             <Icon color="" size={"40px"} type={"leftArrow"} />
@@ -42,7 +42,7 @@ export const Slider = () => {
         <S.Button onClick={onClickRight}>
           <Icon size={"40px"} type={"rightArrow"} />
         </S.Button>
-      </S.Slider>
+      </S.Carousel>
     </>
   );
 };
