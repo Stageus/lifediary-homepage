@@ -22,7 +22,7 @@ export const useGetProfileImage = () => {
           console.error("Profile image fetch failed: ", data);
         }
       } catch (error) {
-        console.error("Error: ", error);
+        // console.error("Error: ", error);
       }
     };
 
