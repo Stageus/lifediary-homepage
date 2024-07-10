@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 
 import { S } from "./style";
-import { DefaultBtn } from "@shared/ui";
+import { DefaultBtn, Icon } from "@shared/ui";
 
 export const CreateImg = () => {
   const [selectedFile, setSelectedFile] = useState([]);
@@ -20,6 +20,10 @@ export const CreateImg = () => {
     fileInputRef.current.click();
   };
 
+  const removeImgPreview = (index) => {
+    setSelectedFile(selectedFile.filter((_, i) => i !== index));
+  };
+
   return (
     <>
       <S.ContentContainer>
@@ -28,11 +32,16 @@ export const CreateImg = () => {
           <DefaultBtn text="선택(최대 3개)" onClick={handleButtonClick} />
           <input type="file" hidden multiple onChange={handleFileChange} ref={fileInputRef} />
         </div>
-        <div style={{ display: "flex" }}>
+        <S.ImgPreviewContainer>
           {selectedFile.map((file, index) => (
-            <img key={index} src={URL.createObjectURL(file)} alt={`preview ${index}`} style={{ width: "150px", height: "150px", marginRight: "10px" }} />
+            <S.ImgWithCancelIcon key={index}>
+              <S.CancelIconContainer onClick={() => removeImgPreview(index)}>
+                <Icon type="cancel" color="red" />
+              </S.CancelIconContainer>
+              <S.ImgPreview src={URL.createObjectURL(file)} alt={`preview ${index}`} />
+            </S.ImgWithCancelIcon>
           ))}
-        </div>
+        </S.ImgPreviewContainer>
       </S.ContentContainer>
     </>
   );
