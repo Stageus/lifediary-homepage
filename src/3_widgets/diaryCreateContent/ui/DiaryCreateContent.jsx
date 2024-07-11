@@ -1,19 +1,32 @@
 import { useState } from "react";
 
 import { S } from "./style";
+import { usePostDiaryInfo } from "../api/usePostDiaryInfo";
 import { DefaultBtn } from "@shared/ui";
 import { CreateImg } from "@features/createImg";
 import { CreateTag } from "@features/createTag";
 import { CreateGrass } from "@features/createGrass";
 import { CreatePublic } from "@features/createPublic";
+import { useFetch } from "@shared/hook";
+import { useCookie } from "@shared/hook";
 
 export const DiaryCreateContent = () => {
   const [colorSelected, setColorSelected] = useState(false);
+  const [imgContents, setImgContents] = useState([]);
+  const [textContent, setTextContent] = useState("");
+  const [tags, setTags] = useState([]);
+  const [isPublic, setIsPublic] = useState(false);
+  const [color, setColor] = useState("");
+  const [postDiaryInfo] = usePostDiaryInfo();
 
   const handleColorSelection = (color) => {
     if (color) {
-      setColorSelected(true); // 색상이 선택되면 상태 업데이트
+      setColorSelected(true);
     }
+  };
+
+  const handleSubmit = () => {
+    postDiaryInfo(imgContents, textContent, tags, isPublic, color);
   };
 
   return (
@@ -21,15 +34,15 @@ export const DiaryCreateContent = () => {
       <S.DiaryCreateContainer>
         <S.ContentContainer>
           <S.ContentNameContainer>내용</S.ContentNameContainer>
-          <S.textContent />
+          <S.textContent onChange={(e) => setTextContent(e.target.value)} />
         </S.ContentContainer>
-        <CreateImg />
-        <CreateTag />
+        <CreateImg onImgContentsChange={setImgContents} />
+        <CreateTag onTagsChange={setTags} />
         <CreateGrass onColorSelected={handleColorSelection} />
-        <CreatePublic />
+        <CreatePublic onIsPublicChange={setIsPublic} />
         <S.BtnContainer>
           <div>
-            <DefaultBtn text="작성" type={colorSelected ? "select" : "disabled"} />
+            <DefaultBtn text="작성" type={colorSelected ? "select" : "disabled"} onClick={handleSubmit} />
           </div>
           <div>
             <DefaultBtn text="취소" />
