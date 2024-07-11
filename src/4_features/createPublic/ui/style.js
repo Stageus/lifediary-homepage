@@ -21,9 +21,9 @@ const ToggleBtn = styled.div`
   align-items: center;
   width: 58px;
   height: 30px;
-  background-color: ${({ isToggled, theme }) => (isToggled ? theme.highlight : theme.gray)};
+  background-color: ${({ $isToggled, theme }) => ($isToggled ? theme.highlight : theme.gray)};
   transition: background-color 0.5s;
-  border: ${({ isToggled, theme }) => `3px solid ${isToggled ? theme.highlight : theme.gray}`};
+  border: ${({ $isToggled, theme }) => `3px solid ${$isToggled ? theme.highlight : theme.gray}`};
   border-radius: 99px;
 `;
 
@@ -33,7 +33,7 @@ const ToggleSlider = styled.span`
   background-color: ${({ theme }) => theme.white};
   border-radius: 99px;
   transition: transform 0.2s;
-  transform: ${({ isToggled }) => (isToggled ? "translateX(calc(58px - 30px))" : "translateX(0%)")};
+  transform: ${({ $isToggled }) => ($isToggled ? "translateX(calc(58px - 30px))" : "translateX(0%)")};
 `;
 
 export const S = {
