@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
 import { usePostDiaryInfo } from "../api/usePostDiaryInfo";
@@ -15,6 +16,7 @@ export const DiaryCreateContent = () => {
   const [isPublic, setIsPublic] = useState(false);
   const [color, setColor] = useState("");
   const [postDiaryInfo] = usePostDiaryInfo();
+  const navigate = useNavigate();
 
   const handleColorSelection = (color) => {
     if (color) {
@@ -28,6 +30,10 @@ export const DiaryCreateContent = () => {
     } else {
       postDiaryInfo(imgContents, textContent, tags, isPublic, color);
     }
+  };
+
+  const handleCancel = () => {
+    navigate(-1);
   };
 
   const checkTextLength = (e) => {
@@ -56,7 +62,7 @@ export const DiaryCreateContent = () => {
             <DefaultBtn text="작성" type={color !== "" ? "select" : "disabled"} onClick={handleSubmit} />
           </div>
           <div>
-            <DefaultBtn text="취소" />
+            <DefaultBtn text="취소" onClick={handleCancel} />
           </div>
         </S.BtnContainer>
       </S.DiaryCreateContainer>
