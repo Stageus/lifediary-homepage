@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
@@ -8,15 +8,33 @@ import { CreateImg } from "@features/createImg";
 import { CreateTag } from "@features/createTag";
 import { CreateGrass } from "@features/createGrass";
 import { CreatePublic } from "@features/createPublic";
+import { useGetDiaryInfo } from "../api/useGetDiaryInfo";
 
-export const DiaryUpdateContent = () => {
+export const DiaryUpdateContent = ({ diaryIdx }) => {
   const [imgContents, setImgContents] = useState([]);
   const [textContent, setTextContent] = useState("");
   const [tags, setTags] = useState([]);
   const [isPublic, setIsPublic] = useState(false);
   const [color, setColor] = useState("");
+  const [diaryInfo, setDiaryInfo] = useState(null);
   const [putDiaryInfo] = usePutDiaryInfo();
   const navigate = useNavigate();
+  const [fetchedDiaryInfo, errorStatus] = useGetDiaryInfo(diaryIdx);
+
+  useEffect(() => {
+    setDiaryInfo(fetchedDiaryInfo);
+  }, [fetchedDiaryInfo]);
+
+  useEffect(() => {
+    if (diaryInfo) {
+      // 일기 정보가 존재하면 상태 업데이트
+      setImgContents(diaryInfo.imgContents || []);
+      setTextContent(diaryInfo.textContent || "");
+      setTags(diaryInfo.tags || []);
+      setIsPublic(diaryInfo.isPublic || false);
+      setColor(diaryInfo.color || "");
+    }
+  }, [diaryInfo]);
 
   const handleColorSelection = (color) => {
     if (color) {
