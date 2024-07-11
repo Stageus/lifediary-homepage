@@ -1,4 +1,4 @@
-import { DiaryCreateContent } from "@widgets/diaryCreateContent/ui/DiaryCreateContent";
+import { DiaryCreateContent } from "@widgets/diaryCreateContent";
 
 export const DiaryCreate = () => {
   return (
