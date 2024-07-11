@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useFetch, useCookie } from "@shared/hook";
+import { useSubscribe } from "@shared/store";
 
 export const usePostSubscribe = (isSubscribed) => {
     const [fetchData, status, baseFetch] = useFetch();
     const {handleGetCookie} = useCookie();
     const [subscribe, setSubscribe] = useState(isSubscribed);
+    const updateSubscribe = useSubscribe( state => state.updateSubscribe);
 
     const postSubscribe = (accountIdx)=>{
         // 테스트데이터
@@ -15,7 +17,8 @@ export const usePostSubscribe = (isSubscribed) => {
     useEffect(()=>{
         if(status === 200){
             console.log("상태변경")
-            setSubscribe(!subscribe)
+            updateSubscribe();
+            setSubscribe(!subscribe);
             return;
         }
         
