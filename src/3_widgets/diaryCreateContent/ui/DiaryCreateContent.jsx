@@ -9,7 +9,6 @@ import { CreateGrass } from "@features/createGrass";
 import { CreatePublic } from "@features/createPublic";
 
 export const DiaryCreateContent = () => {
-  const [colorSelected, setColorSelected] = useState(false);
   const [imgContents, setImgContents] = useState([]);
   const [textContent, setTextContent] = useState("");
   const [tags, setTags] = useState([]);
@@ -19,12 +18,16 @@ export const DiaryCreateContent = () => {
 
   const handleColorSelection = (color) => {
     if (color) {
-      setColorSelected(true);
+      setColor(color);
     }
   };
 
   const handleSubmit = () => {
-    postDiaryInfo(imgContents, textContent, tags, isPublic, color);
+    if (color === "") {
+      alert("색상을 선택해주세요.");
+    } else {
+      postDiaryInfo(imgContents, textContent, tags, isPublic, color);
+    }
   };
 
   const checkTextLength = (e) => {
@@ -50,7 +53,7 @@ export const DiaryCreateContent = () => {
         <CreatePublic onIsPublicChange={setIsPublic} />
         <S.BtnContainer>
           <div>
-            <DefaultBtn text="작성" type={colorSelected ? "select" : "disabled"} onClick={handleSubmit} />
+            <DefaultBtn text="작성" type={color !== "" ? "select" : "disabled"} onClick={handleSubmit} />
           </div>
           <div>
             <DefaultBtn text="취소" />
