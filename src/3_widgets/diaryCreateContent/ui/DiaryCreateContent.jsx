@@ -7,8 +7,6 @@ import { CreateImg } from "@features/createImg";
 import { CreateTag } from "@features/createTag";
 import { CreateGrass } from "@features/createGrass";
 import { CreatePublic } from "@features/createPublic";
-import { useFetch } from "@shared/hook";
-import { useCookie } from "@shared/hook";
 
 export const DiaryCreateContent = () => {
   const [colorSelected, setColorSelected] = useState(false);
