@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { S } from "./style";
 import { DefaultBtn } from "@shared/ui";
 import { CreateImg } from "@features/createImg";
@@ -6,6 +8,14 @@ import { CreateGrass } from "@features/createGrass";
 import { CreatePublic } from "@features/createPublic";
 
 export const DiaryCreateContent = () => {
+  const [colorSelected, setColorSelected] = useState(false);
+
+  const handleColorSelection = (color) => {
+    if (color) {
+      setColorSelected(true); // 색상이 선택되면 상태 업데이트
+    }
+  };
+
   return (
     <>
       <S.DiaryCreateContainer>
@@ -15,11 +25,11 @@ export const DiaryCreateContent = () => {
         </S.ContentContainer>
         <CreateImg />
         <CreateTag />
-        <CreateGrass />
+        <CreateGrass onColorSelected={handleColorSelection} />
         <CreatePublic />
         <S.BtnContainer>
           <div>
-            <DefaultBtn text="작성" type="disabled" />
+            <DefaultBtn text="작성" type={colorSelected ? "select" : "disabled"} />
           </div>
           <div>
             <DefaultBtn text="취소" />

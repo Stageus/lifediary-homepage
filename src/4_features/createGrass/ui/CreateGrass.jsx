@@ -5,18 +5,20 @@ import { ChromePicker } from "react-color";
 import { S } from "./style";
 import { DefaultBtn } from "@shared/ui";
 
-export const CreateGrass = () => {
+export const CreateGrass = ({ onColorSelected }) => {
   const [color, setColor] = useState("");
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef();
 
   const handleColorChange = (color) => {
     setColor(color.hex);
+    onColorSelected(color.hex);
   };
 
   const handleRandomColor = () => {
     const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
     setColor(randomColor);
+    onColorSelected(randomColor);
   };
 
   useEffect(() => {
