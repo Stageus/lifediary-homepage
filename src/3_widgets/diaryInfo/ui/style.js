@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const DiaryWrap = styled.div`
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
     padding: 20px 15px;
     height: 100%;
     display: flex;
