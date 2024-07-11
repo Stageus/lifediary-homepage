@@ -19,7 +19,7 @@ const ContentNameContainer = styled.p`
   width: 80px;
 `;
 
-const textContent = styled.textarea.attrs({
+const TextContent = styled.textarea.attrs({
   placeholder: "내용을 입력해주세요(최대 500자)",
 })`
   width: 600px;
@@ -41,6 +41,6 @@ export const S = {
   DiaryCreateContainer,
   ContentContainer,
   ContentNameContainer,
-  textContent,
+  TextContent,
   BtnContainer,
 };
