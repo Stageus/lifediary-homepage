@@ -39,6 +39,7 @@ const UserImg = styled.div`
     height: 34px;
     display: flex;
     border-radius: 50%;
+    cursor: pointer;
     & > img{
         width: 100%;
     }
