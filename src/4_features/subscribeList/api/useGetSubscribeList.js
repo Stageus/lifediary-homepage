@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createTestData } from "../service/createTestData";
-import { useFetch, useCookie, useSubscribe } from "@shared/hook";
+import { useFetch, useCookie } from "@shared/hook";
+import { useSubscribe } from "@shared/store";
 
 
 export const useGetSubscribeList = ()=>{
