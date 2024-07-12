@@ -1,95 +1,38 @@
 import styled from "styled-components";
 
-const DiaryWrap = styled.div`
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    padding: 20px 15px;
-    height: 100%;
+const DiaryInfo = styled.div`
+    margin-left: 100px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+`;
+
+// ContentPart _________________
+const ContentPart = styled.div`
+    flex: 0 0 350px;
     display: flex;
     flex-direction: column;
-`;
-
-const DiaryHeader = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-`;
-
-const DiaryHeaderContainer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-`;
-
-const UserImg = styled.div`
-    width: 34px;
-    height: 34px;
-    display: flex;
-    border-radius: 50%;
-    & > img{
-        width: 100%;
-    }
-`;
-
-const UserName = styled.div`
-    font-size: ${({theme})=> theme.fontSize.base};
-    color: ${({theme}) => theme.black};
-`;
-
-const DiaryCt = styled.div`
-    font-size: ${({theme})=> theme.fontSize.medium};
-    color: ${({theme}) => theme.black};
-`;
-
-const DiarySubscribe = styled.div`
-    width: 80px;
-`;
-
-const DiaryEditor = styled.div`
-    display: flex;
-    gap: 10px;
-`;
-
-const DiaryMain = styled.div`
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
     justify-content: center;
 `;
 
-const DiaryMainWrap = styled.div`
-    position: relative;
-    display: flex;
-`;
-
-const DiaryContainer = styled.div`
-    display: flex;
-    gap:5px;
-`;
-
-const DiaryInfo = styled.div`
-    width: 350px;
-    height: 700px;
-`;
-
-const DiaryImgContainer = styled.div`
-    height: 300px;
-    position: relative;
+const DiarySliderContainer = styled.div`
+    min-height: 300px;
 `;
 
 const DiaryContent = styled.div`
-    margin: 0;
-    height: 400px;
+    max-height: 500px;
     white-space: pre-wrap;
+    overflow-y: scroll;
     padding: 10px;
-    overflow: scroll;
     border: 4px solid ${({theme}) => theme.minor};
     border-radius: 10px;
 `;
-const DiaryComment = styled.div`
+
+// CommentPart _________________
+const CommentPart = styled.div`
     position: relative;
     width: ${({$openModal}) => $openModal ? "400px" : "0px"};
-    height: 700px;
     background-color: ${({theme}) => theme.minor};
     border-radius: 10px;
     transition: width 0.3s ease-out;
@@ -105,33 +48,20 @@ const Cancel = styled.div`
 `;
 
 
-const DiarySideList = styled.div`
-    position: absolute;
-    align-self: flex-end;
+// ButtonPart _________________
+const ButtonPart = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 0 10px;
-    right: 0;
-    transform: translate(100%, 0);
+    justify-content: flex-end;
+    gap: 5px;
 `;
 
 export const S = {
-    DiaryWrap,
-    DiaryHeader,
-    DiaryHeaderContainer,
-    UserImg,
-    UserName,
-    DiaryCt,
-    DiarySubscribe,
-    DiaryEditor,
-    DiaryMainWrap,
-    DiaryContainer,
-    DiaryMain,
     DiaryInfo,
-    DiaryImgContainer,
+    ContentPart,
+    DiarySliderContainer,
     DiaryContent,
-    DiaryComment,
+    CommentPart,
     Cancel,
-    DiarySideList,
+    ButtonPart,
 }
