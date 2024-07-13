@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+const DatePickerRangeContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const DatePickerContainer = styled.div`
   display: flex;
   align-items: center;
@@ -20,8 +25,14 @@ const DatePickerName = styled.p`
   color: ${({ theme }) => theme.gray};
 `;
 
+const BtnContainer = styled.div`
+  margin-left: 24px;
+`;
+
 export const S = {
+  DatePickerRangeContainer,
   DatePickerContainer,
   horizontalLine,
   DatePickerName,
+  BtnContainer,
 };
