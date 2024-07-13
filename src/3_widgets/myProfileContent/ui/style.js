@@ -5,8 +5,16 @@ const MyProfileContentContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
+  margin: 80px;
+`;
+
+const DiscardArrayContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 `;
 
 export const S = {
   MyProfileContentContainer,
+  DiscardArrayContainer,
 };
