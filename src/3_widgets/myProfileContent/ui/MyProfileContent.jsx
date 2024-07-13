@@ -2,6 +2,7 @@ import { S } from "./style.js";
 import { ProfileInfo } from "@features/profileInfo";
 import { ProfileTab } from "@features/profileTab";
 import { DateRangePicker } from "@features/dateRangePicker";
+import { DiaryCard } from "@features/diaryCard";
 
 export const MyProfileContent = () => {
   return (
@@ -10,6 +11,7 @@ export const MyProfileContent = () => {
         <ProfileInfo />
         <ProfileTab />
         <DateRangePicker />
+        <DiaryCard />
       </S.MyProfileContentContainer>
     </>
   );
