@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 import { useFetch, useCookie } from "@shared/hook";
 // 테스트 데이터
 import { createTestData } from "../service/createTestData";
 
-/*
-    브라우저를 통하여 주소를 복사하고 해당 url을 공유할경우에는
-    url을 업데이트 해야함
-*/
 export const useGetDiaryList = () => {
     const [fetchData, status, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
@@ -17,36 +13,39 @@ export const useGetDiaryList = () => {
 
     const nextPage = () => setPage(page + 1);
 
-    const getDiaryList = ()=>{
+    const getDiaryList = (diaryIdx)=>{
 
-        if(diaryidx){
-            // 임시데이터
-            setDiaryList(createTestData());
-            // 메인페이지에서의 특정일기를 포함한 리스트 반환
-            // baseFetch(`diary/${params}?page=${page}`,{},handleGetCookie());
-        }
-
+        // 임시데이터 -------------
         if(diaryList){
             setDiaryList([...diaryList, ...createTestData()]);
+            return;
         }
-
         setDiaryList(createTestData());
-        // 메인페이지에서의 기본 리스트 반환
+        // --------------------
+
+
+        // 임시주석
+        // if (diaryIdx) {
+        //     baseFetch(`diary/${diaryidx}?page=${page}`,{},handleGetCookie());
+        // }
         // baseFetch(`diary?page=${page}`,{},handleGetCookie());
-    }
+    };
 
     useEffect(()=>{
-        getDiaryList();
+        if(diaryidx){
+            getDiaryList(diaryidx);
+        } else{
+            getDiaryList();
+        }
     },[page])
 
     useEffect(()=>{
         if(status === 200){
             if(diaryList){
-                setDiaryList([...diaryList, ...fetchData()]);
+                setDiaryList([...diaryList, ...fetchData]);
                 return;
             }
             setDiaryList(fetchData);
-            return;
         }
 
         if(status === 400){
@@ -60,8 +59,6 @@ export const useGetDiaryList = () => {
         if(status === 500){
             return console.log("서버 에러")
         }
-        
-
     },[fetchData])
 
     

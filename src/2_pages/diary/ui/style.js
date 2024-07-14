@@ -11,7 +11,7 @@ const Diary = styled.div`
 
 // 리스트
 const ScrollItem = styled.div`
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     scroll-snap-stop: always;
     flex: 1 0 100%;
     padding: 20px 15px;
