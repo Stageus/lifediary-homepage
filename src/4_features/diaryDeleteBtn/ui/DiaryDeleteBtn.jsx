@@ -1,8 +1,8 @@
 import { DefaultBtn } from "@shared/ui";
 import { useModel } from "../model/useModel";
 
-export const DiaryDeleteBtn = () => {
-    const { onClickConfirm } = useModel();
+export const DiaryDeleteBtn = ( diaryIdx ) => {
+    const { onClickConfirm } = useModel( diaryIdx );
     
     return(
         <DefaultBtn
