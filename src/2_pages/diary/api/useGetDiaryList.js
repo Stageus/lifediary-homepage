@@ -11,12 +11,12 @@ export const useGetDiaryList = () => {
     const [diaryList, setDiaryList] = useState(null);
     const [page, setPage] = useState(1);
 
-    const nextPage = () => setPage(page + 1);
+    const nextPage = () => setPage( page + 1 );
 
-    const getDiaryList = (diaryIdx)=>{
+    const getDiaryList = ( diaryIdx )=>{
 
         // 임시데이터 -------------
-        if(diaryList){
+        if ( diaryList ){
             setDiaryList([...diaryList, ...createTestData()]);
             return;
         }
@@ -32,7 +32,7 @@ export const useGetDiaryList = () => {
     };
 
     useEffect(()=>{
-        if(diaryidx){
+        if ( diaryidx ) {
             getDiaryList(diaryidx);
         } else{
             getDiaryList();
@@ -40,25 +40,26 @@ export const useGetDiaryList = () => {
     },[page])
 
     useEffect(()=>{
-        if(status === 200){
-            if(diaryList){
+        if ( status === 200 ){
+            if ( diaryList ){
                 setDiaryList([...diaryList, ...fetchData]);
                 return;
             }
             setDiaryList(fetchData);
         }
 
-        if(status === 400){
+        if( status === 400 ){
             return console.log("유효성검사 실패일경우")
         }
 
-        if(status === 404){
+        if( status === 404 ){
             return console.log("페이지를 기입안햇을경우, 리소스가 없을경우")
         }
 
-        if(status === 500){
+        if( status === 500 ){
             return console.log("서버 에러")
         }
+        
     },[fetchData])
 
     
