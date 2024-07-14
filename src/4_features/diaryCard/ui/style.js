@@ -8,6 +8,7 @@ const DiaryCardContainer = styled.div`
 `;
 
 const ThumbnailContainer = styled.div`
+  position: relative;
   width: 200px;
   height: 150px;
   img {
@@ -15,6 +16,13 @@ const ThumbnailContainer = styled.div`
     height: 100%;
     object-fit: cover;
   }
+`;
+
+const PublicSignContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
 `;
 
 const DateContainer = styled.div`
@@ -30,5 +38,6 @@ const DateContainer = styled.div`
 export const S = {
   DiaryCardContainer,
   ThumbnailContainer,
+  PublicSignContainer,
   DateContainer,
 };

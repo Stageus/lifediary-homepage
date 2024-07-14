@@ -13,12 +13,6 @@ export const MyProfileContent = () => {
         <DateRangePicker />
         <S.DiscardArrayContainer>
           <DiaryCard />
-          <DiaryCard />
-          <DiaryCard />
-          <DiaryCard />
-          <DiaryCard />
-          <DiaryCard />
-          <DiaryCard />
         </S.DiscardArrayContainer>
       </S.MyProfileContentContainer>
     </>
