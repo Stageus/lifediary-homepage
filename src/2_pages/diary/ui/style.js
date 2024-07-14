@@ -11,7 +11,7 @@ const Diary = styled.div`
 
 // 리스트
 const ScrollItem = styled.div`
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     scroll-snap-stop: always;
     flex: 1 0 100%;
     padding: 20px 15px;
@@ -39,6 +39,10 @@ const UserImg = styled.div`
     height: 34px;
     display: flex;
     border-radius: 50%;
+<<<<<<< HEAD
+    cursor: pointer;
+=======
+>>>>>>> 7a5ab37efa2563bbd0d4d590dd09f13cdf50201b
     & > img{
         width: 100%;
     }

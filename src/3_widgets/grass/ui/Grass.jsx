@@ -6,7 +6,7 @@ import { DefaultBtn } from "@shared/ui";
 
 export const Grass = () => {
     const {grassList, yearsList, onClickYears} = useModel();
-    
+
   return (
     <>
     <S.GrassContainer>
