@@ -7,7 +7,12 @@ import { parseTime } from "@shared/util";
 
 
 export const Diary = () => {
-  const {diaryList, onClickRoute, onClickTimeRoute, scrollRef, onScrollNext} = useModel();
+  const { 
+    diaryList, 
+    onClickRoute,
+    onClickTimeRoute, 
+    scrollRef, 
+    onScrollNext } = useModel();
 
   return (
     <>
@@ -15,21 +20,19 @@ export const Diary = () => {
         {diaryList &&
           diaryList.map((diary) => {
             return (
+
               <S.ScrollItem key={diary.idx}>
                 <S.DiaryHeader>
                   <S.DiaryHeaderContainer>
                     <S.UserImg onClick={()=>onClickRoute(diary.isMine, diary.accountIdx)}>
                       <img src={diary.profileImg} alt="#" />
                     </S.UserImg>
-
                     <S.UserName>
                       <span>{diary.nickname}</span>
                     </S.UserName>
-
                     <S.DiaryCt>
                       <span>{parseTime(diary.createdAt)}</span>
                     </S.DiaryCt>
-
                     {diary.isMine 
                     ? null
                     : <S.DiarySubscribe>
@@ -39,8 +42,8 @@ export const Diary = () => {
                         />
                       </S.DiarySubscribe>
                     }
-                    
                   </S.DiaryHeaderContainer>
+
                   {diary.isMine
                   ? <S.DiaryEditor>
                     <div>
@@ -57,7 +60,6 @@ export const Diary = () => {
                     </div>
                     </S.DiaryEditor>
                   : null}
-                  
                 </S.DiaryHeader>
 
                 <S.DiaryInfoContainer>
