@@ -30,7 +30,7 @@ export const useDeleteDiary = ()=>{
             return console.log("서버에러");
         }
 
-    },[fetchData])
+    },[status])
 
     return [ deleteDiary ];
 }
