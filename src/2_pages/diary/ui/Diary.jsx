@@ -4,11 +4,8 @@ import { DiaryInfo } from "@widgets/diaryInfo";
 import { SubscribeBtn } from "@features/subscribeBtn";
 import { DefaultBtn } from "@shared/ui";
 import { parseTime } from "@shared/util";
-<<<<<<< HEAD
-=======
 import { DiaryDeleteBtn } from "@features/diaryDeleteBtn";
 
->>>>>>> 6026a4ca7acf2b0920be45a1b758e73fae67d55e
 
 
 export const Diary = () => {
@@ -58,14 +55,10 @@ export const Diary = () => {
                        />
                     </div>
                     <div>
-<<<<<<< HEAD
                       <DefaultBtn 
                       text="일기삭제"
                       onClick={()=>{}}
                        />
-=======
-                      <DiaryDeleteBtn/>
->>>>>>> 6026a4ca7acf2b0920be45a1b758e73fae67d55e
                     </div>
                     </S.DiaryEditor>
                   : null}

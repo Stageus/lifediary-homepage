@@ -39,10 +39,7 @@ const UserImg = styled.div`
     height: 34px;
     display: flex;
     border-radius: 50%;
-<<<<<<< HEAD
     cursor: pointer;
-=======
->>>>>>> 7a5ab37efa2563bbd0d4d590dd09f13cdf50201b
     & > img{
         width: 100%;
     }
