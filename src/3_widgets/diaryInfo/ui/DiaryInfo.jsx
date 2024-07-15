@@ -19,6 +19,7 @@ export const DiaryInfo = (props)=>{
                   </S.DiarySliderContainer>
 
                   <S.DiaryContent>
+                    {/* <div>{textContent}</div> */}
                     {textContent}
                   </S.DiaryContent>
                 </S.ContentPart>

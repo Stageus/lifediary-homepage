@@ -30,7 +30,7 @@ const DiaryHeader = styled.div`
 const DiaryHeaderContainer = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px;;
     
 `;
 
