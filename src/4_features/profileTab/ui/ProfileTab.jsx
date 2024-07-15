@@ -2,11 +2,12 @@ import { useState } from "react";
 
 import { S } from "./style.js";
 
-export const ProfileTab = () => {
+export const ProfileTab = ({ onTabSelect }) => {
   const [selectedTab, setSelectedTab] = useState("myDiaryTab");
 
   const handleTabBtnClick = (e) => {
     setSelectedTab(e);
+    onTabSelect(e);
   };
 
   return (
