@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { S } from "./style"; 
 import { Slider } from "./slider/ui";
+import { DiaryLikeBtn } from "@features/diaryLikeBtn";
 import { DefaultBtn } from "@shared/ui";
 import { Icon } from "@shared/ui";
 
@@ -18,6 +19,7 @@ export const DiaryInfo = (props)=>{
                   </S.DiarySliderContainer>
 
                   <S.DiaryContent>
+                    {/* <div>{textContent}</div> */}
                     {textContent}
                   </S.DiaryContent>
                 </S.ContentPart>
@@ -29,7 +31,11 @@ export const DiaryInfo = (props)=>{
                 </S.CommentPart>
                 
                 <S.ButtonPart>
-                    <DefaultBtn text="좋아요" />
+                    <DiaryLikeBtn
+                    diaryIdx={idx}
+                    likeCnt={likeCnt}
+                    isLiked={isLiked}
+                    />
                     <DefaultBtn text="댓글" onClick={onClickModal} />
                     <DefaultBtn text="공유" />
                     <DefaultBtn text="신고" />

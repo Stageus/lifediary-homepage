@@ -1,71 +1,64 @@
-import { useEffect, useRef } from "react";
 import { S } from "./style";
-import { useGetDiaryList } from "../api/useGetDiaryList";
+import { useModel } from "../model/useModel";
 import { DiaryInfo } from "@widgets/diaryInfo";
 import { SubscribeBtn } from "@features/subscribeBtn";
 import { DefaultBtn } from "@shared/ui";
+import { parseTime } from "@shared/util";
+import { DiaryDeleteBtn } from "@features/diaryDeleteBtn";
+
+
 
 export const Diary = () => {
-  const [diaryList, nextPage] = useGetDiaryList();
-
-//   const scrollRef = useRef(null);
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       if (scrollRef.current) {
-//         const position = scrollRef.current.scrollTop;
-//         console.log(position);
-//       }
-//     };
-
-//     const scrollElement = scrollRef.current;
-//     if (scrollElement) {
-//       scrollElement.addEventListener("scroll", handleScroll);
-//     }
-
-//     return () => {
-//       if (scrollElement) {
-//         scrollElement.removeEventListener("scroll", handleScroll);
-//       }
-//     };
-//   }, []);
-//   console.log(scrollRef);
+  const { 
+    diaryList, 
+    onClickRoute,
+    onClickTimeRoute, 
+    scrollRef, 
+    onScrollNext } = useModel();
 
   return (
     <>
-      <S.Diary>
+      <S.Diary ref={scrollRef} onScroll={onScrollNext}>
         {diaryList &&
           diaryList.map((diary) => {
             return (
+
               <S.ScrollItem key={diary.idx}>
                 <S.DiaryHeader>
                   <S.DiaryHeaderContainer>
-                    <S.UserImg>
+                    <S.UserImg onClick={()=>onClickRoute(diary.isMine, diary.accountIdx)}>
                       <img src={diary.profileImg} alt="#" />
                     </S.UserImg>
-
                     <S.UserName>
                       <span>{diary.nickname}</span>
                     </S.UserName>
-
                     <S.DiaryCt>
-                      <span>{diary.createdAt}</span>
+                      <span>{parseTime(diary.createdAt)}</span>
                     </S.DiaryCt>
-
-                    <S.DiarySubscribe>
-                      <SubscribeBtn
+                    {diary.isMine 
+                    ? null
+                    : <S.DiarySubscribe>
+                        <SubscribeBtn
                         isSubscribed={diary.isSubscribed}
-                        accountIdx={diary.idx}
-                      />
-                    </S.DiarySubscribe>
+                        accountIdx={diary.accountIdx}
+                        />
+                      </S.DiarySubscribe>
+                    }
                   </S.DiaryHeaderContainer>
-                  <S.DiaryEditor>
+
+                  {diary.isMine
+                  ? <S.DiaryEditor>
                     <div>
-                      <DefaultBtn text="일기수정" />
+                      <DefaultBtn 
+                      text="일기수정"
+                      onClick={()=>onClickTimeRoute(diary.createdAt, diary.idx)}
+                       />
                     </div>
                     <div>
-                      <DefaultBtn text="일기삭제" />
+                      <DiaryDeleteBtn/>
                     </div>
-                  </S.DiaryEditor>
+                    </S.DiaryEditor>
+                  : null}
                 </S.DiaryHeader>
 
                 <S.DiaryInfoContainer>
