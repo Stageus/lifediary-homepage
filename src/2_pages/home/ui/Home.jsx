@@ -1,7 +1,7 @@
 import { S } from "./style"; 
 import { Introduction } from "@widgets/introduction";
 import { Grass } from "@widgets/grass";
-import { Slider } from "@widgets/slider";
+import { Carousel } from "@widgets/carousel";
 import { useCookie } from "@shared/hook";
 
 export const Home = ()=>{
@@ -12,7 +12,7 @@ export const Home = ()=>{
             {handleGetCookie()
             ? <Grass/>
             : <Introduction/>}
-            <Slider/>
+            <Carousel/>
             </S.Container>
         </>
     );

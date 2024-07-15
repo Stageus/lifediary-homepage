@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-const Slider = styled.div`
+const Carousel = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -71,7 +71,7 @@ const ProfileImgContainer = styled.div`
 
 
 export const S = {
-    Slider,
+    Carousel,
     Button,
     ItemList,
     ItemContainer,

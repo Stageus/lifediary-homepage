@@ -1,7 +1,9 @@
-export const MyProfile = ()=>{
-    return(
-        <>
-            <div>마이 페이지</div>
-        </>
-    );
-}
+import { MyProfileContent } from "@widgets/myProfileContent";
+
+export const MyProfile = () => {
+  return (
+    <>
+      <MyProfileContent />
+    </>
+  );
+};
