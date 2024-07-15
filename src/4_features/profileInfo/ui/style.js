@@ -25,8 +25,30 @@ const NicknameContainer = styled.div`
   gap: 8px;
 `;
 
+const ProfileEditContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
+const ProfileTextInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-start;
+`;
+
+const ProfileInfoMessage = styled.p`
+  color: ${({ theme }) => theme.highlight};
+  font-size: ${({ theme }) => theme.fontSize.medium};
+`;
+
 const Nickname = styled.p`
   font-size: ${({ theme }) => theme.fontSize.x_large};
+`;
+
+const EditIconContainer = styled.div`
+  cursor: pointer;
 `;
 
 const SubscribeInfo = styled.p`
@@ -38,6 +60,10 @@ export const S = {
   ProfileImg,
   NicknameAndSubscribeContainer,
   NicknameContainer,
+  ProfileEditContainer,
+  ProfileTextInputContainer,
+  ProfileInfoMessage,
   Nickname,
+  EditIconContainer,
   SubscribeInfo,
 };
