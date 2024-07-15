@@ -1,7 +1,9 @@
-export const DiaryUpdate = ()=>{
-    return(
-        <>
-            <div>일기수정 페이지</div>
-        </>
-    );
-}
+import { DiaryUpdateContent } from "@widgets/diaryUpdateContent";
+
+export const DiaryUpdate = () => {
+  return (
+    <>
+      <DiaryUpdateContent />
+    </>
+  );
+};
