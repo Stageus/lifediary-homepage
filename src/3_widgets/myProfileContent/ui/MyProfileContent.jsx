@@ -4,7 +4,6 @@ import { S } from "./style.js";
 import { ProfileInfo } from "@features/profileInfo";
 import { ProfileTab } from "@features/profileTab";
 import { DateRangePicker } from "@features/dateRangePicker";
-import { DiaryCard } from "@features/diaryCard";
 
 export const MyProfileContent = () => {
   const [selectedTab, setSelectedTab] = useState("myDiaryTab");
@@ -17,13 +16,8 @@ export const MyProfileContent = () => {
         {selectedTab === "myDiaryTab" ? (
           <>
             <DateRangePicker />
-            <S.DiscardArrayContainer>
-              <DiaryCard />
-            </S.DiscardArrayContainer>
           </>
-        ) : (
-          <DiaryCard />
-        )}
+        ) : null}
       </S.MyProfileContentContainer>
     </>
   );

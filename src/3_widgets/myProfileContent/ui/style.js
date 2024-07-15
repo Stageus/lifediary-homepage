@@ -8,13 +8,6 @@ const MyProfileContentContainer = styled.div`
   margin: 80px;
 `;
 
-const DiscardArrayContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-`;
-
 export const S = {
   MyProfileContentContainer,
-  DiscardArrayContainer,
 };
