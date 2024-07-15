@@ -55,10 +55,7 @@ export const Diary = () => {
                        />
                     </div>
                     <div>
-                      <DefaultBtn 
-                      text="일기삭제"
-                      onClick={()=>{}}
-                       />
+                      <DiaryDeleteBtn/>
                     </div>
                     </S.DiaryEditor>
                   : null}
