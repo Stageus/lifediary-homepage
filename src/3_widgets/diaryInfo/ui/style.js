@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const DiaryInfo = styled.div`
     margin-left: 100px;
+    height: 100%;
     width: 90%;
     display: flex;
     justify-content: center;
@@ -10,19 +11,20 @@ const DiaryInfo = styled.div`
 
 // ContentPart _________________
 const ContentPart = styled.div`
-    flex: 0 0 350px;
+    height: 100%;
+    flex: 0 1 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 `;
 
 const DiarySliderContainer = styled.div`
-    min-height: 300px;
+    max-height: 300px;
 `;
 
 const DiaryContent = styled.div`
-    max-height: 500px;
     white-space: pre-wrap;
+    flex: 1 0 300px;
     overflow-y: scroll;
     padding: 10px;
     border: 4px solid ${({theme}) => theme.minor};
