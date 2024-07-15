@@ -6,17 +6,23 @@ const ProfileInfoContainer = styled.div`
   gap: 12px;
 `;
 
+const NicknameAndSubscribeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const ProfileImg = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 99px;
+`;
+
+const ProfileImgUploadBtn = styled.img`
   width: 100px;
   height: 100px;
   cursor: pointer;
   border-radius: 99px;
-`;
-
-const NicknameAndSubscribeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 `;
 
 const NicknameContainer = styled.div`
@@ -55,9 +61,14 @@ const SubscribeInfo = styled.p`
   font-size: ${({ theme }) => theme.fontSize.medium};
 `;
 
+const ResignBtnContainer = styled.div`
+  max-width: 100px;
+`;
+
 export const S = {
   ProfileInfoContainer,
   ProfileImg,
+  ProfileImgUploadBtn,
   NicknameAndSubscribeContainer,
   NicknameContainer,
   ProfileEditContainer,
@@ -66,4 +77,5 @@ export const S = {
   Nickname,
   EditIconContainer,
   SubscribeInfo,
+  ResignBtnContainer,
 };

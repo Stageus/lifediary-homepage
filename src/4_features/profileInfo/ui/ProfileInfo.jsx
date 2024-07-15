@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { S } from "./style.js";
 import DefaultProfile from "@shared/assets/imges/profile.png";
 import { Icon, TextInput, DefaultBtn } from "@shared/ui";
+import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg";
 
 export const ProfileInfo = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
+  const imageInput = useRef(null);
   const [isEdit, setIsEdit] = useState(false);
   const [nickname, setNickname] = useState("고양이");
   const [prevNickname, setPrevNickname] = useState(nickname);
@@ -42,13 +44,17 @@ export const ProfileInfo = () => {
     setIsEdit(false);
   };
 
+  const handleChangeProfileImgCall = handleChangeProfileImg(imageInput);
+  const handleChangeImgBaseCall = handleChangeImgBase(setProfileImg);
+
   return (
     <>
       <S.ProfileInfoContainer>
-        {profileImg && <S.ProfileImg src={profileImg} />}
-        <S.NicknameAndSubscribeContainer>
-          <S.NicknameContainer>
-            {isEdit ? (
+        {isEdit ? (
+          <>
+            <input type="file" hidden ref={imageInput} onChange={handleChangeImgBaseCall} />
+            {profileImg && <S.ProfileImgUploadBtn src={profileImg} onClick={handleChangeProfileImgCall} />}
+            <S.NicknameAndSubscribeContainer>
               <S.ProfileEditContainer>
                 <S.ProfileTextInputContainer>
                   <TextInput type={inputType} placeholder={nickname} onChange={handleNicknameChange} onBlur={handleNicknameChange}>
@@ -56,7 +62,6 @@ export const ProfileInfo = () => {
                   </TextInput>
                   {inputType === "error" && <S.ProfileInfoMessage>5자 이상 입력해주세요.</S.ProfileInfoMessage>}
                 </S.ProfileTextInputContainer>
-
                 <div>
                   <DefaultBtn type={buttonType} text="저장" onClick={handleUploadClick} />
                 </div>
@@ -64,17 +69,26 @@ export const ProfileInfo = () => {
                   <DefaultBtn text="취소" onClick={handleCancelClick} />
                 </div>
               </S.ProfileEditContainer>
-            ) : (
-              <>
+              <S.SubscribeInfo>구독자 100명, 작성 일기 100개</S.SubscribeInfo>
+              <S.ResignBtnContainer>
+                <DefaultBtn text="회원탈퇴" />
+              </S.ResignBtnContainer>
+            </S.NicknameAndSubscribeContainer>
+          </>
+        ) : (
+          <>
+            {profileImg && <S.ProfileImg src={profileImg} />}
+            <S.NicknameAndSubscribeContainer>
+              <S.NicknameContainer>
                 <S.Nickname>{nickname}</S.Nickname>
                 <S.EditIconContainer onClick={handleEditClick}>
                   <Icon type="edit" />
                 </S.EditIconContainer>
-              </>
-            )}
-          </S.NicknameContainer>
-          <S.SubscribeInfo>구독자 100명, 작성 일기 100개</S.SubscribeInfo>
-        </S.NicknameAndSubscribeContainer>
+              </S.NicknameContainer>
+              <S.SubscribeInfo>구독자 100명, 작성 일기 100개</S.SubscribeInfo>
+            </S.NicknameAndSubscribeContainer>
+          </>
+        )}
       </S.ProfileInfoContainer>
     </>
   );
