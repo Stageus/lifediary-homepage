@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Home = styled.div`
     min-height: 100%;
     width: 1080px;
     margin: 0 auto;
@@ -11,5 +11,5 @@ const Container = styled.div`
 `;
 
 export const S = {
-    Container,
+    Home,
 }
