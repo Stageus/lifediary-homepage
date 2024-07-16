@@ -16,14 +16,14 @@ const GrassItem = styled.div`
 
 `;
 
-const MonthItem = styled.div`
+const Month = styled.div`
     white-space: nowrap;
     position: absolute;
     top: 0;
     
 `;
 
-const GrassItemInfo = styled.div`
+const HoverInfo = styled.div`
     position: fixed;
     border-radius: 5px;
     transform: translate(0, -110%);
@@ -37,6 +37,6 @@ const GrassItemInfo = styled.div`
 
 export const S = {
     GrassItem,
-    MonthItem,
-    GrassItemInfo
+    Month,
+    HoverInfo
 }
