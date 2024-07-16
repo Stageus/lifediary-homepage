@@ -10,8 +10,8 @@ export const usePostDiaryLike = ( isLiked, likeCnt ) => {
 
     const changeLikeInfo = () => {
 
-        if ( currentLike ) setLikeCount( currentCount - 1);
-        if ( !currentLike ) setLikeCount( currentCount + 1);
+        if ( currentLike ) setCurrentCount( currentCount - 1);
+        if ( !currentLike ) setCurrentCount( currentCount + 1);
         
         setCurrentLike( !currentLike );
     }
