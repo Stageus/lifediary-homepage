@@ -8,12 +8,12 @@ export const Home = ()=>{
     const {handleGetCookie} = useCookie();
     return(
         <>  
-            <S.Container>
+            <S.Home>
             {handleGetCookie()
             ? <Grass/>
             : <Introduction/>}
             <Carousel/>
-            </S.Container>
+            </S.Home>
         </>
     );
 }
