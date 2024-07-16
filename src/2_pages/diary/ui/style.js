@@ -64,6 +64,11 @@ const SubscribeWrap = styled.div`
 const DiaryEditor = styled.div`
     display: flex;
     gap: 10px;
+
+    & > div {
+        border-radius: 6px;
+        box-shadow: 1px 1px 3px gray;
+    }
 `;
 // -----------------------------
 
