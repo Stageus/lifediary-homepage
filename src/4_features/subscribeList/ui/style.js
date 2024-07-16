@@ -19,7 +19,7 @@ const SubscribeList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 12px;
     overflow-y: scroll;
 `;
 
