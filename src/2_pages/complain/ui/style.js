@@ -44,7 +44,7 @@ const PageBtnContainer = styled.div`
     gap: 10px;
 `;
 
-const PageNextBtn = styled.button`
+const PageArrowBtn = styled.button`
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -62,7 +62,7 @@ export const S = {
     ComplainContent,
     Table,
     PageBtnContainer,
-    PageNextBtn,
+    PageArrowBtn,
     PageBtnList,
     Content
 }
