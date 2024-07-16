@@ -1,14 +1,12 @@
 import { S } from "./style";
 
 export const DefaultBtn = ( props )=>{
-    const { text="button", px, py, fontSize, type, onClick = null } = props;
+    const { text="base", size, type, onClick = null } = props;
     return(
         <>
             <S.DefaultBtn 
             type={type}
-            px={px}
-            py={py}
-            fontSize={fontSize}
+            size={size}
             onClick={ type !== 'disabled' ? ()=>onClick() : null}
             >{text}</S.DefaultBtn>
         </>

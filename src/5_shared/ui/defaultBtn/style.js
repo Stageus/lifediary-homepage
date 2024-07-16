@@ -2,13 +2,39 @@ import styled from "styled-components";
 
 const DefaultBtn = styled.button`
     display: block;
+    width: 100%;
     border-radius: 4px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
     cursor: pointer;
-    padding: ${({px})=> px ?? "8px"} ${({py})=> py ?? "16px"};
-    font-size: ${({fontSize, theme}) => fontSize ?? theme.fontSize.base};
     color: ${({type, theme}) => type ? theme.white : theme.highlight};
+    white-space: nowrap;
+
+    ${({size, theme})=>{
+        switch(size){
+            case "Xsmail":
+                return`
+                    padding: 2px 4px;
+                    font-size: ${theme.fontSize.x_small};
+                `
+            case "smail":
+                return`
+                    padding: 4px 8px;
+                    font-size: ${theme.fontSize.smail};
+                `
+            case "medium":
+                return`
+                    padding: 6px 12px;
+                    font-size: ${theme.fontSize.medium};
+                `
+            default:
+                return`
+                    padding: 8px 16px;
+                    font-size: ${theme.fontSize.base};
+                `
+        }
+    }}
+    
     ${({type,theme}) => {
         switch(type) {
             case "select":
@@ -24,7 +50,7 @@ const DefaultBtn = styled.button`
                 `
             default:
                 return `
-                    background-color:${theme.major};
+                    background-color:${theme.minor};
                     border-color: ${theme.highlight};
                 `
         }

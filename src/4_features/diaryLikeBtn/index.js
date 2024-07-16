@@ -1,0 +1,1 @@
+export { DiaryLikeBtn } from "./ui/DiaryLikeBtn";

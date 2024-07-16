@@ -1,54 +1,38 @@
 import { useState } from "react";
 
 import { S } from "./style";
+import { Icon } from "@shared/ui/icon/Icon";
 
 export const TagInput = (props) => {
-  const { px, fontSize, placeholder } = props;
-  const [tagItem, setTagItem] = useState("");
-  const [tagList, setTagList] = useState([]);
+  const { px, fontSize, placeholder, value } = props;
+  const [tags, setTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
-  const onKeyUpEnter = (e) => {
-    if (e.key === "Enter" && e.target.value.length > 0) {
-      submitTag();
+  const handleInputChange = (e) => {
+    const value = e.target.value.replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, "");
+    setInputValue(value);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && inputValue && !tags.includes(inputValue) && tags.length < 3) {
+      setTags([...tags, inputValue]);
+      setInputValue("");
     }
   };
 
-  const submitTag = () => {
-    if (tagList.length < 3) {
-      let newTagItem = tagItem.trim().replace(/ /g, "");
-      const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
-      newTagItem = newTagItem.replace(regExp, "");
-      if (newTagItem.length > 0) {
-        let updatedTagList = [...tagList];
-        updatedTagList.push("#" + newTagItem);
-        setTagList(updatedTagList);
-        setTagItem("");
-      }
-    }
-  };
-
-  const deleteTag = (e) => {
-    const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter((tagItem) => tagItem !== deleteTagItem);
-    setTagList(filteredTagList);
+  const removeTag = (index) => {
+    setTags(tags.filter((_, i) => i !== index));
   };
 
   return (
-    <>
-      <p>해시태그 인풋</p>
-      <S.TagBox px={px}>
-        <S.TagList>
-          {tagList.map((tagItem, index) => {
-            return (
-              <S.TagListBox key={index} onClick={deleteTag}>
-                <S.TagListName>{tagItem}</S.TagListName>
-                <S.TagListDeleteBtn>X</S.TagListDeleteBtn>
-              </S.TagListBox>
-            );
-          })}
+    <S.TagInputContainer>
+      {tags.map((tag, index) => (
+        <S.TagList key={index} onClick={() => removeTag(index)}>
+          #{tag}
+          <Icon type="cancel" color="red" />
         </S.TagList>
-        <S.TagInputBox type="text" px={px} fontSize={fontSize} placeholder={tagList.length >= 3 ? "" : placeholder} onChange={(e) => setTagItem(e.target.value)} value={tagItem} onKeyUp={onKeyUpEnter} disabled={tagList.length >= 3} />
-      </S.TagBox>
-    </>
+      ))}
+      <S.TagInput type="text" px={px} fontSize={fontSize} placeholder={tags.length >= 3 ? "" : placeholder} value={inputValue} onChange={handleInputChange} onKeyDown={handleKeyDown} disabled={tags.length >= 3} />
+    </S.TagInputContainer>
   );
 };
