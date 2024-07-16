@@ -28,6 +28,12 @@ const SubscribeItem = styled.div`
     justify-content: center;
     align-items: center;
     gap: 7px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: ${( {theme} ) => theme.major};
+    }
 
 
     & > img {
