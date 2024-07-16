@@ -1,4 +1,4 @@
-export const mapper = (mapperData)=>{
+export const mapper = ( mapperData )=>{
     
     const complainList = mapperData.result.map( data => (
         {
