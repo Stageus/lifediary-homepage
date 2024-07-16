@@ -8,6 +8,7 @@ const DefaultBtn = styled.button`
     border-style: solid;
     cursor: pointer;
     color: ${({type, theme}) => type ? theme.white : theme.highlight};
+    white-space: nowrap;
 
     ${({size, theme})=>{
         switch(size){
@@ -33,11 +34,6 @@ const DefaultBtn = styled.button`
                 `
         }
     }}
-
-
-    padding: 8px 16px;
-    font-size: ${({fontSize, theme}) => fontSize ?? theme.fontSize.base};
-
     
     ${({type,theme}) => {
         switch(type) {
