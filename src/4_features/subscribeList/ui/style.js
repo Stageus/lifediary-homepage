@@ -5,6 +5,7 @@ const SubscribeInfo = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 0 5px;
+    height: 100%;
 `;
 
 const SubscribeTitle = styled.h3`
@@ -19,6 +20,7 @@ const SubscribeList = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
+    overflow-y: scroll;
 `;
 
 const SubscribeItem = styled.div`

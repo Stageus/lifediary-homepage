@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
 import logo from "@shared/assets/imges/logo.png";
-<<<<<<< HEAD
 import googleLogo from "@pages/login/assets/googleLogo.png";
-=======
->>>>>>> 58ba93cd19e5fced6a3eef61be9a0eed38955d54
 
 const PageContainer = styled.div`
   display: flex;
@@ -34,7 +31,6 @@ const Logo = styled.img.attrs({
   border-radius: 10px;
 `;
 
-<<<<<<< HEAD
 const GoogleLogo = styled.img.attrs({
   src: googleLogo,
   alt: "Google 로고",
@@ -43,8 +39,6 @@ const GoogleLogo = styled.img.attrs({
   height: 20px;
 `;
 
-=======
->>>>>>> 58ba93cd19e5fced6a3eef61be9a0eed38955d54
 const LoginBtn = styled.button`
   ${({ theme }) => `
   display: flex;
@@ -74,9 +68,6 @@ export const S = {
   PageContainer,
   LoginContainer,
   Logo,
-<<<<<<< HEAD
   GoogleLogo,
-=======
->>>>>>> 58ba93cd19e5fced6a3eef61be9a0eed38955d54
   LoginBtn,
 };
