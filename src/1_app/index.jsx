@@ -13,7 +13,7 @@ export const App = () => {
 
   return (
     <>
-      <GoogleOAuthProvider clientId="1009079539109-7t2fm9taq0bhsroa1n5rbaeq9kb2fsvt.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <ThemeProvider theme={style}>
           <GlobalStyle />
           <RouterProvider router={Router} />
