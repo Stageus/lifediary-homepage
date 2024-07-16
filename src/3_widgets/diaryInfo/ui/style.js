@@ -62,7 +62,7 @@ const CommentBtn = styled.div`
     width: 90px;
     background-color: ${( {theme, $isOpen} )=> $isOpen ? theme.highlight : theme.minor};
     color: ${( {theme, $isOpen} ) => $isOpen ? theme.white : theme.black};
-    border: 2px solid ${( {theme} )=> theme.highlight};
+    border: 1px solid ${( {theme} )=> theme.highlight};
     border-radius: 10px;
     padding: 4px 6px;
     font-size: ${( {theme} ) => theme.fontSize.medium};
