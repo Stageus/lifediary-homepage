@@ -1,45 +1,54 @@
+// Slice
 import { S } from "./style";
 import { useModel } from "../model/useModel";
+// Layer
 import { Icon, DynamicImage } from "@shared/ui";
 
 export const Carousel = () => {
-  const {postionUnit, diaryList, onClickRoute, onClickLeft, onClickRight} = useModel();
+
+  const { postionUnit, diaryList, onClickRoute, onClickLeft, onClickRight } = useModel();
+
   return (
     <>
       <S.Carousel>
-        <S.Button onClick={onClickLeft}>
-          {postionUnit ? (
-            <Icon color="" size={"40px"} type={"leftArrow"} />
-          ) : null}
+        <S.Button onClick={ onClickLeft }>
+          {postionUnit 
+          ? <Icon size={"40px"} type={"leftArrow"} /> 
+          : null}
         </S.Button>
+
         <S.ItemList>
-          { diaryList?.map((diaryContainer, idx) => {
+          { diaryList?.map(( diaryBundle, idx ) => {
               return (
-                <S.ItemContainer key={idx} $postionUnit={postionUnit}>
-                  {Array.isArray(diaryContainer) &&
-                    diaryContainer?.map((diary, idx) => {
+                <S.ItemBundle key={ idx } $postionUnit={ postionUnit }>
+                  {Array.isArray( diaryBundle ) 
+                  && diaryBundle?.map(( diary, idx ) => {
                       return (
                         <S.Item 
-                        key={idx}
-                        onClick={()=>onClickRoute(diary.idx)}
+                        key={ idx }
+                        onClick={ ()=>onClickRoute( diary.idx ) }
                         >
-                          <S.ContentImgContainer>
-                            <DynamicImage src={diary.thumbnailImg} />
-                          </S.ContentImgContainer>
+                          <S.ThumbnailImgWrap>
+                            <DynamicImage src={ diary.thumbnailImg }/>
+                          </S.ThumbnailImgWrap>
+
                           <S.UserInfo>
-                            <S.ProfileImgContainer>
-                              <DynamicImage src={diary.profileImg} />
-                            </S.ProfileImgContainer>
-                            <span>{diary.nickname}</span>
+                            <S.ProfileImgWrap>
+                              <DynamicImage src={ diary.profileImg }/>
+                            </S.ProfileImgWrap>
+
+                            <span>{ diary.nickname }</span>
                           </S.UserInfo>
+
                         </S.Item>
                       );
                     })}
-                </S.ItemContainer>
+                </S.ItemBundle>
               );
             })}
         </S.ItemList>
-        <S.Button onClick={onClickRight}>
+
+        <S.Button onClick={ onClickRight }>
           <Icon size={"40px"} type={"rightArrow"} />
         </S.Button>
       </S.Carousel>
