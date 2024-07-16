@@ -47,7 +47,7 @@ export const useGetGrassList = () => {
         if ( status === 401 ) return console.log("토큰이 잘못되거나 없음");
         if ( status === 500 ) return console.log("서버오류");
 
-    },[status])
+    },[status]);
 
     return [ grassList, setSelectYear ];
 }
