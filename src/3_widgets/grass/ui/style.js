@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const GrassContainer = styled.div`
+const GrassWrap = styled.div`
     min-width: 500px;
     width: 100%;
     box-shadow: 0px 1px 5px gray;
@@ -11,7 +11,7 @@ const GrassContainer = styled.div`
     color: ${({theme}) => theme.gray};
 `;
 
-const YearBtnList = styled.div`
+const YearList = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 10px;
@@ -31,26 +31,26 @@ const Grass = styled.div`
     gap: 3px;
 `;
 
-const DayOfWeekList = styled.div`
+const DayOfWeekItem = styled.div`
     display: flex;
     align-items: center;
 `;
 
-const Dayofweek = styled.p`
+const DayName = styled.p`
     font-size: 14px;
     padding-right: 20px;
 `;
 
-const GrassList = styled.div`
+const DayList = styled.div`
     display: flex;
     gap: 3px;    
 `;
 
 export const S = {
-    GrassContainer,
-    YearBtnList,
+    GrassWrap,
+    YearList,
     Grass,
-    DayOfWeekList,
-    Dayofweek,
-    GrassList,
+    DayOfWeekItem,
+    DayName,
+    DayList,
 }
