@@ -10,6 +10,7 @@ const NewsBtnWrap = styled.div`
 `;
 
 const NewsModal = styled.div`
+    overflow-y: scroll;
     position: absolute;
     top: 150%;
     left: 12%;
