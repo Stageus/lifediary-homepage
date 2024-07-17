@@ -33,7 +33,7 @@ const ModalWrap = styled.div`
         border: none;
         font-size: ${( {theme} ) => theme.fontSize.medium};
         resize: none;
-        outline: none;
+        outline: ${( {$isText} ) => $isText ? "none" : "2px solid red"};
     }
 `;
 

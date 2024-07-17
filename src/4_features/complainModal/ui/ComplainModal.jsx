@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { S } from "./style";
+import { useModel } from "../model/useModel";
 import { DefaultBtn } from "@shared/ui";
 
-export const ComplainModal = () => {
-    const [ isOpenModal, setIsOpenModal ] = useState( false );
-    const onClickModal = () => setIsOpenModal( !isOpenModal );
+export const ComplainModal = ( props ) => {
+    const { diaryidx } = props
+    const { isOpenModal, isText, onClickModal, validation, onClickSubmit} = useModel( diaryidx );
 
     return (
         <>
@@ -14,15 +14,17 @@ export const ComplainModal = () => {
             />
             { isOpenModal 
             ? <S.ComplainModal>
-                <S.ModalWrap>
+                <S.ModalWrap $isText={isText}> 
                     <textarea
+                    onInput={ ( text ) => validation(text) }
                     placeholder="신고 사유를 입력해주세요 (최소 5자 ~ 최대 300자)"
                     />
                     <S.ModalEditerWrap>
                         <DefaultBtn
                         text= "신고"
-                        type= "disabled"
+                        type= { isText ? "select" : "disabled"}
                         size= "medium"
+                        onClick= { () => onClickSubmit( diaryidx, isText)}
                         />
                         <DefaultBtn
                         text= "취소"
