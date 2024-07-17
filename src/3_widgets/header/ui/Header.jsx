@@ -7,6 +7,7 @@ import { DefaultBtn, Icon } from "@shared/ui";
 import { navigatePage } from "../lib/navigatePage";
 import { useGetProfileImage } from "../api/useGetProfileImg";
 import { useLogout } from "../lib/useLogout";
+import { News } from "@features/news";
 
 export const Header = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
@@ -37,9 +38,7 @@ export const Header = () => {
           <S.BtnContainer>
             <DefaultBtn text="일기업로드" onClick={navigateDiaryCreate} />
           </S.BtnContainer>
-          <S.BtnContainer>
-            <DefaultBtn text="알림" />
-          </S.BtnContainer>
+          <News/>
           <S.BtnContainer>
             <DefaultBtn text="로그아웃" onClick={logout} />
           </S.BtnContainer>

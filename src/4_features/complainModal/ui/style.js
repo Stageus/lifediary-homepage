@@ -7,7 +7,7 @@ const ComplainModal = styled.div`
     bottom: 0;
     left: 0;
     background-color: #0000004d;
-    z-index: 1;
+    z-index: 3;
 
     display: flex;
     justify-content: center;
