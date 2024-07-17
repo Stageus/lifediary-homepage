@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
 import { S } from "./style"; 
 import { Slider } from "./slider/ui";
 import { Comment } from "./comment/ui";
+=======
+// Slice
+import { S } from "./style"; 
+import { Slider } from "./slider/ui";
+import { useModel } from "../model/useModel";
+// Layer
+>>>>>>> 4adcdf97510b0eb7f57e64c2f9fc062a27be4a61
 import { DiaryLikeBtn } from "@features/diaryLikeBtn";
+import { ComplainModal } from "@features/complainModal";
 import { DefaultBtn } from "@shared/ui";
 import { Icon } from "@shared/ui";
 
+<<<<<<< HEAD
 export const DiaryInfo = (props)=>{
     const {idx, imgContents, textContent, isLiked, likeCnt, commentCnt} = props.diary;
     const [openModal, setOpenModal] = useState(false);
@@ -68,6 +78,11 @@ export const DiaryInfo = (props)=>{
             clearTimeout(resizeTimeoutRef.current);
         };
     }, []);
+=======
+export const DiaryInfo = ( props )=>{
+    const { idx, imgContents, textContent, isLiked, likeCnt, commentCnt } = props.diary;
+    const { isOpenModal, onClickModal, clipBoard } = useModel();
+>>>>>>> 4adcdf97510b0eb7f57e64c2f9fc062a27be4a61
     
     console.log(commentPartRef.current);
 
@@ -76,16 +91,25 @@ export const DiaryInfo = (props)=>{
 
                 <S.ContentPart>
                   <S.DiarySliderContainer>
-                    <Slider sliderList={imgContents} />
+                    <Slider sliderList={ imgContents } />
                   </S.DiarySliderContainer>
 
                   <S.DiaryContent>
+<<<<<<< HEAD
                     {textContent}
                   </S.DiaryContent>
                 </S.ContentPart>
 
                 <S.CommentPart $openModal={openModal} ref={commentPartRef}>
                   <S.Cancel onClick={onClickModal}>
+=======
+                    { textContent }
+                  </S.DiaryContent>
+                </S.ContentPart>
+
+                <S.CommentPart $openModal={ isOpenModal }>
+                  <S.Cancel onClick={ onClickModal }>
+>>>>>>> 4adcdf97510b0eb7f57e64c2f9fc062a27be4a61
                     <Icon size="30px" type="cancel" color="#FF6767" />
                   </S.Cancel>
                   <Comment/>
@@ -93,13 +117,39 @@ export const DiaryInfo = (props)=>{
                 
                 <S.ButtonPart>
                     <DiaryLikeBtn
-                    diaryIdx={idx}
-                    likeCnt={likeCnt}
-                    isLiked={isLiked}
+                    diaryIdx={ idx }
+                    likeCnt={ likeCnt }
+                    isLiked={ isLiked }
                     />
-                    <DefaultBtn text="댓글" onClick={onClickModal} />
-                    <DefaultBtn text="공유" />
-                    <DefaultBtn text="신고" />
+
+                    <S.CommentBtn
+                    $isOpen={ isOpenModal }
+                    onClick={ onClickModal }
+                    >
+                      <div>
+                        <Icon
+                        type="comment"
+                        color={ isOpenModal ? "#F1F1F1" : "#FF6767" }
+                        />
+                      </div>
+                      <div>
+                        {`${commentCnt}개`}
+                      </div>
+                    </S.CommentBtn>
+
+                    <S.SimpleBtnWrap>
+                      <DefaultBtn 
+                      text="공유"
+                      onClick={ () => clipBoard(`diary/${idx}`) }
+                       />
+                    </S.SimpleBtnWrap>
+                    
+                    <S.SimpleBtnWrap>
+                      <ComplainModal
+                      diaryidx= { idx }
+                      />
+                    </S.SimpleBtnWrap>
+                    
                 </S.ButtonPart>
 
         </S.DiaryInfo>

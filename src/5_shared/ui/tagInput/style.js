@@ -4,7 +4,7 @@ const TagInputContainer = styled.div`
   display: flex;
   width: 100%;
   height: 40px;
-  max-width: 500px;
+  max-width: 600px;
   padding: 8px 16px;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.white};

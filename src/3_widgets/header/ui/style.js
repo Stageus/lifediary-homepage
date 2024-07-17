@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 import logo from "@shared/assets/imges/logo.png";
+import searchIcon from "../assets/searchIcon.png";
 
 const HeaderContainer = styled.div`
   width: 100%;
   height: 80px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 12px;
   padding: 20px;
@@ -19,6 +21,24 @@ const Logo = styled.img.attrs({
 })`
   width: 80px;
   border-radius: 10px;
+  cursor: pointer;
+`;
+
+const TagInputContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const SearchIcon = styled.img.attrs({
+  src: searchIcon,
+  alt: "searchIcon",
+})`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
   cursor: pointer;
 `;
 
@@ -42,6 +62,8 @@ const BtnContainer = styled.div`
 export const S = {
   HeaderContainer,
   Logo,
+  TagInputContainer,
+  SearchIcon,
   ProfileImg,
   RightElemContainer,
   BtnContainer,

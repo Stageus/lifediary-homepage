@@ -1,14 +1,15 @@
+// Slice
 import { S } from "./style";
 import { useModel } from "../model/useModel";
+// Layer
 import { DiaryInfo } from "@widgets/diaryInfo";
 import { SubscribeBtn } from "@features/subscribeBtn";
+import { DiaryDeleteBtn } from "@features/diaryDeleteBtn";
 import { DefaultBtn } from "@shared/ui";
 import { parseTime } from "@shared/util";
-import { DiaryDeleteBtn } from "@features/diaryDeleteBtn";
-
-
 
 export const Diary = () => {
+
   const { 
     diaryList, 
     onClickRoute,
@@ -18,40 +19,39 @@ export const Diary = () => {
 
   return (
     <>
-      <S.Diary ref={scrollRef} onScroll={onScrollNext}>
+      <S.Diary ref={ scrollRef } onScroll={ onScrollNext }>
         {diaryList &&
-          diaryList.map((diary) => {
+          diaryList.map(( diary ) => {
             return (
-
-              <S.ScrollItem key={diary.idx}>
+              <S.ScrollItem key={ diary.idx }>
                 <S.DiaryHeader>
-                  <S.DiaryHeaderContainer>
-                    <S.UserImg onClick={()=>onClickRoute(diary.isMine, diary.accountIdx)}>
-                      <img src={diary.profileImg} alt="#" />
+                  <S.DiaryHeaderWrap>
+                    <S.UserImg onClick={ ()=>onClickRoute( diary.isMine, diary.accountIdx ) }>
+                      <img src={ diary.profileImg } alt="#" />
                     </S.UserImg>
                     <S.UserName>
-                      <span>{diary.nickname}</span>
+                      <span>{ diary.nickname }</span>
                     </S.UserName>
-                    <S.DiaryCt>
-                      <span>{parseTime(diary.createdAt)}</span>
-                    </S.DiaryCt>
+                    <S.CreateDate>
+                      <span>{ parseTime( diary.createdAt ) }</span>
+                    </S.CreateDate>
                     {diary.isMine 
                     ? null
-                    : <S.DiarySubscribe>
+                    : <S.SubscribeWrap>
                         <SubscribeBtn
-                        isSubscribed={diary.isSubscribed}
-                        accountIdx={diary.accountIdx}
+                        isSubscribed={ diary.isSubscribed }
+                        accountIdx={ diary.accountIdx }
                         />
-                      </S.DiarySubscribe>
+                      </S.SubscribeWrap>
                     }
-                  </S.DiaryHeaderContainer>
+                  </S.DiaryHeaderWrap>
 
                   {diary.isMine
                   ? <S.DiaryEditor>
                     <div>
                       <DefaultBtn 
                       text="일기수정"
-                      onClick={()=>onClickTimeRoute(diary.createdAt, diary.idx)}
+                      onClick={ ()=>onClickTimeRoute( diary.createdAt, diary.idx ) }
                        />
                     </div>
                     <div>
@@ -62,7 +62,7 @@ export const Diary = () => {
                 </S.DiaryHeader>
 
                 <S.DiaryInfoContainer>
-                    <DiaryInfo key={diary.idx} diary={diary} />
+                    <DiaryInfo key={ diary.idx } diary={ diary } />
                 </S.DiaryInfoContainer>
               </S.ScrollItem>
             );

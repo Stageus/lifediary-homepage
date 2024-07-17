@@ -1,12 +1,29 @@
+// Slice
 import { S } from "./style";
-import { useModel } from "../model/useModel";
+import { useGetComplainList } from "../api/useGetComplainList";
 import { divideToArray } from "../lib/divideToArray";
+// Layer
 import { ComplainItem } from "@widgets/complainItem";
 import { DefaultBtn, Icon } from "@shared/ui";
 
-// merge 오류난곳
 export const Complain = () => {
-  const { currentPage, complainList, onClickNum, onClickLeft, onClickRight } = useModel();
+
+  const [ complainList, currentPage, changePage ] = useGetComplainList();
+  const onClickNum = ( num ) => changePage( num );
+
+  const onClickLeft = () => {
+
+      if ( +currentPage() === 1 ) return;
+
+      changePage( +currentPage() - 1 )
+  };
+
+  const onClickRight = () => {
+
+      if ( complainList.reportCnt === currentPage() ) return;
+
+      changePage( +currentPage() + 1 );
+  };
 
   return (
     <>
@@ -23,40 +40,50 @@ export const Complain = () => {
             </tr>
           </thead>
           <tbody>
-            {complainList?.result?.map((list) => {
-              return <ComplainItem key={list.idx} list={list}/>;
+            {complainList?.result?.map(( list ) => {
+              return <ComplainItem key={ list.idx } list={ list }/>;
             })}
           </tbody>
         </S.Table>
-        <S.PageBtnContainer>
-          <S.PageNextBtn>
-            {+currentPage() !== 1 ? (
-              <span onClick={onClickLeft}>
-                <Icon type="leftArrow" color="#FF6767" size="30px" />
-              </span>
-            ) : null}
-          </S.PageNextBtn>
-          <S.PageBtnList>
-            {complainList?.reportCnt &&
-              divideToArray(complainList.reportCnt, 5).map((num) => {
-                return (
-                  <DefaultBtn
-                    text={num}
-                    key={num}
-                    type={+currentPage() === num ? "select" : null}
-                    onClick={() => onClickNum(num)}
-                  />
-                );
-              })}
-          </S.PageBtnList>
-          <S.PageNextBtn>
-            {complainList.reportCnt && divideToArray(complainList?.reportCnt,5).length !== +currentPage() ? (
-              <span onClick={onClickRight}>
-                <Icon type="rightArrow" color="#FF6767" size="30px" />
-              </span>
-            ) : null}
-          </S.PageNextBtn>
-        </S.PageBtnContainer>
+        { complainList && complainList.reportCnt !== 0
+          ? (<S.PageBtnContainer>
+              <S.PageArrowBtn>
+                {+currentPage() !== 1 
+                ? (
+                  <span onClick={ onClickLeft }>
+                    <Icon type="leftArrow" color="#FF6767" size="30px" />
+                  </span>) 
+                : null}
+              </S.PageArrowBtn>
+
+              <S.PageBtnList>
+                {complainList
+                && divideToArray( complainList.reportCnt, 5 ).map(( num ) => {
+                    return (
+                      <DefaultBtn
+                        text={ num }
+                        key={ num }
+                        type={ +currentPage() === num ? "select" : null }
+                        onClick={ () => onClickNum(num) }
+                      />
+                    );
+                  })}
+              </S.PageBtnList>
+
+              <S.PageArrowBtn>
+                { complainList 
+                  && divideToArray( complainList?.reportCnt,5 ).length !== +currentPage() 
+                    ? (
+                      <span onClick={onClickRight}>
+                        <Icon type="rightArrow" color="#FF6767" size="30px" />
+                      </span>) 
+                    : null}
+              </S.PageArrowBtn>
+
+          </S.PageBtnContainer>) 
+          : null
+          }
+        
       </S.ComplainContent>
     </>
   );

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import logo from "@shared/assets/imges/logo.png";
+import googleLogo from "@pages/login/assets/googleLogo.png";
 
 const PageContainer = styled.div`
   display: flex;
@@ -28,6 +29,14 @@ const Logo = styled.img.attrs({
 })`
   width: 160px;
   border-radius: 10px;
+`;
+
+const GoogleLogo = styled.img.attrs({
+  src: googleLogo,
+  alt: "Google 로고",
+})`
+  width: 20px;
+  height: 20px;
 `;
 
 const LoginBtn = styled.button`
@@ -59,5 +68,6 @@ export const S = {
   PageContainer,
   LoginContainer,
   Logo,
+  GoogleLogo,
   LoginBtn,
 };
