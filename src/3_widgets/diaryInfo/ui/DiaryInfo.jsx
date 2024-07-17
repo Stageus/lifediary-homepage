@@ -4,6 +4,7 @@ import { Slider } from "./slider/ui";
 import { useModel } from "../model/useModel";
 // Layer
 import { DiaryLikeBtn } from "@features/diaryLikeBtn";
+import { ComplainModal } from "@features/complainModal";
 import { DefaultBtn } from "@shared/ui";
 import { Icon } from "@shared/ui";
 
@@ -60,7 +61,9 @@ export const DiaryInfo = ( props )=>{
                     </S.SimpleBtnWrap>
                     
                     <S.SimpleBtnWrap>
-                      <DefaultBtn text="신고" />
+                      <ComplainModal
+                      diaryidx= { idx }
+                      />
                     </S.SimpleBtnWrap>
                     
                 </S.ButtonPart>
