@@ -107,6 +107,66 @@ export const News = () => {
                         />
                     </S.DeleteBtnWrap>
                 </S.NewsItem>
+                <S.NewsItem>
+                    <S.NewsInfo>
+                        <S.NewsContent>
+                            <span>삭제된 내일기가 복구 되었습니다.</span>
+                            <span>17: 22</span>
+                        </S.NewsContent>
+                    </S.NewsInfo>
+
+                    <S.DeleteBtnWrap>
+                        <Icon
+                        type= "cancel"
+                        color= "red"
+                        />
+                    </S.DeleteBtnWrap>
+                </S.NewsItem>
+                <S.NewsItem>
+                    <S.NewsInfo>
+                        <S.NewsContent>
+                            <span>삭제된 내일기가 복구 되었습니다.</span>
+                            <span>17: 22</span>
+                        </S.NewsContent>
+                    </S.NewsInfo>
+
+                    <S.DeleteBtnWrap>
+                        <Icon
+                        type= "cancel"
+                        color= "red"
+                        />
+                    </S.DeleteBtnWrap>
+                </S.NewsItem>
+                <S.NewsItem>
+                    <S.NewsInfo>
+                        <S.NewsContent>
+                            <span>삭제된 내일기가 복구 되었습니다.</span>
+                            <span>17: 22</span>
+                        </S.NewsContent>
+                    </S.NewsInfo>
+
+                    <S.DeleteBtnWrap>
+                        <Icon
+                        type= "cancel"
+                        color= "red"
+                        />
+                    </S.DeleteBtnWrap>
+                </S.NewsItem>
+                <S.NewsItem>
+                    <S.NewsInfo>
+                        <S.NewsContent>
+                            <span>삭제된 내일기가 복구 되었습니다.</span>
+                            <span>17: 22</span>
+                        </S.NewsContent>
+                    </S.NewsInfo>
+
+                    <S.DeleteBtnWrap>
+                        <Icon
+                        type= "cancel"
+                        color= "red"
+                        />
+                    </S.DeleteBtnWrap>
+                </S.NewsItem>
             </S.NewsModal>
             : null}
         </S.News>
