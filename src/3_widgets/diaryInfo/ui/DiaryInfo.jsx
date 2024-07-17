@@ -1,8 +1,7 @@
-// Npm
-import { useState } from "react";
 // Slice
 import { S } from "./style"; 
 import { Slider } from "./slider/ui";
+import { useModel } from "../model/useModel";
 // Layer
 import { DiaryLikeBtn } from "@features/diaryLikeBtn";
 import { DefaultBtn } from "@shared/ui";
@@ -10,8 +9,7 @@ import { Icon } from "@shared/ui";
 
 export const DiaryInfo = ( props )=>{
     const { idx, imgContents, textContent, isLiked, likeCnt, commentCnt } = props.diary;
-    const [ isOpenModal, setIsOpenModal ] = useState( false );
-    const onClickModal = () => setIsOpenModal( !isOpenModal );
+    const { isOpenModal, onClickModal, clipBoard } = useModel();
     
     return (
         <S.DiaryInfo>
@@ -54,8 +52,17 @@ export const DiaryInfo = ( props )=>{
                       </div>
                     </S.CommentBtn>
 
-                    <DefaultBtn text="공유" />
-                    <DefaultBtn text="신고" />
+                    <S.SimpleBtnWrap>
+                      <DefaultBtn 
+                      text="공유"
+                      onClick={ () => clipBoard(`diary/${idx}`) }
+                       />
+                    </S.SimpleBtnWrap>
+                    
+                    <S.SimpleBtnWrap>
+                      <DefaultBtn text="신고" />
+                    </S.SimpleBtnWrap>
+                    
                 </S.ButtonPart>
 
         </S.DiaryInfo>

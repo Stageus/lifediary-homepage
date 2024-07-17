@@ -75,6 +75,12 @@ const CommentBtn = styled.div`
     gap: 4px;
 `;
 
+const SimpleBtnWrap = styled.div`
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px gray;
+`;
+
+
 export const S = {
     DiaryInfo,
     ContentPart,
@@ -83,5 +89,6 @@ export const S = {
     CommentPart,
     Cancel,
     ButtonPart,
-    CommentBtn
+    CommentBtn,
+    SimpleBtnWrap
 }
