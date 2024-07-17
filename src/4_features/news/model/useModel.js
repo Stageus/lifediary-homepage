@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGetNewNotice } from "../api/useGetNewNotice";
+import { useDeleteNotice } from "../api/useDeleteNotice";
 
 /*
     "newComment": 내일기에 댓글이 달렸을 경우
@@ -11,8 +12,9 @@ import { useGetNewNotice } from "../api/useGetNewNotice";
 
 export const useModel = () => {
     const [ isNew ] = useGetNewNotice();
+    const [ deleteNotice ] = useDeleteNotice();
     const [ isOpenModal, setIsOpenModal ] = useState( false );
     const onClickOpen = () => setIsOpenModal( !isOpenModal );
 
-    return { isNew, isOpenModal, onClickOpen};
+    return { isNew, isOpenModal, onClickOpen, deleteNotice};
 }
