@@ -1,7 +1,24 @@
+import { useState } from "react";
+
+import { S } from "./style.js";
+import { ProfileInfo } from "@features/profileInfo";
+import { ProfileTab } from "@features/profileTab";
+import { DateRangePicker } from "@features/dateRangePicker";
+
 export const UserProfile = () => {
-    return(
-        <>
-            <div>유저 페이지</div>
-        </>
-    );
-}
+  const [selectedTab, setSelectedTab] = useState("myDiaryTab");
+
+  return (
+    <>
+      <S.MyProfileContentContainer>
+        <ProfileInfo />
+        <ProfileTab onTabSelect={setSelectedTab} />
+        {selectedTab === "myDiaryTab" ? (
+          <>
+            <DateRangePicker />
+          </>
+        ) : null}
+      </S.MyProfileContentContainer>
+    </>
+  );
+};
