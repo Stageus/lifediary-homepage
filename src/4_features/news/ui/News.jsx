@@ -3,7 +3,7 @@ import { useModel } from "../model/useModel";
 import { DefaultBtn, Icon } from "@shared/ui"; 
 
 export const News = () => {
-     const { isNew, isOpenModal, onClickOpen} = useModel();
+     const { isNew, isOpenModal, onClickOpen, deleteNotice} = useModel();
     
     return(
         <>
@@ -161,7 +161,9 @@ export const News = () => {
                         </S.NewsContent>
                     </S.NewsInfo>
 
-                    <S.DeleteBtnWrap>
+                    <S.DeleteBtnWrap
+                    onClick={() => deleteNotice("noticeIdx")}
+                    >
                         <Icon
                         type= "cancel"
                         color= "red"
