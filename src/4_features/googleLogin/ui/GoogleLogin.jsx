@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
+
 import { S } from "./style";
 import { useGetRedirectUrl } from "../api/useGetRedirectUrl";
-import { usePostToken } from "./usePostToken"; // 가정한 경로
+import { usePostToken } from "../api/usePostToken";
 
 export const GoogleLoginBtn = () => {
   const [redirectData] = useGetRedirectUrl();

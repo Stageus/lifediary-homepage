@@ -1,7 +1,9 @@
+import { SearchContent } from "@widgets/searchContent/ui/SearchContent";
+
 export const Search = () => {
-    return(
-        <>
-            <div>검색결과 페이지</div>
-        </>
-    );
-}
+  return (
+    <>
+      <SearchContent />
+    </>
+  );
+};
