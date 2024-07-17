@@ -5,7 +5,7 @@ const DiaryLikeBtn = styled.div`
     background-color: ${( {theme, $isLike} )=> $isLike ? theme.highlight : theme.minor};
     color: ${( {theme, $isLike} ) => $isLike ? theme.white : theme.black};
     border: 1px solid ${( {theme} )=> theme.highlight};
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 4px 6px;
     font-size: ${( {theme} ) => theme.fontSize.medium};
     font-weight: 500;

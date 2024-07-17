@@ -63,7 +63,7 @@ const CommentBtn = styled.div`
     background-color: ${( {theme, $isOpen} )=> $isOpen ? theme.highlight : theme.minor};
     color: ${( {theme, $isOpen} ) => $isOpen ? theme.white : theme.black};
     border: 1px solid ${( {theme} )=> theme.highlight};
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 4px 6px;
     font-size: ${( {theme} ) => theme.fontSize.medium};
     font-weight: 500;
@@ -76,7 +76,7 @@ const CommentBtn = styled.div`
 `;
 
 const SimpleBtnWrap = styled.div`
-    border-radius: 4px;
+    border-radius: 6px;
     box-shadow: 1px 1px 3px gray;
 `;
 
