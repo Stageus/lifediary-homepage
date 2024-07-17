@@ -1,5 +1,5 @@
-import { useFetch, useCookie } from "@shared/hook";
 import { useEffect, useState } from "react";
+import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetNewNotice = () => {
     const [ fetchData, status, baseFetch ] = useFetch();
