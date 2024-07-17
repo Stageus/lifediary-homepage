@@ -1,21 +1,22 @@
-import { useState } from "react";
 import { S } from "./style";
+import { useModel } from "../model/useModel";
 import { DefaultBtn, Icon } from "@shared/ui"; 
 
 export const News = () => {
-     const [ isOpenModal, setIsOpenModal ] = useState( false );
-     const onClickOpen = () => setIsOpenModal( !isOpenModal );
-
-/*
-    "newComment": 내일기에 댓글이 달렸을 경우
-    "newDiary": 구독자가 일기를 작성했을 경우
-    "deletedMyDiary": 내일기가 신고받아 삭제되었을 경우
-    "deletedDiary": 신고한일기가 삭제되었을 경우
-    "recoveredDiary": 내일기가 복구되었을 경우
-*/
+     const { isNew, isOpenModal, onClickOpen} = useModel();
+    
     return(
         <>
         <S.News>
+            {isNew 
+            ?<S.NewsAlarm>
+                <Icon
+                type= "alarm"
+                color= "white"
+                size= "20px"
+                />
+             </S.NewsAlarm>
+            : null}
             <S.NewsBtnWrap>
                 <DefaultBtn
                 text= "알림"
