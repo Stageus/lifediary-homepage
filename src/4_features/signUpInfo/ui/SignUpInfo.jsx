@@ -1,30 +1,21 @@
-import React, { useRef, useState, useCallback } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { S } from "./style";
-import { DefaultBtn } from "@shared/ui/defaultBtn/DefaultBtn";
-import { TextInput } from "@shared/ui/textInput/TextInput";
-import Profile from "@shared/assets/imges/profile.png";
-import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg";
-import { handleCheckInputValue } from "../lib/checkInputValueLength";
+import { DefaultBtn, TextInput } from "@shared/ui";
 import { usePostSignUpInfo } from "../api/usePostSignUpInfo";
+import { useProfileForm } from "../lib/useProfileForm";
 
 export const SignUpInfo = () => {
-  const [inputType, setInputType] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [oauthGoogleId, setOauthGoogleId] = useState("1"); // 임시로 1 부여
-  const [profileImg, setProfileImg] = useState(Profile);
-  const imageInput = useRef(null); // imageInput이라는 참조 객체 생성
-  const [, , baseFetch] = usePostSignUpInfo();
+  const { profileImg, nickname, inputType, imageInput, profileImgMessage, btnMessage, btnType, handleChangeImgBase, handleChangeProfileImg, handleCheckInputValue } = useProfileForm();
+  const navigate = useNavigate();
+  const [postSignUpInfo] = usePostSignUpInfo();
 
-  const handleChangeProfileImgCall = handleChangeProfileImg(imageInput);
-  const handleChangeImgBaseCall = handleChangeImgBase(setProfileImg);
-  const handleCheckInputValueCall = handleCheckInputValue(setNickname, setInputType);
+  const location = useLocation();
+  const oauthGoogleId = location.state.userData.googleOauthId;
 
-  const handleUploadInfo = async () => {
-    baseFetch("account", {
-      method: "POST",
-      data: { profileImg, nickname, oauthGoogleId },
-    });
+  const handleUploadInfo = () => {
+    postSignUpInfo(profileImg, nickname, oauthGoogleId);
+    navigate("/");
   };
 
   return (
@@ -32,22 +23,22 @@ export const SignUpInfo = () => {
       <S.SignUpInfoContainer>
         <S.SignUpInfoProfileImgContainer>
           {/* ref속성으로 imageInput을 설정해 입력요소의 참조를 imageInput.current에 저장 */}
-          <input type="file" hidden ref={imageInput} onChange={handleChangeImgBaseCall} />
-          {profileImg && <S.SignUPInfoProfileImg src={profileImg} onClick={handleChangeProfileImgCall} />}
-          <S.SignUpInfoMessage>프로필을 선택해 주세요(jpg, jpeg, gif, png)</S.SignUpInfoMessage>
+          <input type="file" hidden ref={imageInput} onChange={handleChangeImgBase} />
+          {profileImg && <S.SignUPInfoProfileImg src={profileImg} onClick={handleChangeProfileImg} />}
+          <S.SignUpInfoMessage>{profileImgMessage}</S.SignUpInfoMessage>
         </S.SignUpInfoProfileImgContainer>
         <S.SignUpInfoNicknameContainer>
           <S.SignUpInfoNicknameLabel>닉네임</S.SignUpInfoNicknameLabel>
           <S.SignUpInfoNicknameInputContainer>
-            <TextInput type={inputType} placeholder="닉네임을 입력해주세요(최대 20자)" onBlur={handleCheckInputValueCall} onChange={handleCheckInputValueCall}>
+            <TextInput type={inputType} placeholder="닉네임을 입력해주세요(최대 20자)" onBlur={handleCheckInputValue} onChange={handleCheckInputValue}>
               {nickname}
             </TextInput>
-            {inputType === "error" && <S.SignUpInfoMessage>5자 이상 입력해주세요.</S.SignUpInfoMessage>}
+            <S.SignUpInfoMessage>{btnMessage}</S.SignUpInfoMessage>
           </S.SignUpInfoNicknameInputContainer>
         </S.SignUpInfoNicknameContainer>
         <S.SignUpInfoBtnContainer>
-          <DefaultBtn text="작성" onClick={handleUploadInfo} />
-          <DefaultBtn text="취소" />
+          <DefaultBtn type={btnType} text="작성" onClick={handleUploadInfo} />
+          <DefaultBtn text="취소" onClick={() => navigate("/Login")} />
         </S.SignUpInfoBtnContainer>
       </S.SignUpInfoContainer>
     </>
