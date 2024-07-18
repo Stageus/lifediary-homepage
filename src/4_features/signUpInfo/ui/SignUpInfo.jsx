@@ -11,7 +11,7 @@ export const SignUpInfo = () => {
   const [postSignUpInfo] = usePostSignUpInfo();
 
   const location = useLocation();
-  const oauthGoogleId = location.state.userData.googleOauthId;
+  // const oauthGoogleId = location.state.userData.googleOauthId;
 
   const handleUploadInfo = () => {
     postSignUpInfo(profileImg, nickname, oauthGoogleId);
