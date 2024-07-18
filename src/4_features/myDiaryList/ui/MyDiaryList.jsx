@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
 import { S } from "./style";
+import { useGetMineDiary } from "../api/useGetMineDiary";
+
 import { Icon, DefaultBtn } from "@shared/ui";
 import defaultDiary from "@shared/assets/imges/defaultDiary.jpg";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -18,14 +19,19 @@ const posts = [
   { id: 7, date: new Date(2024, 6, 16), isPublic: false },
 ];
 
-export const DateRangePicker = () => {
+export const MyDiaryList = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [startDateSelected, setStartDateSelected] = useState(false);
   const [endDateSelected, setEndDateSelected] = useState(false);
 
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  // const [mineDiaryData, status, baseFetch] = useGetMineDiary();
+  // useEffect(() => {
+  //   baseFetch("diary/mypage/mine", {}, handleGetCookie());
+  // }, [mineDiaryData]);
 
+  //예시 데이터 불러오기
+  const [filteredPosts, setFilteredPosts] = useState([]);
   useEffect(() => {
     if (!startDate && !endDate) {
       setFilteredPosts(posts);
