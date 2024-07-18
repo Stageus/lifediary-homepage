@@ -3,16 +3,29 @@ import { useFetch } from "@shared/hook/useFetch";
 
 export const useGetSearchContent = () => {
   const [searchData, setSearchData] = useState([]);
-  const [data, errorStatus, baseFetch] = useFetch();
+  const [data, status, baseFetch] = useFetch();
+
+  // const getSearchContent = () => {
+  //   baseFetch("diary/search", {});
+  // };
 
   // useEffect(() => {
-  //   baseFetch("diary/search", {});
-  //   setSearchData(data);
+  //   getSearchContent();
+  // }, [searchData]);
 
-  //   if (errorStatus) {
-  //     console.log("Error: ", errorStatus);
+  // useEffect(() => {
+  //   if (status === 400) {
+  //     return console.log("유효성 검사 실패");
   //   }
-  // }, [baseFetch]);
+
+  //   if (status === 404) {
+  //     return console.log("데이터가 없습니다.");
+  //   }
+
+  //   if (status === 500) {
+  //     return console.log("서버 에러");
+  //   }
+  // }, [status]);
 
   //임시데이터로 테스트하는 코드
   useEffect(() => {
@@ -40,10 +53,6 @@ export const useGetSearchContent = () => {
     ];
 
     setSearchData(tempData);
-
-    if (errorStatus) {
-      console.log("Error: ", errorStatus);
-    }
   }, []);
 
   return searchData;

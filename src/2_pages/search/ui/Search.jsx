@@ -1,16 +1,11 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
 import { useGetSearchContent } from "../api/useGetSearchContent";
-import { navigatePage } from "../lib/navigatePage";
 
 export const Search = () => {
+  const navigate = useNavigate();
   const searchData = useGetSearchContent();
-  const [navigateMyProfile, navigateDiary] = navigatePage();
-
-  if (!searchData || searchData.length === 0) {
-    return <div>로딩 중...</div>;
-  }
 
   return (
     <>
@@ -18,7 +13,7 @@ export const Search = () => {
         {searchData.map((item) => (
           <S.SearchContentContainer key={item.idx}>
             <S.ContentInfoContainer>
-              <S.UserInfoContainer onClick={navigateMyProfile}>
+              <S.UserInfoContainer onClick={() => navigate("/myProfile")}>
                 <S.ProfileImg src={item.profileImg} />
                 <p>{item.nickname}</p>
               </S.UserInfoContainer>
@@ -28,10 +23,10 @@ export const Search = () => {
                 <p>{item.tags.map((tag) => "#" + tag)}</p>
               </S.DiaryInfoContainer>
             </S.ContentInfoContainer>
-            <S.ThumbnailImgContainer onClick={navigateDiary}>
+            <S.ThumbnailImgContainer onClick={() => navigate("/diary")}>
               <S.ThumbnailImg src={item.thumbnailImg} />
             </S.ThumbnailImgContainer>
-            <S.TextContentContainer onClick={navigateDiary}>
+            <S.TextContentContainer onClick={() => navigate("/diary")}>
               <p>{item.textContent}</p>
             </S.TextContentContainer>
           </S.SearchContentContainer>
