@@ -1,11 +1,13 @@
+import { useEffect } from "react";
+
 import { useFetch, useCookie } from "@shared/hook";
 
-export const usePostDiaryInfo = (imgContents, textContent, tags, isPublic, color) => {
-  const [data, errorStatus, baseFetch] = useFetch();
+export const usePostDiaryInfo = (diaryIdx, imgContents, textContent, tags, isPublic, color) => {
+  const [DiaryData, status, baseFetch] = useFetch();
   const { handleGetCookie } = useCookie();
 
   const postDiaryInfo = () => {
-    const data = {
+    const fetchData = {
       imgContents,
       textContent,
       tags,
@@ -14,14 +16,32 @@ export const usePostDiaryInfo = (imgContents, textContent, tags, isPublic, color
     };
 
     baseFetch(
-      "diary",
+      `diaryUpload/${diaryIdx}`,
       {
         method: "POST",
-        data: data,
+        data: fetchData,
       },
       handleGetCookie()
     );
   };
 
-  return [postDiaryInfo];
+  useEffect(() => {
+    postDiaryInfo();
+  }, [DiaryData]);
+
+  useEffect(() => {
+    if (status === 400) {
+      return console.log("유효성 검사 실패");
+    }
+
+    if (status === 401) {
+      return console.log("잘못된 토큰입니다.");
+    }
+
+    if (status === 500) {
+      return console.log("서버 에러");
+    }
+  }, [status]);
+
+  return [DiaryData, status, baseFetch];
 };

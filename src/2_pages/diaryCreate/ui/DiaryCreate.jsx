@@ -15,25 +15,15 @@ export const DiaryCreate = () => {
   const [tags, setTags] = useState([]);
   const [isPublic, setIsPublic] = useState(false);
   const [color, setColor] = useState("");
-  const [postDiaryInfo] = usePostDiaryInfo();
+  const [diaryData, status, baseFetch] = usePostDiaryInfo();
   const navigate = useNavigate();
-
-  const handleColorSelection = (color) => {
-    if (color) {
-      setColor(color);
-    }
-  };
 
   const handleSubmit = () => {
     if (color === "") {
       alert("색상을 선택해주세요.");
     } else {
-      postDiaryInfo(imgContents, textContent, tags, isPublic, color);
+      baseFetch(imgContents, textContent, tags, isPublic, color);
     }
-  };
-
-  const handleCancel = () => {
-    navigate(-1);
   };
 
   const checkTextLength = (e) => {
@@ -55,14 +45,14 @@ export const DiaryCreate = () => {
         </S.ContentContainer>
         <CreateImg onImgContentsChange={setImgContents} />
         <CreateTag onTagsChange={setTags} />
-        <CreateGrass onColorSelected={handleColorSelection} />
+        <CreateGrass onColorSelected={() => setColor(color)} />
         <CreatePublic onIsPublicChange={setIsPublic} />
         <S.BtnContainer>
           <div>
             <DefaultBtn text="작성" type={color !== "" ? "select" : "disabled"} onClick={handleSubmit} />
           </div>
           <div>
-            <DefaultBtn text="취소" onClick={handleCancel} />
+            <DefaultBtn text="취소" onClick={() => navigate(-1)} />
           </div>
         </S.BtnContainer>
       </S.DiaryCreateContainer>
