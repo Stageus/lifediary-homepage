@@ -28,6 +28,7 @@ export const Complain = () => {
             </tr>
           </thead>
           <tbody>
+            {/* 신고 리스트*/}
             {complainList?.result?.map(( list ) => {
               return <ComplainItem key={ list.idx } list={ list }/>;
             })}
