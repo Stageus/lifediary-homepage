@@ -4,7 +4,7 @@ import { S } from "./style";
 import { Icon } from "@shared/ui/icon/Icon";
 
 export const TagInput = (props) => {
-  const { px, fontSize, placeholder, value } = props;
+  const { fontSize, placeholder, value } = props;
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -32,7 +32,7 @@ export const TagInput = (props) => {
           <Icon type="cancel" color="red" />
         </S.TagList>
       ))}
-      <S.TagInput type="text" px={px} fontSize={fontSize} placeholder={tags.length >= 3 ? "" : placeholder} value={inputValue} onChange={handleInputChange} onKeyDown={handleKeyDown} disabled={tags.length >= 3} />
+      <S.TagInput type="text" fontSize={fontSize} placeholder={tags.length >= 3 ? "" : placeholder} value={inputValue} onChange={handleInputChange} onKeyDown={handleKeyDown} disabled={tags.length >= 3} />
     </S.TagInputContainer>
   );
 };

@@ -4,11 +4,11 @@ const TagInputContainer = styled.div`
   display: flex;
   width: 100%;
   height: 40px;
-  max-width: 500px;
+  max-width: 600px;
   padding: 8px 16px;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.white};
-  border: ${({ theme }) => `3px solid ${theme.major}`};
+  background-color: white;
+  border: 3px solid ${({ theme }) => theme.major};
   overflow: hidden;
 `;
 
@@ -18,7 +18,7 @@ const TagList = styled.div`
   white-space: nowrap;
   margin: 0px;
   margin-right: 16px;
-  background-color: ${({ theme }) => theme.white};
+  background-color: white;
   font-size: ${({ theme }) => theme.fontSize.base};
   cursor: pointer;
 `;
@@ -26,7 +26,7 @@ const TagList = styled.div`
 const TagInput = styled.input`
   width: 100%;
   font-size: ${({ theme }) => theme.fontSize.base};
-  background-color: ${({ theme }) => theme.white};
+  background-color: white;
   border: none;
 `;
 
