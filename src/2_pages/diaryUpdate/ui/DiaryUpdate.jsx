@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
 import { usePutDiaryInfo } from "../api/usePutDiaryInfo";
-import { DefaultBtn } from "@shared/ui";
+import { DefaultBtn, TagInput } from "@shared/ui";
 import { CreateImg } from "@features/createImg";
-import { CreateTag } from "@features/createTag";
 import { CreateGrass } from "@features/createGrass";
 import { CreatePublic } from "@features/createPublic";
 import { useGetDiaryInfo } from "../api/useGetDiaryInfo";
@@ -17,13 +16,13 @@ export const DiaryUpdate = ({ diaryIdx }) => {
   const [isPublic, setIsPublic] = useState(false);
   const [color, setColor] = useState("");
   const [diaryInfo, setDiaryInfo] = useState(null);
+  const [getDiaryInfo] = useGetDiaryInfo(diaryIdx);
   const [putDiaryInfo] = usePutDiaryInfo();
   const navigate = useNavigate();
-  const [fetchedDiaryInfo, errorStatus] = useGetDiaryInfo(diaryIdx);
 
   useEffect(() => {
-    setDiaryInfo(fetchedDiaryInfo);
-  }, [fetchedDiaryInfo]);
+    setDiaryInfo(putDiaryInfo);
+  }, [putDiaryInfo]);
 
   useEffect(() => {
     if (diaryInfo) {
@@ -36,24 +35,6 @@ export const DiaryUpdate = ({ diaryIdx }) => {
     }
   }, [diaryInfo]);
 
-  const handleColorSelection = (color) => {
-    if (color) {
-      setColor(color);
-    }
-  };
-
-  const handleSubmit = () => {
-    if (color === "") {
-      alert("색상을 선택해주세요.");
-    } else {
-      putDiaryInfo(imgContents, textContent, tags, isPublic, color);
-    }
-  };
-
-  const handleCancel = () => {
-    navigate(-1);
-  };
-
   const checkTextLength = (e) => {
     const inputText = e.target.value;
     if (inputText.length < 500) {
@@ -61,6 +42,14 @@ export const DiaryUpdate = ({ diaryIdx }) => {
     } else {
       alert("입력 가능한 최대 글자수는 500자입니다.");
       setTextContent(inputText.substr(0, 500)); // substr() 메서드는 문자열에서 특정 위치에서 시작하여 특정 문자 수만큼의 문자들을 반환
+    }
+  };
+
+  const handleSubmit = () => {
+    if (color === "") {
+      alert("색상을 선택해주세요.");
+    } else {
+      baseFetch(imgContents, textContent, tags, isPublic, color);
     }
   };
 
@@ -72,15 +61,18 @@ export const DiaryUpdate = ({ diaryIdx }) => {
           <S.TextContent onChange={checkTextLength} maxLength="500" />
         </S.ContentContainer>
         <CreateImg onImgContentsChange={setImgContents} />
-        <CreateTag onTagsChange={setTags} />
-        <CreateGrass onColorSelected={handleColorSelection} />
+        <S.ContentContainer>
+          <S.ContentNameContainer>태그</S.ContentNameContainer>
+          <TagInput placeholder="입력 후 엔터를 누르면 태그가 자동으로 입력됩니다 (최대 3개)" onTagsChange={setTags} />
+        </S.ContentContainer>
+        <CreateGrass onColorSelected={setColor} />
         <CreatePublic onIsPublicChange={setIsPublic} />
         <S.BtnContainer>
           <div>
-            <DefaultBtn text="작성" type={color !== "" ? "select" : "disabled"} onClick={handleSubmit} />
+            <DefaultBtn text="수정" type={color === "" ? "disabled" : ""} onClick={handleSubmit} />
           </div>
           <div>
-            <DefaultBtn text="취소" onClick={handleCancel} />
+            <DefaultBtn text="취소" onClick={() => navigate(-1)} />
           </div>
         </S.BtnContainer>
       </S.DiaryCreateContainer>
