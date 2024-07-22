@@ -1,25 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 import Profile from "@shared/assets/imges/profile.png";
 
-export const useProfileForm = () => {
+export const useChangeImgBase = () => {
   const [profileImg, setProfileImg] = useState(Profile);
-  const [nickname, setNickname] = useState("");
-  const [inputType, setInputType] = useState("");
-  const imageInput = useRef(null);
   const [profileImgMessage, setProfileImgMessage] = useState("프로필을 선택해 주세요(jpg, jpeg, gif, png)");
-  const [btnMessage, setBtnMessage] = useState("");
-  const [btnType, setBtnType] = useState("disabled");
   const [isProfileImgValid, setIsProfileImgValid] = useState(false);
-  const [isNicknameValid, setIsNicknameValid] = useState(false);
-
-  useEffect(() => {
-    if (isProfileImgValid && isNicknameValid) {
-      setBtnType("");
-    } else {
-      setBtnType("disabled");
-    }
-  }, [isProfileImgValid, isNicknameValid]);
 
   const handleChangeImgBase = (e) => {
     const file = e.target.files[0];
@@ -50,10 +36,6 @@ export const useProfileForm = () => {
       return;
     }
 
-    if (file) {
-      setBtnType("");
-    }
-
     const reader = new FileReader();
     reader.onloadend = () => {
       setProfileImg(reader.result);
@@ -61,40 +43,10 @@ export const useProfileForm = () => {
     reader.readAsDataURL(file);
 
     if (file && validExtensions.includes(fileExtension) && file.size <= maxSize) {
+      setProfileImg(file);
       setIsProfileImgValid(true);
     }
   };
 
-  const handleChangeProfileImg = () => {
-    imageInput.current.click();
-  };
-
-  const handleCheckInputValue = (e) => {
-    const value = e.target.value;
-    setNickname(value);
-    if (value.length > 20) {
-      setInputType("error");
-      setBtnMessage("닉네임은 최대 20자 입니다.");
-      setIsNicknameValid(false);
-    } else {
-      setInputType("");
-      setBtnMessage("");
-      setIsNicknameValid(true);
-    }
-  };
-
-  return {
-    profileImg,
-    nickname,
-    inputType,
-    imageInput,
-    profileImgMessage,
-    btnMessage,
-    btnType,
-    isProfileImgValid,
-    isNicknameValid,
-    handleChangeImgBase,
-    handleChangeProfileImg,
-    handleCheckInputValue,
-  };
+  return [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid];
 };
