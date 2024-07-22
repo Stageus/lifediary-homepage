@@ -7,7 +7,7 @@ export const createTestData = (page)=>{
             result.push({
                     "idx" : i,
                     "diaryIdx" : i,
-                    "nickname" : `${page}첫번째요청 리스트`,
+                    "nickname" : `${page}번째요청 리스트`,
                     "textContent" : "Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용Test 내용",
                     "isInvalid" : testState[i],
                     "processedAt" : "2024-03-01",

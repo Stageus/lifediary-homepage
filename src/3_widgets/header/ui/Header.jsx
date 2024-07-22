@@ -5,6 +5,7 @@ import { DefaultBtn } from "@shared/ui";
 import { HeaderDiaryUpload } from "@features/headerDiaryUpload";
 import { HeaderLogout } from "@features/headerLogout";
 import { SearchBar } from "@features/searchBar";
+import { News } from "@features/news";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export const Header = () => {
         <S.Logo onClick={() => navigate("/")} />
         <SearchBar />
         <HeaderDiaryUpload />
+        <News />
         <HeaderLogout />
         <S.BtnContainer>
           <DefaultBtn text="로그인" onClick={() => navigate("/login")} />
