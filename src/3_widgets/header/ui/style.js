@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import logo from "@shared/assets/imges/logo.png";
-import searchIcon from "../assets/searchIcon.png";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -24,46 +23,13 @@ const Logo = styled.img.attrs({
   cursor: pointer;
 `;
 
-const TagInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-`;
-
-const SearchIcon = styled.img.attrs({
-  src: searchIcon,
-  alt: "searchIcon",
-})`
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-`;
-
-const ProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  border-radius: 99px;
-`;
-
-const RightElemContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
 const BtnContainer = styled.div`
-  white-space: nowrap;
+  box-shadow: 1px 1px 3px gray;
+  border-radius: 4px;
 `;
 
 export const S = {
   HeaderContainer,
   Logo,
-  TagInputContainer,
-  SearchIcon,
-  ProfileImg,
-  RightElemContainer,
   BtnContainer,
 };

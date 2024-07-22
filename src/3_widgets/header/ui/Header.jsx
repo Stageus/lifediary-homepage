@@ -1,27 +1,24 @@
 import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
-import { TagInput } from "@shared/ui";
-import { HeaderLoginMenu } from "@features/headerLoginMenu";
-import { HeaderLogoutMenu } from "@features/headerLogoutMenu";
+import { DefaultBtn } from "@shared/ui";
+import { HeaderDiaryUpload } from "@features/headerDiaryUpload";
+import { HeaderLogout } from "@features/headerLogout";
+import { SearchBar } from "@features/searchBar";
 
 export const Header = () => {
   const navigate = useNavigate();
-
-  const searchByTag = () => {
-    console.log("searchByTag");
-  };
 
   return (
     <>
       <S.HeaderContainer>
         <S.Logo onClick={() => navigate("/")} />
-        <S.TagInputContainer>
-          <TagInput placeholder="검색태그를 입력해 주세요" />
-          <S.SearchIcon onClick={searchByTag} />
-        </S.TagInputContainer>
-        <HeaderLoginMenu />
-        {/* <HeaderLogoutMenu /> */}
+        <SearchBar />
+        <HeaderDiaryUpload />
+        <HeaderLogout />
+        <S.BtnContainer>
+          <DefaultBtn text="로그인" onClick={() => navigate("/login")} />
+        </S.BtnContainer>
       </S.HeaderContainer>
     </>
   );
