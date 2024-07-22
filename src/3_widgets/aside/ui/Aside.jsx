@@ -8,7 +8,7 @@ import { ComplainAlarm  } from "@features/complainAlarm";
 import { SubscribeList } from "@features/subscribeList";
 
 export const Aside = () => {
-
+  
     const location = useLocation();
     const pathname = location.pathname;
     const isRoute = pathname.startsWith("/diary");
