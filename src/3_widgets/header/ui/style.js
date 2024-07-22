@@ -7,7 +7,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
   padding: 20px;
@@ -25,7 +25,6 @@ const Logo = styled.img.attrs({
 `;
 
 const TagInputContainer = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   position: relative;

@@ -18,13 +18,13 @@ export const useGetProfileImage = () => {
   // }, [baseFetch]);
 
   // 임시데이터로 테스트하는 코드
-  useEffect(() => {
-    setMyProfileImg("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg");
+  // useEffect(() => {
+  //   setMyProfileImg("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg");
 
-    if (errorStatus) {
-      console.log("Error: ", errorStatus);
-    }
-  }, []);
+  //   if (errorStatus) {
+  //     console.log("Error: ", errorStatus);
+  //   }
+  // }, []);
 
   return myProfileImg;
 };
