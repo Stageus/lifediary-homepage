@@ -7,7 +7,11 @@ const MenuContainer = styled.div`
 `;
 
 const BtnContainer = styled.div`
-  white-space: nowrap;
+  box-shadow: 1px 1px 3px gray;
+  border-radius: 4px;
 `;
 
-export const S = { MenuContainer, BtnContainer };
+export const S = {
+  MenuContainer,
+  BtnContainer,
+};
