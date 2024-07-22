@@ -1,22 +1,9 @@
 import styled from "styled-components";
 
-const ProfileImgUploadContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-`;
-
 const ProfileInfoContainer = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 12px;
-`;
-
-const ProfileImgUploadLabel = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.medium};
-  color: ${({ theme }) => theme.highlight};
-  cursor: pointer;
 `;
 
 const NicknameAndSubscribeContainer = styled.div`
@@ -79,9 +66,7 @@ const ResignBtnContainer = styled.div`
 `;
 
 export const S = {
-  ProfileImgUploadContainer,
   ProfileInfoContainer,
-  ProfileImgUploadLabel,
   ProfileImg,
   ProfileImgUploadBtn,
   NicknameAndSubscribeContainer,
