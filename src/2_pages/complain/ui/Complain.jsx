@@ -1,16 +1,21 @@
+// Slice
 import { S } from "./style";
-import { useModel } from "../model/useModel";
+import { useUpdatePageUrl } from "../model/useUpdatePageUrl";
+import { useGetComplainList } from "../api/useGetComplainList";
 import { divideToArray } from "../lib/divideToArray";
+// Layer
 import { ComplainItem } from "@widgets/complainItem";
 import { DefaultBtn, Icon } from "@shared/ui";
 
-// merge 오류난곳
 export const Complain = () => {
-  const { currentPage, complainList, onClickNum, onClickLeft, onClickRight } = useModel();
+
+  const [ complainList ] = useGetComplainList();
+  const { currentPage, onClickNum, onClickLeft, onClickRight } = useUpdatePageUrl();
 
   return (
     <>
       <S.ComplainContent>
+        {/* 열 제목들 */}
         <S.Table>
           <thead>
             <tr>
@@ -23,40 +28,57 @@ export const Complain = () => {
             </tr>
           </thead>
           <tbody>
-            {complainList?.result?.map((list) => {
-              return <ComplainItem key={list.idx} list={list}/>;
+            {/* 신고 리스트*/}
+            {complainList?.result?.map(( list ) => {
+              return <ComplainItem key={ list.idx } list={ list }/>;
             })}
           </tbody>
         </S.Table>
-        <S.PageBtnContainer>
-          <S.PageNextBtn>
-            {+currentPage() !== 1 ? (
-              <span onClick={onClickLeft}>
-                <Icon type="leftArrow" color="#FF6767" size="30px" />
-              </span>
-            ) : null}
-          </S.PageNextBtn>
-          <S.PageBtnList>
-            {complainList?.reportCnt &&
-              divideToArray(complainList.reportCnt, 5).map((num) => {
-                return (
-                  <DefaultBtn
-                    text={num}
-                    key={num}
-                    type={+currentPage() === num ? "select" : null}
-                    onClick={() => onClickNum(num)}
-                  />
-                );
-              })}
-          </S.PageBtnList>
-          <S.PageNextBtn>
-            {complainList.reportCnt && divideToArray(complainList?.reportCnt,5).length !== +currentPage() ? (
-              <span onClick={onClickRight}>
-                <Icon type="rightArrow" color="#FF6767" size="30px" />
-              </span>
-            ) : null}
-          </S.PageNextBtn>
-        </S.PageBtnContainer>
+
+        {/* 페이지네이션 컴포넌틑 */}
+        { complainList && complainList.reportCnt !== 0
+          ? (<S.PageBtnContainer>
+
+              {/* 왼쪽버튼 */}
+              <S.PageArrowBtn>
+                {+currentPage() !== 1 
+                ? (
+                  <span onClick={ onClickLeft }>
+                    <Icon type="leftArrow" color="#FF6767" size="30px" />
+                  </span>) 
+                : null}
+              </S.PageArrowBtn>
+
+              {/* 신고리스트 개수에 대한 번호들 */}
+              <S.PageBtnList>
+                {complainList
+                && divideToArray( complainList.reportCnt, 5 ).map(( num ) => {
+                    return (
+                      <DefaultBtn
+                        text={ num }
+                        key={ num }
+                        type={ +currentPage() === num ? "select" : null }
+                        onClick={ () => onClickNum(num) }
+                      />
+                    );
+                  })}
+              </S.PageBtnList>
+
+              {/* 오른쪽 버튼 */}
+              <S.PageArrowBtn>
+                { complainList 
+                  && divideToArray( complainList?.reportCnt,5 ).length !== +currentPage() 
+                    ? (
+                      <span onClick={ () => onClickRight( divideToArray( complainList?.reportCnt,5 ).length )}>
+                        <Icon type="rightArrow" color="#FF6767" size="30px" />
+                      </span>) 
+                    : null}
+              </S.PageArrowBtn>
+
+          </S.PageBtnContainer>) 
+          : null
+          }
+        
       </S.ComplainContent>
     </>
   );
