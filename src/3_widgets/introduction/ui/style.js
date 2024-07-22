@@ -8,7 +8,7 @@ const Introduction = styled.div`
     min-height: calc(100vh - 80px);
 `;
 
-const SectionFirst = styled.div`
+const FirstArea = styled.div`
     flex: 1;
     border-radius: 10px;
     display: flex;
@@ -19,7 +19,7 @@ const SectionFirst = styled.div`
     
 `;
 
-const SectionFirstContent = styled.div`
+const Content = styled.div`
     color: ${({theme}) => theme.white};
     display: flex;
     flex-direction: column;
@@ -35,19 +35,15 @@ const SectionFirstContent = styled.div`
     }
 `;
 
-const SectionSecond = styled.div`
+const SecondArea = styled.div`
     flex: 1;
     border-radius: 10px;
     background: url(${({$img}) => $img}) no-repeat center center / cover;
 `;
 
-const SliderSection = styled.div`
-`;
-
 export const S = {
     Introduction,
-    SectionFirst,
-    SectionFirstContent,
-    SectionSecond,
-    SliderSection
+    FirstArea,
+    Content,
+    SecondArea,
 }

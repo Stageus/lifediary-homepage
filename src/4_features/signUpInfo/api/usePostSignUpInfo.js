@@ -1,29 +1,31 @@
 import { useEffect } from "react";
-import { useFetch } from "@shared/hook/useFetch";
+
+import { useFetch, useCookie } from "@shared/hook";
 
 export const usePostSignUpInfo = () => {
   const [signUpData, errorStatus, baseFetch] = useFetch();
+  const { handleGetCookie } = useCookie();
+
+  const postSignUpInfo = (profileImg, nickname, oauthGoogleId) => {
+    baseFetch(
+      "account",
+      {
+        method: "POST",
+        data: { profileImg, nickname, oauthGoogleId },
+      },
+      handleGetCookie()
+    );
+  };
 
   useEffect(() => {
-    const postData = () => {
-      try {
-        const response = baseFetch("account", {
-          method: "POST",
-          data: signUpData,
-        });
+    if (errorStatus === 400) {
+      return console.log("유효성 검사 실패");
+    }
 
-        if (!response) {
-          console.log("Error: ", errorStatus);
-        } else {
-          console.log("업로드 성공");
-        }
-      } catch (error) {
-        console.log("요청 처리 중 에러 발생: ", error);
-      }
-    };
+    if (errorStatus === 500) {
+      return console.log("서버 에러");
+    }
+  }, [errorStatus]);
 
-    postData();
-  }, [signUpData]); // 의존성 배열에 signUpData, baseFetch, errorStatus 추가
-
-  return [signUpData, errorStatus, baseFetch];
+  return [postSignUpInfo, signUpData, errorStatus, baseFetch];
 };
