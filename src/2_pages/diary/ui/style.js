@@ -27,7 +27,7 @@ const DiaryHeader = styled.div`
     justify-content: space-between;
 `;
 
-const DiaryHeaderContainer = styled.div`
+const DiaryHeaderWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;;
@@ -50,18 +50,25 @@ const UserName = styled.div`
     color: ${({theme}) => theme.black};
 `;
 
-const DiaryCt = styled.div`
+const CreateDate = styled.div`
     font-size: ${({theme})=> theme.fontSize.medium};
     color: ${({theme}) => theme.black};
 `;
 
-const DiarySubscribe = styled.div`
+const SubscribeWrap = styled.div`
     width: 80px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px gray;
 `;
 
 const DiaryEditor = styled.div`
     display: flex;
     gap: 10px;
+
+    & > div {
+        border-radius: 6px;
+        box-shadow: 1px 1px 3px gray;
+    }
 `;
 // -----------------------------
 
@@ -77,11 +84,11 @@ export const S = {
     Diary,
     ScrollItem,
     DiaryHeader,
-    DiaryHeaderContainer,
+    DiaryHeaderWrap,
     UserImg,
     UserName,
-    DiaryCt,
-    DiarySubscribe,
+    CreateDate,
+    SubscribeWrap,
     DiaryEditor,
     DiaryInfoContainer,
 }

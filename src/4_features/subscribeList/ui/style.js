@@ -5,6 +5,7 @@ const SubscribeInfo = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 0 5px;
+    height: 100%;
 `;
 
 const SubscribeTitle = styled.h3`
@@ -18,7 +19,8 @@ const SubscribeList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 12px;
+    overflow-y: scroll;
 `;
 
 const SubscribeItem = styled.div`
@@ -26,6 +28,12 @@ const SubscribeItem = styled.div`
     justify-content: center;
     align-items: center;
     gap: 7px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: ${( {theme} ) => theme.major};
+    }
 
 
     & > img {
