@@ -7,6 +7,7 @@ import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfil
 
 export const ProfileInfo = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
+  const [prevProfileImg, setPrevProfileImg] = useState(profileImg);
   const imageInput = useRef(null);
   const [isEdit, setIsEdit] = useState(false);
   const [nickname, setNickname] = useState("고양이");
@@ -25,7 +26,7 @@ export const ProfileInfo = () => {
   };
 
   useEffect(() => {
-    if (nickname.length < 5) {
+    if (nickname.length < 3) {
       setInputType("error");
       setButtonType("disabled");
     } else {
@@ -41,6 +42,7 @@ export const ProfileInfo = () => {
 
   const handleCancelClick = () => {
     setNickname(prevNickname);
+    setProfileImg(prevProfileImg);
     setIsEdit(false);
   };
 
@@ -53,14 +55,19 @@ export const ProfileInfo = () => {
         {isEdit ? (
           <>
             <input type="file" hidden ref={imageInput} onChange={handleChangeImgBaseCall} />
-            {profileImg && <S.ProfileImgUploadBtn src={profileImg} onClick={handleChangeProfileImgCall} />}
+            {profileImg && (
+              <S.ProfileImgUploadContainer onClick={handleChangeProfileImgCall}>
+                <S.ProfileImgUploadBtn src={profileImg} />
+                <S.ProfileImgUploadLabel>프로필 수정</S.ProfileImgUploadLabel>
+              </S.ProfileImgUploadContainer>
+            )}
             <S.NicknameAndSubscribeContainer>
               <S.ProfileEditContainer>
                 <S.ProfileTextInputContainer>
                   <TextInput type={inputType} placeholder={nickname} onChange={handleNicknameChange} onBlur={handleNicknameChange}>
                     {nickname}
                   </TextInput>
-                  {inputType === "error" && <S.ProfileInfoMessage>5자 이상 입력해주세요.</S.ProfileInfoMessage>}
+                  {inputType === "error" && <S.ProfileInfoMessage>3자 이상 입력해주세요.</S.ProfileInfoMessage>}
                 </S.ProfileTextInputContainer>
                 <div>
                   <DefaultBtn type={buttonType} text="저장" onClick={handleUploadClick} />

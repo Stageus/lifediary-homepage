@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+const MyProfileContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 80px;
+`;
+
 const ProfileTabContainer = styled.div`
   display: flex;
   width: 100%;
@@ -33,6 +41,7 @@ const DefaultTabBtn = styled.div`
 `;
 
 export const S = {
+  MyProfileContentContainer,
   ProfileTabContainer,
   TabBtnContainer,
   ActiveTabBtn,
