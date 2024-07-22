@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetRedirectUrl = () => {
-  const [redirecUrltData, errorStatus, baseFetch] = useFetch();
-  const { handleGetCookie } = useCookie();
+  const [redirecUrltData, status, baseFetch] = useFetch();
+  const { handleSetCookie } = useCookie();
 
   const getRedirectUrl = () => {
-    baseFetch("login/oauth/google", {}, handleGetCookie());
+    baseFetch("login/oauth/google", {}, handleSetCookie());
   };
 
   useEffect(() => {
@@ -15,10 +15,13 @@ export const useGetRedirectUrl = () => {
   }, []);
 
   useEffect(() => {
-    if (errorStatus === 500) {
+    if (status === 200) {
+      console.log("구글 로그인 페이지로 이동");
+    }
+    if (status === 500) {
       console.log("서버 에러");
     }
-  }, [errorStatus]);
+  }, [status]);
 
-  return [redirecUrltData, errorStatus, baseFetch];
+  return [redirecUrltData, status, baseFetch];
 };

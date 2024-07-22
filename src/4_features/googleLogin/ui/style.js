@@ -2,15 +2,7 @@ import styled from "styled-components";
 
 import googleLogo from "../assets/googleLogo.png";
 
-const GoogleLogo = styled.img.attrs({
-  src: googleLogo,
-  alt: "googleLogo",
-})`
-  width: 20px;
-  height: 20px;
-`;
-
-const GoogleLoginBtn = styled.button`
+const GoogleLoginBtn = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -25,6 +17,14 @@ const GoogleLoginBtn = styled.button`
   &::after {
     content: "구글 계정으로 로그인";
   }
+`;
+
+const GoogleLogo = styled.img.attrs({
+  src: googleLogo,
+  alt: "googleLogo",
+})`
+  width: 20px;
+  height: 20px;
 `;
 
 export const S = {
