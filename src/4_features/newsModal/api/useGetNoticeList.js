@@ -80,7 +80,7 @@ export const useGetNoticeList = () => {
 
         case 401:
             // commonModal 적용 예정
-            console.log("토큰이 잘못된 경우 (없는경우)");
+            console.log("회원만 가능한 접근입니다.");
             break;
 
         case 404:
@@ -89,6 +89,7 @@ export const useGetNoticeList = () => {
             break;
 
         case 500:
+            // commonModal 적용 예정
             setErrorMessage( "잠시후에 다시 시도해주세요" );
             break;
         // 500 에러와 같이 사용?
