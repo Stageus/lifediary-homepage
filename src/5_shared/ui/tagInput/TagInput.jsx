@@ -10,7 +10,7 @@ export const TagInput = (props) => {
   const [isComposing, setIsComposing] = useState(false); // 한글 입력 중인지 여부를 추적하는 상태 추가
 
   const handleInputChange = (e) => {
-    const value = e.target.value.replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g, "");
+    const value = e.target.value.replace(/[\s\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\=\(\'\"\]]/g, "");
     setInputValue(value);
   };
 
