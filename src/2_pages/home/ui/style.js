@@ -8,6 +8,8 @@ const Home = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    padding: 20px 5px 5px 10px;
+    gap: 30px;
 `;
 
 export const S = {
