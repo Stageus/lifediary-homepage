@@ -11,7 +11,7 @@ import { Icon } from "@shared/ui";
 export const DiaryInfo = ( props )=>{
     const { idx, imgContents, textContent, isLiked, likeCnt, commentCnt } = props.diary;
     const { isOpenModal, onClickModal, clipBoard } = useModel();
-    
+    console.log("공유버튼");
     return (
         <S.DiaryInfo>
 

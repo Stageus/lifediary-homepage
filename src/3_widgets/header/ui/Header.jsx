@@ -7,7 +7,8 @@ import { DefaultBtn, Icon } from "@shared/ui";
 import { navigatePage } from "../lib/navigatePage";
 import { useGetProfileImage } from "../api/useGetProfileImg";
 import { useLogout } from "../lib/useLogout";
-import { News } from "@features/news";
+import { News } from "@widgets/news";
+
 
 export const Header = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
