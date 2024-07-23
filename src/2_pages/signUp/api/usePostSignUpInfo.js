@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useFetch, useCookie } from "@shared/hook";
 
 export const usePostSignUpInfo = () => {
+  const navigate = useNavigate();
   const [signUpData, status, baseFetch] = useFetch();
   const { handleGetCookie } = useCookie();
 
@@ -22,10 +25,10 @@ export const usePostSignUpInfo = () => {
   };
 
   useEffect(() => {
-    postSignUpInfo();
-  }, [signUpData]);
-
-  useEffect(() => {
+    if (status === 200) {
+      alert("회원가입에 성공했습니다!");
+      navigate("/diary");
+    }
     if (status === 400) {
       return console.log("유효성 검사 실패");
     }
@@ -34,5 +37,5 @@ export const usePostSignUpInfo = () => {
     }
   }, [status]);
 
-  return [signUpData, status, baseFetch];
+  return [signUpData, status, postSignUpInfo];
 };
