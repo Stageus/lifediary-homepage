@@ -13,7 +13,8 @@ export const useGetNoticeList = () => {
   const [ isLoading, setIsLoading ] = useState( false );
   const [ pageNum, setPageNum ] = useState( 1 );
 
-  const mapper = ( prevData ) => {
+  // 알람데이터에 대한 mapper
+  const mapper = ( resData ) => {
 
     const noticeTypeText = {
       newComment: "님이 새로운 댓글을 달았습니다.",
@@ -23,7 +24,7 @@ export const useGetNoticeList = () => {
       recoveredDiary: "삭제된 내일기가 복구 되었습니다",
     };
 
-    const prevDataWrap = prevData.map( item => {
+    const prevDataWrap = resData.map( item => {
       if ( item.noticeType === "deletedMyDiary" 
         || item.noticeType === "deletedDiary" 
         || item.noticeType === "recoveredDiary" ) {
@@ -46,44 +47,54 @@ export const useGetNoticeList = () => {
     return prevDataWrap;
   };
 
+  // 초기페이지 와 다음페이지의 데이터를 요청하기 위한 함수
   const getNoticeList = () => {
     if ( errorMessage ) return;
     setIsLoading( true );
     baseFetch( `notice?page=${pageNum}`, {}, handleGetCookie() );
   };
 
+  // 초기 알람 데이터에 대한 요청
   useEffect(() => {
     getNoticeList();
   }, []);
 
+  // 상태에 따른 예외처리
   useEffect(() => {
     if ( !fetchData ) return;
-
-    const status = fetchData.status;
     setIsLoading( false );
-    switch ( status ) {
-      case 200:
-        // 함수로 분리 예정
-        const mapperData = mapper( fetchData.data );
-        setPageNum( pageNum + 1 );
-        if ( !noticeList ) return setNoticeList( mapperData );
-        setNoticeList( [...noticeList, ...mapperData] );
-        break;
-      case 400:
-        setErrorMessage( "잠시후에 다시 시도해주세요" );
-        break;
-      case 401:
-        // navigate 예정
-        console.log("토큰이 잘못된 경우 (없는경우)");
-        break;
-      case 404:
-        // 초기 렌더링, 이후 렌더링에 대한 조건 추가예정
-        setErrorMessage( "알람이 존재하지 않아요!" );
-        break;
-      case 500:
-        // 다른 조건으로 변경 예정
-        setErrorMessage( "서버 에러" );
-        break;
+
+    switch ( fetchData.status ) {
+        case 200:
+            setPageNum( pageNum + 1 );
+            const mapperData = mapper( fetchData.data );
+
+            if ( !noticeList ) return setNoticeList( mapperData );
+            setNoticeList( [...noticeList, ...mapperData] );
+            break;
+
+        case 400:
+            // 서버에 다시 요청을하고, 호출횟수를 기록하고, 이후에 알림 적용할예정
+            setErrorMessage( "잠시후에 다시 시도해주세요" );
+            break;
+
+        case 401:
+            // commonModal 적용 예정
+            console.log("회원만 가능한 접근입니다.");
+            break;
+
+        case 404:
+            if ( !noticeList ) return setErrorMessage( "아직 알람이 없어요!" );
+            setErrorMessage( "더이상 알람이 존재하지 않아요!" );
+            break;
+
+        case 500:
+            // commonModal 적용 예정
+            setErrorMessage( "잠시후에 다시 시도해주세요" );
+            break;
+        // 500 에러와 같이 사용?
+        default:
+            console.log("예상하지 못한 상황");
     }
 
   }, [ fetchData ]);

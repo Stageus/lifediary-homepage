@@ -1,13 +1,9 @@
+// Slice
 import { S } from "./style";
 import { NewsItem } from "./newsItem";
 import { useGetNoticeList } from "../api/useGetNoticeList";
+// Layer
 import { useScroll } from "@shared/hook";
-
-/*
-    [렌더링 과정]
-    1. NewsModal jsx 렌더링
-    2. 
-*/
 
 export const NewsModal = () => {
 
@@ -30,8 +26,12 @@ export const NewsModal = () => {
                 && <div ref={ watchRef }></div>
             }
             
-            { isLoading ? <div>로딩중</div> : null}
-
+            {/* 
+                gif파일을 적용할경우는 gif를 받아오는 시간또한 딜레이가 생긴다
+                해당부분은 좀더 고민해보기로
+            */}
+            { isLoading ? <S.Loading>로딩중...</S.Loading> : null}
+            
             { errorMessage ?? <div>{ errorMessage }</div>}
 
           </S.NewsModal>
