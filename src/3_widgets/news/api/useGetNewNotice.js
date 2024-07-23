@@ -1,14 +1,14 @@
+// Npm
 import { useEffect, useState } from "react";
+// Layer
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetNewNotice = () => {
     const [ fetchData, status, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
-    const [ isNew, setIsNew ] = useState( null );
+    const [ isNew, setIsNew ] = useState( false );
 
-    const getNewNotice = () => {
-        baseFetch("notice/new", {}, handleGetCookie());
-    }
+    const getNewNotice = () => baseFetch("notice/new", {}, handleGetCookie());
 
     useEffect(() => {
 
