@@ -11,10 +11,6 @@ export const useGetDuplication = () => {
   };
 
   useEffect(() => {
-    getDuplication();
-  }, [duplicationData]);
-
-  useEffect(() => {
     if (status === 400) {
       return console.log("유효성 검사 실패");
     }
@@ -23,5 +19,5 @@ export const useGetDuplication = () => {
     }
   }, [status]);
 
-  return [duplicationData, status, baseFetch];
+  return [duplicationData, status, getDuplication];
 };
