@@ -3,9 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { S } from "./style.js";
 import DefaultProfile from "@shared/assets/imges/profile.png";
 import { Icon, TextInput, DefaultBtn } from "@shared/ui";
-import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg";
+import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg.js";
 
-export const ProfileInfo = () => {
+export const MyProfileInfo = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
   const [prevProfileImg, setPrevProfileImg] = useState(profileImg);
   const imageInput = useRef(null);
