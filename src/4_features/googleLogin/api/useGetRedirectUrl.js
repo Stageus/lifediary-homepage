@@ -14,7 +14,7 @@ export const useGetRedirectUrl = () => {
     if (status === 500) {
       console.log("서버 에러");
     }
-  }, [fetchData]);
+  }, [status]);
 
   return [fetchData, status, baseFetch];
 };
