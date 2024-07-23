@@ -4,13 +4,14 @@ import logo from "@shared/assets/imges/logo.png";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  max-width: 1080px;
   height: 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
   padding: 20px;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.major};
 `;
 
 const Logo = styled.img.attrs({
@@ -22,22 +23,13 @@ const Logo = styled.img.attrs({
   cursor: pointer;
 `;
 
-const ProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  border-radius: 99px;
-`;
-
-const RightElemContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
+const BtnContainer = styled.div`
+  box-shadow: 1px 1px 3px gray;
+  border-radius: 4px;
 `;
 
 export const S = {
   HeaderContainer,
   Logo,
-  ProfileImg,
-  RightElemContainer,
+  BtnContainer,
 };

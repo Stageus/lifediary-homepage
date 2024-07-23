@@ -1,53 +1,49 @@
 import { useState } from "react";
 
 import { S } from "./style";
+import { Icon } from "@shared/ui/icon/Icon";
 
 export const TagInput = (props) => {
-  const { px, fontSize, placeholder } = props;
-  const [tagItem, setTagItem] = useState("");
-  const [tagList, setTagList] = useState([]);
+  const { fontSize, placeholder, onTagsChange } = props;
+  const [tags, setTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isComposing, setIsComposing] = useState(false); // 한글 입력 중인지 여부를 추적하는 상태 추가
 
-  const onKeyUpEnter = (e) => {
-    if (e.key === "Enter" && e.target.value.length > 0) {
-      submitTag();
+  const handleInputChange = (e) => {
+    const value = e.target.value.replace(/[\s\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\=\(\'\"\]]/g, "");
+    setInputValue(value);
+  };
+
+  const handleCompositionStart = () => {
+    setIsComposing(true);
+  };
+
+  const handleCompositionEnd = () => {
+    setIsComposing(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !isComposing && inputValue && !tags.includes(inputValue) && tags.length < 3) {
+      setTags([...tags, inputValue]);
+      onTagsChange([...tags, inputValue]);
+      setInputValue("");
     }
   };
 
-  const submitTag = () => {
-    if (tagList.length < 3) {
-      let newTagItem = tagItem.trim().replace(/ /g, "");
-      const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
-      newTagItem = newTagItem.replace(regExp, "");
-      if (newTagItem.length > 0) {
-        let updatedTagList = [...tagList];
-        updatedTagList.push("#" + newTagItem);
-        setTagList(updatedTagList);
-        setTagItem("");
-      }
-    }
-  };
-
-  const deleteTag = (e) => {
-    const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter((tagItem) => tagItem !== deleteTagItem);
-    setTagList(filteredTagList);
+  const removeTag = (index) => {
+    setTags(tags.filter((_, i) => i !== index));
+    onTagsChange(tags.filter((_, i) => i !== index));
   };
 
   return (
-    <>
-      <S.TagBox px={px}>
-        <S.TagList>
-          {tagList.map((tagItem, index) => {
-            return (
-              <S.TagListBox key={index} onClick={deleteTag}>
-                <S.TagListName>{tagItem}</S.TagListName>
-                <S.TagListDeleteBtn>X</S.TagListDeleteBtn>
-              </S.TagListBox>
-            );
-          })}
+    <S.TagInputContainer>
+      {tags.map((tag, index) => (
+        <S.TagList key={index} onClick={() => removeTag(index)}>
+          #{tag}
+          <Icon type="cancel" color="red" />
         </S.TagList>
-        <S.TagInputBox type="text" px={px} fontSize={fontSize} placeholder={tagList.length >= 3 ? "" : placeholder} onChange={(e) => setTagItem(e.target.value)} value={tagItem} onKeyUp={onKeyUpEnter} disabled={tagList.length >= 3} />
-      </S.TagBox>
-    </>
+      ))}
+      <S.TagInput type="text" fontSize={fontSize} placeholder={tags.length >= 3 ? "" : placeholder} value={inputValue} onChange={handleInputChange} onKeyDown={handleKeyDown} onCompositionStart={handleCompositionStart} onCompositionEnd={handleCompositionEnd} disabled={tags.length >= 3} />
+    </S.TagInputContainer>
   );
 };
