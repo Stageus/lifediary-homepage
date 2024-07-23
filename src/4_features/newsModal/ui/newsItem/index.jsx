@@ -9,7 +9,8 @@ export const NewsItem = ( props ) => {
   
   const { idx, nickname, noticeType, createdAt } = props.item;
   const { onClickRoute } = useRoute();
-  const [ deleteNotice, isDelete ] = useDeleteNotice();
+  const [ deleteNotice, isDelete] = useDeleteNotice();
+  
 
   return (
     <>

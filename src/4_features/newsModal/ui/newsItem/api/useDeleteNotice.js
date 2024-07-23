@@ -4,29 +4,48 @@ import { useState, useEffect } from "react";
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useDeleteNotice = () => {
-    const [ _, status, baseFetch ] = useFetch();
+
+    const [ fetchData, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
     const [ isDelete, setIsDelete ] = useState( true );
 
-    // original
     const deleteNotice = ( noticeIdx ) => {
-        baseFetch(`notice/${noticeIdx}`, {}, handleGetCookie());
+        baseFetch(`notice/${noticeIdx}`, {method: "DELETE"}, handleGetCookie());
     };
 
-    // Test
-    const _deleteNotice = () => {
-        setIsDelete( false );
-    }
-
     useEffect( () => {
+        if ( !fetchData ) return;
 
-        if ( status === 200) return setIsDelete( false );
-        if ( status === 400) return console.log("유효성검사 실패일 경우");
-        if ( status === 401) return console.log("토큰이 잘못된 경우 (없는경우)");
-        if ( status === 404) return console.log("대상으로하는 noticeIdx가 없는경우");
-        if ( status === 500) return console.log("서버에러");
+        switch ( fetchData.status ) {
+            case 200:
+                setIsDelete( false );
+                break;
 
-    },[status]);
+            case 400:
+                // commonModal 적용 예정
+                console.log("잠시후에 다시 시도해주세요");
+                break;
 
-    return [ _deleteNotice, isDelete ];
+            case 401:
+                // commonModal 적용 예정
+                console.log("회원만 가능한 접근입니다.");
+                break;
+
+            case 404:
+                // commonModal 적용 예정
+                console.log("이미 삭제된 알림입니다.");
+                break;
+
+            case 500:
+                // commonModal 적용 예정
+                console.log("잠시후에 다시 시도해주세요");
+                break;
+            // 500 에러와 같이 사용?
+            default:
+                console.log("예상하지 못한 상황")
+        }
+
+    },[ fetchData ]);
+
+    return [ deleteNotice, isDelete];
 }
