@@ -14,7 +14,7 @@ export const useGetNoticeList = () => {
   const [ pageNum, setPageNum ] = useState( 1 );
 
   // 알람데이터에 대한 mapper
-  const mapper = ( prevData ) => {
+  const mapper = ( resData ) => {
 
     const noticeTypeText = {
       newComment: "님이 새로운 댓글을 달았습니다.",
@@ -24,7 +24,7 @@ export const useGetNoticeList = () => {
       recoveredDiary: "삭제된 내일기가 복구 되었습니다",
     };
 
-    const prevDataWrap = prevData.map( item => {
+    const prevDataWrap = resData.map( item => {
       if ( item.noticeType === "deletedMyDiary" 
         || item.noticeType === "deletedDiary" 
         || item.noticeType === "recoveredDiary" ) {
