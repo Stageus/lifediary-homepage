@@ -2,52 +2,70 @@
 import { useEffect, useState } from "react";
 // Slice
 import { grassWrap } from "../lib/grassWrap";
-import { mapper } from "../lib/mapper";
 // Layer
 import { useFetch, useCookie } from "@shared/hook";
-// 임시데이터(삭제예정)
-import { createTestData } from "../service/createTestData";
 
 export const useGetGrassList = () => {
 
-    const [ grassList, setGrassList ] = useState( null );
-    const [ fetchData, status, baseFetch ] = useFetch();
-    const [ selectYear, setSelectYear ] = useState(null);
+    const [ fetchData, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
+    const [ grassList, setGrassList ] = useState( null );
+    const [ selectYear, setSelectYear ] = useState(null);
+
+    const onClickYears = ( year )=> setSelectYear( year );
+
+    // 데이터 mapper
+    const mapper = ( mapperData )=>{
+
+        const grassList = mapperData.map( data  => (
+            {
+                idx: data.idx,
+                color: data.color,
+                date: data.date
+            }
+        ));
+
+        return grassList;
+    };
 
     const getGrassList = () => {
 
         // 선택된 년도가 없다면
-        if ( !selectYear ) {
-
-            // 임시데이터(삭제예정)
-            setGrassList( grassWrap( mapper( createTestData() ) ) );
-            // 임시주석
-            // baseFetch("grass",{},handleGetCookie());
-            return;
-        }
+        if ( !selectYear ) return baseFetch("grass",{},handleGetCookie());
 
         // 선택된 년도가 있다면
-        // 임시데이터(삭제예정)
-        setGrassList( grassWrap( mapper( createTestData( selectYear ) ) ) );
-        // 임시주석
-        // baseFetch(`grass?year=${selectYear}`,{},handleGetCookie());
+        baseFetch(`grass?year=${selectYear}`,{},handleGetCookie());
     };
 
     useEffect(() => {
-
         getGrassList();
-
     },[selectYear]);
 
     useEffect(() => {
+        if ( !fetchData ) return;
 
-        if ( status === 200 ) return setGrassList( mapper( fetchData ) );
-        if ( status === 400 ) return console.log("유효성 검사 실패");
-        if ( status === 401 ) return console.log("토큰이 잘못되거나 없음");
-        if ( status === 500 ) return console.log("서버오류");
+        switch ( fetchData.status ) {
+            case 200:
+                setGrassList( grassWrap( mapper( fetchData.data ) ) );
+                break
+            case 400:
+                // 서버에 다시 요청을하고, 호출횟수를 기록하고, 이후에 알림 적용할예정
+                setErrorMessage( "잠시후에 다시 시도해주세요" );
+                break
+            case 401:
+                // commonModal 적용 예정
+                console.log("회원만 가능한 접근입니다.");
+                break
+            case 500:
+                // commonModal 적용 예정
+                console.log("잠시후에 다시 시도해주세요");
+                break
+            // 500 에러와 같이 사용?
+            default:
+                console.log("예상하지 못한 상황");
+        }
 
-    },[status]);
+    },[fetchData]);
 
-    return [ grassList, setSelectYear ];
+    return [ grassList, onClickYears ];
 }
