@@ -10,6 +10,7 @@ export const useGetGrassList = () => {
     const [ fetchData, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
     const [ grassList, setGrassList ] = useState( null );
+    const [ isLoading, setIsLoading ] = useState( false );
     const [ selectYear, setSelectYear ] = useState(null);
 
     const onClickYears = ( year )=> setSelectYear( year );
@@ -29,6 +30,7 @@ export const useGetGrassList = () => {
     };
 
     const getGrassList = () => {
+        setIsLoading( true );
 
         // 선택된 년도가 없다면
         if ( !selectYear ) return baseFetch("grass",{},handleGetCookie());
@@ -43,6 +45,7 @@ export const useGetGrassList = () => {
 
     useEffect(() => {
         if ( !fetchData ) return;
+        setIsLoading( false );
 
         switch ( fetchData.status ) {
             case 200:
@@ -67,5 +70,5 @@ export const useGetGrassList = () => {
 
     },[fetchData]);
 
-    return [ grassList, onClickYears ];
+    return [ grassList, onClickYears, isLoading ];
 }
