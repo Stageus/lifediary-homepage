@@ -12,7 +12,7 @@ export const useGetNewNotice = () => {
     const getNewNotice = () => baseFetch("notice/new", {}, handleGetCookie());
 
     useEffect(() => {
-        getNewNotice();
+        // getNewNotice();
     },[])
 
     useEffect( () => {
