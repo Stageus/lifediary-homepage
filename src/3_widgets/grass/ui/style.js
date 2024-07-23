@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const GrassWrap = styled.div`
+    margin-top: 30px;
     min-width: 500px;
     width: 100%;
     min-height: 300px;
