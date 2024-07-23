@@ -65,35 +65,35 @@ export const useGetNoticeList = () => {
     setIsLoading( false );
 
     switch ( fetchData.status ) {
-      case 200:
-        setPageNum( pageNum + 1 );
-        const mapperData = mapper( fetchData.data );
+        case 200:
+            setPageNum( pageNum + 1 );
+            const mapperData = mapper( fetchData.data );
 
-        if ( !noticeList ) return setNoticeList( mapperData );
-        setNoticeList( [...noticeList, ...mapperData] );
-        break;
+            if ( !noticeList ) return setNoticeList( mapperData );
+            setNoticeList( [...noticeList, ...mapperData] );
+            break;
 
-      case 400:
-        // 서버에 다시 요청을하고, 호출횟수를 기록하고, 이후에 알림 적용할예정
-        setErrorMessage( "잠시후에 다시 시도해주세요" );
-        break;
+        case 400:
+            // 서버에 다시 요청을하고, 호출횟수를 기록하고, 이후에 알림 적용할예정
+            setErrorMessage( "잠시후에 다시 시도해주세요" );
+            break;
 
-      case 401:
-        // commonModal 적용 예정
-        console.log("토큰이 잘못된 경우 (없는경우)");
-        break;
+        case 401:
+            // commonModal 적용 예정
+            console.log("토큰이 잘못된 경우 (없는경우)");
+            break;
 
-      case 404:
-        if ( !noticeList ) return setErrorMessage( "아직 알람이 없어요!" );
-        setErrorMessage( "더이상 알람이 존재하지 않아요!" );
-        break;
+        case 404:
+            if ( !noticeList ) return setErrorMessage( "아직 알람이 없어요!" );
+            setErrorMessage( "더이상 알람이 존재하지 않아요!" );
+            break;
 
-      case 500:
-        setErrorMessage( "잠시후에 다시 시도해주세요" );
-        break;
-
-      default:
-        console.log("모든조건이 일치하지 않을경우");
+        case 500:
+            setErrorMessage( "잠시후에 다시 시도해주세요" );
+            break;
+        // 500 에러와 같이 사용?
+        default:
+            console.log("예상하지 못한 상황");
     }
 
   }, [ fetchData ]);
