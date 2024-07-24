@@ -1,22 +1,34 @@
-import {useState, useRef} from "react";
+import { useEffect, useRef } from "react";
 
-export const useScroll = ()=>{
-    const [lastScroll, setLastScroll] = useState(false);
-    const scrollRef = useRef(null);
+export const useScroll = ( callBack ) => {
+    
+    const rootRef = useRef( null );
+    const watchRef = useRef( null );
 
-    const onScrollReset = () => {
-        setLastScroll(false);
-    }
+    useEffect(()=>{
 
-    const onScrollNext = ()=>{
-        if(scrollRef.current){
-            const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
-            
-            if(scrollHeight - clientHeight - scrollTop <= 1){
-                setLastScroll(true);
-            }
+        if ( !watchRef.current ) return;
+
+        const observeCallBack = ( entries ) => {
+            const target = entries[0];
+            if ( target.isIntersecting ) callBack();
+        };
+
+        const observeOptions = {
+            root: rootRef.current,
+            threshold: 0.5,
+        };
+        
+        const observer = new IntersectionObserver( observeCallBack ,observeOptions );
+        if ( watchRef.current ) observer.observe(watchRef.current);
+
+        return () => {
+
+            if ( watchRef.current ) observer.unobserve(watchRef.current);
+            observer.disconnect(watchRef.current);
         }
-    }
 
-    return [lastScroll, scrollRef, onScrollNext, onScrollReset];
+    },[ callBack ]);
+
+    return [ rootRef, watchRef ];
 }

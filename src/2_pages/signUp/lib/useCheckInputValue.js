@@ -7,13 +7,13 @@ export const useCheckInputValue = () => {
   const [inputType, setInputType] = useState("");
   const [btnMessage, setBtnMessage] = useState("");
   const [isNicknameValid, setIsNicknameValid] = useState(false);
-  const [duplicationData, status, baseFetch] = useGetDuplication();
+  const [duplicationData, status, getDuplication] = useGetDuplication();
 
   useEffect(() => {
-    if (nickname) {
-      baseFetch("account/nickname/duplication");
+    if (nickname !== "") {
+      getDuplication();
     }
-  }, [nickname, baseFetch]);
+  }, [nickname, getDuplication]);
 
   useEffect(() => {
     if (status === 200 && duplicationData?.isDuplicated) {
