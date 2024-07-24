@@ -1,17 +1,15 @@
-// Npm
-import { useNavigate } from "react-router-dom";
 // Slice
 import { S } from "./style";
+import { useRoute } from "../model/useRoute";
 import { usePutComplain } from "../api/usePutComplain";
 // Layer
 import { DefaultBtn } from "@shared/ui";
 
 export const ComplainItem = ( props ) => {
 
-  const navigate = useNavigate();
-  const onClickRoute = ( diaryIdx ) => navigate(`/diary/${diaryIdx}`);
+  const { onClickRoute } = useRoute();
   const { idx, textContent, nickname, createdAt, diaryIdx, isInvalid } = props.list;
-  const [ itemState, putComplain ] = usePutComplain(isInvalid);
+  const [ putComplain ] = usePutComplain();
   
   return (
     <>
@@ -21,9 +19,9 @@ export const ComplainItem = ( props ) => {
         <td>{ nickname }</td>
         <td>{ createdAt }</td>
         <td>
-          { itemState === true ? "삭제" : null }
-          { itemState === false ? "통과" : null }
-          { itemState === null ? "대기중" : null }
+          { isInvalid === true ? "삭제" : null }
+          { isInvalid === false ? "통과" : null }
+          { isInvalid === null ? "대기중" : null }
         </td>
         <td>
           <S.BtnContainter>
@@ -34,7 +32,7 @@ export const ComplainItem = ( props ) => {
                 onClick={() => onClickRoute( diaryIdx )}
               />
             </div>
-            {itemState === true || itemState === false 
+            {isInvalid === true || isInvalid === false 
             ? (
               <div>
                 <DefaultBtn
@@ -45,7 +43,7 @@ export const ComplainItem = ( props ) => {
               </div>) 
             : null}
 
-            {itemState === null 
+            {isInvalid === null 
             ? (
               <>
                 <div>
