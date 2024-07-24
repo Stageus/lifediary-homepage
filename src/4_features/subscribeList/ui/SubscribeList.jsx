@@ -19,7 +19,7 @@ export const SubscribeList = () => {
 
         if ( lastScroll ){
             addPage();
-            onScrollReset();
+            // onScrollReset();
         }
 
     },[lastScroll])

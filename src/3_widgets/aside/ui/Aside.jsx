@@ -6,6 +6,7 @@ import { S } from "./style";
 import { DefaultBtn } from "@shared/ui";
 import { ComplainAlarm  } from "@features/complainAlarm"; 
 import { SubscribeList } from "@features/subscribeList";
+import { useGetAuth } from "@features/auth";
 
 export const Aside = () => {
   
@@ -14,6 +15,7 @@ export const Aside = () => {
     const isRoute = pathname.startsWith("/diary");
     const navigate = useNavigate();
     const onClickRoute = ( path ) => navigate( path );
+    const [ userInfo ] = useGetAuth();
 
   return (
     <>
@@ -36,7 +38,7 @@ export const Aside = () => {
           </S.BtnWrap>
 
           <S.BtnWrap>
-            <ComplainAlarm/>
+            { userInfo && userInfo.permission === 1 && <ComplainAlarm/>}
           </S.BtnWrap>
         </S.BtnList>
 
