@@ -15,8 +15,8 @@ export const CreatePublic = ({ onIsPublicChange }) => {
       <S.ContentContainer>
         <S.ContentNameContainer>공개</S.ContentNameContainer>
         <S.ToggleBtnContainer onClick={toggle}>
-          <S.ToggleBtn $isToggled={isToggled}>
-            <S.ToggleSlider $isToggled={isToggled} />
+          <S.ToggleBtn $isToggled={isPublic}>
+            <S.ToggleSlider $isToggled={isPublic} />
           </S.ToggleBtn>
         </S.ToggleBtnContainer>
       </S.ContentContainer>
