@@ -1,57 +1,68 @@
 // Npm
 import { useEffect, useState } from "react";
 // Slice
-import { mapper } from "../lib/mapper";
 import { sliceDiaryCount } from "../lib/sliceDiaryCount";
 // Layer
 import { useFetch } from "@shared/hook";
-// 임시데이터
-import { createTestData } from "../service/createTestData";
 
 export const useGetDiaryList = () => {
 
+    const [ fetchData, baseFetch ] = useFetch();
     const [ diaryList, setDiaryList ] = useState( null );
-    const [ fetchData, status, baseFetch ] = useFetch();
     const [ page, setPage ] = useState( 1 );
-    const addPage = () => setPage( page + 1 );
 
-    const isEmpty = () => {
-        
-        if ( page === 1 ) return setDiaryList(sliceDiaryCount(mapper(fetchData), 5));
+    const nextPage = () => setPage( page + 1 );
 
-        setDiaryList([...diaryList, ...sliceDiaryCount(mapper(fetchData), 5)]);
+    const mapper = ( resData )=>{
+
+        const sliderDiaryList = resData.map( data  => (
+            {
+                idx : data.idx,
+                thumbnailImg : data.thumbnailImg,
+                nickname : data.nickname,
+                profileImg : data.profileImg,
+            }
+        ));
+    
+        return sliderDiaryList;
     }
 
-    const getDiaryList = () => {
-        // ____________________________________________________________조건문(삭제예정)
-        if(page === 1){
-            // 임시데이터 (삭제예정)
-            setDiaryList(sliceDiaryCount(mapper(createTestData(page)), 5));
-            return;
-        }
-        // 임시데이터(삭제예정)
-        setDiaryList([...diaryList,...sliceDiaryCount(mapper(createTestData(page)), 5)]);
-        // __________________________________________________________________________
-
-        // 임시주석
-        // baseFetch(`diary/home?page=${page}`);
-    }
+    const getDiaryList = () => baseFetch(`diary/home?page=${page}`);
 
     useEffect(() => {
-
         getDiaryList();
-
     },[page]);
 
     useEffect(() => {
+        if ( !fetchData ) return;
 
-        if ( status === 200 ) return isEmpty();
-        if ( status === 400 ) return console.log("유효성 검사 실패");
-        if ( status === 404 ) return console.log("페이지기입 안했을경우, 일기리소스가 없을경우");
-        if ( status === 500 ) return console.log("서버 에러");
+        switch ( fetchData.status ) {
+            case 200:
+                if ( !diaryList ) return setDiaryList(sliceDiaryCount( mapper(fetchData.data), 5 ));
+                setDiaryList([...diaryList, ...sliceDiaryCount( mapper(fetchData.data), 5 )]);
+                break;
+
+            case 400:
+                // commonModal 적용 예정
+                console.log("잠시후에 다시 시도해주세요");
+                break;
+
+            case 404:
+                // commonModal 적용 예정
+                console.log("페이지기입 안했을경우");
+                console.log("일기리소스가 없을경우");
+                break;
+
+            case 500:
+                // commonModal 적용 예정
+                console.log("잠시후에 다시 시도해주세요");
+                break;
+            // 500 에러와 같이 사용?
+            default:
+                console.log("예상하지 못한 상황");
+        }
         
-    },[status]);
+    },[fetchData]);
 
-    
-    return [diaryList, addPage]
+    return [diaryList, nextPage]
 }

@@ -68,7 +68,7 @@ export const useGetComplainList = () => {
         if ( status === 404 ) return console.log("더이상 작성된 신고가 없을경우");
         if ( status === 500 ) return console.log("서버 에러");
 
-    },[fetchData]);
+    },[status]);
     
     return [ complainList ];
 }

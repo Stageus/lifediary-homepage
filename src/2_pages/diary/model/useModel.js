@@ -30,7 +30,7 @@ export const useModel = ()=>{
 
         if ( lastScroll ){
             nextPage();
-            onScrollReset();
+            // onScrollReset();
         }
 
     },[lastScroll])
