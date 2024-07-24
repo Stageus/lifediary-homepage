@@ -1,12 +1,16 @@
 // Slice
 import { S } from "./style";
-import { useModel } from "../model/useModel";
+import { useRoute } from "../model/useRoute";
+import { usePostionUnit } from "../model/usePostionUnit";
+import { useGetDiaryList } from "../api/useGetDiaryList";
 // Layer
 import { Icon, DynamicImage } from "@shared/ui";
 
 export const Carousel = () => {
 
-  const { postionUnit, diaryList, onClickRoute, onClickLeft, onClickRight } = useModel();
+    const [ diaryList, nextPage ] = useGetDiaryList();
+    const { onClickRoute } = useRoute();
+    const { postionUnit, onClickLeft , onClickRight } = usePostionUnit( diaryList?.length, nextPage );
 
   return (
     <>

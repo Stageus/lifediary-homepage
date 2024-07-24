@@ -1,57 +1,69 @@
 // Npm
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-// Slice
-import { mapper } from "../lib/mapper";
 // Layer
 import { useFetch, useCookie } from "@shared/hook";
-// 임시데이터
-import { createTestData } from "../service/createTestData";
 
 export const useGetComplainList = () => {
     
-    const [ complainList, setComplainList ] = useState( null );
-    const [ fetchData, status, baseFetch ] = useFetch();
+    const [ fetchData, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
-    const [ searchParams, setSearchParams ] = useSearchParams();
-    const currentPage = ()=> searchParams.get( "page" );
+    const [ complainList, setComplainList ] = useState( null );
+    const [ searchParams ] = useSearchParams();
 
-    const changePage = ( pageNumber )=> {
-        setSearchParams( {page: pageNumber} )
+    const mapper = ( resData ) => {
+
+        const mapperWrap = resData.result.map( res => (
+            {
+                idx: res.idx,
+                textContent: res.textContent,
+                nickname: res.nickname,
+                createdAt: res.createdAt,
+                isInvalid: res.isInvalid,
+                diaryIdx: res.diaryIdx,
+                processedAt: res.processedAt
+            }
+        ))
+    
+        return {data: [...mapperWrap], reportCnt: resData.reportCnt}
     };
 
-    const getComplainList = ()=>{ 
-
-        if ( !searchParams.size ) {
-            setSearchParams( { page: 1 } );
-            // 임시 데이터(삭제예정)
-            setComplainList({...mapper( createTestData( 1 ) )});
-            // baseFetch(`report?page=${1}`,{},handleGetCookie());
-            return;
-        }
-
-        // 임시 데이터(삭제예정)
-        setComplainList({...mapper( createTestData( searchParams.get( "page" ) ) )}); 
-        // 임시주석
-        // baseFetch(`report?page=${searchParams.get( "page" )}`,{},handleGetCookie());
+    const getComplainList = () => { 
+        baseFetch(`report?page=${searchParams.get( "page" )}`,{},handleGetCookie());
     };
 
     useEffect(() => {
-
         getComplainList();
-
     },[searchParams]);
 
     useEffect(() => {
+        if ( !fetchData ) return;
 
-        if ( status === 200 ) return setComplainList(mapper(fetchData));
-        if ( status === 400 ) return console.log("유효성 검사 실패일 경우");
-        if ( status === 401 ) return console.log("토큰이 없는경우, 잘못된경우");
-        if ( status === 403 ) return console.log("관리자가 아닐경우");
-        if ( status === 404 ) return console.log("더이상 작성된 신고가 없을경우");
-        if ( status === 500 ) return console.log("서버 에러");
+        switch ( fetchData.status ) {
+            case 200:
+                setComplainList( mapper( fetchData.data ) );
+                break;
+            case 400:
+                console.log("유효성 검사 실패일 경우");
+                break;
+            case 401:
+                console.log("토큰이 없는경우, 잘못된경우");
+                break;
+            case 403:
+                console.log("관리자가 아닐경우");
+                break;
+            case 404:
+                alert("404페이지로 리다이렉트")
+                console.log("더이상 작성된 신고가 없을경우");
+                break;
+            case 500:
+                console.log("서버 에러");
+                break;
+            default:
+                console.log("예상하지 못한 경우");
+        }
 
     },[fetchData]);
     
-    return [complainList, currentPage, changePage];
+    return [ complainList ];
 }
