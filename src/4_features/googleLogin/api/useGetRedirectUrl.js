@@ -1,17 +1,20 @@
 import { useEffect } from "react";
 
-import { useFetch } from "@shared/hook/useFetch";
+import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetRedirectUrl = () => {
-  const [redirectData, errorStatus, baseFetch] = useFetch();
+  const [fetchData, status, baseFetch] = useFetch();
+  const { handleSetCookie } = useCookie();
+
   useEffect(() => {
-    baseFetch("login/oauth/google");
+    baseFetch("login/oauth/google", {}, handleSetCookie());
+  }, [fetchData]);
 
-    if (errorStatus) {
-      console.log(`Error: ${errorStatus}`);
-      return;
+  useEffect(() => {
+    if (status === 500) {
+      console.log("서버 에러");
     }
-  }, [redirectData]);
+  }, [status]);
 
-  return [redirectData, errorStatus, baseFetch];
+  return [fetchData, status, baseFetch];
 };

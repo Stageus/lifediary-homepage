@@ -12,7 +12,7 @@ export const ComplainAlarm = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const pathName = location.pathname;
-    const onClickRoute = () => navigate("complain?page=1");
+    const onClickRoute = () => navigate("/complain");
 
     return(
         <>
