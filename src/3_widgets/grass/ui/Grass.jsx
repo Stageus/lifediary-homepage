@@ -2,16 +2,15 @@
 import { S } from "./style";
 import { GrassItem } from "./grassItem/ui";
 import { useGetGrassList } from "../api/useGetGrassList";
+import { useYearsList } from "../model/useYearsList";
 // Layer
 import { DefaultBtn } from "@shared/ui";
 
 export const Grass = () => {
     
-    const [ grassList, setSelectYear ] = useGetGrassList();
-    const nowYears = new Date().getFullYear();
-    const yearsList = Array( 3 ).fill( nowYears ).map( ( value, idx ) => value - idx );
-    const onClickYears = ( year )=> setSelectYear( year );
-    
+    const [ grassList, onClickYears, isLoading ] = useGetGrassList();
+    const { yearsList  } = useYearsList();
+
     return (
         <>
         <S.GrassWrap>
@@ -21,7 +20,7 @@ export const Grass = () => {
                     return(
                     <div key={ idx }>
                         <DefaultBtn
-                            onClick={ ()=>onClickYears( year ) }
+                            onClick={ () => onClickYears( year ) }
                             text={ year }
                             />
                     </div>
@@ -29,7 +28,10 @@ export const Grass = () => {
                 })}
             </S.YearList>
             {/* Grass 각 요소 리스트 */}
-            <S.Grass>            
+            
+            { isLoading 
+            ? <S.Loading>로딩중....</S.Loading> 
+            : <S.Grass>            
                     {grassList?.map( ( dayOfWeek, idx ) => {
                         return (
                             <S.DayOfWeekItem key={ idx }>
@@ -44,7 +46,8 @@ export const Grass = () => {
                             </S.DayOfWeekItem>
                         );
                     })}
-            </S.Grass>
+            </S.Grass>}
+            
         </S.GrassWrap>
         </>
   );

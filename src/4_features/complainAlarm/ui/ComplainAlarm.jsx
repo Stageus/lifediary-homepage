@@ -1,18 +1,16 @@
-// Npm
-import { useNavigate, useLocation } from "react-router-dom";
 // Slice
 import { S } from "./style";
+import { useCurrentPage } from "../model/useCurrentPage";
+import { useRoute } from "../model/useRoute";
 import { useGetAlarm } from "../api/useGetAlarm";
 // Layer
 import { DefaultBtn, Icon } from "@shared/ui";
 
 export const ComplainAlarm = () => {
 
-    const isAlarm = useGetAlarm();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const pathName = location.pathname;
-    const onClickRoute = () => navigate("/complain");
+    const [ isNew ] = useGetAlarm();
+    const { onClickRoute } = useRoute();
+    const { pathName } = useCurrentPage();
 
     return(
         <>
@@ -23,7 +21,7 @@ export const ComplainAlarm = () => {
                 type={ pathName === "/complain" ? "select" : null}
                 />
 
-                {isAlarm 
+                {isNew 
                 ? <S.Alarm>
                     <Icon
                     type="alarm"
