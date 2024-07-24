@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
 import { useGetRedirectUrl } from "../api/useGetRedirectUrl";
-import { useIsUser } from "../api/useIsUser";
+import { useGetAccountExist } from "../api/useGetAccountExist";
 
 export const Login = () => {
   const navigate = useNavigate();
 
   const [getRedirectUrl] = useGetRedirectUrl();
-  const [isUser] = useIsUser();
+  const [getAccountExist] = useGetAccountExist();
 
   return (
     <S.PageContainer>

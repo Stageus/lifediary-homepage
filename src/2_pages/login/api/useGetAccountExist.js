@@ -2,19 +2,19 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useFetch, useCookie } from "@shared/hook";
 import { useEffect } from "react";
 
-export const useIsUser = () => {
+export const useGetAccountExist = () => {
   const [fetchData, baseFetch] = useFetch();
   const { handleSetCookie } = useCookie();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const isUser = () => {
+  const getAccountExist = () => {
     baseFetch(`account/login/oauth/google/redirect?${searchParams}`);
   };
 
   useEffect(() => {
     if (searchParams) {
-      isUser();
+      getAccountExist();
     }
   }, []);
 
@@ -30,5 +30,5 @@ export const useIsUser = () => {
     }
   }, [fetchData]);
 
-  return [isUser];
+  return [getAccountExist];
 };

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useFetch, useCookie } from "@shared/hook";
+import { useFetch } from "@shared/hook";
 
 /*
   1. 클라이언트 요청: /account/login/oauth/google
