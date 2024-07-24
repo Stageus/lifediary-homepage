@@ -2,15 +2,12 @@ import { S } from "./style";
 import { useGetRedirectUrl } from "../api/useGetRedirectUrl";
 
 export const GoogleLoginBtn = () => {
-  const [fetchData] = useGetRedirectUrl();
-
-  const handleLogin = () => {
-    window.location.href = fetchData.redirectUrl;
-  };
+  
+  const [ getRedirectUrl ] = useGetRedirectUrl();
 
   return (
     <>
-      <S.GoogleLoginBtn onClick={handleLogin}>
+      <S.GoogleLoginBtn onClick={getRedirectUrl}>
         <S.GoogleLogo />
       </S.GoogleLoginBtn>
     </>

@@ -1,6 +1,7 @@
 // Slice
 import { S } from "./style"; 
 import { Slider } from "./slider/ui";
+import { Comment } from "./comment/ui";
 import { useModel } from "../model/useModel";
 // Layer
 import { DiaryLikeBtn } from "@features/diaryLikeBtn";
@@ -29,6 +30,7 @@ export const DiaryInfo = ( props )=>{
                   <S.Cancel onClick={ onClickModal }>
                     <Icon size="30px" type="cancel" color="#FF6767" />
                   </S.Cancel>
+                  <Comment/>
                 </S.CommentPart>
                 
                 <S.ButtonPart>
