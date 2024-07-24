@@ -6,9 +6,12 @@ import { useGetAccountExist } from "../api/useGetAccountExist";
 
 export const Login = () => {
   const navigate = useNavigate();
-
   const [getRedirectUrl] = useGetRedirectUrl();
-  useGetAccountExist();
+  const [getAccountExist] = useGetAccountExist();
+
+  if (window.location.search.includes("code=")) {
+    getAccountExist();
+  }
 
   return (
     <S.PageContainer>

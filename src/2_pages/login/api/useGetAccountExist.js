@@ -13,20 +13,19 @@ export const useGetAccountExist = () => {
   };
 
   useEffect(() => {
-    if (searchParams) {
-      getAccountExist();
-    }
-  }, []);
-
-  useEffect(() => {
     if (!fetchData) return;
 
     if (fetchData.status === 200) {
       // 계정이 없다면
-      if (!fetchData.data.isAccountExist) return navigate("/signup");
+      if (!fetchData.data.isAccountExist) {
+        navigate("/signup");
+      } else {
+        handleSetCookie("myCookie", fetchData.data.token);
+        navigate("/");
+      }
       // 계정이 있다면
-      handleSetCookie("myCookie", fetchData.data.token);
-      navigate("/");
     }
   }, [fetchData]);
+
+  return [getAccountExist];
 };
