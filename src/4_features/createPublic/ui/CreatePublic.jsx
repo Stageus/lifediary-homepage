@@ -2,11 +2,12 @@ import { useState } from "react";
 
 import { S } from "./style";
 
-export const CreatePublic = () => {
-  const [isToggled, setIsToggled] = useState(false);
+export const CreatePublic = ({ onIsPublicChange }) => {
+  const [isPublic, setIsPublic] = useState(false);
 
   const toggle = () => {
-    setIsToggled(!isToggled);
+    setIsPublic(!isPublic);
+    onIsPublicChange(!isPublic);
   };
 
   return (
