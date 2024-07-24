@@ -29,6 +29,4 @@ export const useGetAccountExist = () => {
       navigate("/");
     }
   }, [fetchData]);
-
-  return [getAccountExist];
 };

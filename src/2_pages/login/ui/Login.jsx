@@ -8,7 +8,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const [getRedirectUrl] = useGetRedirectUrl();
-  const [getAccountExist] = useGetAccountExist();
+  useGetAccountExist();
 
   return (
     <S.PageContainer>

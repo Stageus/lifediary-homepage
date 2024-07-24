@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { S } from "./style";
 import { useChangeImgBase } from "../lib/useChangeImgBase";
@@ -23,8 +23,8 @@ export const SignUp = () => {
     }
   }, [isProfileImgValid, isNicknameValid]);
 
-  const location = useLocation();
-  const oauthGoogleId = location.state.userData.googleOauthId;
+  const [searchParams] = useSearchParams();
+  const oauthGoogleId = searchParams.get("googleOauthId");
 
   const handleUploadInfo = () => {
     postSignUpInfo(profileImg, nickname, oauthGoogleId);
