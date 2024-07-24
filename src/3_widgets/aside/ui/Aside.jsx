@@ -1,7 +1,7 @@
-// Npm
-import { useNavigate, useLocation } from "react-router-dom";
 // Slice
 import { S } from "./style";
+import { useRoute } from "../model/useRoute";
+import { useCurrentPage } from "../model/useCurrentPage";
 // Layer
 import { DefaultBtn } from "@shared/ui";
 import { ComplainAlarm  } from "@features/complainAlarm"; 
@@ -10,12 +10,9 @@ import { useGetAuth } from "@features/auth";
 
 export const Aside = () => {
   
-    const location = useLocation();
-    const pathname = location.pathname;
-    const isRoute = pathname.startsWith("/diary");
-    const navigate = useNavigate();
-    const onClickRoute = ( path ) => navigate( path );
     const [ userInfo ] = useGetAuth();
+    const { isRoute } = useCurrentPage();
+    const { onClickRoute } = useRoute();
 
   return (
     <>
