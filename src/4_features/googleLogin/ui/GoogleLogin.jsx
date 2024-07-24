@@ -2,7 +2,7 @@ import { S } from "./style";
 import { useGetRedirectUrl } from "../api/useGetRedirectUrl";
 
 export const GoogleLoginBtn = () => {
-  const [fetchData, status, baseFetch] = useGetRedirectUrl();
+  const [fetchData] = useGetRedirectUrl();
 
   const handleLogin = () => {
     window.location.href = fetchData.redirectUrl;
