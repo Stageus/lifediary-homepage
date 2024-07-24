@@ -3,17 +3,17 @@ import { S } from "./style";
 import { useRoute } from "../model/useRoute";
 import { useCurrentPage } from "../model/useCurrentPage";
 // Layer
-import { DefaultBtn } from "@shared/ui";
 import { ComplainAlarm  } from "@features/complainAlarm"; 
 import { SubscribeList } from "@features/subscribeList";
 import { useGetAuth } from "@features/auth";
+import { DefaultBtn } from "@shared/ui";
 
 export const Aside = () => {
   
     const [ userInfo ] = useGetAuth();
     const { isRoute } = useCurrentPage();
     const { onClickRoute } = useRoute();
-
+    
   return (
     <>
       <S.Aside>
@@ -40,7 +40,7 @@ export const Aside = () => {
         </S.BtnList>
 
         <S.SubscribeListWrap>
-          <SubscribeList/>
+          { userInfo && <SubscribeList/> }
         </S.SubscribeListWrap>
       </S.Aside>
     </>
