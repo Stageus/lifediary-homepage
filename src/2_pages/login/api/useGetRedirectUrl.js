@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { useFetch, useCookie } from "@shared/hook";
-
+import { useFetch } from "@shared/hook";
 
 /*
   1. 클라이언트 요청: /account/login/oauth/google
@@ -14,21 +13,19 @@ import { useFetch, useCookie } from "@shared/hook";
   # google ID, PW을 입력이 끝난상태를, 클라이언트가 어떻게 알수있냐?
 */
 export const useGetRedirectUrl = () => {
-  const [ fetchData, baseFetch ] = useFetch();
-  const { handleSetCookie } = useCookie();
+  const [fetchData, baseFetch] = useFetch();
 
   const getRedirectUrl = () => {
-    baseFetch("login/oauth/google");
+    baseFetch("account/login/oauth/google");
   };
 
   useEffect(() => {
-    if ( !fetchData ) return;
+    if (!fetchData) return;
 
-    if ( fetchData.status === 200 ){
-        window.location.href = fetchData.data.redirectUrl;
-    } 
-
+    if (fetchData.status === 200) {
+      window.location.href = fetchData.data.redirectUrl;
+    }
   }, [fetchData]);
 
-  return [ getRedirectUrl ];
+  return [getRedirectUrl];
 };
