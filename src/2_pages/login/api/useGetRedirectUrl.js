@@ -18,7 +18,7 @@ export const useGetRedirectUrl = () => {
   const { handleSetCookie } = useCookie();
 
   const getRedirectUrl = () => {
-    baseFetch("account/login/oauth/google", {}, handleSetCookie());
+    baseFetch("login/oauth/google");
   };
 
   useEffect(() => {
