@@ -7,26 +7,26 @@ export const useGetAccountExist = () => {
   const { handleSetCookie } = useCookie();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const code = searchParams.get("code");
 
   const getAccountExist = () => {
-    baseFetch(`account/login/oauth/google/redirect?${searchParams}`);
+    baseFetch(`account/login/oauth/google/redirect?code=${code}`);
   };
-
-  useEffect(() => {
-    if (searchParams) {
-      getAccountExist();
-    }
-  }, []);
 
   useEffect(() => {
     if (!fetchData) return;
 
     if (fetchData.status === 200) {
-      // 계정이 없다면
-      if (!fetchData.data.isAccountExist) return navigate("/signup");
-      // 계정이 있다면
-      handleSetCookie("myCookie", fetchData.data.token);
-      navigate("/");
+      //계정이 없다면
+      if (!fetchData.data.isAccountExist) {
+        navigate("/signup");
+      } else {
+        //계정이 있다면
+        handleSetCookie("myCookie", fetchData.data.token);
+        navigate("/");
+      }
     }
   }, [fetchData]);
+
+  return [getAccountExist];
 };

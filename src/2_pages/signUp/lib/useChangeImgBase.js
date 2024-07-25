@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export const useChangeImgBase = () => {
+  const imageInputRef = useRef(null);
   const [profileImg, setProfileImg] = useState(null);
   const [profileImgMessage, setProfileImgMessage] = useState("프로필을 선택해 주세요(jpg, jpeg, gif, png)");
   const [isProfileImgValid, setIsProfileImgValid] = useState(false);
@@ -34,5 +35,5 @@ export const useChangeImgBase = () => {
     setIsProfileImgValid(true);
   };
 
-  return [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid];
+  return [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef];
 };

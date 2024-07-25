@@ -5,14 +5,14 @@ import { useFetch, useCookie } from "@shared/hook";
 
 export const usePostSignUpInfo = () => {
   const navigate = useNavigate();
-  const [signUpData, status, baseFetch] = useFetch();
+  const [fetchData, baseFetch] = useFetch();
   const { handleGetCookie } = useCookie();
 
-  const postSignUpInfo = (profileImg, nickname, oauthGoogleId) => {
+  const postSignUpInfo = (profileImg, nickname) => {
     const formData = new FormData();
     formData.append("profileImg", profileImg);
     formData.append("nickname", nickname);
-    formData.append("oauthGoogleId", oauthGoogleId);
+    formData.append("oauthGoogleId", oauthGooglId);
 
     baseFetch(
       "account",
@@ -25,17 +25,19 @@ export const usePostSignUpInfo = () => {
   };
 
   useEffect(() => {
-    if (status === 200) {
+    if (fetchData?.status === 200) {
       alert("회원가입에 성공했습니다!");
       navigate("/diary");
     }
-    if (status === 400) {
+
+    if (fetchData?.status === 400) {
       return console.log("유효성 검사 실패");
     }
-    if (status === 500) {
+
+    if (fetchData?.status === 500) {
       return console.log("서버 에러");
     }
-  }, [status]);
+  }, [fetchData]);
 
-  return [signUpData, status, postSignUpInfo];
+  return [postSignUpInfo];
 };

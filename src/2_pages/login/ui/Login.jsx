@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
@@ -6,9 +7,17 @@ import { useGetAccountExist } from "../api/useGetAccountExist";
 
 export const Login = () => {
   const navigate = useNavigate();
-
   const [getRedirectUrl] = useGetRedirectUrl();
-  useGetAccountExist();
+  const [getAccountExist] = useGetAccountExist();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+
+    if (code) {
+      getAccountExist();
+    }
+  }, []);
 
   return (
     <S.PageContainer>

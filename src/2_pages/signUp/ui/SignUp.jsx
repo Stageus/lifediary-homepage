@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
 import { useChangeImgBase } from "../lib/useChangeImgBase";
 import { useCheckInputValue } from "../lib/useCheckInputValue";
+import { useChangeBtnType } from "../lib/useChangeBtnType";
 import { usePostSignUpInfo } from "../api/usePostSignUpInfo";
 
 import { DefaultBtn, TextInput } from "@shared/ui";
@@ -11,24 +12,14 @@ import Profile from "@shared/assets/imges/profile.png";
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const [btnType, setBtnType] = useState("disabled");
-  const imageInputRef = useRef(null);
-  const [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid] = useChangeImgBase();
+  const [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef] = useChangeImgBase();
   const [handleCheckInputValue, nickname, inputType, btnMessage, isNicknameValid] = useCheckInputValue();
-  const [signUpData, status, postSignUpInfo] = usePostSignUpInfo();
+  const [btnType, checkBtnType] = useChangeBtnType(isNicknameValid, isProfileImgValid);
+  const [postSignUpInfo] = usePostSignUpInfo(profileImg, nickname);
 
   useEffect(() => {
-    if (isProfileImgValid && isNicknameValid) {
-      setBtnType("");
-    }
-  }, [isProfileImgValid, isNicknameValid]);
-
-  const [searchParams] = useSearchParams();
-  const oauthGoogleId = searchParams.get("googleOauthId");
-
-  const handleUploadInfo = () => {
-    postSignUpInfo(profileImg, nickname, oauthGoogleId);
-  };
+    checkBtnType();
+  }, [isNicknameValid, isProfileImgValid]);
 
   return (
     <>
@@ -52,7 +43,7 @@ export const SignUp = () => {
               </S.SignUpInfoNicknameInputContainer>
             </S.SignUpInfoNicknameContainer>
             <S.SignUpInfoBtnContainer>
-              <DefaultBtn type={btnType} text="작성" onClick={() => handleUploadInfo()} />
+              <DefaultBtn type={btnType} text="작성" onClick={postSignUpInfo} />
               <DefaultBtn text="취소" onClick={() => navigate("/Login")} />
             </S.SignUpInfoBtnContainer>
           </S.SignUpInfoContainer>

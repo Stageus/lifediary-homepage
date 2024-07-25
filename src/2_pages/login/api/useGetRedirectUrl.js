@@ -25,6 +25,10 @@ export const useGetRedirectUrl = () => {
     if (fetchData.status === 200) {
       window.location.href = fetchData.data.redirectUrl;
     }
+
+    if (fetchData.status === 500) {
+      console.log("잘못된 요청입니다.");
+    }
   }, [fetchData]);
 
   return [getRedirectUrl];
