@@ -1,25 +1,51 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { S } from "./style";
 import { useChangeImgBase } from "../lib/useChangeImgBase";
 import { useCheckInputValue } from "../lib/useCheckInputValue";
 import { useChangeBtnType } from "../lib/useChangeBtnType";
-import { usePostSignUpInfo } from "../api/usePostSignUpInfo";
+// import { usePostSignUpInfo } from "../api/usePostSignUpInfo";
 
 import { DefaultBtn, TextInput } from "@shared/ui";
 import Profile from "@shared/assets/imges/profile.png";
 
 export const SignUp = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { oauthGoogleId } = location.state;
   const [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef] = useChangeImgBase();
   const [handleCheckInputValue, nickname, inputType, btnMessage, isNicknameValid] = useCheckInputValue();
   const [btnType, checkBtnType] = useChangeBtnType(isNicknameValid, isProfileImgValid);
-  const [postSignUpInfo] = usePostSignUpInfo(profileImg, nickname);
+  // const [postSignUpInfo] = usePostSignUpInfo(profileImg, nickname, oauthGoogleId);
+  console.log(profileImg, nickname, oauthGoogleId);
 
   useEffect(() => {
     checkBtnType();
   }, [isNicknameValid, isProfileImgValid]);
+
+  const postSignUpInfo = async () => {
+    const formData = new FormData();
+    formData.append("profileImg", profileImg);
+    formData.append("nickname", nickname);
+    formData.append("oauthGoogleId", oauthGoogleId);
+
+    try {
+      const response = await fetch("http://3.36.128.193/account", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Signup successful:", data);
+      } else {
+        console.log("Signup failed:", response.status);
+      }
+    } catch (error) {
+      console.log("Error occurred during signup:", error.message);
+    }
+  };
 
   return (
     <>
