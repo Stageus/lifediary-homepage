@@ -12,7 +12,7 @@ export const usePostSignUpInfo = () => {
     const formData = new FormData();
     formData.append("profileImg", profileImg);
     formData.append("nickname", nickname);
-    formData.append("oauthGoogleId", 33);
+    formData.append("oauthGoogleId", oauthGooglId);
 
     baseFetch(
       "account",
