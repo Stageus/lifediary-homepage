@@ -50,9 +50,16 @@ const SubscribeItem = styled.div`
     }
 `;
 
+const Loading = styled.div`
+    width: 100%;
+    height: 100%;
+    text-align: center;
+`;
+
 export const S = {
     SubscribeInfo,
     SubscribeTitle,
     SubscribeList,
-    SubscribeItem
+    SubscribeItem,
+    Loading,
 }

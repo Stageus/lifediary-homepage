@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { S } from "./style";
 import { DefaultBtn, Icon } from "@shared/ui";
 
-export const CreateImg = () => {
+export const CreateImg = ({ onImgContentsChange }) => {
   const [selectedFile, setSelectedFile] = useState([]);
   const fileInputRef = useRef(null);
 
@@ -11,6 +11,7 @@ export const CreateImg = () => {
     const files = e.target.files;
     if (files.length + selectedFile.length <= 3) {
       setSelectedFile([...selectedFile, ...files]);
+      onImgContentsChange([...selectedFile, ...files]);
     } else {
       alert("최대 3개의 파일만 업로드할 수 있습니다.");
     }

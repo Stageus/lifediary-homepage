@@ -5,7 +5,7 @@ import { DefaultBtn } from "@shared/ui";
 import { HeaderDiaryUpload } from "@features/headerDiaryUpload";
 import { HeaderLogout } from "@features/headerLogout";
 import { SearchBar } from "@features/searchBar";
-import { News } from "@features/news";
+import { News } from "@widgets/news";
 
 export const Header = () => {
   const navigate = useNavigate();

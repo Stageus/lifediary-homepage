@@ -1,26 +1,20 @@
-import { useState } from "react";
-
-import Profile from "@shared/assets/imges/profile.png";
+import { useState, useRef } from "react";
 
 export const useChangeImgBase = () => {
-  const [profileImg, setProfileImg] = useState(Profile);
+  const imageInputRef = useRef(null);
+  const [profileImg, setProfileImg] = useState(null);
   const [profileImgMessage, setProfileImgMessage] = useState("프로필을 선택해 주세요(jpg, jpeg, gif, png)");
   const [isProfileImgValid, setIsProfileImgValid] = useState(false);
 
   const handleChangeImgBase = (e) => {
     const file = e.target.files[0];
     const validExtensions = ["jpg", "jpeg", "gif", "png"];
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-    const maxSize = 10 * 1024 * 1024;
-
-    if (!e.target.files.length) {
-      setIsProfileImgValid(false);
-      setProfileImgMessage("파일을 선택해 주세요");
-      return;
-    }
+    const fileExtension = file?.name.split(".").pop().toLowerCase();
+    const maxSize = 10 * 1024 * 1024; // 10MB
 
     if (!file) {
       setIsProfileImgValid(false);
+      setProfileImgMessage("파일을 선택해 주세요");
       return;
     }
 
@@ -36,17 +30,10 @@ export const useChangeImgBase = () => {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfileImg(reader.result);
-    };
-    reader.readAsDataURL(file);
-
-    if (file && validExtensions.includes(fileExtension) && file.size <= maxSize) {
-      setProfileImg(file);
-      setIsProfileImgValid(true);
-    }
+    // 파일 객체를 직접 저장
+    setProfileImg(file);
+    setIsProfileImgValid(true);
   };
 
-  return [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid];
+  return [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef];
 };

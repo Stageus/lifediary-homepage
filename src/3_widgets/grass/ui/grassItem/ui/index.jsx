@@ -1,12 +1,14 @@
 // Slice
 import { S } from "./style";
-import { useModel } from "../model/useModel";
+import { useHover } from "../model/useHover";
+import { useRoute } from "../model/useRoute"; 
 import { findFirstDay } from "../lib/findFirstDay";
 
 export const GrassItem = ( props )=>{
 
     const { idx, color, date } = props.day ?? {};
-    const { hover, onMuouserOver, onMouserOut, onClickRoute } = useModel();
+    const { hover, onMuouserOver, onMouserOut } = useHover();
+    const { onClickRoute } = useRoute();
 
     return(
         <>
