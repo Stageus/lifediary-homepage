@@ -4,7 +4,7 @@ import { useUpdatePageUrl } from "../model/useUpdatePageUrl";
 import { useGetComplainList } from "../api/useGetComplainList";
 import { divideToArray } from "../lib/divideToArray";
 // Layer
-import { ComplainItem } from "@widgets/complainItem";
+import { ComplainItem } from "./complainItem";
 import { DefaultBtn, Icon } from "@shared/ui";
 
 export const Complain = () => {
@@ -29,24 +29,24 @@ export const Complain = () => {
           </thead>
           <tbody>
             {/* 신고 리스트*/}
-            {complainList?.result?.map(( list ) => {
+            {complainList?.data.map(( list ) => {
               return <ComplainItem key={ list.idx } list={ list }/>;
             })}
           </tbody>
         </S.Table>
 
-        {/* 페이지네이션 컴포넌틑 */}
-        { complainList && complainList.reportCnt !== 0
-          ? (<S.PageBtnContainer>
+        {/* 페이지네이션 컴포넌트
+          button 비활성화 적용해야함
+        */}
+        <S.PageBtnContainer>
 
               {/* 왼쪽버튼 */}
               <S.PageArrowBtn>
-                {+currentPage() !== 1 
-                ? (
-                  <span onClick={ onClickLeft }>
+                {complainList
+                && <span onClick={ onClickLeft }>
                     <Icon type="leftArrow" color="#FF6767" size="30px" />
-                  </span>) 
-                : null}
+                  </span>}
+                  
               </S.PageArrowBtn>
 
               {/* 신고리스트 개수에 대한 번호들 */}
@@ -57,7 +57,7 @@ export const Complain = () => {
                       <DefaultBtn
                         text={ num }
                         key={ num }
-                        type={ +currentPage() === num ? "select" : null }
+                        type={ currentPage() === num ? "select" : null }
                         onClick={ () => onClickNum(num) }
                       />
                     );
@@ -66,18 +66,14 @@ export const Complain = () => {
 
               {/* 오른쪽 버튼 */}
               <S.PageArrowBtn>
-                { complainList 
-                  && divideToArray( complainList?.reportCnt,5 ).length !== +currentPage() 
-                    ? (
-                      <span onClick={ () => onClickRight( divideToArray( complainList?.reportCnt,5 ).length )}>
-                        <Icon type="rightArrow" color="#FF6767" size="30px" />
-                      </span>) 
-                    : null}
+                {complainList 
+                && <span onClick={ () => onClickRight( divideToArray( complainList?.reportCnt,5 ).length )}>
+                      <Icon type="rightArrow" color="#FF6767" size="30px" />
+                  </span>}
+                    
               </S.PageArrowBtn>
 
-          </S.PageBtnContainer>) 
-          : null
-          }
+          </S.PageBtnContainer>
         
       </S.ComplainContent>
     </>

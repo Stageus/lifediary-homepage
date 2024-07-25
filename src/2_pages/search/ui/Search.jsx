@@ -5,12 +5,12 @@ import { useGetSearchContent } from "../api/useGetSearchContent";
 
 export const Search = () => {
   const navigate = useNavigate();
-  const searchData = useGetSearchContent();
+  const [fetchData] = useGetSearchContent();
 
   return (
     <>
       <S.SearchContents>
-        {searchData.map((item) => (
+        {fetchData.map((item) => (
           <S.SearchContentContainer key={item.idx}>
             <S.ContentInfoContainer>
               <S.UserInfoContainer onClick={() => navigate("/myProfile")}>

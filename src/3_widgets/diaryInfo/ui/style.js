@@ -34,7 +34,7 @@ const DiaryContent = styled.div`
 // CommentPart _________________
 const CommentPart = styled.div`
     position: relative;
-    width: ${({$openModal}) => $openModal ? "400px" : "0px"};
+    width: ${({$openModal}) => $openModal ? "450px" : "0px"};
     background-color: ${({theme}) => theme.minor};
     border-radius: 10px;
     transition: width 0.3s ease-out;

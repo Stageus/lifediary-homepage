@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
 
-import { useGetDuplication } from "../api/useGetDuplication";
+// import { useGetDuplication } from "../api/useGetDuplication";
 
 export const useCheckInputValue = () => {
   const [nickname, setNickname] = useState("");
   const [inputType, setInputType] = useState("");
   const [btnMessage, setBtnMessage] = useState("");
   const [isNicknameValid, setIsNicknameValid] = useState(false);
-  const [duplicationData, status, baseFetch] = useGetDuplication();
+  // const [duplicationData, status, getDuplication] = useGetDuplication();
 
-  useEffect(() => {
-    if (nickname) {
-      baseFetch("account/nickname/duplication");
-    }
-  }, [nickname, baseFetch]);
+  // useEffect(() => {
+  //   if (nickname !== "") {
+  //     getDuplication();
+  //   }
+  // }, [nickname]);
 
-  useEffect(() => {
-    if (status === 200 && duplicationData?.isDuplicated) {
-      setInputType("error");
-      setBtnMessage("닉네임이 중복됩니다.");
-      setIsNicknameValid(false);
-    }
-  }, [duplicationData, status]);
+  // useEffect(() => {
+  //   if (status === 200 && duplicationData?.isDuplicated) {
+  //     setInputType("error");
+  //     setBtnMessage("닉네임이 중복됩니다.");
+  //     setIsNicknameValid(false);
+  //   }
+  // }, [duplicationData, status]);
 
   const handleCheckInputValue = (e) => {
     const value = e.target.value;
