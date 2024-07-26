@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetDuplication = () => {
-  const [duplicationData, status, baseFetch] = useFetch();
+  const [fetchData, baseFetch] = useFetch();
   const { handleGetCookie } = useCookie();
 
   const getDuplication = () => {
@@ -12,16 +12,16 @@ export const useGetDuplication = () => {
 
   useEffect(() => {
     getDuplication();
-  }, [duplicationData]);
+  }, []);
 
   useEffect(() => {
-    if (status === 400) {
+    if (fetchData?.status === 400) {
       return console.log("유효성 검사 실패");
     }
-    if (status === 500) {
+    if (fetchData?.status === 500) {
       return console.log("서버 에러");
     }
-  }, [status]);
+  }, [fetchData]);
 
-  return [duplicationData, status, baseFetch];
+  return [getDuplication];
 };
