@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useChangeBtnType = (isNicknameValid, isProfileImgValid) => {
   const [btnType, setBtnType] = useState("disabled");
@@ -8,6 +8,10 @@ export const useChangeBtnType = (isNicknameValid, isProfileImgValid) => {
       setBtnType("");
     }
   };
+
+  useEffect(() => {
+    checkBtnType();
+  }, [isNicknameValid, isProfileImgValid]);
 
   return [btnType, checkBtnType];
 };
