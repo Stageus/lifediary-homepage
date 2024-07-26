@@ -1,9 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 
 import { S } from "./style.js";
+import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg.js";
+// import { useGetAccount } from "../api/useGetAccount";
+
 import DefaultProfile from "@shared/assets/imges/profile.png";
 import { Icon, TextInput, DefaultBtn } from "@shared/ui";
-import { handleChangeProfileImg, handleChangeImgBase } from "../lib/changeProfileImg.js";
+import { useCookie } from "@shared/hook";
 
 export const MyProfileInfo = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
@@ -14,6 +17,30 @@ export const MyProfileInfo = () => {
   const [prevNickname, setPrevNickname] = useState(nickname);
   const [inputType, setInputType] = useState("");
   const [buttonType, setButtonType] = useState("disabled");
+  // const [fetchData, baseFetch] = useGetAccount();
+  const { handleGetCookie } = useCookie();
+
+  useEffect(() => {
+    const testFetch = async () => {
+      try {
+        const token = handleGetCookie();
+        console.log(token);
+        const response = await fetch("http://3.36.128.193/account", {
+          headers: {
+            token: token,
+          },
+        });
+
+        if (response.ok) {
+          const res = await response.json();
+          console.log(res);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    testFetch();
+  }, []);
 
   const handleEditClick = () => {
     setPrevNickname(nickname);
