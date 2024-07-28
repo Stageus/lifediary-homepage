@@ -19,9 +19,7 @@ const ContentNameContainer = styled.p`
   width: 80px;
 `;
 
-const TextContent = styled.textarea.attrs({
-  placeholder: "내용을 입력해주세요(최대 500자)",
-})`
+const TextContent = styled.textarea`
   width: 600px;
   height: 300px;
   border: ${({ theme }) => `3px solid ${theme.major}`};
