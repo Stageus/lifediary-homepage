@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
 import { DefaultBtn } from "@shared/ui";
-import { HeaderDiaryUpload } from "@features/headerDiaryUpload";
-import { HeaderLogout } from "@features/headerLogout";
-import { SearchBar } from "@features/searchBar";
+import { HeaderDiaryUpload } from "@widgets/headerDiaryUpload";
+import { HeaderLogout } from "@widgets/headerLogout";
+import { SearchBar } from "@widgets/searchBar";
 import { News } from "@widgets/news";
 
 export const Header = () => {

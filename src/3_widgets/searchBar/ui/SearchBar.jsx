@@ -3,7 +3,7 @@ import { useState } from "react";
 import { S } from "./style";
 import { useGetSearchContent } from "../api/useGetSearchContent";
 
-import { TagInput } from "@shared/ui";
+import { TagInput } from "@features/tagInput";
 
 export const SearchBar = () => {
   const [tags, setTags, getSearchContent] = useGetSearchContent();
