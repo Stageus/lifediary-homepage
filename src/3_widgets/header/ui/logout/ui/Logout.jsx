@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { S } from "./style";
 import { DefaultBtn } from "@shared/ui";
 
-export const HeaderLogout = () => {
+export const Logout = () => {
   const navigate = useNavigate();
 
   return (

@@ -11,7 +11,7 @@ export const useGetSearchContent = () => {
   const getSearchContent = () => {
     const searchParams = new URLSearchParams();
     searchParams.append("tags", tags.join("&"));
-    baseFetch(`diary/search?tags=${searchParams.toString()}`, {}, handleGetCookie());
+    baseFetch(`diary/search?${searchParams.toString()}`, {}, handleGetCookie());
   };
 
   useEffect(() => {

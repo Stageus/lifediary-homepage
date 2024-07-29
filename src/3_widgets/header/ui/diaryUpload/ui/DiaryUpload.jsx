@@ -7,7 +7,7 @@ import { DefaultBtn } from "@shared/ui";
 import { useLogout } from "../lib/useLogout";
 import { useGetProfileImage } from "../api/useGetProfileImg";
 
-export const HeaderDiaryUpload = () => {
+export const DiaryUpload = () => {
   const navigate = useNavigate();
   const [profileImg, setProfileImg] = useState(DefaultProfile);
   const myProfileImg = useGetProfileImage();

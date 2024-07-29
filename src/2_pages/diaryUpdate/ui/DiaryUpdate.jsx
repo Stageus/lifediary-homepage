@@ -8,7 +8,7 @@ import { createPublic } from "../lib/createPublic";
 import { useCheckTextLength } from "../lib/useCheckTextLength";
 
 import { DefaultBtn, Icon } from "@shared/ui";
-import { TagInput } from "@features/tagInput";
+import { TagInput } from "@widgets/tagInput";
 import { ChromePicker } from "react-color";
 
 export const DiaryUpdate = () => {

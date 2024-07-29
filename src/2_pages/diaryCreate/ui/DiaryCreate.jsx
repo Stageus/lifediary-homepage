@@ -8,11 +8,10 @@ import { createPublic } from "../lib/createPublic";
 import { useCheckTextLength } from "../lib/useCheckTextLength";
 
 import { DefaultBtn, Icon } from "@shared/ui";
-import { TagInput } from "@features/tagInput";
+import { TagInput } from "@widgets/tagInput";
 import { ChromePicker } from "react-color";
 
 export const DiaryCreate = () => {
-  const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   const [checkTextLength] = useCheckTextLength(500);
   const [fileInputRef, selectedFile, handleFileChange, handleButtonClick, removeImgPreview] = createImg();
@@ -55,7 +54,7 @@ export const DiaryCreate = () => {
         </S.ImgContentContainer>
         <S.ContentContainer>
           <S.ContentNameContainer>태그</S.ContentNameContainer>
-          <TagInput placeholder="입력 후 엔터를 누르면 태그 자동 입력 (최대 3개)" onTagsChange={setTags} />
+          <TagInput placeholder="입력 후 엔터를 누르면 태그 자동 입력 (최대 3개)" />
         </S.ContentContainer>
         <S.ImgContentContainer>
           <S.NameAndBtnContainer>
@@ -85,7 +84,6 @@ export const DiaryCreate = () => {
             </S.ToggleBtn>
           </S.ToggleBtnContainer>
         </S.ContentContainer>
-
         <S.BtnContainer>
           <div>
             <DefaultBtn text="작성" type={color === "" ? "disabled" : ""} onClick={handleSubmit} />
