@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-export const createGrass = () => {
+export const useCreateGrass = () => {
   const [color, setColor] = useState("");
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef();

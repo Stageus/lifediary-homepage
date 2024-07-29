@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const createPublic = () => {
+export const useCreatePublic = () => {
   const [isPublic, setIsPublic] = useState(false);
 
   const toggle = () => {

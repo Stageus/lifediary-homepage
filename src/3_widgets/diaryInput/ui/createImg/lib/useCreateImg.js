@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-export const createImg = () => {
+export const useCreateImg = () => {
   const [selectedFile, setSelectedFile] = useState([]);
   const fileInputRef = useRef(null);
 
