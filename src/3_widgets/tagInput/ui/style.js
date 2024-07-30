@@ -27,6 +27,10 @@ const TagInput = styled.input`
   font-size: ${({ theme }) => theme.fontSize.base};
   background-color: white;
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const S = {

@@ -6,7 +6,14 @@ export const useCheckInput = () => {
   const [isComposing, setIsComposing] = useState(false); // 한글 입력 중인지 여부를 추적하는 상태 추가
 
   const handleInputChange = (e) => {
-    const value = e.target.value.replace(/[\s\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\=\(\'\"\]]/g, "");
+    let value = e.target.value.replace(/[\s\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\=\(\'\"\]]/g, "");
+
+    if (value.length > 20) {
+      alert("태그는 최대 20자로 입력해주세요.");
+      value = value.slice(0, 20); // 최대 20자로 제한
+      setInputValue(value);
+    }
+
     setInputValue(value);
   };
 

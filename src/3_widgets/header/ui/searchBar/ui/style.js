@@ -14,9 +14,11 @@ const SearchIcon = styled.img.attrs({
 })`
   width: 20px;
   height: 20px;
-  position: absolute;
+  margin: 0 4px;
   right: 10px;
   cursor: pointer;
+  position: absolute;
+  background-color: white;
 `;
 
 export const S = {

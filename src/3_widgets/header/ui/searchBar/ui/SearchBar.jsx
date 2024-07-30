@@ -11,7 +11,7 @@ export const SearchBar = () => {
   return (
     <>
       <S.TagInputContainer>
-        <TagInput placeholder="검색태그를 입력해 주세요" onTagsChange={() => setTags()} />
+        <TagInput placeholder="검색어 입력 후 엔터를 누르면 태그 자동 입력 (최대 20자, 3개 )" />
         <S.SearchIcon onClick={getSearchContent} />
       </S.TagInputContainer>
     </>
