@@ -7,8 +7,8 @@ export const useFetch = () => {
   const baseFetch = async ( url, options, token ) => {
     try {
       
-      const { method = "GET", headers = "aplication/json", data = null } = options ?? {};
-
+      const { method = "GET", headers = "application/json", data = null } = options ?? {};
+  
       const requestInfo = {
         method,
         headers: {
@@ -16,7 +16,7 @@ export const useFetch = () => {
           ...(token && { token: token }),
         },
         ...(data && {
-          body: data instanceof FormData ? data : JSON.stringify( data ),
+          body: JSON.stringify( data ),
         }),
       };
 
