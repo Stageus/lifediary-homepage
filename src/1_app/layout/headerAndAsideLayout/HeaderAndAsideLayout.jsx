@@ -1,8 +1,11 @@
+// Npm
 import { Outlet } from "react-router-dom";
+// Slice
 import { S } from "./style"; 
-import { Header } from "@widgets/header";
-import { Aside } from "@widgets/aside";
-import { AlarmModal } from "@features/alarmModal";
+// Layer
+import { Header } from "@app/header";
+import { Aside } from "@app/aside";
+import { AlarmModal } from "@app/alarmModal";
 
 export const HeaderAndAsideLayout = ()=>{
     return(

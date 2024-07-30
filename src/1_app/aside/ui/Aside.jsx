@@ -2,9 +2,9 @@
 import { S } from "./style";
 import { useRoute } from "../model/useRoute";
 import { useCurrentPage } from "../model/useCurrentPage";
+import { SubscribeList } from "./subscribeList";
+import { ComplainAlarm  } from "./complainAlarm"; 
 // Layer
-import { ComplainAlarm  } from "@features/complainAlarm"; 
-import { SubscribeList } from "@features/subscribeList";
 import { useGetAuth } from "@features/auth";
 import { DefaultBtn } from "@shared/ui";
 

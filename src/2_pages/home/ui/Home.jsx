@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { S } from "./style";
 import defaultDiary1 from "../assets/defaultDiary1.png";
 import description from "../assets/description.png";
+import { Carousel } from "../ui/carousel";
+import { Grass } from "../ui/grass";
 // Layer
-import { Grass } from "@widgets/grass";
-import { Carousel } from "@widgets/carousel";
 import { useCookie } from "@shared/hook";
 import { DefaultBtn } from "@shared/ui";
 
