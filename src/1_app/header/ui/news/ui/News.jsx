@@ -2,9 +2,9 @@
 import { S } from "./style";
 import { useOpenModal } from "../model/useOpenModal";
 import { useGetNewNotice } from "../api/useGetNewNotice";
+import { NewsModal } from "./newsModal";
 // Layer
 import { DefaultBtn, Icon } from "@shared/ui";
-import { NewsModal } from "@features/newsModal";
 
 export const News = () => {
 

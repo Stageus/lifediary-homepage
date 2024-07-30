@@ -1,11 +1,13 @@
+// Npm
 import { useNavigate } from "react-router-dom";
-
+// Slice
 import { S } from "./style";
+import { News } from "../ui/news";
+// Layer
 import { DefaultBtn } from "@shared/ui";
-import { DiaryUpload } from "./diaryUpload";
-import { Logout } from "./logout";
-import { SearchBar } from "./searchBar";
-import { News } from "@widgets/news";
+import { HeaderDiaryUpload } from "@widgets/headerDiaryUpload";
+import { HeaderLogout } from "@widgets/headerLogout";
+import { SearchBar } from "@widgets/searchBar";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -15,9 +17,9 @@ export const Header = () => {
       <S.HeaderContainer>
         <S.Logo onClick={() => navigate("/")} />
         <SearchBar />
-        <DiaryUpload />
+        <HeaderDiaryUpload />
         <News />
-        <Logout />
+        <HeaderLogout />
         <S.BtnContainer>
           <DefaultBtn text="로그인" onClick={() => navigate("/login")} />
         </S.BtnContainer>
