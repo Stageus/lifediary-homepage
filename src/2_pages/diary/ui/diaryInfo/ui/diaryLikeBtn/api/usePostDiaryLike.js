@@ -3,7 +3,7 @@ import { useFetch, useCookie } from "@shared/hook";
 
 export const usePostDiaryLike = ( isLiked, likeCnt ) => {
     
-    const [ _, status, baseFetch ] = useFetch();
+    const [ fetchData, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
     const [ currentLike, setCurrentLike ] = useState( isLiked );
     const [ currentCount, setCurrentCount ] = useState( likeCnt );
@@ -17,22 +17,35 @@ export const usePostDiaryLike = ( isLiked, likeCnt ) => {
     }
 
     const postDiaryLike = ( diaryIdx ) => {
-        // 임시데이터(삭제예정)
-        changeLikeInfo();
-
-        // 임시주석
-        // baseFetch( `diary/${diaryIdx}/like`, {method: "POST"}, handleGetCookie() );
+        baseFetch( `diary/${diaryIdx}/like`, {method: "POST"}, handleGetCookie() );
     };
 
     useEffect(()=>{
+        if ( !fetchData ) return;
 
-        if(status === 200) return changeData();
-        if(status === 400) return console.log("유효성 검사 실패일경우");
-        if(status === 401) return console.log("토큰이 잘못된경우 (없는경우)");
-        if(status === 404) return console.log("대상 diaryIdx가 없는경우");
-        if(status === 500) return console.log("서버에러");
+        switch ( fetchData.status ) {
+            case 200:
+                changeLikeInfo();
+                break;
 
-    },[status])
+            case 400:
+                console.log("유효성 검사 실패일경우");
+                break;
+
+            case 401:
+                console.log("토큰이 잘못된경우 (없는경우)");
+                break;
+
+            case 404:
+                console.log("대상 diaryIdx가 없는경우");
+                break;
+
+            case 500:
+                console.log("서버에러");
+                break;
+        }
+
+    },[ fetchData ]);
     
     return [ currentLike, currentCount, postDiaryLike ];
 }
