@@ -8,6 +8,39 @@ const MyProfileContentContainer = styled.div`
   margin: 80px;
 `;
 
+const ProfileInfoContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
+const NicknameAndSubscribeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const ProfileImg = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 99px;
+`;
+
+const NicknameContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const Nickname = styled.p`
+  font-size: ${({ theme }) => theme.fontSize.x_large};
+  white-space: nowrap;
+`;
+
+const SubscribeInfo = styled.p`
+  font-size: ${({ theme }) => theme.fontSize.medium};
+`;
+
 const ProfileTabContainer = styled.div`
   display: flex;
   width: 100%;
@@ -42,6 +75,12 @@ const DefaultTabBtn = styled.div`
 
 export const S = {
   MyProfileContentContainer,
+  ProfileInfoContainer,
+  NicknameAndSubscribeContainer,
+  ProfileImg,
+  NicknameContainer,
+  Nickname,
+  SubscribeInfo,
   ProfileTabContainer,
   TabBtnContainer,
   ActiveTabBtn,

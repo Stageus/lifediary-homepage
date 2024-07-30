@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { S } from "./style";
-import { Header } from "@widgets/header";
+import { Header } from "@app/header";
 
 export const HeaderLayout = () => {
   return (

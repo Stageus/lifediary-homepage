@@ -1,52 +1,42 @@
-import { useState } from "react";
-
-import Profile from "@shared/assets/imges/profile.png";
+import { useState, useRef } from "react";
 
 export const useChangeImgBase = () => {
-  const [profileImg, setProfileImg] = useState(Profile);
+  const imageInputRef = useRef(null);
+  const [profileImg, setProfileImg] = useState(null);
   const [profileImgMessage, setProfileImgMessage] = useState("프로필을 선택해 주세요(jpg, jpeg, gif, png)");
   const [isProfileImgValid, setIsProfileImgValid] = useState(false);
 
   const handleChangeImgBase = (e) => {
     const file = e.target.files[0];
     const validExtensions = ["jpg", "jpeg", "gif", "png"];
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-    const maxSize = 10 * 1024 * 1024;
+    const fileExtension = file?.name.split(".").pop().toLowerCase();
+    const maxSize = 10 * 1024 * 1024; // 10MB
 
-    if (!e.target.files.length) {
-      setIsProfileImgValid(false);
-      setProfileImgMessage("파일을 선택해 주세요");
-      return;
-    }
+    switch (true) {
+      case !file:
+        setIsProfileImgValid(false);
+        setProfileImgMessage("파일을 선택해 주세요");
+        setProfileImg(null);
+        break;
 
-    if (!file) {
-      setIsProfileImgValid(false);
-      return;
-    }
+      case !validExtensions.includes(fileExtension):
+        setProfileImgMessage("파일 확장자가 올바르지 않습니다");
+        setIsProfileImgValid(false);
+        setProfileImg(null);
+        break;
 
-    if (!validExtensions.includes(fileExtension)) {
-      setProfileImgMessage("파일 확장자가 올바르지 않습니다");
-      setIsProfileImgValid(false);
-      return;
-    }
+      case file.size > maxSize:
+        setProfileImgMessage("파일 크기가 10MB 이하여야 합니다");
+        setIsProfileImgValid(false);
+        setProfileImg(null);
+        break;
 
-    if (file.size > maxSize) {
-      setProfileImgMessage("파일 크기가 10MB 이하여야 합니다");
-      setIsProfileImgValid(false);
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfileImg(reader.result);
-    };
-    reader.readAsDataURL(file);
-
-    if (file && validExtensions.includes(fileExtension) && file.size <= maxSize) {
-      setProfileImg(file);
-      setIsProfileImgValid(true);
+      default:
+        setProfileImg(file);
+        setIsProfileImgValid(true);
+        setProfileImgMessage("");
     }
   };
 
-  return [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid];
+  return [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef];
 };

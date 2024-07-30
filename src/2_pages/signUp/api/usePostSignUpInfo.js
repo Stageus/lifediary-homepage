@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useFetch, useCookie } from "@shared/hook";
 
 export const usePostSignUpInfo = () => {
-  const [signUpData, status, baseFetch] = useFetch();
+  const navigate = useNavigate();
+  const [fetchData, baseFetch] = useFetch();
   const { handleGetCookie } = useCookie();
 
   const postSignUpInfo = (profileImg, nickname, oauthGoogleId) => {
@@ -22,17 +25,21 @@ export const usePostSignUpInfo = () => {
   };
 
   useEffect(() => {
-    postSignUpInfo();
-  }, [signUpData]);
+    if (!fetchData) return;
 
-  useEffect(() => {
-    if (status === 400) {
+    if (fetchData.status === 200) {
+      alert("회원가입에 성공했습니다!");
+      navigate("/diary");
+    }
+
+    if (fetchData?.status === 400) {
       return console.log("유효성 검사 실패");
     }
-    if (status === 500) {
+
+    if (fetchData?.status === 500) {
       return console.log("서버 에러");
     }
-  }, [status]);
+  }, [fetchData]);
 
-  return [signUpData, status, baseFetch];
+  return [postSignUpInfo];
 };
