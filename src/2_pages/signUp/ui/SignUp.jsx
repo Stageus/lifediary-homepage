@@ -22,6 +22,7 @@ export const SignUp = () => {
     postSignUpInfo(profileImg, nickname, oauthGoogleId);
   };
 
+  // fetch함수로 api기능 테스트, useFetch로는 작동되지 않는 이유 찾아야 함
   // const postSignUpInfo = async () => {
   //   const formData = new FormData();
   //   formData.append("profileImg", profileImg);

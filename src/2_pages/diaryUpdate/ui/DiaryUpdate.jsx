@@ -1,23 +1,17 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { S } from "./style";
-import { createImg } from "../lib/createImg";
-import { createGrass } from "../lib/createGrass";
-import { createPublic } from "../lib/createPublic";
-import { useCheckTextLength } from "../lib/useCheckTextLength";
+import { CreateText } from "./createText";
+import { CreateImg } from "./createImg";
+import { CreateTag } from "./createTag";
+import { CreatePublic } from "./createPublic";
+import { useCreateGrass } from "../lib/useCreateGrass";
 
-import { DefaultBtn, Icon } from "@shared/ui";
-import { TagInput } from "@features/tagInput";
-import { ChromePicker } from "react-color";
+import { DefaultBtn } from "@shared/ui";
 
 export const DiaryUpdate = () => {
-  const [tags, setTags] = useState([]);
   const navigate = useNavigate();
-  const [checkTextLength] = useCheckTextLength(500);
-  const [fileInputRef, selectedFile, handleFileChange, handleButtonClick, removeImgPreview] = createImg();
-  const [pickerRef, color, showPicker, handleShowPicker, handleColorChange, handleRandomColor] = createGrass();
-  const [isPublic, toggle] = createPublic();
+  const [pickerRef, color, showPicker, handleShowPicker, handleColorChange, handleRandomColor] = useCreateGrass();
 
   const handleSubmit = () => {
     if (color === "") {
@@ -30,33 +24,9 @@ export const DiaryUpdate = () => {
   return (
     <>
       <S.DiaryCreateContainer>
-        <S.ContentContainer>
-          <S.ContentNameContainer>내용</S.ContentNameContainer>
-          <S.TextContent onChange={checkTextLength} placeholder="내용을 입력해주세요(최대 500자)" />
-        </S.ContentContainer>
-        <S.ImgContentContainer>
-          <S.NameAndBtnContainer>
-            <S.ContentNameContainer>이미지</S.ContentNameContainer>
-            <div>
-              <DefaultBtn text="선택(최대 3개)" onClick={handleButtonClick} />
-              <input type="file" hidden multiple onChange={handleFileChange} ref={fileInputRef} />
-            </div>
-          </S.NameAndBtnContainer>
-          <S.ImgPreviewContainer>
-            {selectedFile.map((file, index) => (
-              <S.ImgWithCancelIcon key={index}>
-                <S.CancelIconContainer onClick={() => removeImgPreview(index)}>
-                  <Icon type="cancel" color="red" />
-                </S.CancelIconContainer>
-                <S.ImgPreview src={URL.createObjectURL(file)} alt={`preview ${index}`} />
-              </S.ImgWithCancelIcon>
-            ))}
-          </S.ImgPreviewContainer>
-        </S.ImgContentContainer>
-        <S.ContentContainer>
-          <S.ContentNameContainer>태그</S.ContentNameContainer>
-          <TagInput placeholder="입력 후 엔터를 누르면 태그 자동 입력 (최대 3개)" onTagsChange={setTags} />
-        </S.ContentContainer>
+        <CreateText />
+        <CreateImg />
+        <CreateTag />
         <S.ImgContentContainer>
           <S.NameAndBtnContainer>
             <S.ContentNameContainer>
@@ -77,15 +47,7 @@ export const DiaryUpdate = () => {
             )}
           </div>
         </S.ImgContentContainer>
-        <S.ContentContainer>
-          <S.ContentNameContainer>공개</S.ContentNameContainer>
-          <S.ToggleBtnContainer onClick={toggle}>
-            <S.ToggleBtn $isToggled={isPublic}>
-              <S.ToggleSlider $isToggled={isPublic} />
-            </S.ToggleBtn>
-          </S.ToggleBtnContainer>
-        </S.ContentContainer>
-
+        <CreatePublic />
         <S.BtnContainer>
           <div>
             <DefaultBtn text="작성" type={color === "" ? "disabled" : ""} onClick={handleSubmit} />

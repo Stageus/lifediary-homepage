@@ -22,6 +22,7 @@ const ProfileInfoContainer = styled.div`
 `;
 
 const ProfileImgUploadLabel = styled.p`
+  text-align: center;
   font-size: ${({ theme }) => theme.fontSize.medium};
   color: ${({ theme }) => theme.highlight};
   cursor: pointer;

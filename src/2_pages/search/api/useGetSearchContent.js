@@ -51,7 +51,7 @@ export const useGetSearchContent = () => {
         tags: ["일상222", "일기테스트222"],
       },
       {
-        idx: 2,
+        idx: 3,
         thumbnailImg: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
         textContent: "오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...",
         nickname: "사용자2",
@@ -61,7 +61,7 @@ export const useGetSearchContent = () => {
         tags: ["일상222", "일기테스트222"],
       },
       {
-        idx: 2,
+        idx: 4,
         thumbnailImg: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
         textContent: "오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...",
         nickname: "사용자2",
@@ -71,7 +71,7 @@ export const useGetSearchContent = () => {
         tags: ["일상222", "일기테스트222"],
       },
       {
-        idx: 2,
+        idx: 5,
         thumbnailImg: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
         textContent: "오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...오늘의 두번째 일기...",
         nickname: "사용자2",
