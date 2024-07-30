@@ -6,6 +6,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 80px;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
   padding: 20px;
@@ -22,27 +23,13 @@ const Logo = styled.img.attrs({
   cursor: pointer;
 `;
 
-const ProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  border-radius: 99px;
-`;
-
-const RightElemContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
 const BtnContainer = styled.div`
-  white-space: nowrap;
+  box-shadow: 1px 1px 3px gray;
+  border-radius: 4px;
 `;
 
 export const S = {
   HeaderContainer,
   Logo,
-  ProfileImg,
-  RightElemContainer,
   BtnContainer,
 };

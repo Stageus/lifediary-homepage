@@ -3,7 +3,6 @@ import { RouterProvider } from "react-router-dom";
 import { Router } from "./Router.jsx";
 import { theme } from "./theme";
 import { GlobalStyle } from "./GlobalStyle";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export const App = () => {
   const style = {
@@ -13,12 +12,10 @@ export const App = () => {
 
   return (
     <>
-      <GoogleOAuthProvider clientId="1009079539109-7t2fm9taq0bhsroa1n5rbaeq9kb2fsvt.apps.googleusercontent.com">
-        <ThemeProvider theme={style}>
-          <GlobalStyle />
-          <RouterProvider router={Router} />
-        </ThemeProvider>
-      </GoogleOAuthProvider>
+      <ThemeProvider theme={style}>
+        <GlobalStyle />
+        <RouterProvider router={Router} />
+      </ThemeProvider>
     </>
   );
 };

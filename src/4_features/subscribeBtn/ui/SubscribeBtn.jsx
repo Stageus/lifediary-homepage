@@ -1,28 +1,28 @@
-import { S } from "./style";
-import { useModel } from "../model/useModel";
+// Slice
+import { usePostSubscribe } from "../api/usePostSubscribe";
+// Layer
 import { DefaultBtn } from "@shared/ui";
 
-export const SubscribeBtn = (props)=>{
+export const SubscribeBtn = ( props )=>{
+    
     const { isSubscribed, accountIdx } = props;
-    const {subscribe, onClickSubscribe} = useModel(isSubscribed, accountIdx);
+    const [ subscribe, postSubscribe ] = usePostSubscribe(isSubscribed);
 
     return(
         <>
-            <S.SubscribeBtn>
             {subscribe 
-            ? <DefaultBtn
-            text="구독중"
-            type="select"
-            size="medium"
-            onClick={onClickSubscribe}
-            />
-            :<DefaultBtn
-            text="구독"
-            size="medium"
-            onClick={onClickSubscribe}
-            />
+                ? <DefaultBtn
+                text="구독중"
+                type="select"
+                size="medium"
+                onClick={ () => postSubscribe(accountIdx) }
+                />
+                :<DefaultBtn
+                text="구독"
+                size="medium"
+                onClick={() => postSubscribe(accountIdx)}
+                />
             }
-            </S.SubscribeBtn>
         </>
     );
 }

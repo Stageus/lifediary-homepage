@@ -34,7 +34,7 @@ const DiaryContent = styled.div`
 // CommentPart _________________
 const CommentPart = styled.div`
     position: relative;
-    width: ${({$openModal}) => $openModal ? "400px" : "0px"};
+    width: ${({$openModal}) => $openModal ? "450px" : "0px"};
     background-color: ${({theme}) => theme.minor};
     border-radius: 10px;
     transition: width 0.3s ease-out;
@@ -58,6 +58,29 @@ const ButtonPart = styled.div`
     gap: 5px;
 `;
 
+const CommentBtn = styled.div`
+    width: 90px;
+    background-color: ${( {theme, $isOpen} )=> $isOpen ? theme.highlight : theme.minor};
+    color: ${( {theme, $isOpen} ) => $isOpen ? theme.white : theme.black};
+    border: 1px solid ${( {theme} )=> theme.highlight};
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: ${( {theme} ) => theme.fontSize.medium};
+    font-weight: 500;
+    box-shadow: 1px 1px 3px gray;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+`;
+
+const SimpleBtnWrap = styled.div`
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px gray;
+`;
+
+
 export const S = {
     DiaryInfo,
     ContentPart,
@@ -66,4 +89,6 @@ export const S = {
     CommentPart,
     Cancel,
     ButtonPart,
+    CommentBtn,
+    SimpleBtnWrap
 }

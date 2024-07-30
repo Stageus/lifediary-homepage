@@ -1,27 +1,47 @@
-import { useModel } from "../model/useModel";
+// Slice
 import { S } from "./style";
-import { DefaultBtn } from "@shared/ui";
+import { useRoute } from "../model/useRoute";
+import { useCurrentPage } from "../model/useCurrentPage";
+// Layer
 import { ComplainAlarm  } from "@features/complainAlarm"; 
 import { SubscribeList } from "@features/subscribeList";
+import { useGetAuth } from "@features/auth";
+import { DefaultBtn } from "@shared/ui";
 
 export const Aside = () => {
-  const {pathname, onClickRoute} = useModel();
+  
+    const [ userInfo ] = useGetAuth();
+    const { isRoute } = useCurrentPage();
+    const { onClickRoute } = useRoute();
+    
   return (
     <>
       <S.Aside>
         <S.BtnList>
-          <DefaultBtn 
-          text="홈"
-          onClick={()=>onClickRoute("/")}
-           />
-          <DefaultBtn 
-            text="둘러 보기"
-            onClick={()=>onClickRoute("diary")}
-            type={pathname === "/diary" ? "select" : null}
+
+          <S.BtnWrap>
+            <DefaultBtn 
+            text="홈"
+            onClick={ ()=>onClickRoute("/") }
              />
-          <ComplainAlarm/>
+          </S.BtnWrap>
+
+          <S.BtnWrap>
+            <DefaultBtn 
+              text="둘러 보기"
+              onClick={ ()=>onClickRoute("diary") }
+              type={ isRoute ? "select" : null }
+               />
+          </S.BtnWrap>
+
+          <S.BtnWrap>
+            { userInfo && userInfo.permission === 1 && <ComplainAlarm/>}
+          </S.BtnWrap>
         </S.BtnList>
-        <SubscribeList/>
+
+        <S.SubscribeListWrap>
+          { userInfo && <SubscribeList/> }
+        </S.SubscribeListWrap>
       </S.Aside>
     </>
   );

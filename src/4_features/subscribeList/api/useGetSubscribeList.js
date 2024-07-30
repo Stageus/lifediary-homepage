@@ -1,60 +1,79 @@
+// Npm
 import { useEffect, useState } from "react";
-import { createTestData } from "../service/createTestData";
+// Layer
 import { useFetch, useCookie } from "@shared/hook";
 import { useSubscribe } from "@shared/store";
 
 
-export const useGetSubscribeList = ()=>{
-    const [subscribeList, setSubscribeList] = useState([]);
-    const [fetchData, status, baseFetch] = useFetch();
-    const { handleGetCookie } = useCookie();
-    const isSubscribe = useSubscribe( state => state.value);
-    const [page, setPage] = useState(1);
+export const useGetSubscribeList = () => {
 
-    // 무한스크롤에 사용할 함수
-    const addPage = ()=>{
-        setPage(page + 1)
-    }
+    const [ fetchData, baseFetch ] = useFetch();
+    const { handleGetCookie } = useCookie();
+    const [ subscribeList, setSubscribeList ] = useState( null );
+    const [ isLoading, setIsLoading ] = useState( false ); 
+    const isSubscribe = useSubscribe( state => state.value );
+    const [ errorMessage, setErrorMessage ] = useState( null );
+    const [ pageNum, setPageNum ] = useState(1);
+
+    const mapper = ( resData ) => {
+        const subscribeList = resData.map( data => (
+            {
+                toAccountIdx : data.toAccountIdx,
+                profileImg : data.profileImg,
+                nickname : data.nickname
+            }
+        ));
+        return subscribeList;
+    };
 
     const getSubscribeList = ()=>{
-        
-        // 임시데이터 & 조건문
-        if(page === 1){
-            setSubscribeList(createTestData());
-        }else{
-            setSubscribeList([...subscribeList,...createTestData(page)]);
-        }
-        // 임시주석
-        // baseFetch(`subscription?page=${page}`,{},handleGetCookie());
-    }
+        if ( errorMessage ) return;
+        setIsLoading( true );
+        baseFetch(`subscription?page=${pageNum}`,{},handleGetCookie());
+    };
 
-    useEffect(()=>{
+    useEffect(() => {
         getSubscribeList();
-    },[isSubscribe,page])
+    },[isSubscribe]);
     
 
     useEffect(()=>{
-        if(status === 200){
-            if(page === 1){
-                setSubscribeList(fetchData);
-            }else{
-                setSubscribeList([...subscribeList,...fetchData]);
-            }
-            return ;
-        }
-        if(status === 400){
-            return console.log("유효성검사 실패");
-        }
-        if(status === 401){
-            return console.log("토큰이 잘못되거나 없는경우");
-        }
-        if(status === 404){
-            return console.log("더이상 구독 계정이 없음");
-        }
-        if(status === 500){
-            return console.log("서버에러");
-        }
-    },[status])
+        if ( !fetchData ) return;
+        setIsLoading( false );
 
-    return [subscribeList, addPage];
+        switch ( fetchData.status ) {
+            case 200:
+                setPageNum( pageNum + 1);
+                const mapperData = mapper( fetchData.data );
+
+                if ( !subscribeList ) return setSubscribeList( mapperData );
+                setSubscribeList([ ...subscribeList, ...mapperData ]);
+                break
+                
+            case 400:
+                // 재요청하는걸로
+                console.log("유효성검사 실패");
+                break
+
+            case 401:
+                // 회원에 대한 접근 안내로
+                console.log("토큰이 잘못되거나 없는경우");
+                break
+
+            case 404:
+                setErrorMessage("더이상 구독리스트가 존재하지 않아요")
+                break
+
+            case 500:
+                // 500 페이지로
+                console.log("서버에러");
+                break
+
+            default:
+                console.log("예상하지 못한경우")
+        }
+
+    },[ fetchData ]);
+
+    return [ getSubscribeList, subscribeList, isLoading, errorMessage ];
 }

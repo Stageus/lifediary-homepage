@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import logo from "@shared/assets/imges/logo.png";
+import googleLogo from "../assets/googleLogo.png";
 
 const PageContainer = styled.div`
   display: flex;
@@ -10,16 +11,14 @@ const PageContainer = styled.div`
 `;
 
 const LoginContainer = styled.div`
-  ${({ theme }) => `
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 60px;
-  border: 3px solid ${theme.major};
+  border: 3px solid ${({ theme }) => theme.major};
   border-radius: 10px;
   padding: 120px 80px;
   max-width: 480px;
-  `}
 `;
 
 const Logo = styled.img.attrs({
@@ -31,28 +30,45 @@ const Logo = styled.img.attrs({
 `;
 
 const LoginBtn = styled.button`
-  ${({ theme }) => `
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
   border-radius: 99px;
-  border: 1px solid ${theme.highlight};
-  background-color: ${theme.major};
-  font-size: ${theme.fontSize.base};
-  color: ${theme.highlight};
+  border: 1px solid ${({ theme }) => theme.highlight};
+  background-color: ${({ theme }) => theme.major};
+  font-size: ${({ theme }) => theme.fontSize.base};
+  color: ${({ theme }) => theme.highlight};
   cursor: pointer;
   white-space: nowrap;
   &::after {
     content: "구글 계정으로 로그인";
   }
+`;
 
-  @media (max-width: 375px) {
-    &::after {
-      content: "로그인";
-    }
+const GoogleLoginBtn = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 99px;
+  border: 1px solid ${({ theme }) => theme.highlight};
+  background-color: ${({ theme }) => theme.major};
+  font-size: ${({ theme }) => theme.fontSize.base};
+  color: ${({ theme }) => theme.highlight};
+  cursor: pointer;
+  white-space: nowrap;
+  &::after {
+    content: "구글 계정으로 로그인";
   }
-  `}
+`;
+
+const GoogleLogo = styled.img.attrs({
+  src: googleLogo,
+  alt: "googleLogo",
+})`
+  width: 20px;
+  height: 20px;
 `;
 
 export const S = {
@@ -60,4 +76,6 @@ export const S = {
   LoginContainer,
   Logo,
   LoginBtn,
+  GoogleLoginBtn,
+  GoogleLogo,
 };

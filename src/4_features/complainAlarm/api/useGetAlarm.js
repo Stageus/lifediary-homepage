@@ -1,42 +1,44 @@
+// Npm
 import { useEffect, useState } from "react";
+// Layer
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetAlarm = () => {
-    // 추후 false로 변경 -> 기본값
-    const [alarm, setAlarm] = useState(true);
-    const [fetchData, status, baseFetch] = useFetch();
+    
+    const [ fetchData, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
+    const [ isNew, setIsNew ] = useState( false );
 
-    const getAlarm = ()=>{
-        baseFetch("report/new",{},handleGetCookie());
-    }
+    const getAlarm = ()=> baseFetch("report/new",{},handleGetCookie());
 
-    useEffect(()=>{
-        // 임시주석
+    useEffect(() => {
         // getAlarm();
     },[])
 
-    useEffect(()=>{
-
-        if(status === 200){
-            setAlarm(fetchData.isNew);
-            return;
-        }
+    useEffect(() => {
+        if ( !fetchData ) return;
         
-        if(status === 401){
-            return console.log("토큰이 잘못되거나 없는경우");
+        switch ( fetchData.status ) {
+            case 200:
+                setIsNew(fetchData.data.isNew)
+                break;
+
+            case 401:
+                console.log("토큰이 잘못되거나 없는경우");
+                break;
+
+            case 403:
+                console.log("관리자가 아닌경우");
+                break;
+
+            case 500:
+                console.log("서버 에러");
+                break;
+            default:
+                console.log("예상하지못한 경우")
         }
 
-        if(status === 403){
-            return console.log("관리자가 아닌경우")
-        }
+    },[ fetchData ])
 
-        if(status === 500){
-            return console.log("서버 에러")
-        }
-        // 알림은 페이지가 새로고침시에만 발생시키기 때문에
-        // 의존성은 할당하지 않는다
-    },[])
-
-    return alarm;
+    return [ isNew ];
 };
