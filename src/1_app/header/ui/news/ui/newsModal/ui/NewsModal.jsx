@@ -32,7 +32,7 @@ export const NewsModal = () => {
             */}
             { isLoading ? <S.Loading>로딩중...</S.Loading> : null}
             
-            { errorMessage ?? <div>{ errorMessage }</div>}
+            { errorMessage && <div>{ errorMessage }</div>}
 
           </S.NewsModal>
         </>

@@ -1,7 +1,7 @@
 // Slice
 import { S } from "./style"; 
 import { Slider } from "./slider/ui";
-import { Comment } from "./comment/ui";
+import { Comment } from "./comment";
 import { useOpenModal } from "../model/useOpenModal";
 import { useClipBoard } from "../model/useClipBoard";
 import { DiaryLikeBtn } from "./diaryLikeBtn";
@@ -11,10 +11,10 @@ import { DefaultBtn } from "@shared/ui";
 import { Icon } from "@shared/ui";
 
 export const DiaryInfo = ( props )=>{
-
-    const { idx, imgContents, textContent, isLiked, likeCnt, commentCnt } = props.diary;
-    const { isOpenModal, onClickModal } = useOpenModal();
-    const { clipBoard } = useClipBoard();
+  
+  const { idx, imgContents, textContent, isLiked, likeCnt, commentCnt, isMine} = props.diary;
+  const { isOpenModal, onClickModal } = useOpenModal();
+  const { clipBoard } = useClipBoard();
     
     return (
         <S.DiaryInfo>
@@ -32,8 +32,8 @@ export const DiaryInfo = ( props )=>{
                 <S.CommentPart $openModal={ isOpenModal }>
                   <S.Cancel onClick={ onClickModal }>
                     <Icon size="30px" type="cancel" color="#FF6767" />
-                  </S.Cancel>
-                  <Comment/>
+                  </S.Cancel> 
+                  { isOpenModal ? <Comment likeCount={likeCnt} diaryIsMine={isMine} diaryIdx={idx}/> : null}
                 </S.CommentPart>
                 
                 <S.ButtonPart>

@@ -7,7 +7,13 @@ const Comment = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow: hidden;
+`;
+
+const CommentWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
 `;
 
 const TitleArea = styled.h2`
@@ -19,62 +25,15 @@ const ContentArea = styled.div`
     flex: 1 0 100px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
+    gap: 20px;
+    overflow-y: scroll;
 `;
 
-const ItemInfo = styled.div`
-    display: flex;
-    gap: 12px;
-`;
-
-const ImgWrap = styled.div`
-    flex: 0 0 34px;
-    & > img{
-        width: 100%;
-        border-radius: 50%;
-    }
-`;
-
-const ContentWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 5px; 
-`;
-
-const UserInfoWrap = styled.div`
-    display: flex;
-    gap: 10px;
-`;
-
-const UserInfo = styled.div`
-    display: flex;
-    gap: 10px;
-    color: ${( {theme} ) => theme.gray};
-    font-size: ${( {theme} ) => theme.fontSize.medium};
-`;
-
-const UserEditor = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: ${( {theme} ) => theme.highlight};
-    font-size: ${( {theme} ) => theme.fontSize.medium};
-    & > span {
-        cursor: pointer;
-    }
-`;
-
-const Content = styled.div`
-    /* background-color: gray; */
-`;
 
 const ReComment = styled.div`
     display: flex;
     gap: 12px;
 `;
-
-
 
 const InputArea = styled.div`
     display: flex;
@@ -103,15 +62,9 @@ const InputArea = styled.div`
 
 export const S = {
     Comment,
+    CommentWrap,
     TitleArea,
     ContentArea,
-    ItemInfo,
-    ImgWrap,
-    ContentWrap,
-    UserInfoWrap,
-    UserInfo,
-    UserEditor,
-    Content,
     ReComment,
     InputArea,
 };
