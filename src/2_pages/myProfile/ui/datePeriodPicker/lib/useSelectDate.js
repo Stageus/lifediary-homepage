@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 
+import { useDate } from "@shared/store";
+
 export const useSelectDate = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const { startDate, endDate, setStartDate, setEndDate } = useDate();
   const [startDateSelected, setStartDateSelected] = useState(false);
   const [endDateSelected, setEndDateSelected] = useState(false);
 

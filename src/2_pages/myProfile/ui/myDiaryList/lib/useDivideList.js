@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-//예시 데이터
+import { useDate, usePost } from "@shared/store";
+
 const posts = [
   { id: 1, date: new Date(2024, 6, 14), isPublic: false },
   { id: 2, date: new Date(2024, 6, 15), isPublic: true },
@@ -12,7 +13,10 @@ const posts = [
 ];
 
 export const useDivideList = () => {
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  const { startDate, endDate } = useDate();
+  const { filteredPosts, setFilteredPosts } = usePost();
+
+  // const [filteredPosts, setFilteredPosts] = useState([]);
 
   const formatDate = (date) => date.toLocaleDateString("ko-KR");
 
