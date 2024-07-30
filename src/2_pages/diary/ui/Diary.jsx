@@ -1,10 +1,10 @@
 // Slice
 import { S } from "./style";
 import { useModel } from "../model/useModel";
+import { DiaryInfo } from "../ui/diaryInfo";
+import { DiaryDeleteBtn } from "./diaryDeleteBtn";
 // Layer
-import { DiaryInfo } from "@widgets/diaryInfo";
 import { SubscribeBtn } from "@features/subscribeBtn";
-import { DiaryDeleteBtn } from "@features/diaryDeleteBtn";
 import { DefaultBtn } from "@shared/ui";
 import { parseTime } from "@shared/util";
 

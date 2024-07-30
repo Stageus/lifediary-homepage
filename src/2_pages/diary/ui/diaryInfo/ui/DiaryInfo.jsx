@@ -3,9 +3,9 @@ import { S } from "./style";
 import { Slider } from "./slider/ui";
 import { Comment } from "./comment/ui";
 import { useModel } from "../model/useModel";
+import { DiaryLikeBtn } from "./diaryLikeBtn";
+import { ComplainModal } from "./complainModal";
 // Layer
-import { DiaryLikeBtn } from "@features/diaryLikeBtn";
-import { ComplainModal } from "@features/complainModal";
 import { DefaultBtn } from "@shared/ui";
 import { Icon } from "@shared/ui";
 
