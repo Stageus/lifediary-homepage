@@ -14,9 +14,9 @@ const posts = [
   { id: 2, date: new Date(2024, 6, 15), isPublic: true },
   { id: 3, date: new Date(2024, 6, 16), isPublic: false },
   { id: 4, date: new Date(2024, 6, 16), isPublic: false },
-  { id: 5, date: new Date(2024, 6, 16), isPublic: false },
+  { id: 5, date: new Date(2024, 6, 16), isPublic: true },
   { id: 6, date: new Date(2024, 6, 16), isPublic: false },
-  { id: 7, date: new Date(2024, 6, 16), isPublic: false },
+  { id: 7, date: new Date(2024, 6, 16), isPublic: true },
 ];
 
 export const MyDiaryList = () => {
@@ -111,7 +111,7 @@ export const MyDiaryList = () => {
         {filteredPosts.map((post) => (
           <S.DiaryCard key={post.id}>
             <S.ThumbnailContainer>
-              <S.PublicSignContainer>{!post.isPublic ? "비공개" : "공개"}</S.PublicSignContainer>
+              <S.PublicSignContainer>{!post.isPublic ? <S.NameHighlight>비공개</S.NameHighlight> : "공개"}</S.PublicSignContainer>
               <img src={defaultDiary} alt="Diary thumbnail" />
             </S.ThumbnailContainer>
             <S.DateContainer>{formatDate(post.date)}</S.DateContainer>

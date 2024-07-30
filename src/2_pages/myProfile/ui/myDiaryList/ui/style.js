@@ -70,6 +70,10 @@ const DateContainer = styled.div`
   border-radius: 0 0 10px 10px;
 `;
 
+const NameHighlight = styled.span`
+  color: ${({ theme }) => theme.highlight};
+`;
+
 export const S = {
   DatePickerRangeContainer,
   DatePickerContainer,
@@ -81,4 +85,5 @@ export const S = {
   ThumbnailContainer,
   PublicSignContainer,
   DateContainer,
+  NameHighlight,
 };

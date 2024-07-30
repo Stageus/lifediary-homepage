@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { S } from "./style.js";
 
-import { MyDiaryList } from "@widgets/myDiaryList";
+import { MyDiaryList } from "./myDiaryList";
 import { SubscribeBtn } from "@features/subscribeBtn";
 import DefaultProfile from "@shared/assets/imges/profile.png";
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { S } from "./style.js";
 import { changeProfileNickname } from "../lib/changeProfileNickname.js";
 
-import { MyDiaryList } from "@widgets/myDiaryList";
+import { MyDiaryList } from "./myDiaryList";
 import { Icon, TextInput, DefaultBtn } from "@shared/ui";
 
 export const MyProfile = () => {
