@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 import { S } from "./style.js";
-import { changeProfileNickname } from "../lib/changeProfileNickname.js";
+import { changeProfileInfo } from "../lib/changeProfileInfo.js";
 
 import { MyDiaryList } from "./myDiaryList";
 import { Icon, TextInput, DefaultBtn } from "@shared/ui";
 
 export const MyProfile = () => {
   const [selectedTab, setSelectedTab] = useState("myDiaryTab");
-  const [imageInput, buttonType, inputType, nickname, profileImg, isEdit, handleChangeProfileImg, handleChangeImgBase, handleEditClick, handleNicknameChange, handleUploadClick, handleCancelClick] = changeProfileNickname();
+  const [imageInput, buttonType, inputType, nickname, profileImg, isEdit, handleChangeProfileImg, handleChangeImgBase, handleEditClick, handleNicknameChange, handleUploadClick, handleCancelClick] = changeProfileInfo();
 
   const handleTabBtnClick = (e) => {
     setSelectedTab(e);

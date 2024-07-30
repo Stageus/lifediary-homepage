@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import DefaultProfile from "@shared/assets/imges/profile.png";
 
-export const changeProfileNickname = () => {
+export const changeProfileInfo = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
   const [prevProfileImg, setPrevProfileImg] = useState(profileImg);
   const [isEdit, setIsEdit] = useState(false);
@@ -14,6 +14,7 @@ export const changeProfileNickname = () => {
 
   const handleEditClick = () => {
     setPrevNickname(nickname);
+    setPrevProfileImg(profileImg);
     setIsEdit(true);
   };
 
