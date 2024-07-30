@@ -1,10 +1,10 @@
 import { S } from "./style";
-import { useModel } from "../model/useSlider";
+import { useSlider } from "../model/useSlider";
 import { Icon, DynamicImage } from "@shared/ui";
 
 export const Slider = (props) => {
     const { sliderList } = props;
-    const { positionUnit, onClickLeft, onClickRight } = useModel(sliderList.length);
+    const { positionUnit, onClickLeft, onClickRight } = useSlider( sliderList.length );
 
   return (
     <>
