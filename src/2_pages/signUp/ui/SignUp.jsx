@@ -15,7 +15,7 @@ export const SignUp = () => {
   const { oauthGoogleId } = location.state;
   const [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef] = useChangeImgBase();
   const [handleCheckInputValue, nickname, inputType, btnMessage, isNicknameValid] = useCheckInputValue();
-  const [btnType, checkBtnType] = useChangeBtnType(isNicknameValid, isProfileImgValid);
+  const [btnType] = useChangeBtnType(isNicknameValid, isProfileImgValid);
   const [postSignUpInfo] = usePostSignUpInfo();
 
   const handleSignUp = () => {
