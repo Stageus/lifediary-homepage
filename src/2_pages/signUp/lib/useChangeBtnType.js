@@ -4,8 +4,15 @@ export const useChangeBtnType = (isNicknameValid, isProfileImgValid) => {
   const [btnType, setBtnType] = useState("disabled");
 
   const checkBtnType = () => {
-    if (isProfileImgValid && isNicknameValid) {
-      setBtnType("");
+    switch (true) {
+      case isProfileImgValid && isNicknameValid:
+        setBtnType("");
+        break;
+      case !isProfileImgValid || !isNicknameValid:
+        setBtnType("disabled");
+        break;
+      default:
+        break;
     }
   };
 
