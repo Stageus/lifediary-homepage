@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import DefaultProfile from "@shared/assets/imges/profile.png";
 
 export const changeProfileInfo = () => {
+  const [inputMessage, setInputMessage] = useState("");
   const [profileImg, setProfileImg] = useState(DefaultProfile);
   const [prevProfileImg, setPrevProfileImg] = useState(profileImg);
   const [isEdit, setIsEdit] = useState(false);
@@ -40,6 +41,7 @@ export const changeProfileInfo = () => {
 
     reader.onloadend = () => {
       setProfileImg(reader.result);
+      setButtonType("");
     };
 
     if (file) {
@@ -50,17 +52,28 @@ export const changeProfileInfo = () => {
   const handleNicknameChange = (e) => {
     const inputValue = e.target.value;
     setNickname(inputValue);
-  };
 
-  useEffect(() => {
-    if (nickname.length < 3) {
-      setInputType("error");
-      setButtonType("disabled");
-    } else {
-      setInputType("");
-      setButtonType("");
+    switch (true) {
+      case inputValue.length > 20:
+        setInputType("error");
+        setInputMessage("닉네임은 최대 20자 입니다.");
+        setButtonType("disabled");
+        break;
+
+      case inputValue.length < 3:
+        setInputType("error");
+        setInputMessage("닉네임은 최소 3자 이상입니다.");
+        setButtonType("disabled");
+        break;
+
+      default:
+        setInputType("");
+        setButtonType("");
+        setInputMessage("");
+        setButtonType("");
+        break;
     }
-  }, [nickname]);
+  };
 
   const handleUploadClick = () => {
     setNickname(nickname);
@@ -73,5 +86,5 @@ export const changeProfileInfo = () => {
     setIsEdit(false);
   };
 
-  return [imageInput, buttonType, inputType, nickname, profileImg, isEdit, handleChangeProfileImg, handleChangeImgBase, handleEditClick, handleNicknameChange, handleUploadClick, handleCancelClick];
+  return [inputMessage, imageInput, buttonType, inputType, nickname, profileImg, isEdit, handleChangeProfileImg, handleChangeImgBase, handleEditClick, handleNicknameChange, handleUploadClick, handleCancelClick];
 };
