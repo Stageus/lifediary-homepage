@@ -12,7 +12,7 @@ export const CreateImg = () => {
         <S.NameAndBtnContainer>
           <S.ContentNameContainer>이미지</S.ContentNameContainer>
           <div>
-            <DefaultBtn text="선택(최대 3개)" onClick={handleButtonClick} />
+            <DefaultBtn text="선택( jpg, jpeg, gif, png 파일만 가능, 최대 3개)" onClick={handleButtonClick} />
             <input type="file" hidden multiple onChange={handleFileChange} ref={fileInputRef} />
           </div>
         </S.NameAndBtnContainer>

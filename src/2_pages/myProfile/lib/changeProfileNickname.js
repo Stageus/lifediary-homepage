@@ -23,6 +23,18 @@ export const changeProfileNickname = () => {
 
   const handleChangeImgBase = (e) => {
     let file = e.target.files[0];
+
+    const allowedExtensions = ["jpg", "jpeg", "gif", "png"];
+
+    if (file) {
+      const fileExtension = file.name.split(".").pop().toLowerCase();
+
+      if (!allowedExtensions.includes(fileExtension)) {
+        alert("이미지는 jpg, jpeg, gif, png 형식만 지원합니다.");
+        return;
+      }
+    }
+
     let reader = new FileReader();
 
     reader.onloadend = () => {

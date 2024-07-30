@@ -6,6 +6,18 @@ export const useCreateImg = () => {
 
   const handleFileChange = (e) => {
     const files = e.target.files;
+
+    const allowedExtensions = ["jpg", "jpeg", "gif", "png"];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const extension = file.name.split(".").pop().toLowerCase();
+      if (!allowedExtensions.includes(extension)) {
+        alert("jpg, jpeg, gif, png 파일만 선택 가능합니다.");
+        return;
+      }
+    }
+
     if (files.length + selectedFile.length <= 3) {
       setSelectedFile([...selectedFile, ...files]);
     } else {

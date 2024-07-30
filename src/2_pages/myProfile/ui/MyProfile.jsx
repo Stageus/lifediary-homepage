@@ -24,7 +24,11 @@ export const MyProfile = () => {
               {profileImg && (
                 <S.ProfileImgUploadContainer onClick={handleChangeProfileImg}>
                   <S.ProfileImgUploadBtn src={profileImg} />
-                  <S.ProfileImgUploadLabel>프로필 수정</S.ProfileImgUploadLabel>
+                  <S.ProfileImgUploadLabel>
+                    프로필 수정
+                    <br />
+                    (jpg, jpeg, gif, png)
+                  </S.ProfileImgUploadLabel>
                 </S.ProfileImgUploadContainer>
               )}
               <S.NicknameAndSubscribeContainer>
