@@ -8,6 +8,7 @@ import { CreatePublic } from "./createPublic";
 import { useCreateGrass } from "../lib/useCreateGrass";
 
 import { DefaultBtn } from "@shared/ui";
+import { ChromePicker } from "react-color";
 
 export const DiaryCreate = () => {
   const navigate = useNavigate();
