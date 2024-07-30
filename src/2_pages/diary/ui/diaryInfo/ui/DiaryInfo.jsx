@@ -2,7 +2,8 @@
 import { S } from "./style"; 
 import { Slider } from "./slider/ui";
 import { Comment } from "./comment/ui";
-import { useModel } from "../model/useModel";
+import { useOpenModal } from "../model/useOpenModal";
+import { useClipBoard } from "../model/useClipBoard";
 import { DiaryLikeBtn } from "./diaryLikeBtn";
 import { ComplainModal } from "./complainModal";
 // Layer
@@ -10,8 +11,11 @@ import { DefaultBtn } from "@shared/ui";
 import { Icon } from "@shared/ui";
 
 export const DiaryInfo = ( props )=>{
+
     const { idx, imgContents, textContent, isLiked, likeCnt, commentCnt } = props.diary;
-    const { isOpenModal, onClickModal, clipBoard } = useModel();
+    const { isOpenModal, onClickModal } = useOpenModal();
+    const { clipBoard } = useClipBoard();
+    
     return (
         <S.DiaryInfo>
 
