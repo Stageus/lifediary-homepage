@@ -1,25 +1,24 @@
 // Slice
 import { S } from "./style";
-import { useModel } from "../model/useModel";
+import { useRoute } from "../model/useRoute";
+import { useGetDiaryList } from "../api/useGetDiaryList";
 import { DiaryInfo } from "../ui/diaryInfo";
 import { DiaryDeleteBtn } from "./diaryDeleteBtn";
 // Layer
 import { SubscribeBtn } from "@features/subscribeBtn";
 import { DefaultBtn } from "@shared/ui";
 import { parseTime } from "@shared/util";
+import { useScroll } from "@shared/hook";
 
 export const Diary = () => {
 
-  const { 
-    diaryList, 
-    onClickRoute,
-    onClickTimeRoute, 
-    scrollRef, 
-    onScrollNext } = useModel();
+  const [ diaryList, getDiaryList, isLoading, errorMessage] = useGetDiaryList();
+  const { onClickRoute, onClickTimeRoute } = useRoute();
+  const [ rootRef, watchRef ] = useScroll( getDiaryList );    
 
   return (
     <>
-      <S.Diary ref={ scrollRef } onScroll={ onScrollNext }>
+      <S.Diary ref={ rootRef }>
         {diaryList &&
           diaryList.map(( diary ) => {
             return (
@@ -67,6 +66,15 @@ export const Diary = () => {
               </S.ScrollItem>
             );
           })}
+
+          {diaryList && diaryList.length >= 10 
+                && <div ref={ watchRef }></div>
+          }
+
+          { isLoading ? <div>로딩중...</div> : null}
+
+          { errorMessage ?? <div>{ errorMessage }</div>}
+
       </S.Diary>
     </>
   );

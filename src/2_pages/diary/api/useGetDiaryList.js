@@ -1,34 +1,50 @@
-import { useState, useEffect } from "react";
+// Npm
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+// Layer
 import { useFetch, useCookie } from "@shared/hook";
-// 테스트 데이터
-import { createTestData } from "../service/createTestData";
 
 export const useGetDiaryList = () => {
-    const [fetchData, status, baseFetch] = useFetch();
+
+    const [ fetchData, baseFetch ] = useFetch();
     const { handleGetCookie } = useCookie();
     const { diaryidx } = useParams();
-    const [diaryList, setDiaryList] = useState(null);
-    const [page, setPage] = useState(1);
+    const [ diaryList, setDiaryList ] = useState( null );
+    const [ pageNum, setPageNum ] = useState(1);
+    const [ errorMessage, setErrorMessage ] = useState( null );
+    const [ isLoading, setIsLoading ] = useState( false );
 
-    const nextPage = () => setPage( page + 1 );
+    const mapper = ( resData ) => {
+        
+        const resDataWrap = resData.map( item => (
+            {
+                idx : item.idx,
+			    imgContents : item.imgContents,
+			    textContent : item.textContent,
+			    likeCnt : item.likeCnt,
+			    commentCnt : item.commentCnt,
+			    createdAt : item.createdAt,
+			    accountIdx : item.accountIdx,
+			    nickname : item.nickname,
+			    profileImg : item.profileImg,
+			    isSubscribed : item.isSubscribed,
+			    isLiked : item.isLiked,
+			    isMine : item.isMine,
+            }
+        ));
+
+        return resDataWrap;
+    }
 
     const getDiaryList = ( diaryIdx )=>{
+        if ( errorMessage ) return;
+        setIsLoading( true );
 
-        // 임시데이터 -------------
-        if ( diaryList ){
-            setDiaryList([...diaryList, ...createTestData()]);
+        if ( diaryIdx ) {
+            baseFetch(`diary/${diaryidx}?page=${pageNum}`,{},handleGetCookie());
             return;
         }
-        setDiaryList(createTestData());
-        // --------------------
-
-
-        // 임시주석
-        // if (diaryIdx) {
-        //     baseFetch(`diary/${diaryidx}?page=${page}`,{},handleGetCookie());
-        // }
-        // baseFetch(`diary?page=${page}`,{},handleGetCookie());
+        baseFetch(`diary?page=${pageNum}`,{},handleGetCookie());
     };
 
     useEffect(()=>{
@@ -37,32 +53,40 @@ export const useGetDiaryList = () => {
         } else{
             getDiaryList();
         }
-    },[page])
+    },[])
 
     useEffect(()=>{
-        if ( status === 200 ){
-            if ( diaryList ){
-                setDiaryList([...diaryList, ...fetchData]);
-                return;
-            }
-            setDiaryList(fetchData);
-        }
+        if ( !fetchData ) return;
+        setIsLoading( false );
 
-        if( status === 400 ){
-            return console.log("유효성검사 실패일경우")
-        }
+        switch ( fetchData.status ) {
+            case 200:
+                setPageNum( pageNum + 1 );
+                const mapperData = mapper( fetchData.data );
 
-        if( status === 404 ){
-            return console.log("페이지를 기입안햇을경우, 리소스가 없을경우")
-        }
+                if ( diaryList ) {
+                    setDiaryList([...diaryList, ...mapperData]);
+                    return;
+                }
+                setDiaryList(mapperData);
+                break;
 
-        if( status === 500 ){
-            return console.log("서버 에러")
+            case 400:
+                console.log("유효성검사 실패일경우");
+                break;
+
+            case 404:
+                if ( !pageNum ) return console.log("잘못되었을경우 공통모달로 처리")
+                setErrorMessage( "더이상 일기가 존재하지 않아요!" );
+                break;
+
+            case 500:
+                console.log("서버 에러");
+                break;
         }
-        
-    },[fetchData])
+    },[ fetchData ]);
 
     
 
-    return [diaryList, nextPage]
+    return [ diaryList, getDiaryList, isLoading, errorMessage ];
 }

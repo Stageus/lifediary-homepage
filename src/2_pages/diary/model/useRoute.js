@@ -1,12 +1,7 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetDiaryList } from "../api/useGetDiaryList";
-import { parseTime } from "@shared/util";
-import { useScroll } from "@shared/hook";
 
-export const useModel = ()=>{
-    const [diaryList, nextPage] = useGetDiaryList();
-    const [lastScroll, scrollRef, onScrollNext, onScrollReset] = useScroll();
+export const useRoute = () => {
+
     const navigate = useNavigate();
 
     const onClickRoute = ( isMine, accountIdx ) => {
@@ -26,15 +21,5 @@ export const useModel = ()=>{
         navigate(`/diaryUpload/${diaryIdx}`);
     };
 
-    useEffect(()=>{
-
-        if ( lastScroll ){
-            nextPage();
-            // onScrollReset();
-        }
-
-    },[lastScroll])
-
-
-    return { diaryList, onClickRoute, onClickTimeRoute, scrollRef, onScrollNext };
-};
+    return { onClickRoute, onClickTimeRoute }; 
+}
