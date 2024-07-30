@@ -1,11 +1,20 @@
+// Npm
+import { useState } from "react";
+// Slice
 import { S } from "./style";
-import { useModel } from "../model/useModel";
+import { useOpenModal } from "../model/useOpenModal";
+import { useValidation } from "../model/useValidation";
+import { usePostComplain } from "../api/usePostComplain";
+// Layer
 import { DefaultBtn } from "@shared/ui";
 
 export const ComplainModal = ( props ) => {
-    const { diaryidx } = props
-    const { isOpenModal, isText, onClickModal, validation, onClickSubmit} = useModel( diaryidx );
 
+    const { diaryidx } = props;
+    const { isOpenModal, onClickModal } = useOpenModal();
+    const { complainTextRef, isValidation, validation } = useValidation();
+    const [ onClickSubmit ] = usePostComplain( onClickModal );
+    
     return (
         <>
             <DefaultBtn
@@ -14,17 +23,18 @@ export const ComplainModal = ( props ) => {
             />
             { isOpenModal 
             ? <S.ComplainModal>
-                <S.ModalWrap $isText={isText}> 
+                <S.ModalWrap $isText={ isValidation }> 
                     <textarea
-                    onInput={ ( text ) => validation(text) }
+                    ref={ complainTextRef }
+                    onChange={ validation }
                     placeholder="신고 사유를 입력해주세요 (최소 5자 ~ 최대 300자)"
                     />
                     <S.ModalEditerWrap>
                         <DefaultBtn
                         text= "신고"
-                        type= { isText ? "select" : "disabled"}
+                        type= { isValidation ? "select" : "disabled"}
                         size= "medium"
-                        onClick= { () => onClickSubmit( diaryidx, isText)}
+                        onClick= { () => onClickSubmit( diaryidx, complainTextRef.current.value)}
                         />
                         <DefaultBtn
                         text= "취소"
