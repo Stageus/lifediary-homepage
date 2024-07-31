@@ -13,10 +13,12 @@ const posts = [
 ];
 
 export const LikeDiaryList = () => {
+  const publicPosts = posts.filter((post) => post.isPublic);
+
   return (
     <>
       <S.DiaryCardContainer>
-        {posts.map((post) => (
+        {publicPosts.map((post) => (
           <S.DiaryCard key={post.id}>
             <S.ThumbnailContainer>
               <img src={defaultDiary} alt="Diary thumbnail" />

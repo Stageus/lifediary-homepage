@@ -14,16 +14,6 @@ const ProfileInfoContainer = styled.div`
   gap: 12px;
 `;
 
-const SubscribeInfo = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.medium};
-`;
-
-const NicknameAndSubscribeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
 const ProfileImg = styled.img`
   width: 100px;
   height: 100px;
@@ -39,6 +29,16 @@ const NicknameContainer = styled.div`
 
 const Nickname = styled.p`
   font-size: ${({ theme }) => theme.fontSize.x_large};
+`;
+
+const NicknameAndSubscribeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const SubscribeInfo = styled.p`
+  font-size: ${({ theme }) => theme.fontSize.medium};
 `;
 
 const ProfileTabContainer = styled.div`
