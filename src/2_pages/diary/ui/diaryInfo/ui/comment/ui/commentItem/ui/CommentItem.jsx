@@ -25,7 +25,6 @@ export const CommentItem = ( {comment, diaryIsMine} ) => {
     reComment,
   } = comment;
 
-
   return (
     <>
       <S.ItemInfo>

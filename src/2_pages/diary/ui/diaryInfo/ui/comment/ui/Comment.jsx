@@ -1,9 +1,9 @@
 // Slice
 import { S } from "./style";
 import { CommentItem } from "./commentItem";
+import { CommentInput } from "./commentInput"
 import { useGetComment } from "../api/useGetComment";
 // Layer
-import { DefaultBtn } from "@shared/ui";
 import { useScroll } from "@shared/hook";
 
 export const Comment = ( props ) => {
@@ -11,7 +11,7 @@ export const Comment = ( props ) => {
   const { likeCount, diaryIsMine, diaryIdx } = props;
   const [ getComment, commentList, isLoading, errorMessage ] = useGetComment( diaryIdx );
   const [ rootRef, watchRef ] = useScroll( getComment );
-    
+      
   return (
     <>
       <S.Comment>
@@ -46,6 +46,7 @@ export const Comment = ( props ) => {
                   </S.CommentWrap>
               );
             })}
+
             { commentList && commentList?.count >= 10 
             && <div ref={ watchRef}></div>}
             <div ref={ watchRef}></div>
@@ -53,12 +54,7 @@ export const Comment = ( props ) => {
             { errorMessage && <div>{ errorMessage }</div>}
         </S.ContentArea>
 
-        <S.InputArea>
-          <input placeholder="댓글을 달아주세요" />
-          <div>
-            <DefaultBtn text="작성" size="medium" />
-          </div>
-        </S.InputArea>
+        <CommentInput diaryIdx={diaryIdx}/>
       </S.Comment>
     </>
   );
