@@ -20,6 +20,12 @@ const ProfileImg = styled.img`
   border-radius: 99px;
 `;
 
+const NicknameAndSubscribeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const NicknameContainer = styled.div`
   display: flex;
   align-items: center;
@@ -29,12 +35,6 @@ const NicknameContainer = styled.div`
 
 const Nickname = styled.p`
   font-size: ${({ theme }) => theme.fontSize.x_large};
-`;
-
-const NicknameAndSubscribeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 `;
 
 const SubscribeInfo = styled.p`
