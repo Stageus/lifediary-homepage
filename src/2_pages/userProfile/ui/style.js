@@ -14,12 +14,6 @@ const ProfileInfoContainer = styled.div`
   gap: 12px;
 `;
 
-const NicknameAndSubscribeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
 const ProfileImg = styled.img`
   width: 100px;
   height: 100px;
@@ -30,11 +24,17 @@ const NicknameContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 `;
 
 const Nickname = styled.p`
   font-size: ${({ theme }) => theme.fontSize.x_large};
-  white-space: nowrap;
+`;
+
+const NicknameAndSubscribeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 const SubscribeInfo = styled.p`
@@ -76,8 +76,8 @@ const DefaultTabBtn = styled.div`
 export const S = {
   MyProfileContentContainer,
   ProfileInfoContainer,
-  NicknameAndSubscribeContainer,
   ProfileImg,
+  NicknameAndSubscribeContainer,
   NicknameContainer,
   Nickname,
   SubscribeInfo,

@@ -18,7 +18,8 @@ export const useDivideList = () => {
 
   useEffect(() => {
     if (!startDate && !endDate) {
-      setFilteredPosts(posts);
+      const publicPosts = posts.filter((post) => post.isPublic);
+      setFilteredPosts(publicPosts);
     }
   }, []);
 

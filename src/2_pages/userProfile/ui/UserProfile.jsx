@@ -1,19 +1,16 @@
 import { useState } from "react";
 
 import { S } from "./style.js";
+import { UserDiaryList } from "./userDiaryList";
 
-import { MyDiaryList } from "./myDiaryList";
+import { DatePeriodPicker } from "@widgets/datePeriodPicker";
 import { SubscribeBtn } from "@features/subscribeBtn";
 import DefaultProfile from "@shared/assets/imges/profile.png";
 
 export const UserProfile = () => {
-  const [selectedTab, setSelectedTab] = useState("myDiaryTab");
+  const [selectedTab, setSelectedTab] = useState("userDiaryTab");
   const [profileImg, setProfileImg] = useState(DefaultProfile);
   const [nickname, setNickname] = useState("고양이");
-
-  const handleTabBtnClick = (e) => {
-    setSelectedTab(e);
-  };
 
   return (
     <>
@@ -29,9 +26,14 @@ export const UserProfile = () => {
           </S.NicknameAndSubscribeContainer>
         </S.ProfileInfoContainer>
         <S.ProfileTabContainer>
-          <S.TabBtnContainer onClick={() => handleTabBtnClick("myDiaryTab")}>{selectedTab === "myDiaryTab" ? <S.ActiveTabBtn>유저 일기</S.ActiveTabBtn> : <S.DefaultTabBtn>유저 일기</S.DefaultTabBtn>}</S.TabBtnContainer>
+          <S.TabBtnContainer onClick={() => setSelectedTab("userDiaryTab")}>{selectedTab === "userDiaryTab" ? <S.ActiveTabBtn>유저 일기</S.ActiveTabBtn> : <S.DefaultTabBtn>유저 일기</S.DefaultTabBtn>}</S.TabBtnContainer>
         </S.ProfileTabContainer>
-        {selectedTab === "myDiaryTab" ? <MyDiaryList /> : null}
+        {selectedTab === "userDiaryTab" && (
+          <>
+            <DatePeriodPicker />
+            <UserDiaryList />
+          </>
+        )}
       </S.MyProfileContentContainer>
     </>
   );
