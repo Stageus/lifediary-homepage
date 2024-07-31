@@ -1,15 +1,12 @@
 import { useState } from "react";
 
 import { S } from "./style.js";
-
-import { MyDiaryList } from "./myDiaryList";
-import { SubscribeBtn } from "@features/subscribeBtn";
-import DefaultProfile from "@shared/assets/imges/profile.png";
+import { UserDiaryList } from "./userDiaryList";
+import { DatePeriodPicker } from "./datePeriodPicker";
+import { ProfileInfo } from "./profileInfo";
 
 export const UserProfile = () => {
-  const [selectedTab, setSelectedTab] = useState("myDiaryTab");
-  const [profileImg, setProfileImg] = useState(DefaultProfile);
-  const [nickname, setNickname] = useState("고양이");
+  const [selectedTab, setSelectedTab] = useState("userDiaryTab");
 
   const handleTabBtnClick = (e) => {
     setSelectedTab(e);
@@ -18,20 +15,16 @@ export const UserProfile = () => {
   return (
     <>
       <S.MyProfileContentContainer>
-        <S.ProfileInfoContainer>
-          {profileImg && <S.ProfileImg src={profileImg} />}
-          <S.NicknameAndSubscribeContainer>
-            <S.NicknameContainer>
-              <S.Nickname>{nickname}</S.Nickname>
-              <SubscribeBtn />
-            </S.NicknameContainer>
-            <S.SubscribeInfo>구독자 100명, 작성 일기 100개</S.SubscribeInfo>
-          </S.NicknameAndSubscribeContainer>
-        </S.ProfileInfoContainer>
+        <ProfileInfo />
         <S.ProfileTabContainer>
-          <S.TabBtnContainer onClick={() => handleTabBtnClick("myDiaryTab")}>{selectedTab === "myDiaryTab" ? <S.ActiveTabBtn>유저 일기</S.ActiveTabBtn> : <S.DefaultTabBtn>유저 일기</S.DefaultTabBtn>}</S.TabBtnContainer>
+          <S.TabBtnContainer onClick={() => handleTabBtnClick("userDiaryTab")}>{selectedTab === "userDiaryTab" ? <S.ActiveTabBtn>유저 일기</S.ActiveTabBtn> : <S.DefaultTabBtn>유저 일기</S.DefaultTabBtn>}</S.TabBtnContainer>
         </S.ProfileTabContainer>
-        {selectedTab === "myDiaryTab" ? <MyDiaryList /> : null}
+        {selectedTab === "userDiaryTab" && (
+          <>
+            <DatePeriodPicker />
+            <UserDiaryList />
+          </>
+        )}
       </S.MyProfileContentContainer>
     </>
   );

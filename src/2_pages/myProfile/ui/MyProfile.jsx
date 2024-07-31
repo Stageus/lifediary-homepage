@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { S } from "./style.js";
 import { MyDiaryList } from "./myDiaryList";
+import { LikeDiaryList } from "./likeDiaryList";
 import { DatePeriodPicker } from "./datePeriodPicker/";
 import { ProfileInfo } from "./profileInfo";
 
@@ -26,7 +27,7 @@ export const MyProfile = () => {
             <MyDiaryList />
           </>
         )}
-        {selectedTab === "likeDiaryTab" && <MyDiaryList />}
+        {selectedTab === "likeDiaryTab" && <LikeDiaryList />}
       </S.MyProfileContentContainer>
     </>
   );

@@ -4,7 +4,7 @@ import { useDivideList } from "../lib/useDivideList";
 
 import defaultDiary from "@shared/assets/imges/defaultDiary.jpg";
 
-export const MyDiaryList = () => {
+export const UserDiaryList = () => {
   const [filteredPosts] = useDivideList();
 
   return (
@@ -13,7 +13,6 @@ export const MyDiaryList = () => {
         {filteredPosts.map((post) => (
           <S.DiaryCard key={post.id}>
             <S.ThumbnailContainer>
-              <S.PublicSignContainer>{!post.isPublic ? <S.NameHighlight>비공개</S.NameHighlight> : "공개"}</S.PublicSignContainer>
               <img src={defaultDiary} alt="Diary thumbnail" />
             </S.ThumbnailContainer>
             <S.DateContainer>{post.date.toLocaleDateString("ko-KR")}</S.DateContainer>

@@ -54,12 +54,6 @@ const ThumbnailContainer = styled.div`
   }
 `;
 
-const PublicSignContainer = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-`;
-
 const DateContainer = styled.div`
   display: flex;
   align-items: center;
@@ -68,10 +62,6 @@ const DateContainer = styled.div`
   height: 50px;
   border: ${({ theme }) => `3px solid ${theme.major}`};
   border-radius: 0 0 10px 10px;
-`;
-
-const NameHighlight = styled.span`
-  color: ${({ theme }) => theme.highlight};
 `;
 
 export const S = {
@@ -83,7 +73,5 @@ export const S = {
   DiaryCardContainer,
   DiaryCard,
   ThumbnailContainer,
-  PublicSignContainer,
   DateContainer,
-  NameHighlight,
 };
