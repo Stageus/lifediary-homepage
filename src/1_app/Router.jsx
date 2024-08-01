@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
-import { HeaderLayout, HeaderAndAsideLayout } from "./layout";
+import { Layout } from "./layout";
 import { Complain } from "@pages/complain";
 import { Diary } from "@pages/diary";
 import { DiaryCreate } from "@pages/diaryCreate";
@@ -15,10 +15,8 @@ import { paths } from "@shared/consts/paths";
 export const Router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path={paths.HOME} element={<HeaderLayout />}>
+      <Route path={"/"} element={<Layout />}>
         <Route index element={<Home />} />
-      </Route>
-      <Route path={paths.HOME} element={<HeaderAndAsideLayout />}>
         <Route path={paths.COMPLAIN} element={<Complain />} />
         <Route path={paths.DIARY} element={<Diary />} >
           <Route path=":diaryidx"/>

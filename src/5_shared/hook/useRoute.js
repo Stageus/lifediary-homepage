@@ -5,7 +5,7 @@ export const useRoute = () => {
 
     const navigate = useNavigate();
 
-    const homeRoute = () => navigate( paths.HOME );
+    const homeRoute = () => navigate( "/" );
     const complainRoute = ( pageNum ) => navigate( `${paths.COMPLAIN}?page=${pageNum}` );
     const diaryRoute = ( diaryIdx ) => {
         if ( diaryIdx ) return navigate( `${paths.DIARY}/${diaryIdx}` );
