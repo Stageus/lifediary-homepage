@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { S } from "./style";
 import defaultProfile from "@shared/assets/imges/profile.png";
 
@@ -11,6 +12,11 @@ import defaultProfile from "@shared/assets/imges/profile.png";
     
     2. 답글의 경우에수
       -  작성자라면 diaryIsMine(true): 수정, 삭제 보이기
+
+
+      수정을 누르면 input창이 나오는건 문제가 안되는데
+      답글을 눌렀을시 하나의 input창이 활성화 되며,
+      현재 유저에 대한 정보를 기반으로 답글 작성된게 눈에 보여야하는데
       
 */
 
@@ -24,6 +30,12 @@ export const CommentItem = ( {comment, diaryIsMine} ) => {
     isParent,
     reComment,
   } = comment;
+
+  const [ changeText, setChangeText ] = useState( null );
+
+  const onClickSet = () => {
+    setChangeText(textContent);
+  };
 
   return (
     <>
@@ -41,7 +53,7 @@ export const CommentItem = ( {comment, diaryIsMine} ) => {
               {/* 본인댓글이냐: isMine(true) -> 수정, 삭제 */}
               {isMine && (
                   <>
-                    <span>수정</span>
+                    <span onClick={onClickSet}>수정</span>
                     <span>삭제</span>
                   </>
                 )}
@@ -50,7 +62,7 @@ export const CommentItem = ( {comment, diaryIsMine} ) => {
               {diaryIsMine && isMine && reComment && <div>답글</div>}
             </S.UserEditor>
           </S.UserInfoWrap>
-          <p>{ textContent }</p>
+          { changeText ? <input value={changeText} onChange={ (e) => setChangeText(e.target.value)}/> : <p>{ textContent }</p>}
         </S.ContentWrap>
       </S.ItemInfo>
     </>
