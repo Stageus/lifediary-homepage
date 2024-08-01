@@ -18,7 +18,7 @@ export const usePostSignUpInfo = () => {
       "account",
       {
         method: "POST",
-        body: formData,
+        data: formData,
       },
       handleGetCookie()
     );
@@ -29,7 +29,7 @@ export const usePostSignUpInfo = () => {
 
     if (fetchData.status === 200) {
       alert("회원가입에 성공했습니다!");
-      navigate("/diary");
+      navigate("/");
     }
 
     if (fetchData?.status === 400) {
