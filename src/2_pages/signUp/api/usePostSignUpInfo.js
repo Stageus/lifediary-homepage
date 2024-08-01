@@ -18,16 +18,18 @@ export const usePostSignUpInfo = () => {
       "account",
       {
         method: "POST",
-        body: formData,
+        data: formData,
       },
       handleGetCookie()
     );
   };
 
   useEffect(() => {
-    if (fetchData?.status === 200) {
+    if (!fetchData) return;
+
+    if (fetchData.status === 200) {
       alert("회원가입에 성공했습니다!");
-      navigate("/diary");
+      navigate("/");
     }
 
     if (fetchData?.status === 400) {

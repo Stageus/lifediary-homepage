@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { S } from "./style";
 import { useChangeImgBase } from "../lib/useChangeImgBase";
@@ -12,14 +11,40 @@ import Profile from "@shared/assets/imges/profile.png";
 
 export const SignUp = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { oauthGoogleId } = location.state;
   const [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef] = useChangeImgBase();
   const [handleCheckInputValue, nickname, inputType, btnMessage, isNicknameValid] = useCheckInputValue();
-  const [btnType, checkBtnType] = useChangeBtnType(isNicknameValid, isProfileImgValid);
-  const [postSignUpInfo] = usePostSignUpInfo(profileImg, nickname);
+  const [btnType] = useChangeBtnType(isNicknameValid, isProfileImgValid);
+  const [postSignUpInfo] = usePostSignUpInfo();
 
-  useEffect(() => {
-    checkBtnType();
-  }, [isNicknameValid, isProfileImgValid]);
+  const handleSignUp = () => {
+    postSignUpInfo(profileImg, nickname, oauthGoogleId);
+  };
+
+  // fetch함수로 api기능 테스트, useFetch로는 작동되지 않는 이유 찾아야 함
+  // const postSignUpInfo = async () => {
+  //   const formData = new FormData();
+  //   formData.append("profileImg", profileImg);
+  //   formData.append("nickname", nickname);
+  //   formData.append("oauthGoogleId", oauthGoogleId);
+
+  //   try {
+  //     const response = await fetch("http://3.36.128.193/account", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       console.log("Signup successful:", data);
+  //     } else {
+  //       console.log("Signup failed:", response.status);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error occurred during signup:", error.message);
+  //   }
+  // };
 
   return (
     <>
@@ -43,7 +68,7 @@ export const SignUp = () => {
               </S.SignUpInfoNicknameInputContainer>
             </S.SignUpInfoNicknameContainer>
             <S.SignUpInfoBtnContainer>
-              <DefaultBtn type={btnType} text="작성" onClick={postSignUpInfo} />
+              <DefaultBtn type={btnType} text="작성" onClick={handleSignUp} />
               <DefaultBtn text="취소" onClick={() => navigate("/Login")} />
             </S.SignUpInfoBtnContainer>
           </S.SignUpInfoContainer>

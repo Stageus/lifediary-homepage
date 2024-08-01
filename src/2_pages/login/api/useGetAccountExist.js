@@ -19,7 +19,8 @@ export const useGetAccountExist = () => {
     if (fetchData.status === 200) {
       //계정이 없다면
       if (!fetchData.data.isAccountExist) {
-        navigate("/signup");
+        const oauthGoogleId = fetchData.data.oauthGoogleId;
+        navigate("/signup", { state: { oauthGoogleId } });
       } else {
         //계정이 있다면
         handleSetCookie("myCookie", fetchData.data.token);

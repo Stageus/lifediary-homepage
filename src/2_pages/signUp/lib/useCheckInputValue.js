@@ -27,16 +27,22 @@ export const useCheckInputValue = () => {
     const value = e.target.value;
     setNickname(value);
 
-    if (value.length > 20) {
-      setInputType("error");
-      setBtnMessage("닉네임은 최대 20자 입니다.");
-      setIsNicknameValid(false);
-    }
-
-    if (value && value.length <= 20) {
-      setInputType("");
-      setBtnMessage("");
-      setIsNicknameValid(true);
+    switch (true) {
+      case value.length > 20:
+        setInputType("error");
+        setBtnMessage("닉네임은 최대 20자 입니다.");
+        setIsNicknameValid(false);
+        break;
+      case value.includes(" ") || /[~!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./]/.test(value):
+        setInputType("error");
+        setBtnMessage("빈칸이나 특수기호는 사용할 수 없습니다.");
+        setIsNicknameValid(false);
+        break;
+      default:
+        setInputType("");
+        setBtnMessage("");
+        setIsNicknameValid(true);
+        break;
     }
   };
 

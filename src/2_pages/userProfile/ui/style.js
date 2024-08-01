@@ -42,6 +42,7 @@ const DefaultTabBtn = styled.div`
 
 export const S = {
   MyProfileContentContainer,
+
   ProfileTabContainer,
   TabBtnContainer,
   ActiveTabBtn,

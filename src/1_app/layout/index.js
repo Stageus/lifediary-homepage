@@ -1,2 +1,1 @@
-export { HeaderLayout } from "./headerLayout/HeaderLayout";
-export { HeaderAndAsideLayout} from "./headerAndAsideLayout/HeaderAndAsideLayout";
+export { Layout } from "./ui/Layout";
