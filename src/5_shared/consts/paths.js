@@ -1,5 +1,4 @@
 export const paths = {
-    HOME: "/",
     COMPLAIN: "complain",
     DIARY: "diary",
     DIARYCREATE: "diarycreate",
