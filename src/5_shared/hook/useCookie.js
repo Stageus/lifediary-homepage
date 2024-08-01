@@ -10,7 +10,7 @@ import { useCookies } from "react-cookie";
 */
 export const useCookie = () => {
 
-  const [ cookies, setCookie, removeCookie ] = useCookies(["myCookie"]);
+  const [ cookies, setCookie, removeCookie ] = useCookies();
   
   const cookieSet = ( name, value, period ) => {
 
