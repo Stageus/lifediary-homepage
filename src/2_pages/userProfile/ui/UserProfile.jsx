@@ -4,8 +4,6 @@ import { S } from "./style.js";
 import { UserDiaryList } from "./userDiaryList";
 import { UserProfileInfo } from "./userProfileInfo";
 
-import { DatePeriodPicker } from "@widgets/datePeriodPicker";
-
 export const UserProfile = () => {
   const [selectedTab, setSelectedTab] = useState("userDiaryTab");
 
@@ -18,7 +16,6 @@ export const UserProfile = () => {
         </S.ProfileTabContainer>
         {selectedTab === "userDiaryTab" && (
           <>
-            <DatePeriodPicker />
             <UserDiaryList />
           </>
         )}
