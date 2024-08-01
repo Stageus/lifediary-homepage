@@ -12,6 +12,7 @@ export const Carousel = () => {
     const { onClickRoute } = useRoute();
     const { postionUnit, onClickLeft , onClickRight } = usePostionUnit( diaryList?.length, nextPage );
 
+
   return (
     <>
       <S.Carousel>
