@@ -1,17 +1,16 @@
 // Slice
 import { S } from "./style";
 import { useRoute } from "../model/useRoute";
-import { useCurrentPage } from "../model/useCurrentPage";
 import { SubscribeList } from "./subscribeList";
 import { ComplainAlarm  } from "./complainAlarm"; 
 // Layer
 import { useGetAuth } from "@features/auth";
 import { DefaultBtn } from "@shared/ui";
 
-export const Aside = () => {
-  
+export const Aside = ( props ) => {
+
+    const { currentPage } = props;
     const [ userInfo ] = useGetAuth();
-    const { isRoute } = useCurrentPage();
     const { onClickRoute } = useRoute();
     
   return (
@@ -30,7 +29,7 @@ export const Aside = () => {
             <DefaultBtn 
               text="둘러 보기"
               onClick={ ()=>onClickRoute("diary") }
-              type={ isRoute ? "select" : null }
+              type={ currentPage ? "select" : null }
                />
           </S.BtnWrap>
 
