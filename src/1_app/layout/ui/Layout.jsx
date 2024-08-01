@@ -2,10 +2,11 @@
 import { Outlet, useLocation } from "react-router-dom";
 // Slice
 import { S } from "./style"; 
+import { AlarmModal } from "../ui/alarmModal";
+import { MessageModal } from "./messageModal";
 // Layer
 import { Header } from "@app/header";
 import { Aside } from "@app/aside";
-import { AlarmModal } from "@app/alarmModal";
 import { paths } from "@shared/consts/paths"; 
 
 export const Layout = ()=>{
@@ -15,6 +16,7 @@ export const Layout = ()=>{
     
     return(
         <S.Layout>
+            <MessageModal/>
             <S.header>
                 <Header/>
             </S.header>
