@@ -8,11 +8,11 @@ export const usePostSignUpInfo = () => {
   const [fetchData, baseFetch] = useFetch();
   const { handleGetCookie } = useCookie();
 
-  const postSignUpInfo = (profileImg, nickname) => {
+  const postSignUpInfo = (profileImg, nickname, oauthGoogleId) => {
     const formData = new FormData();
     formData.append("profileImg", profileImg);
     formData.append("nickname", nickname);
-    formData.append("oauthGoogleId", oauthGooglId);
+    formData.append("oauthGoogleId", oauthGoogleId);
 
     baseFetch(
       "account",
