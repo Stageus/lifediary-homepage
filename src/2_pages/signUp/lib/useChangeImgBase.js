@@ -10,7 +10,6 @@ export const useChangeImgBase = () => {
     const file = e.target.files[0];
     const validExtensions = ["jpg", "jpeg", "gif", "png"];
     const fileExtension = file?.name.split(".").pop().toLowerCase();
-    const maxSize = 10 * 1024 * 1024; // 10MB
 
     switch (true) {
       case !file:
@@ -25,7 +24,7 @@ export const useChangeImgBase = () => {
         setProfileImg(null);
         break;
 
-      case file.size > maxSize:
+      case file.size > 10 * 1024 * 1024:
         setProfileImgMessage("파일 크기가 10MB 이하여야 합니다");
         setIsProfileImgValid(false);
         setProfileImg(null);
