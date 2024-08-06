@@ -22,9 +22,10 @@ export const News = () => {
         ) : null}
 
         {/* 알림 버튼 */}
-        <S.NewsBtnWrap>
-          <DefaultBtn text="알림" onClick={ onClickOpen }/>
-        </S.NewsBtnWrap>
+        <DefaultBtn 
+        size="medium"
+        text="알림" 
+        onClick={ onClickOpen }/>
 
         {/* 모달 */}
         {isOpenModal 

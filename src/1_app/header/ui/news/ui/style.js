@@ -16,13 +16,8 @@ const NewsAlarm = styled.div`
     padding: 1px;
 `;
 
-const NewsBtnWrap = styled.div`
-    box-shadow: 1px 1px 3px gray;
-    border-radius: 4px;
-`;
 
 export const S = {
     News,
     NewsAlarm,
-    NewsBtnWrap,
 }
