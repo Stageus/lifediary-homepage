@@ -38,6 +38,7 @@ export const Header = () => {
             <S.profileArea onClick={()=>myProfileRoute()}>
               <ProfileTag/>
             </S.profileArea>
+
             <div>
               <DefaultBtn
               size="medium"
@@ -45,15 +46,18 @@ export const Header = () => {
               onClick={()=>diaryCreateRoute()}
               />
             </div>
+
             <div>
               <News />
             </div>
+
             <div>
               <DefaultBtn 
               size="medium"
               text="로그아웃" 
               onClick={() => setMessage("로그아웃 하시겠습니까?",logoutHandler)}/>
             </div>
+            
           </>
           : <div>
             <DefaultBtn

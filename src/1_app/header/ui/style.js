@@ -57,7 +57,7 @@ const menuArea = styled.div`
 `;
 
 const profileArea = styled.div`
-  width: 50px;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
