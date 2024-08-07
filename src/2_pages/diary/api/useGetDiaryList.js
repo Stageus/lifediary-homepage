@@ -5,7 +5,7 @@ import { useFetch, useCookie } from "@shared/hook";
 import { createTestData } from "../service/createTestData";
 
 export const useGetDiaryList = () => {
-    const [fetchData, status, baseFetch] = useFetch();
+    const [fetchData, baseFetch] = useFetch();
     const { handleGetCookie } = useCookie();
     const { diaryidx } = useParams();
     const [diaryList, setDiaryList] = useState(null);
