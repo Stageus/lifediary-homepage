@@ -1,16 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 
 import { S } from "./style";
 import { useGetSearchContent } from "../api/useGetSearchContent";
 
 export const Search = () => {
   const navigate = useNavigate();
-  const [fetchData] = useGetSearchContent();
+  // console.log("테스트");
+  
+  const [ searchParams ] = useSearchParams();
+  console.log(searchParams.get("tag"));
+  // const loaction = useLocation();
+  // console.log(loaction);
+  // const [fetchData] = useGetSearchContent();
 
   return (
     <>
       <S.SearchContents>
-        {fetchData.map((item) => (
+        {/* {fetchData.map((item) => (
           <S.SearchContentContainer key={item.idx}>
             <S.ContentInfoContainer>
               <S.UserInfoContainer onClick={() => navigate("/myProfile")}>
@@ -30,7 +36,7 @@ export const Search = () => {
               <p>{item.textContent}</p>
             </S.TextContentContainer>
           </S.SearchContentContainer>
-        ))}
+        ))} */}
       </S.SearchContents>
     </>
   );

@@ -7,11 +7,12 @@ const DefaultBtn = styled.button`
     border-width: 1px;
     border-style: solid;
     cursor: pointer;
-    color: ${({type, theme}) => type ? theme.white : theme.highlight};
+    color: ${({$type, theme}) => $type ? theme.white : theme.highlight};
     white-space: nowrap;
+    box-shadow: ${({$shadow}) => $shadow ? "1px 1px 3px gray" : "none"};
 
-    ${({size, theme})=>{
-        switch(size){
+    ${({$size, theme})=>{
+        switch($size){
             case "Xsmail":
                 return`
                     padding: 2px 4px;
@@ -35,8 +36,8 @@ const DefaultBtn = styled.button`
         }
     }}
     
-    ${({type,theme}) => {
-        switch(type) {
+    ${({$type,theme}) => {
+        switch($type) {
             case "select":
                 return `
                     background-color:${theme.highlight};
