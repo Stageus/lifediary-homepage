@@ -10,7 +10,8 @@ import { MyProfile } from "@pages/myProfile";
 import { Search } from "@pages/search";
 import { SignUp } from "@pages/signUp";
 import { UserProfile } from "@pages/userProfile";
-import { NotFound } from "@pages/notFound"
+import { NotFound } from "@pages/errorNotFound";
+import { Server } from "@pages/errorServer";
 import { paths } from "@shared/consts/paths";
 
 export const Router = createBrowserRouter(
@@ -31,6 +32,7 @@ export const Router = createBrowserRouter(
       </Route>
       <Route path={paths.LOGIN} element={<Login />} />
       <Route path={paths.SIGNUP} element={<SignUp />} />
+      <Route path={"server"} element={<Server/>}/>
     </>
   )
 );
