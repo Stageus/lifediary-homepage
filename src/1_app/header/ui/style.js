@@ -25,57 +25,6 @@ const logoArea = styled.div`
 `;
 const searchArea = styled.div`
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: white;
-  border-radius: 8px;
-  height: 40px;
-  border: 1px solid ${({ theme }) => theme.major};
-  padding: 0 10px;
-
-  & > svg {
-    cursor: pointer;
-  };
-`;
-
-const tagList = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`;
-
-const tag = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  margin: 0 5px;
-
-  & > input {
-    width: fit-content;
-    border: none;
-    outline: none;
-  }
-
-
-`;
-
-const search = styled.div`
-  flex: 1;
-  font-size: 14px;
-
-& > input {
-    background-color: transparent;
-    flex: 1;
-    padding: 0;
-    border: none;
-    outline: none;
-  };
-
-  & > span {
-    color: ${({theme}) => theme.gray};
-  }
 `;
 
 const menuArea = styled.div`
@@ -97,9 +46,6 @@ export const S = {
   Header,
   logoArea,
   searchArea,
-  tagList,
-  tag,
-  search,
   menuArea,
   profileArea,
 };
