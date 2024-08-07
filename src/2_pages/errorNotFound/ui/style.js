@@ -15,10 +15,6 @@ const notFound = styled.div`
         width: 300px;
         height: 300px;
     }
-
-    & > span {
-        
-    }
 `;
 
 export const S = {
