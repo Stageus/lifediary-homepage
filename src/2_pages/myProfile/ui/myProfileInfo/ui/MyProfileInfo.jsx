@@ -1,9 +1,9 @@
-import { S } from "./style";
+import { S } from "./style.js";
 
 import { Icon, TextInput, DefaultBtn } from "@shared/ui";
 import { changeProfileInfo } from "../lib/changeProfileInfo.js";
 
-export const ProfileInfo = () => {
+export const MyProfileInfo = () => {
   const [inputMessage, imageInput, buttonType, inputType, nickname, profileImg, isEdit, handleChangeProfileImg, handleChangeImgBase, handleEditClick, handleNicknameChange, handleUploadClick, handleCancelClick] = changeProfileInfo();
 
   return (
