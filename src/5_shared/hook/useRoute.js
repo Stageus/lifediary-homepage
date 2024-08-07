@@ -18,6 +18,7 @@ export const useRoute = () => {
     const userProfileRoute = ( accountIdx ) => navigate( `${paths.USERPROFILE}/${accountIdx}` );
     const loginRoute = () => navigate( paths.LOGIN );
     const signupRoute = () => navigate( paths.SIGNUP );
+    const notFoundRoute = ( message ) => navigate("/not-found",{state: message})
 
     return { 
         homeRoute,
@@ -30,5 +31,6 @@ export const useRoute = () => {
         userProfileRoute,
         loginRoute,
         signupRoute,
+        notFoundRoute,
      };
 }

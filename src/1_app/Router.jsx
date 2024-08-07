@@ -10,6 +10,7 @@ import { MyProfile } from "@pages/myProfile";
 import { Search } from "@pages/search";
 import { SignUp } from "@pages/signUp";
 import { UserProfile } from "@pages/userProfile";
+import { NotFound } from "@pages/notFound"
 import { paths } from "@shared/consts/paths";
 
 export const Router = createBrowserRouter(
@@ -26,6 +27,7 @@ export const Router = createBrowserRouter(
         <Route path={paths.SEARCH} element={<Search />} />
         <Route path={paths.MYPROFILE} element={<MyProfile />} />
         <Route path={`${paths.USERPROFILE}/:accountIdx`} element={<UserProfile />} />
+        <Route path={"not-found"} element={<NotFound/>}/>
       </Route>
       <Route path={paths.LOGIN} element={<Login />} />
       <Route path={paths.SIGNUP} element={<SignUp />} />
