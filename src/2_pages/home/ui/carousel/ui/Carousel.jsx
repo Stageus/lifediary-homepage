@@ -4,7 +4,7 @@ import { useRoute } from "../model/useRoute";
 import { usePostionUnit } from "../model/usePostionUnit";
 import { useGetDiaryList } from "../api/useGetDiaryList";
 // Layer
-import { Icon, DynamicImage } from "@shared/ui";
+import { Icon, Thumbnail } from "@shared/ui";
 
 export const Carousel = () => {
 
@@ -34,12 +34,12 @@ export const Carousel = () => {
                         onClick={ ()=>onClickRoute( diary.idx ) }
                         >
                           <S.ThumbnailImgWrap>
-                            <DynamicImage src={ diary.thumbnailImg }/>
+                            <Thumbnail src={ diary.thumbnailImg }/>
                           </S.ThumbnailImgWrap>
 
                           <S.UserInfo>
                             <S.ProfileImgWrap>
-                              <DynamicImage src={ diary.profileImg }/>
+                              <Thumbnail src={ diary.profileImg }/>
                             </S.ProfileImgWrap>
 
                             <span>{ diary.nickname }</span>

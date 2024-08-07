@@ -1,14 +1,14 @@
 // Slice
 import { S } from "./style";
-import profileImg from "../assets/profile.png";
+import profileImg from "./assets/profile.png";
 
-export const ProfileTag = ( props ) => {
+export const Profile = ( props ) => {
 
     const { img } = props;
     
     return(
         <S.ProfileTag
-        src={ img ?? profileImg } 
+        src={ img ?? profileImg }
         alt="프로필 이미지"/>
     );
 }

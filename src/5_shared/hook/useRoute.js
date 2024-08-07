@@ -13,7 +13,7 @@ export const useRoute = () => {
     };
     const diaryCreateRoute = () => navigate( paths.DIARYCREATE );
     const diaryUpdateRoute = ( diaryIdx ) => navigate( `${paths.DIARYUPDATE}/${diaryIdx}` );
-    const searchRoute = ( tags ) => navigate( `${paths.SEARCH}?page=1&tag=${tags}` );
+    const searchRoute = ( tags ) => navigate( `${paths.SEARCH}?tag=${tags}` );
     const myProfileRoute = () => navigate( paths.MYPROFILE );
     const userProfileRoute = ( accountIdx ) => navigate( `${paths.USERPROFILE}/${accountIdx}` );
     const loginRoute = () => navigate( paths.LOGIN );

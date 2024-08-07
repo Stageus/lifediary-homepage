@@ -3,7 +3,7 @@ import { S } from "./style";
 import loadingImg  from "../../assets/imges/loading.gif";
 import preparingImg from "../../assets/imges/defaultDiary.jpg";
 
-export const DynamicImage = (props)=>{
+export const Thumbnail = (props)=>{
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const { src } = props;

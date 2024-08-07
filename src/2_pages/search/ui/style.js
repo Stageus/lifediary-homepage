@@ -1,80 +1,106 @@
 import styled from "styled-components";
 
-const SearchContents = styled.div`
+const search = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 80px;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 12px;
+  
 `;
 
-const SearchContentContainer = styled.div`
-  display: flex;
-  padding: 8px;
-  gap: 8px;
+const diary = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 `;
 
-const ContentInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 120px;
-`;
-
-const UserInfoContainer = styled.div`
+const headerArea = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
+  gap: 10px;
 `;
 
-const ProfileImgContainer = styled.div`
-  width: 50px;
-  height: 50px;
-`;
-
-const ProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 99px;
-`;
-
-const DiaryInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const ThumbnailImgContainer = styled.div`
-  width: 300px;
-  height: 240px;
-  border-radius: 10px;
+const accountImgWrap = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   overflow: hidden;
-  cursor: pointer;
 `;
 
-const ThumbnailImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+const accountName = styled.span`
+  font-size: 14px;
+  color: ${({theme}) => theme.black};
 `;
 
-const TextContentContainer = styled.div`
+const createAt = styled.div`
+  font-size: ${({theme}) => theme.fontSize.medium};
+  color: ${({theme}) => theme.gray};
+`;
+
+const mainArea = styled.div`
+  display: flex;
+  gap: 6px;
+`;
+
+const diaryImgWrap = styled.div`
   width: 300px;
   height: 240px;
-  padding: 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: ${({ theme }) => `3px solid ${theme.major}`};
 `;
+
+const contentWrap = styled.div`
+  width: 300px;
+  height: 240px;
+  border: 2px solid ${({theme}) => theme.major};
+  border-radius: 8px;
+  padding: 10px;
+  overflow-y: scroll;
+
+  ${({$isContent}) => !$isContent && `
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    color: gray;
+  `}
+`;
+
+const footerArea = styled.div`
+  flex: 1;
+  display: flex;
+  gap: 6px;
+`;
+
+const likeWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 200px;
+`;
+
+const tagWrap = styled.div`
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  color: #ff9800;
+  font-weight: bold;
+  font-style: italic;
+  gap: 4px;
+  flex-wrap: wrap;
+`;
+
 
 export const S = {
-  SearchContents,
-  SearchContentContainer,
-  ContentInfoContainer,
-  UserInfoContainer,
-  ProfileImgContainer,
-  ProfileImg,
-  DiaryInfoContainer,
-  ThumbnailImgContainer,
-  ThumbnailImg,
-  TextContentContainer,
+  search,
+  diary,
+  headerArea,
+  accountImgWrap,
+  accountName,
+  createAt,
+  mainArea,
+  diaryImgWrap,
+  contentWrap,
+  footerArea,
+  likeWrap,
+  tagWrap
 };

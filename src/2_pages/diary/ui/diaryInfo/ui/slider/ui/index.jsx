@@ -1,6 +1,6 @@
 import { S } from "./style";
 import { useModel } from "../model/useModel";
-import { Icon, DynamicImage } from "@shared/ui";
+import { Icon, Thumbnail } from "@shared/ui";
 
 export const Slider = (props) => {
     const {sliderList} = props;
