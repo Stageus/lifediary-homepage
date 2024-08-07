@@ -4,9 +4,9 @@ const search = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 40px;
   height: 100%;
-  padding: 12px;
+  padding: 20px;
   
 `;
 

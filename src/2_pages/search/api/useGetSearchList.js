@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 // Layer
 import { useFetch } from "@shared/hook/useFetch";
+import { useRoute } from "@shared/hook/useRoute";
 
 export const useGetSearchList = () => {
 
@@ -11,6 +12,7 @@ export const useGetSearchList = () => {
   const [ fetchData, baseFetch ] = useFetch();
   const [ pageNum, setPageNume ] = useState( 1 );
   const [ searchParams ] = useSearchParams();
+  const { notFoundRoute, serverRoute } = useRoute();
 
   const mapper = ( resData ) => {
     
@@ -48,13 +50,14 @@ export const useGetSearchList = () => {
         setDiaryList( mapper( fetchData.data ) );
         break;
       case 400:
+        // 처리 대기
         console.log("유효성 검사 실패일경우");
         break;
       case 404:
-        console.log("페이지를 기입 안했을경우, 더 이상 일기 리소스가 없을경우");
+        notFoundRoute("등록되어있는 일기가 존재하지 않습니다")
         break;
       case 500:
-        console.log("서버에러");
+        serverRoute()
         break;
     };
   }, [fetchData]);
