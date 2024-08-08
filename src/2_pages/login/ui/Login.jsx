@@ -4,6 +4,7 @@ import { useGetAccountExist } from "../api/useGetAccountExist";
 import { useGetGoogleUrl } from "../api/useGetGoogleUrl";
 // Layer
 import { useRoute } from "@shared/hook";
+import logo from "@shared/assets/img/logo.png";
 
 
 export const Login = () => {
@@ -15,7 +16,9 @@ export const Login = () => {
   return (
     <S.PageContainer>
       <S.LoginContainer>
-        <S.Logo onClick={ homeRoute } />
+        <S.Logo
+          src={logo}
+         onClick={ homeRoute } />
         <S.GoogleLoginBtn onClick={onClickGetUrl}>
           <S.GoogleLogo />
         </S.GoogleLoginBtn>

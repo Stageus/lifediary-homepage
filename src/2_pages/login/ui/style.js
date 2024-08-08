@@ -1,6 +1,4 @@
 import styled from "styled-components";
-
-import logo from "@shared/assets/imges/logo.png";
 import googleLogo from "../assets/googleLogo.png";
 
 const PageContainer = styled.div`
@@ -21,10 +19,7 @@ const LoginContainer = styled.div`
   max-width: 480px;
 `;
 
-const Logo = styled.img.attrs({
-  src: logo,
-  alt: "logo",
-})`
+const Logo = styled.img`
   width: 160px;
   border-radius: 10px;
 `;
