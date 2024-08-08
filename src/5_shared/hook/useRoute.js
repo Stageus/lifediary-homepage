@@ -13,13 +13,15 @@ export const useRoute = () => {
     };
     const diaryCreateRoute = () => navigate( paths.DIARYCREATE );
     const diaryUpdateRoute = ( diaryIdx ) => navigate( `${paths.DIARYUPDATE}/${diaryIdx}` );
-    const searchRoute = ( tags ) => navigate( `${paths.SEARCH}?tag=${tags}` );
+    const searchRoute = ( tags ) => {
+        const encodedTags = tags.map(tag => encodeURIComponent(tag));
+        navigate( `${paths.SEARCH}?tags=${encodedTags}` );
+    }
     const myProfileRoute = () => navigate( paths.MYPROFILE );
     const userProfileRoute = ( accountIdx ) => navigate( `${paths.USERPROFILE}/${accountIdx}` );
     const loginRoute = () => navigate( paths.LOGIN );
     const signupRoute = () => navigate( paths.SIGNUP );
-    const notFoundRoute = ( message ) => navigate("/not-found",{state: message});
-    const serverRoute = () => navigate("/server");
+    const errorRoute = ( status, message ) => navigate(`/${status}`, {state:{status, message}});
 
     return { 
         homeRoute,
@@ -32,7 +34,6 @@ export const useRoute = () => {
         userProfileRoute,
         loginRoute,
         signupRoute,
-        notFoundRoute,
-        serverRoute,
+        errorRoute,
      };
 }

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-const server = styled.div`
-
+const error = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,9 +15,13 @@ const server = styled.div`
         width: 300px;
         height: 300px;
     }
+`;
 
+const btnWrap = styled.div`
+    padding: 10px;
 `;
 
 export const S = {
-    server,
-};
+    error,
+    btnWrap,
+}
