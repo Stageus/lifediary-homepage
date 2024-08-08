@@ -21,7 +21,7 @@ export const Header = () => {
 
   return (
     <S.Header>
-      <S.logoArea onClick={() => homeRoute()}>
+      <S.logoArea onClick={homeRoute}>
         <img src={logo} />
       </S.logoArea>
       <S.searchArea>
@@ -30,7 +30,7 @@ export const Header = () => {
       <S.menuArea>
         {cookieGet("token") ? (
           <>
-            <S.profileArea onClick={() => myProfileRoute()}>
+            <S.profileArea onClick={myProfileRoute}>
               <Profile />
             </S.profileArea>
 
@@ -38,7 +38,7 @@ export const Header = () => {
               <DefaultBtn
                 size="medium"
                 text="일기업로드"
-                onClick={() => diaryCreateRoute()}
+                onClick={diaryCreateRoute}
               />
             </div>
 
@@ -61,7 +61,7 @@ export const Header = () => {
             <DefaultBtn
               size="medium"
               text="로그인"
-              onClick={() => loginRoute()}
+              onClick={loginRoute}
             />
           </div>
         )}
