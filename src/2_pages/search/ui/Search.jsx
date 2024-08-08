@@ -10,7 +10,7 @@ export const Search = () => {
 
   return (
     <S.search>
-      {diaryList ? diaryList?.map((diary) => {
+      {diaryList ? diaryList.map((diary) => {
         return (
           <S.diary key={diary.idx}>
             <S.headerArea>
