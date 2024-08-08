@@ -7,9 +7,13 @@ export const MessageModal = () => {
   const isMessage = useMessage( (state) => state.message );
   const isCallback = useMessage( (state) => state.callback );
   const cleanMessage = useMessage( (state) => state.cleanMessage );
+  const btnOption = useMessage( (state) => state.BtnOption );
 
-  const onClickClean = () => {
-    isCallback();
+  const onClickOk = () => {
+
+    if ( isCallback ){
+        isCallback();
+    };
     cleanMessage();
   };
 
@@ -20,26 +24,25 @@ export const MessageModal = () => {
           <S.ModalWrap>
             <S.Message>{isMessage}</S.Message>
             <S.ButtonWrap>
-            {isCallback ? (
-              <>
+              { btnOption 
+              ?<>
                 <DefaultBtn
                 size="medium"
                 text="확인"
-                onClick={ onClickClean }
+                onClick={ onClickOk }
                 />
                 <DefaultBtn
                 size="medium"
                 text="취소"
                 onClick={()=>cleanMessage()}
                 />
-              </>
-            ) : (
-              <DefaultBtn
-              size="medium"
-              text="확인"
-              onClick={()=>cleanMessage()}
-              />
-            )}
+               </>
+              : <DefaultBtn
+                size="medium"
+                text="확인"
+                onClick={ onClickOk }
+                />
+            }
             </S.ButtonWrap>
           </S.ModalWrap>
         </S.MessageModal>

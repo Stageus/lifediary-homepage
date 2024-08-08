@@ -34,7 +34,7 @@ export const useGetComplainList = () => {
 
     useEffect(() => {
         getComplainList();
-    },[searchParams]);
+    },[useSearchParams]);
 
     useEffect(() => {
         if ( !fetchData ) return;

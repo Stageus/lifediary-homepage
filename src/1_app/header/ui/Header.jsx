@@ -4,7 +4,7 @@ import { News } from "./news";
 import { Search } from "./search";
 // Layer
 import logo from "@shared/assets/imges/logo.png";
-import { DefaultBtn, ProfileTag } from "@shared/ui";
+import { DefaultBtn, Profile } from "@shared/ui";
 import { useRoute, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
 
@@ -31,7 +31,7 @@ export const Header = () => {
         {cookieGet("token") ? (
           <>
             <S.profileArea onClick={() => myProfileRoute()}>
-              <ProfileTag />
+              <Profile />
             </S.profileArea>
 
             <div>

@@ -8,8 +8,8 @@ import { useRoute } from "@shared/hook";
 export const Search = () => {
 
   const { searchRoute } = useRoute();
-  const { tag, onKeyUp, onBlur, deleteTag } = useTag();
-
+  const { tag, inputRef, onKeyUp, onBlur, deleteTag } = useTag();
+  
   return (
     <S.search>
       <S.tagList>
@@ -28,12 +28,13 @@ export const Search = () => {
         <span>#</span>
         <input
           type="text"
+          ref={inputRef}
           onKeyUp={onKeyUp}
           onBlur={onBlur}
           placeholder="태그입력"
         />
       </S.tagInput>
-      <S.iconArea onClick={() => searchRoute(encodeURIComponent(tag))}>
+      <S.iconArea onClick={() => searchRoute(tag)}>
         <Icon size="28px" color="#FFE6DE" type="search"/>
       </S.iconArea>
     </S.search>

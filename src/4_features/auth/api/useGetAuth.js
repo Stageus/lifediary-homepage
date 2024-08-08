@@ -18,7 +18,7 @@ export const useGetAuth = () => {
   };
 
   const getAuth = () => {
-    baseFetch("auth", {}, handleGetCookie());
+    // baseFetch("auth", {}, handleGetCookie());
   };
 
   useEffect(() => {

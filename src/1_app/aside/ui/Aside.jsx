@@ -12,7 +12,6 @@ export const Aside = ( props ) => {
     const { currentPage } = props;
     const [ userInfo ] = useGetAuth();
     const { onClickRoute } = useRoute();
-    console.log(currentPage);
     
   return (
     <>

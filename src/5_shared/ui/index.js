@@ -1,5 +1,5 @@
-export { Icon } from "./icon/Icon";
+export { Icon } from "./icon";
 export { TextInput } from "./textInput/TextInput";
 export { DefaultBtn } from "./defaultBtn/DefaultBtn";
-export { DynamicImage } from "./dynamicImage/DynamicImage";
-export { ProfileTag } from "./profileTag/ui/ProfileTag";
+export { Thumbnail } from "./thumbnail";
+export { Profile } from "./profile";

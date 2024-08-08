@@ -11,6 +11,7 @@ const header = styled.div`
 
 const divideArea = styled.div`
   display: flex;
+  height: 100%;
 `;
 
 const aside = styled.div`
@@ -19,6 +20,7 @@ const aside = styled.div`
 
 const main = styled.div`
   flex: 1;
+  height: 100%;
 `;
 
 export const S = {

@@ -1,18 +1,19 @@
 # 진행상황
 
-
 [app]
-- layout: 완료
-- router.jsx: 완료
+### header
+- ui/search: 검색을 눌렀을시, 태그로 등록되지 않은 문자열삭제 필요
+- 레이아웃 위치 다시적용 필요
 
+### aisde
+- 각버튼의 url위치 다시판단해야함
+- width가 고정적이지 않아 움직임
+- height 또한 짧아짐 현상
 
-
-
-
-[shared]
-- hook/useCookie.js: 완료
-- hook/useRoute.js: 완료
-
+[pages]
+### search
+- 무한스크롤 적용 필요
+- 백엔드에 디코드가 적용될수있으므로 요청직전에 디코드 적용
 
 
   
