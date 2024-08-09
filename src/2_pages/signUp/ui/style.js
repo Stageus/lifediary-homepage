@@ -24,10 +24,14 @@ const innerBox = styled.div`
 
 const logoArea = styled.div`
     width: fit-content;
+    display: flex;
+    border: 2px solid ${({theme}) => theme.major};
+    border-radius: 8px;
+    width: 250px;
 
     & > img {
+        width: 100%;
         border-radius: 8px;
-        width: 250px;
     }
 `;
 
