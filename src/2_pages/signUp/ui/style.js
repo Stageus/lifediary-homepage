@@ -17,6 +17,9 @@ const innerBox = styled.div`
     align-items: center;
     justify-content: center;
     gap: 30px;
+    background-color: #c0c0c00a;
+    padding: 100px;
+    box-shadow: 1px 0 10px gray;
 `;
 
 const logoArea = styled.div`
@@ -32,11 +35,27 @@ const profileArea = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 `;
 
 const imgWrap = styled.div`
+    position: relative;
     width: 100px;
+    display: flex;
+    border-radius: 50%;
+
+    & > label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left:0;
+        cursor: pointer;
+    }
+
+    & > input {
+        display: none;
+    }
 `;
 
 const profileGuide = styled.span`
@@ -44,18 +63,33 @@ const profileGuide = styled.span`
     font-size: 14px;
 `;
 
+
+
 const nameArea = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 4px;
 `;
 
-const nameInout = styled.input`
-    width: 200px;
-    padding: 10px;
-    border-radius: 8px;
+const nameWrap = styled.div`
+    width: 100%;
+    display: flex;
     border: 2px solid ${({theme}) => theme.major};
+    border-radius: 8px;
+    padding: 4px;
+`;
+
+const nameInput = styled.input`
+    outline: none;
+    border: none;
+    padding: 8px;
+    width: 100%;
     font-size: 12px;
+`;
+
+const checkBtn = styled.div`
+
 `;
 
 const nameGuide = styled.span`
@@ -76,7 +110,9 @@ export const S = {
     imgWrap,
     profileGuide,
     nameArea,
-    nameInout,
+    nameWrap,
+    nameInput,
+    checkBtn,
     nameGuide,
     btnArea,
 };
