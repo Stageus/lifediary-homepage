@@ -27,9 +27,9 @@ export const Router = createBrowserRouter(
         <Route path={ paths.SEARCH } element={ <Search /> }/>
         <Route path={paths.MYPROFILE} element={<MyProfile />} />
         <Route path={`${paths.USERPROFILE}/:accountIdx`} element={<UserProfile />} />
+        <Route path={paths.LOGIN} element={<Login />} />
+        <Route path={paths.SIGNUP} element={<SignUp />} />
       </Route>
-      <Route path={paths.LOGIN} element={<Login />} />
-      <Route path={paths.SIGNUP} element={<SignUp />} />
       <Route path={"*"} element={<Error/>}/>
     </>
   )

@@ -45,8 +45,10 @@ const profileArea = styled.div`
 const imgWrap = styled.div`
     position: relative;
     width: 100px;
+    height: 100px;
     display: flex;
     border-radius: 50%;
+    overflow: hidden;
 
     & > label {
         position: absolute;
@@ -61,13 +63,6 @@ const imgWrap = styled.div`
         display: none;
     }
 `;
-
-const profileGuide = styled.span`
-    color: red;
-    font-size: 14px;
-`;
-
-
 
 const nameArea = styled.div`
     width: 100%;
@@ -112,7 +107,6 @@ export const S = {
     logoArea,
     profileArea,
     imgWrap,
-    profileGuide,
     nameArea,
     nameWrap,
     nameInput,

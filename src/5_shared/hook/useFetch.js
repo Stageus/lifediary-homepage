@@ -21,9 +21,9 @@ export const useFetch = () => {
       };
 
       const response = await fetch( `${import.meta.env.VITE_API_URL}/${url}`, { ...requestInfo } );
-      
+
       if ( response.status === 200 ) {
-        const jsonData = await response.json();
+        const jsonData = await response.json();  
         setFetchData( { status: response.status, data: jsonData.result} );
       } else {
         setFetchData( { status: response.status} ) ;
