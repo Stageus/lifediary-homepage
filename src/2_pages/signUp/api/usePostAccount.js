@@ -2,17 +2,22 @@
 import { useEffect } from "react";
 // Slice
 import { useFetch, useRoute, useCookie } from "@shared/hook";
+import { nameValidation } from "@shared/consts/validation";
+import { useMessage } from "@shared/store";
 
 export const usePostAccount = () => {
     
     const [ fetchData, baseFetch ] = useFetch();
     const { errorRoute, homeRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage );
     const { setCookie } = useCookie();
 
     const postAccount = ( accountInfo ) => {
-
-        console.log("실행",accountInfo)
-        // baseFetch("account", {method:"POST", data:accountInfo});
+        const { nickname, oauthGoogleId, profileImg} = accountInfo;
+        if( nameValidation(nickname) && !oauthGoogleId && !profileImg) {
+            setMessage(" 프로필 사진과, 이름을 다시한번 확인해주세요");
+        }
+        baseFetch("account", {method:"POST", data:{...accountInfo}});
     };
 
     useEffect(()=>{
@@ -20,8 +25,9 @@ export const usePostAccount = () => {
 
         switch ( fetchData.status ) {
             case 200:
+                console.log("성공");
                 setCookie("token",fetchData.data.token);
-                homeRoute();
+                // homeRoute();
                 break;
 
             case 400:

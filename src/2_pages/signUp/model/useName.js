@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from "react";
 // Layer
 import { nameValidation } from "@shared/consts/validation";
 
-export const useName = () => {
+export const useName = ( checkedHandelr ) => {
 
     const [ checkName, setCheckName ] = useState( false );
     const nameRef = useRef( null );
 
     const onChangeName = ( e ) => {
         const targetValue = e.target.value;
+        checkedHandelr();
         
         if ( !nameValidation(targetValue) ){
             setCheckName(false);
@@ -26,5 +27,5 @@ export const useName = () => {
 
     },[]);
 
-    return { checkName, nameRef, onChangeName};
+    return { checkName, nameRef, onChangeName };
 };

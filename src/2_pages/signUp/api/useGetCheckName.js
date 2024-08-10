@@ -8,10 +8,16 @@ export const useGetCheckName = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const [ isInvalid, setIsInvalid] = useState( true );
+    const [ isChecked, setIsChecked ] = useState( false );
     const setMessage = useMessage( state => state.setMessage );
     const { errorRoute } = useRoute();
 
+    const checkedHandelr = () => {
+        setIsChecked( false );
+    };
+
     const getCheckName = ( name ) => {
+        setIsChecked( true );
         baseFetch(`account/nickname/duplication?nickname=${name}`);
     };
 
@@ -25,7 +31,7 @@ export const useGetCheckName = () => {
                 break;
 
             case 400:
-                setMessage("잘못된 요청입니다.");
+                setMessage("이름은 최소 3자이상 ~ 최대 20자 이하 입니다");
                 break;
 
             case 500:
@@ -35,5 +41,5 @@ export const useGetCheckName = () => {
 
     },[fetchData])
 
-    return [ isInvalid, getCheckName ];
+    return [ isChecked, checkedHandelr, isInvalid, getCheckName ];
 }

@@ -15,10 +15,10 @@ export const SignUp = () => {
     
     const location = useLocation();
     const googleInfo = location.state;
-    const { homeRoute } = useRoute();
+    const { loginRoute } = useRoute();
     const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( googleInfo.googleProfileImg );
-    const { checkName, nameRef, onChangeName} = useName();
-    const [ isInvalid, getCheckName ] = useGetCheckName();
+    const [ isChecked, checkedHandelr, isInvalid, getCheckName ] = useGetCheckName();
+    const { checkName, nameRef, onChangeName} = useName( checkedHandelr );
     const [ postAccount ] = usePostAccount();
 
   return (
@@ -43,13 +43,13 @@ export const SignUp = () => {
             onChange={onClickImg}
              />
           </S.imgWrap>
-            { previewImg && selectImg !== previewImg && 
+            { previewImg && selectImg !== previewImg ?
             <DefaultBtn
             size="smail"
             type="select"
             text="Google 이미지 사용하기"
             onClick={onClickReset}
-          />}
+          /> : <S.imgGuide>{"(프로필을 눌러 이미지를 변경할수 있어요)"}</S.imgGuide>}
         
         </S.profileArea>
 
@@ -65,7 +65,7 @@ export const SignUp = () => {
             />
             <S.checkBtn>
               <DefaultBtn 
-              type={ checkName ? "select" : "disabled"}
+              type={ isChecked ? "disabled" : "select" }
               text="중복확인" 
               size="medium"
               onClick={ () => getCheckName( nameRef.current.value ) }
@@ -74,21 +74,21 @@ export const SignUp = () => {
           </S.nameWrap>
           { checkName
           ? null
-          : <S.nameGuide>{"사용할수 없는 닉네임 입니다."}</S.nameGuide>}
+          : <S.nameGuide>{"사용할수 없는 닉네임 입니다. (최소 3자 이상 ~ 최대20자 이하)"}</S.nameGuide>}
           
         </S.nameArea>
 
         <S.btnArea>
           <DefaultBtn 
           text="가입하기"
-          type={ checkName && !isInvalid && selectImg ? "select" : "disabled"}
+          type={ checkName && isChecked && !isInvalid && selectImg ? "select" : "disabled"}
           size="medium"
           onClick={() => postAccount({profileImg: selectImg, nickname: nameRef.current.value, oauthGoogleId: googleInfo.oauthGoogleId})}
            />
           <DefaultBtn 
           size="medium"
           text="취소"
-          onClick={homeRoute}
+          onClick={loginRoute}
            />
         </S.btnArea>
       </S.innerBox>

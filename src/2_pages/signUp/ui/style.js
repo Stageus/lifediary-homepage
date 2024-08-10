@@ -28,6 +28,7 @@ const logoArea = styled.div`
     border: 2px solid ${({theme}) => theme.major};
     border-radius: 8px;
     width: 250px;
+    cursor: pointer;
 
     & > img {
         width: 100%;
@@ -62,6 +63,11 @@ const imgWrap = styled.div`
     & > input {
         display: none;
     }
+`;
+
+const imgGuide = styled.div`
+    font-size: 14px;
+    color: gray;
 `;
 
 const nameArea = styled.div`
@@ -107,6 +113,7 @@ export const S = {
     logoArea,
     profileArea,
     imgWrap,
+    imgGuide,
     nameArea,
     nameWrap,
     nameInput,
