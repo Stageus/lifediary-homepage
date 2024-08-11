@@ -7,7 +7,7 @@ import { Thumbnail, Profile, Icon } from "@shared/ui";
 export const Search = () => {
 
   const [diaryList, errorMessage] = useGetSearchList();
-
+  console.log(diaryList);
   return (
     <S.search>
       {diaryList ? diaryList.map((diary) => {

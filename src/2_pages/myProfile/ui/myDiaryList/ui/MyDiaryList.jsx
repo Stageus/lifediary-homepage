@@ -6,7 +6,7 @@ import { Icon, DefaultBtn } from "@shared/ui";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import defaultDiary from "@shared/assets/imges/defaultDiary.jpg";
+import defaultDiary from "@shared/assets/img/defaultDiary.jpg";
 
 export const MyDiaryList = () => {
   const [filteredPosts, startDate, endDate, startDateSelected, endDateSelected, handleStartDateChange, handleEndDateChange, handleSearch] = useDivideList();

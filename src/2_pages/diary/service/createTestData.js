@@ -1,4 +1,4 @@
-import profile from "@shared/assets/imges/profile.png";
+import profile from "@shared/assets/img/profile.png";
 let testIdx = 1;
 
 export const createTestData = ()=>{

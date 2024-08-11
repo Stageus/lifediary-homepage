@@ -1,3 +1,5 @@
+// Npm
+import { useLocation } from "react-router-dom";
 // Slice
 import { S } from "./style";
 import { useRoute } from "../model/useRoute";
@@ -7,9 +9,9 @@ import { ComplainAlarm  } from "./complainAlarm";
 import { useGetAuth } from "@features/auth";
 import { DefaultBtn } from "@shared/ui";
 
-export const Aside = ( props ) => {
+export const Aside = () => {
 
-    const { currentPage } = props;
+    const loaction = useLocation();
     const [ userInfo ] = useGetAuth();
     const { onClickRoute } = useRoute();
     
@@ -29,7 +31,7 @@ export const Aside = ( props ) => {
             <DefaultBtn 
               text="둘러 보기"
               onClick={ ()=>onClickRoute("diary") }
-              type={ currentPage ? "select" : null }
+              type={ loaction.pathname === "diary" ? "select" : null }
                />
           </S.BtnWrap>
 

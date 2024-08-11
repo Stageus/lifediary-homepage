@@ -1,79 +1,97 @@
-import { useNavigate, useLocation } from "react-router-dom";
-
+// Npm
+import { useLocation } from "react-router-dom";
+// Slice
 import { S } from "./style";
-import { useChangeImgBase } from "../lib/useChangeImgBase";
-import { useCheckInputValue } from "../lib/useCheckInputValue";
-import { useChangeBtnType } from "../lib/useChangeBtnType";
-import { usePostSignUpInfo } from "../api/usePostSignUpInfo";
-
-import { DefaultBtn, TextInput } from "@shared/ui";
-import Profile from "@shared/assets/imges/profile.png";
+import { usePostAccount } from "../api/usePostAccount";
+import { useGetCheckName } from "../api/useGetCheckName";
+import { useProfileImg } from "../model/useProfileImg";
+import { useName } from "../model/useName";
+// Layer
+import logo from "@shared/assets/img/logo.png";
+import { Profile, DefaultBtn } from "@shared/ui";
+import { useRoute } from "@shared/hook";
 
 export const SignUp = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { oauthGoogleId } = location.state;
-  const [handleChangeImgBase, profileImg, profileImgMessage, isProfileImgValid, imageInputRef] = useChangeImgBase();
-  const [handleCheckInputValue, nickname, inputType, btnMessage, isNicknameValid] = useCheckInputValue();
-  const [btnType] = useChangeBtnType(isNicknameValid, isProfileImgValid);
-  const [postSignUpInfo] = usePostSignUpInfo();
-
-  const handleSignUp = () => {
-    postSignUpInfo(profileImg, nickname, oauthGoogleId);
-  };
-
-  // fetch함수로 api기능 테스트, useFetch로는 작동되지 않는 이유 찾아야 함
-  // const postSignUpInfo = async () => {
-  //   const formData = new FormData();
-  //   formData.append("profileImg", profileImg);
-  //   formData.append("nickname", nickname);
-  //   formData.append("oauthGoogleId", oauthGoogleId);
-
-  //   try {
-  //     const response = await fetch("http://3.36.128.193/account", {
-  //       method: "POST",
-  //       body: formData,
-  //     });
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       console.log("Signup successful:", data);
-  //     } else {
-  //       console.log("Signup failed:", response.status);
-  //     }
-  //   } catch (error) {
-  //     console.log("Error occurred during signup:", error.message);
-  //   }
-  // };
+    
+    const location = useLocation();
+    const googleInfo = location.state;
+    const { loginRoute, homeRoute } = useRoute();
+    const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( googleInfo.googleProfileImg );
+    const [ isChecked, checkedHandelr, isInvalid, getCheckName ] = useGetCheckName();
+    const { checkName, nameRef, onChangeName} = useName( checkedHandelr );
+    const [ postAccount ] = usePostAccount();
 
   return (
-    <>
-      <S.PageContainer>
-        <S.ProfileContainer>
-          <S.Logo onClick={() => navigate("/")} />
-          <S.SignUpInfoContainer>
-            <S.SignUpInfoProfileImgContainer>
-              {/* ref속성으로 imageInput을 설정해 입력요소의 참조를 imageInput.current에 저장 */}
-              <input type="file" hidden ref={imageInputRef} onChange={handleChangeImgBase} />
-              {profileImg ? <S.SignUPInfoProfileImg src={URL.createObjectURL(profileImg)} onClick={() => imageInputRef.current.click()} /> : <S.SignUPInfoProfileImg src={Profile} onClick={() => imageInputRef.current.click()} />}
-              <S.SignUpInfoMessage>{profileImgMessage}</S.SignUpInfoMessage>
-            </S.SignUpInfoProfileImgContainer>
-            <S.SignUpInfoNicknameContainer>
-              <S.SignUpInfoNicknameLabel>닉네임</S.SignUpInfoNicknameLabel>
-              <S.SignUpInfoNicknameInputContainer>
-                <TextInput type={inputType} placeholder="닉네임을 입력해주세요(최대 20자)" onBlur={handleCheckInputValue}>
-                  {nickname}
-                </TextInput>
-                <S.SignUpInfoMessage>{btnMessage}</S.SignUpInfoMessage>
-              </S.SignUpInfoNicknameInputContainer>
-            </S.SignUpInfoNicknameContainer>
-            <S.SignUpInfoBtnContainer>
-              <DefaultBtn type={btnType} text="작성" onClick={handleSignUp} />
-              <DefaultBtn text="취소" onClick={() => navigate("/Login")} />
-            </S.SignUpInfoBtnContainer>
-          </S.SignUpInfoContainer>
-        </S.ProfileContainer>
-      </S.PageContainer>
-    </>
+    <S.signUp>
+      <S.innerBox>
+        {/* 로고영역 */}
+        <S.logoArea onClick={homeRoute}>
+          <img src={logo} />
+        </S.logoArea>
+
+        {/* 프로필 영역 */}
+        <S.profileArea>
+          <S.imgWrap>
+            <Profile
+            img={ previewImg ?? selectImg }
+             />
+            <label htmlFor="file" />
+            <input 
+            id="file"
+            type="file"
+            accept=".jpg, .jpeg, .png, .gif" 
+            onChange={onClickImg}
+             />
+          </S.imgWrap>
+            { previewImg && selectImg !== previewImg ?
+            <DefaultBtn
+            size="smail"
+            type="select"
+            text="Google 이미지 사용하기"
+            onClick={onClickReset}
+          /> : <S.imgGuide>{"(프로필을 눌러 이미지를 변경할수 있어요)"}</S.imgGuide>}
+        
+        </S.profileArea>
+
+        {/* 이름 영역 */}
+        <S.nameArea>
+          <S.nameWrap>
+            <S.nameInput
+              maxLength="19"
+              placeholder="닉네임은 3자 이상 ~  20자 이하 입니다."
+              defaultValue= { googleInfo.googleName }
+              ref={ nameRef }
+              onChange={ onChangeName }
+            />
+            <S.checkBtn>
+              <DefaultBtn 
+              type={ isChecked ? "disabled" : "select" }
+              text="중복확인" 
+              size="medium"
+              onClick={ () => getCheckName( nameRef.current.value ) }
+               />
+            </S.checkBtn>
+          </S.nameWrap>
+          { checkName
+          ? null
+          : <S.nameGuide>{"사용할수 없는 닉네임 입니다. (최소 3자 이상 ~ 최대20자 이하)"}</S.nameGuide>}
+          
+        </S.nameArea>
+
+        <S.btnArea>
+          <DefaultBtn 
+          text="가입하기"
+          type={ checkName && isChecked && !isInvalid && selectImg ? "select" : "disabled"}
+          size="medium"
+          onClick={() => postAccount({profileImg: selectImg, nickname: nameRef.current.value, oauthGoogleId: googleInfo.oauthGoogleId})}
+           />
+          <DefaultBtn 
+          size="medium"
+          text="취소"
+          onClick={loginRoute}
+           />
+        </S.btnArea>
+      </S.innerBox>
+    </S.signUp>
   );
 };

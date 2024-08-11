@@ -19,8 +19,8 @@ export const useRoute = () => {
     };
     const myProfileRoute = () => navigate( paths.MYPROFILE );
     const userProfileRoute = ( accountIdx ) => navigate( `${paths.USERPROFILE}/${accountIdx}` );
-    const loginRoute = () => navigate( paths.LOGIN );
-    const signupRoute = ( googleInfo ) => navigate( `/${paths.SIGNUP}`, { state: {googleInfo}} );
+    const loginRoute = () => navigate( `/${paths.LOGIN}` );
+    const signupRoute = ( googleInfo ) => navigate( `/${paths.SIGNUP}`, { state: {...googleInfo} } );
     const errorRoute = ( status, message ) => navigate(`/${status}`, {state:{status, message}});
 
     return { 

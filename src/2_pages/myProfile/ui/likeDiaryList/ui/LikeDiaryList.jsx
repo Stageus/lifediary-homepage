@@ -1,6 +1,6 @@
 import { S } from "./style";
 
-import defaultDiary from "@shared/assets/imges/defaultDiary.jpg";
+import defaultDiary from "@shared/assets/img/defaultDiary.jpg";
 
 const posts = [
   { id: 1, date: new Date(2024, 6, 14), isPublic: false },

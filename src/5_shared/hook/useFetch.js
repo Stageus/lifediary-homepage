@@ -7,8 +7,8 @@ export const useFetch = () => {
   const baseFetch = async ( url, options, token ) => {
     try {
       
-      const { method = "GET", headers = "aplication/json", data = null } = options ?? {};
-
+      const { method = "GET", headers = "application/json", data = null } = options ?? {};
+      
       const requestInfo = {
         method,
         headers: {
@@ -20,10 +20,12 @@ export const useFetch = () => {
         }),
       };
 
+      console.log(requestInfo);
+
       const response = await fetch( `${import.meta.env.VITE_API_URL}/${url}`, { ...requestInfo } );
-      
+
       if ( response.status === 200 ) {
-        const jsonData = await response.json();
+        const jsonData = await response.json();  
         setFetchData( { status: response.status, data: jsonData.result} );
       } else {
         setFetchData( { status: response.status} ) ;

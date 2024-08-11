@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { S } from "./style";
-import loadingImg  from "../../assets/imges/loading.gif";
-import preparingImg from "../../assets/imges/defaultDiary.jpg";
+import loadingImg  from "../../assets/img/loading.gif";
+import preparingImg from "../../assets/img/defaultDiary.jpg";
 
 export const Thumbnail = (props)=>{
     const [loading, setLoading] = useState(true);

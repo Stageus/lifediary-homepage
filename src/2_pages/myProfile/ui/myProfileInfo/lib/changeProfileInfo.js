@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import DefaultProfile from "@shared/assets/imges/profile.png";
+import DefaultProfile from "@shared/assets/img/profile.png";
 
 export const changeProfileInfo = () => {
   const [inputMessage, setInputMessage] = useState("");

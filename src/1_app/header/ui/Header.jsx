@@ -3,7 +3,7 @@ import { S } from "./style";
 import { News } from "./news";
 import { Search } from "./search";
 // Layer
-import logo from "@shared/assets/imges/logo.png";
+import logo from "@shared/assets/img/logo.png";
 import { DefaultBtn, Profile } from "@shared/ui";
 import { useRoute, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";

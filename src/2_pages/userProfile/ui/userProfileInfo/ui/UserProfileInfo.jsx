@@ -3,7 +3,7 @@ import { useState } from "react";
 import { S } from "./style";
 
 import { SubscribeBtn } from "@features/subscribeBtn";
-import DefaultProfile from "@shared/assets/imges/profile.png";
+import DefaultProfile from "@shared/assets/img/profile.png";
 
 export const UserProfileInfo = () => {
   const [profileImg, setProfileImg] = useState(DefaultProfile);
