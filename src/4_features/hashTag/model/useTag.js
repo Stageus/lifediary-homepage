@@ -18,6 +18,12 @@ export const useTag = ( props ) => {
             setMessage("#은 사용할수 없으며,최대20자까지만 입력이 가능해요"); 
             return;
           }
+
+          if ( tagList.length === 20){
+            setMessage("태그는 최대 20개까지만 가능해요"); 
+            return
+          }
+          
           setTagList([...tagList, target]);
           e.target.value = "";
         }
@@ -30,6 +36,12 @@ export const useTag = ( props ) => {
             inputRef.current.focus();
             return;
           }
+
+          if ( tagList.length === 20){
+            e.target.value = "";
+            return;
+          }
+          
           setTagList([...tagList, target]);
           e.target.value = "";
         }
