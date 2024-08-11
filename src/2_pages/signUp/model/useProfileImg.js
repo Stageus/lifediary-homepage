@@ -5,9 +5,9 @@ import { imgValidation } from "@shared/consts/validation";
 import { useMessage } from "@shared/store";
 
 export const useProfileImg = ( googleProfileImg ) => {
-
+    
     const [ selectImg, setSelectImg ] = useState( googleProfileImg );
-    const [ previewImg, setPreviewImg ] = useState( null );
+    const [ previewImg, setPreviewImg ] = useState( URL.createObjectURL(googleProfileImg) );
     const setMessage = useMessage( state => state.setMessage );
     const onClickImg = ( e ) => {
     
@@ -25,7 +25,7 @@ export const useProfileImg = ( googleProfileImg ) => {
     };
 
     const onClickReset = () => {
-        setPreviewImg( null );
+        setPreviewImg( URL.createObjectURL(googleProfileImg) );
         setSelectImg( googleProfileImg );
     };
 

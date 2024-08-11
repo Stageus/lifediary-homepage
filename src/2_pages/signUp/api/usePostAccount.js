@@ -1,6 +1,6 @@
 // Npm
 import { useEffect } from "react";
-// Slice
+// Layer
 import { useFetch, useRoute, useCookie } from "@shared/hook";
 import { nameValidation } from "@shared/consts/validation";
 import { useMessage } from "@shared/store";
@@ -10,20 +10,23 @@ export const usePostAccount = () => {
     const [ fetchData, baseFetch ] = useFetch();
     const { errorRoute, homeRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage );
-    const { setCookie } = useCookie();
+    const { cookieSet } = useCookie();
 
     const postAccount = ( accountInfo ) => {
-        const { nickname, oauthGoogleId, profileImg} = accountInfo;
-        if( nameValidation(nickname) && !oauthGoogleId && !profileImg) {
-            setMessage(" 프로필 사진과, 이름을 다시한번 확인해주세요");
-        }
 
-        // file객체를 받지만 string 형태를 못받음
-        const formData = new FormData();
-        formData.append("profileImg",profileImg);
-        formData.append("nickname",nickname);
-        formData.append("oauthGoogleId",oauthGoogleId);
-        baseFetch("account", {method:"POST", headers: "multipart/form-data", data:formData});
+            const { nickname, oauthGoogleId, profileImg} = accountInfo;
+        
+            if( nameValidation(nickname) && !oauthGoogleId && !profileImg) {
+                setMessage(" 프로필 사진과, 이름을 다시한번 확인해주세요");
+            }
+            console.log(nickname);
+            console.log(oauthGoogleId);
+            console.log(profileImg);
+            const formData = new FormData();
+            formData.append("profileImg",profileImg);
+            formData.append("nickname",nickname);
+            formData.append("oauthGoogleId",oauthGoogleId);
+            baseFetch("account", {method:"POST", data:formData});     
     };
 
     useEffect(()=>{
@@ -31,7 +34,7 @@ export const usePostAccount = () => {
 
         switch ( fetchData.status ) {
             case 200:
-                setCookie("token",fetchData.data.token);
+                cookieSet("token",fetchData.data.token);
                 homeRoute();
                 break;
 

@@ -2,8 +2,9 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 // Slice
-import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { convertImageUrl } from "../lib/convertImageUrl"
 // Layer
+import { useFetch, useCookie, useRoute } from "@shared/hook";
 
 export const useGetAccountExist = () => {
 
@@ -25,16 +26,25 @@ export const useGetAccountExist = () => {
 
     switch ( fetchData.status ) {
       case 200:
-        console.log(fetchData);
-        if ( !fetchData.data.isAccountExist ) {
-          // signupRoute(fetchData.data);
-          return;
-        }
-
-        // cookieSet("token",fetchData.data.token);
-        // homeRoute();
+        ( async () => {
+          try{
+            if ( !fetchData.data.isAccountExist && fetchData.data.googleProfileImg ){
+              const convert = await convertImageUrl(fetchData.data.googleProfileImg);
+              signupRoute({
+                ...fetchData.data,
+                googleProfileImg: convert,
+              })
+              return;
+            }
+            
+            cookieSet("token",fetchData.data.token);
+            homeRoute();
+          }catch ( error ){
+            console.error("파일변환 에러");
+          }
+        })();
         break;
-
+       
       case 500:
         errorRoute(500, "서버에러");
         break;

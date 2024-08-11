@@ -33,7 +33,7 @@ export const SignUp = () => {
         <S.profileArea>
           <S.imgWrap>
             <Profile
-            img={ previewImg ?? selectImg }
+            img={ previewImg }
              />
             <label htmlFor="file" />
             <input 
@@ -43,7 +43,7 @@ export const SignUp = () => {
             onChange={onClickImg}
              />
           </S.imgWrap>
-            { previewImg && selectImg !== previewImg ?
+            { selectImg !== googleInfo.googleProfileImg ?
             <DefaultBtn
             size="smail"
             type="select"
