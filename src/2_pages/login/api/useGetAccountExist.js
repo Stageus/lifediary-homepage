@@ -9,7 +9,7 @@ export const useGetAccountExist = () => {
 
   const [ fetchData, baseFetch ] = useFetch();
   const [ searchParams ] = useSearchParams();
-  const { signupRoute, homeRoute } = useRoute();
+  const { signupRoute, homeRoute, errorRoute } = useRoute();
   const { cookieSet } = useCookie();
 
   useEffect(()=>{
@@ -25,13 +25,14 @@ export const useGetAccountExist = () => {
 
     switch ( fetchData.status ) {
       case 200:
+        console.log(fetchData);
         if ( !fetchData.data.isAccountExist ) {
-          signupRoute(fetchData.data);
+          // signupRoute(fetchData.data);
           return;
         }
 
-        cookieSet("token",fetchData.data.token);
-        homeRoute();
+        // cookieSet("token",fetchData.data.token);
+        // homeRoute();
         break;
 
       case 500:
