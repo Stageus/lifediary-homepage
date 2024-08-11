@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import googleLogo from "../assets/googleLogo.png";
 
-const PageContainer = styled.div`
+const login = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 `;
 
-const LoginContainer = styled.div`
+const innerBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,60 +16,51 @@ const LoginContainer = styled.div`
   border-radius: 10px;
   padding: 120px 80px;
   max-width: 480px;
+  box-shadow: 1px 0 10px gray;
 `;
 
-const Logo = styled.img`
+const logoArea = styled.div`
+    width: fit-content;
+    display: flex;
+    border: 2px solid ${({theme}) => theme.major};
+    border-radius: 8px;
+    width: 250px;
+    cursor: pointer;
+
+    & > img {
+        width: 100%;
+        border-radius: 8px;
+    }
+`;
+
+const googleLogin = styled.div`
+  display: flex;
   width: 160px;
-  border-radius: 10px;
-`;
-
-const LoginBtn = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border-radius: 99px;
-  border: 1px solid ${({ theme }) => theme.highlight};
-  background-color: ${({ theme }) => theme.major};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  color: ${({ theme }) => theme.highlight};
+  justify-content: space-between;
+  box-shadow: 1px 1px 3px gray;
+  border-radius: 8px;
+  border-width: 2px;
+  border-color: ${({theme}) => theme.major};
+  border-style: solid;
+  padding: 4px;
   cursor: pointer;
-  white-space: nowrap;
-  &::after {
-    content: "구글 계정으로 로그인";
+  
+  & > button {
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: transparent;
   }
-`;
 
-const GoogleLoginBtn = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border-radius: 99px;
-  border: 1px solid ${({ theme }) => theme.highlight};
-  background-color: ${({ theme }) => theme.major};
-  font-size: ${({ theme }) => theme.fontSize.base};
-  color: ${({ theme }) => theme.highlight};
-  cursor: pointer;
-  white-space: nowrap;
-  &::after {
-    content: "구글 계정으로 로그인";
+  & > img {
+    width: 30px;
   }
-`;
-
-const GoogleLogo = styled.img.attrs({
-  src: googleLogo,
-  alt: "googleLogo",
-})`
-  width: 20px;
-  height: 20px;
 `;
 
 export const S = {
-  PageContainer,
-  LoginContainer,
-  Logo,
-  LoginBtn,
-  GoogleLoginBtn,
-  GoogleLogo,
+  login,
+  innerBox,
+  logoArea,
+  googleLogin
+
 };
