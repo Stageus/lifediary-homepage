@@ -17,7 +17,13 @@ export const usePostAccount = () => {
         if( nameValidation(nickname) && !oauthGoogleId && !profileImg) {
             setMessage(" 프로필 사진과, 이름을 다시한번 확인해주세요");
         }
-        baseFetch("account", {method:"POST", data:{...accountInfo}});
+
+        // file객체를 받지만 string 형태를 못받음
+        const formData = new FormData();
+        formData.append("profileImg",profileImg);
+        formData.append("nickname",nickname);
+        formData.append("oauthGoogleId",oauthGoogleId);
+        baseFetch("account", {method:"POST", headers: "multipart/form-data", data:formData});
     };
 
     useEffect(()=>{
@@ -25,9 +31,8 @@ export const usePostAccount = () => {
 
         switch ( fetchData.status ) {
             case 200:
-                console.log("성공");
                 setCookie("token",fetchData.data.token);
-                // homeRoute();
+                homeRoute();
                 break;
 
             case 400:

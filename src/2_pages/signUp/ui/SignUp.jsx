@@ -15,7 +15,7 @@ export const SignUp = () => {
     
     const location = useLocation();
     const googleInfo = location.state;
-    const { loginRoute } = useRoute();
+    const { loginRoute, homeRoute } = useRoute();
     const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( googleInfo.googleProfileImg );
     const [ isChecked, checkedHandelr, isInvalid, getCheckName ] = useGetCheckName();
     const { checkName, nameRef, onChangeName} = useName( checkedHandelr );
@@ -25,7 +25,7 @@ export const SignUp = () => {
     <S.signUp>
       <S.innerBox>
         {/* 로고영역 */}
-        <S.logoArea>
+        <S.logoArea onClick={homeRoute}>
           <img src={logo} />
         </S.logoArea>
 
