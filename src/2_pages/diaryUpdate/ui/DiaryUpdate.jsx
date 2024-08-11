@@ -3,6 +3,7 @@ import { DiarySet } from "@widgets/diarySet";
 
 export const DiaryUpdate = () => {
   const testData = {
+    // diaryIdx
     textContent: "test",
     tags: ["인기","최신"],
     isPublic: false,
