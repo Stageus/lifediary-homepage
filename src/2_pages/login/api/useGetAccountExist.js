@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 // Slice
-import { convertImageUrl } from "../lib/convertImageUrl"
+import { convertImageUrl } from "@shared/util"
 // Layer
 import { useFetch, useCookie, useRoute } from "@shared/hook";
 

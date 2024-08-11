@@ -17,3 +17,9 @@ export const nameValidation = ( name ) => {
     if ( !regex.test(name) ) return false;
     return true;
 };
+
+export const diaryContentValidation = ( text ) => {
+    const regex= /^.{0,500}$/;
+    if ( !regex.text(text) ) return false;
+    return true;
+}

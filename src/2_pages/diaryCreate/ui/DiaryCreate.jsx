@@ -3,6 +3,6 @@ import { DiarySet } from "@widgets/diarySet";
 
 export const DiaryCreate = () => {
     return(
-        <DiarySet/>
+        <DiarySet callback={""}/>
     );
 }
