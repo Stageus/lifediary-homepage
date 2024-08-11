@@ -6,14 +6,13 @@ import { useRoute } from "../model/useRoute";
 import { SubscribeList } from "./subscribeList";
 import { ComplainAlarm  } from "./complainAlarm"; 
 // Layer
-import { useGetAuth } from "@features/auth";
 import { DefaultBtn } from "@shared/ui";
 
-export const Aside = () => {
+export const Aside = ( props ) => {
 
-    const loaction = useLocation();
-    const [ userInfo ] = useGetAuth();
-    const { onClickRoute } = useRoute();
+  const [ userInfo ] = props;
+  const loaction = useLocation();
+  const { onClickRoute } = useRoute();
     
   return (
     <>

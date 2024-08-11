@@ -8,11 +8,12 @@ import { DefaultBtn, Profile } from "@shared/ui";
 import { useRoute, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
 
-export const Header = () => {
+export const Header = ( props ) => {
   
+  const { userInfo } = props; 
   const { homeRoute, loginRoute, diaryCreateRoute, myProfileRoute } = useRoute();
-  const setMessage = useMessage((state) => state.setMessage);
   const { cookieGet, cookieRemove } = useCookie();
+  const setMessage = useMessage((state) => state.setMessage);
 
   const logoutHandler = () => {
     cookieRemove();
@@ -28,7 +29,10 @@ export const Header = () => {
         <Search/>
       </S.searchArea>
       <S.menuArea>
+        {/* 임시테스트용 */}
         {cookieGet("token") ? (
+        // token이 유효할경우만 보여준다
+        // userInfo ? (
           <>
             <S.profileArea onClick={myProfileRoute}>
               <Profile />
