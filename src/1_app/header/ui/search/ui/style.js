@@ -10,6 +10,14 @@ const search = styled.div`
   height: 40px;
   border: 1px solid ${({ theme }) => theme.major};
   padding: 0 10px;
+  
+`;
+
+const tagArea = styled.div`
+    display: flex;
+    flex: 1;
+    overflow-x: scroll;
+    width: 300px;
 `;
 
 const tagList = styled.div`
@@ -66,6 +74,7 @@ const iconArea = styled.div`
 
 export const S = {
   search,
+  tagArea,
   tagList,
   tag,
   tagInput,

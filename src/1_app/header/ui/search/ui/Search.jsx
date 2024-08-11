@@ -1,40 +1,23 @@
+// Npm
+import { useState } from "react";
 // Slice
 import { S } from "./style";
-import { useTag } from "../model/useTag";
 // Layer
 import { Icon } from "@shared/ui";
 import { useRoute } from "@shared/hook";
+import { HashTag } from "@features/hashTag";
 
 export const Search = () => {
 
   const { searchRoute } = useRoute();
-  const { tag, inputRef, onKeyUp, onBlur, deleteTag } = useTag();
+  const [ tagList, setTagList ] = useState([]);
   
   return (
     <S.search>
-      <S.tagList>
-        {tag &&
-          tag?.map((text, idx) => {
-            return (
-              <S.tag onClick={() => deleteTag(text)} key={idx}>
-                <span>#</span>
-                <span>{text}</span>
-                <span>×</span>
-              </S.tag>
-            );
-          })}
-      </S.tagList>
-      <S.tagInput>
-        <span>#</span>
-        <input
-          type="text"
-          ref={inputRef}
-          onKeyUp={onKeyUp}
-          onBlur={onBlur}
-          placeholder="태그입력"
-        />
-      </S.tagInput>
-      <S.iconArea onClick={() => searchRoute(tag)}>
+      <S.tagArea>
+        <HashTag tagList={tagList} setTagList={setTagList} scroll={true}/>
+      </S.tagArea>
+      <S.iconArea onClick={() => searchRoute(tagList)}>
         <Icon size="28px" color="#FFE6DE" type="search"/>
       </S.iconArea>
     </S.search>
