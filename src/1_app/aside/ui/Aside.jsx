@@ -10,7 +10,7 @@ import { DefaultBtn } from "@shared/ui";
 
 export const Aside = ( props ) => {
 
-  const [ userInfo ] = props;
+  const { userInfo } = props;
   const loaction = useLocation();
   const { onClickRoute } = useRoute();
     
