@@ -8,7 +8,7 @@ import { useSubscribe } from "@shared/store";
 export const useGetSubscribeList = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet } = useCookie();
     const [ subscribeList, setSubscribeList ] = useState( null );
     const [ isLoading, setIsLoading ] = useState( false ); 
     const isSubscribe = useSubscribe( state => state.value );
@@ -29,7 +29,7 @@ export const useGetSubscribeList = () => {
     const getSubscribeList = ()=>{
         if ( errorMessage ) return;
         setIsLoading( true );
-        baseFetch(`subscription?page=${pageNum}`,{},handleGetCookie());
+        baseFetch(`subscription?page=${pageNum}`,{},cookieGet("token"));
     };
 
     useEffect(() => {

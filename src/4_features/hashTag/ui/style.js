@@ -1,31 +1,16 @@
 import styled from "styled-components";
 
-const search = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: white;
-  border-radius: 8px;
-  height: 40px;
-  border: 1px solid ${({ theme }) => theme.major};
-  padding: 0 10px;
-  
-`;
-
-const tagArea = styled.div`
+const hashTag = styled.div`
+    width: 100%;
     display: flex;
-    flex: 1;
-    overflow-x: scroll;
-    width: 300px;
+    align-items: center;
 `;
 
 const tagList = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  max-width: 400px;
-  overflow-y: scroll;
+  flex-wrap: ${({$scroll}) => $scroll ? "nowrap" : "wrap"};
 
   &::-webkit-scrollbar{
     display: none;
@@ -64,19 +49,9 @@ const tagInput = styled.div`
   }
 `;
 
-const iconArea = styled.div`
-  display: flex;
-
-  & > svg {
-    cursor: pointer;
-  }
-`;
-
 export const S = {
-  search,
-  tagArea,
-  tagList,
-  tag,
-  tagInput,
-  iconArea,
+    hashTag,
+    tagList,
+    tag,
+    tagInput
 };
