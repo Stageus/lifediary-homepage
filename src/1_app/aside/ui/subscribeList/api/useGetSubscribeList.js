@@ -29,7 +29,7 @@ export const useGetSubscribeList = () => {
     const getSubscribeList = ()=>{
         if ( errorMessage ) return;
         setIsLoading( true );
-        baseFetch(`subscription?page=${pageNum}`,{},cookieGet("token"));
+        // baseFetch(`subscription?page=${pageNum}`,{},cookieGet("token"));
     };
 
     useEffect(() => {

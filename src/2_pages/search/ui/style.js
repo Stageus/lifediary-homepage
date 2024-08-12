@@ -89,6 +89,16 @@ const tagWrap = styled.div`
   flex-wrap: wrap;
 `;
 
+const errorArea = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+
+`;
+
 
 export const S = {
   search,
@@ -102,5 +112,6 @@ export const S = {
   contentWrap,
   footerArea,
   likeWrap,
-  tagWrap
+  tagWrap,
+  errorArea
 };

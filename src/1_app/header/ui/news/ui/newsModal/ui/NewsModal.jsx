@@ -8,7 +8,7 @@ import { useScroll } from "@shared/hook";
 export const NewsModal = () => {
 
     const [ getNoticeList, noticeList, isLoading, errorMessage ] = useGetNoticeList();
-    const [ rootRef, watchRef ] = useScroll( getNoticeList );
+    const [ watchRef ] = useScroll( getNoticeList );
 
     return(
         <>
