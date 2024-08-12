@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 // Layer
 import { useFetch, useRoute } from "@shared/hook";
 import { useMessage } from "@shared/store";
+import { nameValidation } from "@shared/consts/validation";
 
 export const useGetCheckName = () => {
 
@@ -17,6 +18,9 @@ export const useGetCheckName = () => {
     };
 
     const getCheckName = ( name ) => {
+
+        if ( !nameValidation(name) ) return setMessage("이름은 최소 3자이상 ~ 최대 20자 이하만 가능합니다.");
+
         setIsChecked( true );
         baseFetch(`account/nickname/duplication?nickname=${name}`);
     };
