@@ -15,7 +15,7 @@ export const useGetAccountExist = () => {
 
   useEffect(()=>{
 
-    if ( searchParams.get("code") ){
+    if ( searchParams.get("code") ) {
       baseFetch(`account/login/oauth/google/redirect?code=${searchParams.get("code")}`);
     }
 
@@ -28,12 +28,11 @@ export const useGetAccountExist = () => {
       case 200:
         ( async () => {
           try{
-            if ( !fetchData.data.isAccountExist && fetchData.data.googleProfileImg ){
+            if ( !fetchData.data.isAccountExist && fetchData.data.googleProfileImg ) {
+
               const convert = await convertImageUrl(fetchData.data.googleProfileImg);
-              signupRoute({
-                ...fetchData.data,
-                googleProfileImg: convert,
-              })
+              signupRoute({...fetchData.data, googleProfileImg: convert,})
+
               return;
             }
             
