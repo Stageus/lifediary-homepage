@@ -15,7 +15,7 @@ export const DiarySet = ( props ) => {
 
     const navigate = useNavigate();
     const { textContent = "", tags = [], isPublic = true, color = "#ef3131", imgContents = []} = props?.diaryInfo || {};
-    const { callback } = props.callback;
+    const { submit } = props;
     const contentRef = useRef("");
     const [ tagList, setTagList ] = useState( tags );
     const { toggle, isToogle } = useToogle( isPublic );
@@ -87,7 +87,7 @@ export const DiarySet = ( props ) => {
                         type={ selectColor ? "select" : "disabled"}
                         size="medium"
                         text="작성하기"
-                        callback={callback}
+                        onClick={ () => submit( {textContent:contentRef.current.value, tags:tagList, isPublic:toggle, color:selectColor, imgContents:selectImg, deletedImgs:""} )}
                         />
                     </div>
                     <div>

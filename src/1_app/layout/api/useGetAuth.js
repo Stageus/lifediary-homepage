@@ -22,12 +22,15 @@ export const useGetAuth = () => {
   };
 
   const getAuth = () => {
-    baseFetch("auth", {}, cookieGet());
+    baseFetch("auth", {}, cookieGet("token"));
   };
 
   useEffect(() => {
-    getAuth();
-  }, []);
+    if ( cookieGet("token") ){
+      getAuth();
+    }
+
+  }, [ cookieGet("token") ]);
 
   useEffect(() => {
     if (!fetchData) return;

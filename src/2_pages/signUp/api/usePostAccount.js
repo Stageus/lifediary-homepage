@@ -19,9 +19,7 @@ export const usePostAccount = () => {
             if( nameValidation(nickname) && !oauthGoogleId && !profileImg) {
                 setMessage(" 프로필 사진과, 이름을 다시한번 확인해주세요");
             }
-            console.log(nickname);
-            console.log(oauthGoogleId);
-            console.log(profileImg);
+            
             const formData = new FormData();
             formData.append("profileImg",profileImg);
             formData.append("nickname",nickname);
