@@ -3,16 +3,19 @@ import { S } from "./style";
 import { useGetSearchList } from "../api/useGetSearchList";
 // Layer
 import { Thumbnail, Profile, Icon } from "@shared/ui";
+import { useScroll } from "@shared/hook";
+import { parseTime } from "@shared/util";
 
 export const Search = () => {
 
-  const [diaryList, errorMessage] = useGetSearchList();
-  console.log(diaryList);
+  const [ isEnd, getSearchList, diaryList, errorMessage ] = useGetSearchList();
+  const [ watchRef ] = useScroll( getSearchList );
+
   return (
     <S.search>
-      {diaryList ? diaryList.map((diary) => {
+      {diaryList?.map((diary, idx) => {
         return (
-          <S.diary key={diary.idx}>
+          <S.diary key={idx}>
             <S.headerArea>
               <S.accountImgWrap>
                 <Profile src={diary.profileImg} />
@@ -20,7 +23,7 @@ export const Search = () => {
 
               <S.accountName>{diary.nickname}</S.accountName>
 
-              <S.createAt>{diary.createdAt}</S.createAt>
+              <S.createAt>{parseTime(diary.createdAt)}</S.createAt>
             </S.headerArea>
 
             <S.mainArea>
@@ -48,7 +51,11 @@ export const Search = () => {
             </S.footerArea>
           </S.diary>
         );
-      }): <div>{ errorMessage }</div>}
+      })}
+      
+      { errorMessage && <S.errorArea> { `${errorMessage}  ❌` }</S.errorArea>}
+      { !isEnd && !diaryList && <div ref={watchRef}>워칭</div>}
+      { !isEnd && diaryList && diaryList?.length % 10 === 0 && <div ref={watchRef}>워칭</div>}
     </S.search>
   );
 };
