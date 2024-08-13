@@ -20,7 +20,6 @@ export const useGetSearchList = () => {
   const [ isEnd, setIsEnd ] = useState( false ); 
 
   const mapper = ( resData ) => {
-    
     const mapperData = resData.map( obj => (
       {
         idx : obj.idx,

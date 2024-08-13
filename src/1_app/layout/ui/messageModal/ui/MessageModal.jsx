@@ -7,7 +7,7 @@ export const MessageModal = () => {
   const isMessage = useMessage( (state) => state.message );
   const isCallback = useMessage( (state) => state.callback );
   const cleanMessage = useMessage( (state) => state.cleanMessage );
-  const btnOption = useMessage( (state) => state.BtnOption );
+  const btnOption = useMessage( (state) => state.btnOption );
 
   const onClickOk = () => {
 

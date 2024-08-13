@@ -3,7 +3,7 @@ import styled from "styled-components";
 const diarySet = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-top: 50px;
     align-items: center;
     height: 100vh;
 `;
