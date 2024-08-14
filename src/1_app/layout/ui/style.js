@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const Layout = styled.div`
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const header = styled.div`
@@ -11,7 +13,7 @@ const header = styled.div`
 
 const divideArea = styled.div`
   display: flex;
-  height: 100%;
+  flex-grow: 1;
 `;
 
 const aside = styled.div`
@@ -19,8 +21,7 @@ const aside = styled.div`
 `;
 
 const main = styled.div`
-  flex: 1;
-  height: 100%;
+  flex-grow: 1;
 `;
 
 export const S = {
