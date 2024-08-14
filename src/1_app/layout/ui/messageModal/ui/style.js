@@ -13,19 +13,26 @@ const MessageModal = styled.div`
 
 const ModalWrap = styled.div`
     background-color: ${({theme}) => theme.major};
-    border: 1px solid ${({theme}) => theme.highlight};
     border-radius: 10px;
     width: 300px;
     height: 200px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    box-shadow: 2px 2px 5px 2px gray;
+    padding: 10px;
 `;
 
 const Message = styled.p`
+    flex-grow: 1;
     color: ${({theme}) => theme.highlight};
     padding: 20px;
+    white-space: pre;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const ButtonWrap = styled.div`

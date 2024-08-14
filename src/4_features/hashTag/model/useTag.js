@@ -13,44 +13,35 @@ export const useTag = ( props ) => {
 
     const onKeyUp = ( e ) => {
         const target = e.target.value;
-        if (e.key === "Enter" && target.trim() !== "") {
+
+        if ( e.key === "Enter" && target.trim() !== "" ) {
           if ( !tagValidation(target) ) {
-            setMessage("#은 사용할수 없으며,최대20자까지만 입력이 가능해요"); 
+            setMessage("#은 사용할수 없습니다. \n\n태그는 최대 20자입니다."); 
             return;
           }
-
-          if ( tagList.length === 20){
-            setMessage("태그는 최대 20개까지만 가능해요"); 
-            return
-          }
-          
           setTagList([...tagList, target]);
           e.target.value = "";
         }
       };
     
-      const onBlur = ( e ) => {
+    const onBlur = ( e ) => {
         const target = e.target.value;
-        if (target.trim() !== "") {
+
+        if ( target.trim() !== "" ) {
           if ( !tagValidation(target) ) {
+            setMessage("#은 사용할수 없습니다. \n\n태그는 최대 20자입니다."); 
             inputRef.current.focus();
             return;
           }
-
-          if ( tagList.length === 20){
-            e.target.value = "";
-            return;
-          }
-          
           setTagList([...tagList, target]);
           e.target.value = "";
         }
       };
     
-      const deleteTag = ( text ) => {
-        const deleteTagList = tagList.filter((item) => item !== text);
-        setTagList(deleteTagList);
-      };
+    const deleteTag = ( text ) => {
+      const deleteTagList = tagList.filter((item) => item !== text);
+      setTagList(deleteTagList);
+    };
 
     return { tagList, inputRef, onKeyUp, onBlur, deleteTag };
 }

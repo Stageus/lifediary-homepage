@@ -23,7 +23,7 @@ export const Router = createBrowserRouter(
           <Route path=":diaryidx"/>
         </Route>
         <Route path={paths.DIARYCREATE} element={<DiaryCreate />} />
-        <Route path={`${paths.DIARYUPDATE}/:diaryidx`} element={<DiaryUpdate />} />
+        <Route path={`${paths.DIARYUPDATE}/:diaryIdx`} element={<DiaryUpdate />} />
         <Route path={ paths.SEARCH } element={ <Search /> }/>
         <Route path={paths.MYPROFILE} element={<MyProfile />} />
         <Route path={`${paths.USERPROFILE}/:accountIdx`} element={<UserProfile />} />
