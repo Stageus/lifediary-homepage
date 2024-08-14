@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 // Layer
 import { useFetch, useCookie, useRoute } from "@shared/hook";
-import { useMessage } from "@shared/store"
+import { useMessage } from "@shared/store";
 
 export const usePostDiary = () => {
 
@@ -14,24 +14,14 @@ export const usePostDiary = () => {
     const postDiary = ( props ) => {
         
         const { textContent, tags, isPublic, color, imgContents } = props;
-        
-        if ( imgContents.length > 3) {
-            setMessage("이미지는 최대 3개까지만 등록가능합니다");
-            return;
-        }
-
-        if ( !color ) {
-            setMessage("색상 선택은 필수입니다");
-            return;
-        }
 
         const formData = new FormData();
+        if ( Array.isArray(tags) && tags.length ) tags.forEach( tag => formData.append("tags", tag));
+        if ( Array.isArray(imgContents) && imgContents.length ) imgContents.forEach( fileObj => formData.append("imgContents", fileObj));
         formData.append("textContent", textContent);
-        formData.append("tags", tags);
         formData.append("isPublic", isPublic);
         formData.append("color", color);
-        // formData는 배열을 문자열로 인식한다 ? file객체를 배열로 담을경우에 발생했음
-        imgContents.forEach( file => formData.append("imgContents",file));
+
         baseFetch("diary", {method:"POST", data:formData}, cookieGet("token"));
     }
 

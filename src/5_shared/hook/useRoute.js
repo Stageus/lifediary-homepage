@@ -24,6 +24,7 @@ export const useRoute = () => {
         navigate( `/${paths.SIGNUP}`, { state: {...googleInfo} } )
     };
     const errorRoute = ( status, message ) => navigate(`/${status}`, {state:{status, message}});
+    const backRoute = () => navigate(-1);
 
     return { 
         homeRoute,
@@ -37,5 +38,6 @@ export const useRoute = () => {
         loginRoute,
         signupRoute,
         errorRoute,
+        backRoute,
      };
 }
