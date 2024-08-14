@@ -6,7 +6,7 @@ export const useDiaryVaildation = ( submit ) => {
     const setMessage = useMessage( state => state.setMessage );
 
     const checkSubmit = ( props ) => {
-        const { textContent, tags, imgContents } = props;
+        const { textContent, tags, imgContents, isPublic, color, deletedImgs } = props;
         
         // 일기내용 유효성 검사
         if ( !diaryContentValidation(textContent) ) {
@@ -24,10 +24,15 @@ export const useDiaryVaildation = ( submit ) => {
         if ( Array.isArray(imgContents) ) {
             if ( imgContents.length > 3 ) return setMessage("이미지는 3개이상 등록할수 없습니다.");
 
-            const isTrue = imgContents.some( img => !imgValidation(img));
-            if ( isTrue ) return setMessage("이미지확장자: JPG, JPEG, GIF, PNG\n이미지크기: 10M 이하");             
+            for ( let fileORurl of imgContents) {
+                if ( fileORurl instanceof File && !imgValidation(fileORurl)){
+                    return setMessage("이미지확장자: JPG, JPEG, GIF, PNG\n이미지크기: 10M 이하");
+                }
+            }
         }   
-        return submit(props);
+        const filterSelectImg = imgContents.filter( item => item instanceof File);
+
+        return submit({textContent, tags, isPublic, color, imgContents:filterSelectImg, deletedImgs});
     }
 
     return [ checkSubmit ];

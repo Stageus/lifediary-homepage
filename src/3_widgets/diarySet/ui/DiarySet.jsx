@@ -20,7 +20,7 @@ export const DiarySet = ( props ) => {
     const [ tagList, setTagList ] = useState( tags );
     const { toggle, isToogle } = useToogle( isPublic );
     const { selectColor, changeColor, randomColor } = useColor( color );  
-    const { selectImg, previewImg, deleteUrlList, onClickImg, onClickDeleteImg } = useImg( imgContents );
+    const { selectImg, deleteUrlList, onClickImg, onClickDeleteImg } = useImg( imgContents );
 
     return(
        <S.diarySet>
@@ -68,14 +68,14 @@ export const DiarySet = ( props ) => {
                         />
                 </S.imgArea>
                 <S.previewArea>
-                    { previewImg?.map( ( url, idx )=> {
+                    { selectImg?.map( ( fileORurl, idx )=> {
                         return(
-                            <S.previewItem key={idx} onClick={() => onClickDeleteImg(url, idx)}>
+                            <S.previewItem key={idx} onClick={() => onClickDeleteImg(fileORurl)}>
                                 <Icon 
                                 color="#FF6767"
                                 type="cancel"
                                 />
-                                <img key={idx} src={url}/>
+                                <img key={idx} src={ typeof fileORurl === "string" ? fileORurl : URL.createObjectURL(fileORurl)}/>
                             </S.previewItem>
                         );
                     })}                    

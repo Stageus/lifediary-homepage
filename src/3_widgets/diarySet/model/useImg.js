@@ -7,7 +7,6 @@ import { imgValidation } from "@shared/consts/validation";
 export const useImg = ( imgContents ) => {
 
     const [ selectImg, setSelectImg ] = useState([]);
-    const [ previewImg, setPreviewImg ] = useState([]);
     const [ deleteUrlList, setDeleteUrlList ] = useState([]);
     const setMessage = useMessage( state => state.setMessage );
 
@@ -22,39 +21,26 @@ export const useImg = ( imgContents ) => {
             setMessage(`이미지는 3개이상 등록할수 없습니다.`);
             return;
         }
-
-        if ( Array.isArray(previewImg) && previewImg.length >= 3 ) {
-            setMessage(`이미지는 3개이상 등록할수 없습니다.`);
-            return;
-        }
-
-        const previewUrl = URL.createObjectURL(e.target.files[0]);
-        setPreviewImg([...previewImg, previewUrl]);
         setSelectImg([...selectImg, e.target.files[0]]);
     };
 
-    const onClickDeleteImg = ( url, imgidx) => {
+    const onClickDeleteImg = ( fileORurl ) => {
 
-        // 일기작성시: selectImg, previewImg를 삭제
-        const deletePreview =  previewImg.filter((_, idx) => idx !== imgidx);
-        setPreviewImg(deletePreview);
-        const deleteSelect = selectImg.filter((_, idx) => idx !== imgidx)
+        const deleteSelect = selectImg.filter( item => item !== fileORurl);
         setSelectImg(deleteSelect);
 
-        // 일기수정시: deleteUrl을 저장
-        if ( Array.isArray(imgContents) && !imgContents.length ){
-            const deleteUrl = imgContents.filter( item => item === url);
-            setDeleteUrlList([...deleteUrlList, ...deleteUrl]);
+        if ( Array.isArray(selectImg) && selectImg.length && typeof fileORurl === "string" ){
+            setDeleteUrlList([...deleteUrlList, fileORurl]);
         }
     };
 
     useEffect(()=>{
 
         if ( imgContents ) {
-            setPreviewImg( [...imgContents])
+            setSelectImg( [...imgContents])
         };
 
     },[])
 
-    return { selectImg, previewImg, deleteUrlList, onClickImg, onClickDeleteImg };
+    return { selectImg, deleteUrlList, onClickImg, onClickDeleteImg };
 }
