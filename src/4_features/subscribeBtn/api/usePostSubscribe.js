@@ -7,13 +7,13 @@ import { useSubscribe, useAlarm } from "@shared/store";
 export const usePostSubscribe = ( isSubscribed ) => {
 
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet } = useCookie();
     const [ subscribe, setSubscribe ] = useState( isSubscribed );
     const updateSubscribe = useSubscribe( state => state.updateSubscribe );
     const alarmText = useAlarm( state => state.alarmText );
 
     const postSubscribe = ( accountIdx )=>{
-        baseFetch(`subscription/${accountIdx}`,{method: "POST"},handleGetCookie());
+        baseFetch(`subscription/${accountIdx}`,{method: "POST"},cookieGet("token"));
     };
 
     useEffect(() => {

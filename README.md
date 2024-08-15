@@ -60,6 +60,11 @@
 - api: 없음
 - model: 완료
   - create & update를 동시에 사용하고있어서 코드가 읽기가 힘든부분이 존재함, 동작에 문제가 있지 않지만 api부분또한 랩핑해야하는 현상이 있음
+  - 
+- ### profileSet ✅
+- ui: 
+- api:
+- model:
 
 
 
@@ -67,3 +72,47 @@
 
 
 
+
+/*
+  마이페이지
+    - 내정보반환 api
+  유저페이지
+    - 유저정보반환 api
+
+
+  프로필에 대한 api는 각 페이지에서 요청하여 처리하고, 해당 데이터를
+  profile에서 props로 받아 ui를 그려준다.
+  이때 프로필이미지 수정, 닉네임 수정, 회원탈퇴, 구독 등은 어떻게 구분할것인가?
+  profile자체를 widgets으로 만들고,
+  props에따라 구분해야하나 ?
+  아니면 프로필정보만 props로 받고, props로 ui를 구분하고, profile컴포넌트 자체에서 api처리를 다한다?
+
+  "nickname" : string,
+	"profileImg" : string,
+	"subscribeCnt" : number,
+	"diaryCnt" : number,
+
+    "nickname" : string,
+		"profileImg" : string,
+		"subscribeCnt" : number,
+		"diaryCnt" : number,	
+		"isSubscribed": bool
+
+  페이지 라우트에따라 ul를 구분하는게 좋을것같음
+  
+  일단 두개다 React.memo를 사용해야한다
+  
+
+  안되는 상황
+  token으로 구분하여 ui를 바꾸게되면
+  마이프로필, 유저프로필에서 문제가 발생함
+  프로필컴포넌트에서 props에 따라 ui를 바꿔주면 될것같은데
+
+
+
+  tap이 공존하는데 어떻게 해야하나 ?
+  tap은 독립적으로 움직이는데 
+  
+
+
+*/

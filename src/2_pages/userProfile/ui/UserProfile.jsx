@@ -1,11 +1,13 @@
+// Slice
 import { S } from "./style";
-import { ProfileSet } from "@widgets/profileSet";
+// Layer
+import { AccountProfile } from "@widgets/accountProfile";
 
 export const UserProfile = () => {
 
     return (
-        <>
-            <ProfileSet/>
-        </>
+        <S.userProfile>
+            <AccountProfile/>
+        </S.userProfile>
     );
 }
