@@ -4,6 +4,7 @@ import { useName } from "../model/useName";
 import { useProfileImg } from "../model/useProfileImg";
 import { usePageCheck } from "../model/usePageCheck";
 import { usePutProfileImg } from "../api/usePutProfileImg";
+import { usePutName } from "../api/usePutName";
 // Layer
 import { Profile, DefaultBtn, Icon } from "@shared/ui";
 import { SubscribeBtn } from "@features/subscribeBtn";
@@ -13,10 +14,11 @@ import profile from "@shared/assets/img/profile.png";
 export const AccountProfile = ( props ) => {
 
   const { nickname, profileImg, subscribeCnt, diaryCnt, isSubscribed, accountIdx } = props;  
-  const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( profileImg || profile );
   const { isMyprifle } = usePageCheck();
+  const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( profileImg || profile );
+  const [ isProfileSuccess, onClickProfileAgain, putProfileImg ] = usePutProfileImg();
   const { name, setName, nameEdit, onClickEdit } = useName();
-  const [ isSuccess, onClickAgain, putProfileImg ] = usePutProfileImg();
+  const [ isNameSuccess, onClickNameAgain, putName ] = usePutName();
 
   return (
     <S.userInfoArea>
@@ -27,14 +29,14 @@ export const AccountProfile = ( props ) => {
             <S.profileWrap>
               <Profile img={previewImg}/>
             </S.profileWrap>
-            <label htmlFor="file" onClick={onClickAgain}/>
+            <label htmlFor="file" onClick={onClickProfileAgain}/>
             <input
               id="file"
               type="file"
               accept=".jpg, .jpeg, .png, .gif"
               onChange={onClickImg}
             />
-            {!isSuccess && selectImg && (
+            {!isProfileSuccess && selectImg && (
               <S.imgBtnWrap>
                 <DefaultBtn 
                 text="저장하기" 
@@ -62,14 +64,17 @@ export const AccountProfile = ( props ) => {
         <S.userInfo>
           {isMyprifle 
           ? (
+            // 이름을 변경하고 성공하면, input창을 닫아야하고
+            // 다시눌렀을시에는 열리도록해야함 useName쪽이라 조합해야할듯
             <>
-              {nameEdit 
+              { !isNameSuccess && nameEdit 
               ? <>
                 <NameInput name={name} setName={setName} initState={nickname}/>
                 <DefaultBtn
                   size="medium"
                   type={ name ? "select" : "disabled"}
                   text="저장"
+                  onClick={ ()=>putName(name)}
                 />
                 <DefaultBtn
                   size="medium"
@@ -79,9 +84,9 @@ export const AccountProfile = ( props ) => {
               </>
               : (
                 <>
-                  <S.name>{nickname}</S.name>
+                  <S.name>{  name ?? nickname }</S.name>
                   <S.iconWrap onClick={onClickEdit}>
-                    <Icon type="edit" />
+                    <Icon type="edit"/>
                   </S.iconWrap>
                 </>
               )}

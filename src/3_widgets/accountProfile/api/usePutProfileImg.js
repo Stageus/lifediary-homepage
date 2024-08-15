@@ -13,7 +13,7 @@ export const usePutProfileImg = () => {
 
     const onClickAgain = () => {
         if( isSuccess ) setisSuccess(false);
-    }
+    };
 
     const putProfileImg = ( fileObj ) => {
         const formData = new FormData();
