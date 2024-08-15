@@ -1,9 +1,9 @@
 // Slice
 import { S } from "./style";
 import { Picker } from "./picker";
+import { useProfileImg } from "../model/useProfileImg";
 // Layer
 import { Profile, DefaultBtn, Icon, Thumbnail } from "@shared/ui";
-
 
 export const ProfileSet = () => {
   const testData = [
@@ -45,19 +45,30 @@ export const ProfileSet = () => {
     },
   ];
 
+  const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg(
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxDrnaoaTgWNNn6hUvTdTLyWNYjFxC2aRqlg&s"
+  );
 
   return (
     <S.profileSet>
-      {/* 유저 정보영역 */}
       <S.userInfoArea>
-        {/* 유저 이미지 영역 회원가입부분그대로 활용 단! 이미지 변경감지시 저장, 되돌리기 버튼 노출 */}
         <S.imgWrap>
-          <Profile />
-          {/* 사진이 변경되었을때 노출 */}
-          <S.imgBtnWrap>
-            <DefaultBtn text="저장하기" size="smail" type="select" />
-            <DefaultBtn text="되돌리기" size="smail" />
-          </S.imgBtnWrap>
+          <S.profileWrap>
+            <Profile img={previewImg} />
+          </S.profileWrap>
+          <label htmlFor="file" />
+          <input
+            id="file"
+            type="file"
+            accept=".jpg, .jpeg, .png, .gif"
+            onChange={onClickImg}
+          />
+          {selectImg && (
+            <S.imgBtnWrap>
+              <DefaultBtn text="저장하기" size="smail" type="select" />
+              <DefaultBtn onClick={ onClickReset } text="되돌리기" size="smail" />
+            </S.imgBtnWrap>
+          )}
         </S.imgWrap>
         {/* 유저 이름 및 구독자 및 작성한일기 개수 */}
         <S.infoWrap>
@@ -90,7 +101,7 @@ export const ProfileSet = () => {
           </S.tapDateWrap>
         </S.tapHeader>
         <S.tapContent>
-          {testData?.map((item,idx) => {
+          {testData?.map((item, idx) => {
             return (
               <S.diaryItem key={idx}>
                 <S.thumbnailWrap>

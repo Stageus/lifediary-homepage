@@ -20,9 +20,28 @@ const userInfoArea = styled.div`
 
 const imgWrap = styled.div`
     position: relative;
-    width: 150px;
-    height: 100%;
     display: flex;
+
+    & > label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left:0;
+        cursor: pointer;
+    }
+
+    & > input {
+        display: none;
+    }
+`;
+
+const profileWrap = styled.div`
+    width: 150px;
+    height: 150px;
+    display: flex;
+    border-radius: 50%;
+    overflow: hidden;
 `;
 
 const imgBtnWrap = styled.div`
@@ -145,6 +164,7 @@ const diaryInfoWrap = styled.div`
 export const S = {
     profileSet,
     userInfoArea,
+    profileWrap,
     imgWrap,
     imgBtnWrap,
     infoWrap,
