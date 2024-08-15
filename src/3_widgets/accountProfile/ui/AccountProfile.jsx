@@ -3,6 +3,7 @@ import { S } from "./style";
 import { useName } from "../model/useName";
 import { useProfileImg } from "../model/useProfileImg";
 import { usePageCheck } from "../model/usePageCheck";
+import { usePutProfileImg } from "../api/usePutProfileImg";
 // Layer
 import { Profile, DefaultBtn, Icon } from "@shared/ui";
 import { SubscribeBtn } from "@features/subscribeBtn";
@@ -11,10 +12,11 @@ import profile from "@shared/assets/img/profile.png";
 
 export const AccountProfile = ( props ) => {
 
-  const { nickName, profileImg, subscribeCnt, diaryCnt, isSubscribed } = props;  
-  const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( profileImg ?? profile );
+  const { nickname, profileImg, subscribeCnt, diaryCnt, isSubscribed, accountIdx } = props;  
+  const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( profileImg || profile );
   const { isMyprifle } = usePageCheck();
   const { name, setName, nameEdit, onClickEdit } = useName();
+  const [ isSuccess, onClickAgain, putProfileImg ] = usePutProfileImg();
 
   return (
     <S.userInfoArea>
@@ -23,18 +25,23 @@ export const AccountProfile = ( props ) => {
         {isMyprifle ? (
           <>
             <S.profileWrap>
-              <Profile img={previewImg} />
+              <Profile img={previewImg}/>
             </S.profileWrap>
-            <label htmlFor="file" />
+            <label htmlFor="file" onClick={onClickAgain}/>
             <input
               id="file"
               type="file"
               accept=".jpg, .jpeg, .png, .gif"
               onChange={onClickImg}
             />
-            {selectImg && (
+            {!isSuccess && selectImg && (
               <S.imgBtnWrap>
-                <DefaultBtn text="저장하기" size="smail" type="select" />
+                <DefaultBtn 
+                text="저장하기" 
+                size="smail" 
+                type="select"
+                onClick={ () => putProfileImg(selectImg)}
+                 />
                 <DefaultBtn
                   onClick={onClickReset}
                   text="되돌리기"
@@ -58,7 +65,7 @@ export const AccountProfile = ( props ) => {
             <>
               {nameEdit 
               ? <>
-                <NameInput name={name} setName={setName} initState={"초반이름"}/>
+                <NameInput name={name} setName={setName} initState={nickname}/>
                 <DefaultBtn
                   size="medium"
                   type={ name ? "select" : "disabled"}
@@ -72,7 +79,7 @@ export const AccountProfile = ( props ) => {
               </>
               : (
                 <>
-                  <S.name>유저이름최대20글자입니다다다다다다다다</S.name>
+                  <S.name>{nickname}</S.name>
                   <S.iconWrap onClick={onClickEdit}>
                     <Icon type="edit" />
                   </S.iconWrap>
@@ -80,14 +87,14 @@ export const AccountProfile = ( props ) => {
               )}
             </>
             ) 
-          : <S.name>유저이름최대20글자입니다다다다다다다다</S.name>
+          : <S.name>{nickname}</S.name>
           }
         </S.userInfo>
-        <S.pageInfo>{`구독자 110명 ・ 작성 일기 50개`}</S.pageInfo>
+        <S.pageInfo>{`구독자 ${subscribeCnt}명 ・ 작성 일기 ${diaryCnt}개`}</S.pageInfo>
         <S.btnWrap>
           {isMyprifle 
           ? <DefaultBtn text="회원탈퇴" size="medium" />
-          : <SubscribeBtn isSubscribed={false} accountIdx={17}/>
+          : <SubscribeBtn isSubscribed={isSubscribed} accountIdx={accountIdx}/>
           }
         </S.btnWrap>
       </S.infoWrap>
