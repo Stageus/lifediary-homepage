@@ -48,6 +48,10 @@ const userInfo = styled.div`
     gap: 5px;
 `;
 
+const iconWrap = styled.div`
+    cursor: pointer;
+`;
+
 const name = styled.span`
     text-align: center;
 `;
@@ -63,10 +67,6 @@ const btnWrap = styled.div`
     gap: 10px;
     width: 100px;
 `;
-
-
-
-
 
 
 const tapArea = styled.div`
@@ -90,6 +90,11 @@ const tapBtnWrap = styled.div`
         background-color: ${({theme}) => theme.minor};
         color: ${({theme}) => theme.highlight};
         cursor: pointer;
+
+        &:hover{
+            background-color: ${({theme}) => theme.highlight};
+            color: white;
+        }
     }
 `;
 
@@ -115,6 +120,13 @@ const diaryItem = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4px;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover{
+        transform: scale(1.1);
+        border-color: ${({theme}) => theme.highlight};
+    }
     
 `;
 
@@ -138,6 +150,7 @@ export const S = {
     infoWrap,
     userInfo,
     name,
+    iconWrap,
     pageInfo,
     btnWrap,
     tapArea,

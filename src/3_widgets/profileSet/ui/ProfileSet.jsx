@@ -65,9 +65,9 @@ export const ProfileSet = () => {
           <S.userInfo>
             {/* 수정 input 들어와야함 */}
             <S.name>유저이름최대20글자입니다다다다다다다다</S.name>
-            <div>
+            <S.iconWrap>
               <Icon type="edit" />
-            </div>
+            </S.iconWrap>
           </S.userInfo>
           <S.pageInfo>{`구독자 110명 ・ 작성 일기 50개`}</S.pageInfo>
           <S.btnWrap>

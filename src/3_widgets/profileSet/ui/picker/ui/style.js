@@ -9,6 +9,7 @@ const picker = styled.div`
     border: 3px solid ${({theme}) => theme.minor};
     border-radius: 8px;
     width: 210px;
+    cursor: pointer;
   }
 `;
 
