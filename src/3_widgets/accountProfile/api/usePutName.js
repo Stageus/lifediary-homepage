@@ -8,12 +8,6 @@ export const usePutName = () => {
     const { cookieGet } = useCookie();
     const { errorRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage );
-    const [ isSuccess, setisSuccess ] = useState( false );
-
-    const onClickAgain = () => {
-        console.log( isSuccess )
-        if ( isSuccess ) setisSuccess(false);
-    }
 
     const putName = ( name ) => {
         baseFetch("account/nickname",{method:"PUT", data:{"nickname":name}},cookieGet("token"));
@@ -24,7 +18,7 @@ export const usePutName = () => {
 
         switch ( fetchData.status ) {
             case 200:
-                setisSuccess( true );
+                // 
                 break;
 
             case 400:
@@ -47,5 +41,5 @@ export const usePutName = () => {
     },[fetchData])
 
 
-    return [ isSuccess, onClickAgain, putName ];
+    return [ putName ];
 }
