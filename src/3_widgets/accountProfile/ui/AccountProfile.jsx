@@ -5,11 +5,13 @@ import { useProfileImg } from "../model/useProfileImg";
 import { usePageCheck } from "../model/usePageCheck";
 import { usePutProfileImg } from "../api/usePutProfileImg";
 import { usePutName } from "../api/usePutName";
+import { useDeleteAccount } from "../api/useDeleteAccount";
 // Layer
 import { Profile, DefaultBtn, Icon } from "@shared/ui";
 import { SubscribeBtn } from "@features/subscribeBtn";
 import { NameInput } from "@features/nameInput";
 import profile from "@shared/assets/img/profile.png";
+import { useMessage } from "@shared/store";
 
 export const AccountProfile = ( props ) => {
 
@@ -19,6 +21,8 @@ export const AccountProfile = ( props ) => {
   const [ isProfileSuccess, onClickProfileAgain, putProfileImg ] = usePutProfileImg();
   const { name, setName, nameEdit, onClickEdit } = useName();
   const [ putName ] = usePutName();
+  const setMessage = useMessage( state => state.setMessage );
+  const [ deleteAccount ] = useDeleteAccount();
 
   return (
     <S.userInfoArea>
@@ -101,7 +105,11 @@ export const AccountProfile = ( props ) => {
         <S.pageInfo>{`구독자 ${subscribeCnt}명 ・ 작성 일기 ${diaryCnt}개`}</S.pageInfo>
         <S.btnWrap>
           {isMyprifle 
-          ? <DefaultBtn text="회원탈퇴" size="medium" />
+          ? <DefaultBtn 
+            text="회원탈퇴" 
+            size="medium"
+            onClick={()=> setMessage("정말 탈퇴하시겠습니까?",deleteAccount,true)}
+            />
           : <SubscribeBtn isSubscribed={isSubscribed} accountIdx={accountIdx}/>
           }
         </S.btnWrap>
