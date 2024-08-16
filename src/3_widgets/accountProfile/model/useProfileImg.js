@@ -11,7 +11,9 @@ export const useProfileImg = ( urlImg ) => {
     const setMessage = useMessage( state => state.setMessage );
     
     const onClickImg = ( e ) => {
-    
+        setSelectImg( null );
+        if ( !e.target.files[0] ) return;
+            
         const imgCheckValidation = imgValidation( e.target.files[0] );
 
         if ( !imgCheckValidation ) {
