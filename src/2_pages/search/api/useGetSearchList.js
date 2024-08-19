@@ -8,6 +8,7 @@ import { useRoute } from "@shared/hook";
 import { tagValidation } from "@shared/consts/validation";
 
 export const useGetSearchList = () => {
+  
   const [diaryList, setDiaryList] = useState(null);
   const [fetchData, baseFetch] = useFetch();
   const [pageNum, setPageNum] = useState(1);

@@ -18,11 +18,6 @@ export const useRoute = () => {
         navigate( `${paths.SEARCH}?tags=${encodedTags}` );
     };
     const myProfileRoute = () => navigate( paths.MYPROFILE );
-    const profileTabRoute = ( beginDate, endDate ) => {
-        const beginQuery = beginDate ? beginDate : "";
-        const endQuery = endDate ? endDate : "";
-        navigate( `?beginDate=${beginQuery}&endDate=${endQuery}` );
-    }
     const userProfileRoute = ( accountIdx ) => navigate( `${paths.USERPROFILE}/${accountIdx}` );
     const loginRoute = () => navigate( `/${paths.LOGIN}` );
     const signupRoute = ( googleInfo ) => {
@@ -44,6 +39,5 @@ export const useRoute = () => {
         signupRoute,
         errorRoute,
         backRoute,
-        profileTabRoute,
      };
 }
