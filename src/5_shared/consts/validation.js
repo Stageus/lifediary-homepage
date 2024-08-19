@@ -1,8 +1,13 @@
 
 export const tagValidation = ( tag ) => {
     const regex = /^[^\s#]{1,20}$/;
-    if( !regex.test(tag) ) return false;
-    return true;
+    return regex.test(tag);
+};
+
+export const dateValidation = ( date ) => {
+    // 정수인지도 확인해야함
+    const regex = /^\d{4}-\d{2}-\d{2}$/;    
+    return regex.test(date)
 };
 
 export const imgValidation = ( fileObj ) => {
@@ -15,12 +20,10 @@ export const imgValidation = ( fileObj ) => {
 
 export const nameValidation = ( name ) => {
     const regex= /^.{3,20}$/;
-    if ( !regex.test(name) ) return false;
-    return true;
+    return regex.test(name)
 };
 
 export const diaryContentValidation = ( text ) => {
     const regex= /^.{0,500}$/;
-    if ( !regex.test(text) ) return false;
-    return true;
+    return regex.test(text)
 }
