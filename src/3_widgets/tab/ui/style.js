@@ -56,7 +56,7 @@ const diaryItem = styled.div`
   transition: 0.1s;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     border-color: ${({ theme }) => theme.highlight};
   }
 `;
@@ -73,6 +73,11 @@ const diaryInfoWrap = styled.div`
   font-size: 14px;
 `;
 
+const guideMessage = styled.p`
+  grid-column: 1/4;
+  text-align: center;
+`;
+
 export const S = {
   tabArea,
   tabHeader,
@@ -83,4 +88,5 @@ export const S = {
   diaryItem,
   thumbnailWrap,
   diaryInfoWrap,
+  guideMessage,
 };

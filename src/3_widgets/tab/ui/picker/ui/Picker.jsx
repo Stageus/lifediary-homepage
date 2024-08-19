@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // Slice
 import { S } from "./style";
 
-export const Picker = () => {
+export const Picker = ( props ) => {
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
@@ -13,6 +13,7 @@ export const Picker = () => {
   return (
     <S.picker>
       <DatePicker
+        ref={props.dateRef}
         // 해당 input에 대한 css class
         className="input_style"
         // 당일 날짜 선택버튼
