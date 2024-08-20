@@ -25,6 +25,7 @@ export const News = () => {
         <DefaultBtn 
         size="medium"
         text="알림" 
+        type={isOpenModal ? "select" : ""}
         onClick={ onClickOpen }/>
 
         {/* 모달 */}

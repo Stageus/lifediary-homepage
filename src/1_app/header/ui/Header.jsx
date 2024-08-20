@@ -11,8 +11,9 @@ import { useMessage } from "@shared/store";
 export const Header = ( props ) => {
   
   const { userInfo } = props; 
+  
   const { homeRoute, loginRoute, diaryCreateRoute, myProfileRoute } = useRoute();
-  const { cookieGet, cookieRemove } = useCookie();
+  const { cookieRemove } = useCookie();
   const setMessage = useMessage((state) => state.setMessage);
 
   const logoutHandler = () => {
@@ -29,10 +30,7 @@ export const Header = ( props ) => {
         <Search/>
       </S.searchArea>
       <S.menuArea>
-        {/* 임시테스트용 */}
-        {cookieGet("token") ? (
-        // token이 유효할경우만 보여준다
-        // userInfo ? (
+        { userInfo ? (
           <>
             <S.profileArea onClick={myProfileRoute}>
               <Profile />

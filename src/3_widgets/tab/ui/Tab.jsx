@@ -7,18 +7,6 @@ import { useSubmit } from "../model/useSubmit";
 // Layer
 import { DefaultBtn } from "@shared/ui";
 
-
-/*
-  
-  const obj = [
-  {
-    name: function,
-  },
-  {
-    name: function,
-  }
-  ]
-*/
 export const Tab = ( props ) => {
 
   const { components, tabLabel } = props;

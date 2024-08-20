@@ -17,7 +17,7 @@ const Month = styled.div`
 `;
 
 const HoverInfo = styled.div`
-    position: fixed;
+    position: absolute;
     transform: translate(-25%, -80%);
     background-color: ${({theme}) => theme.highlight};
     color: ${({theme})=> theme.white};

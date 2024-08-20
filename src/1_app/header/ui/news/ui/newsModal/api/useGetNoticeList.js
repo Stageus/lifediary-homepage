@@ -1,17 +1,21 @@
 // Npm
 import { useEffect, useState } from "react";
 // Layer
-import { useFetch, useCookie } from "@shared/hook";
+import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useMessage } from "@shared/store";
 import { parseTime } from "@shared/util";
 
 export const useGetNoticeList = () => {
 
-  const [ fetchData, baseFetch] = useFetch();
-  const { handleGetCookie } = useCookie();
+  const [ fetchData, baseFetch ] = useFetch();
+  const { cookieGet } = useCookie();
   const [ noticeList, setNoticeList ] = useState( null );
-  const [ errorMessage, setErrorMessage ] = useState( null );
   const [ isLoading, setIsLoading ] = useState( false );
   const [ pageNum, setPageNum ] = useState( 1 );
+  const [ isEnd, setIsEnd ] = useState( false );
+  const setMessage = useMessage( state => state.setMessage );
+  const { errorRoute } = useRoute();
+
 
   // 알람데이터에 대한 mapper
   const mapper = ( resData ) => {
@@ -49,9 +53,8 @@ export const useGetNoticeList = () => {
 
   // 초기페이지 와 다음페이지의 데이터를 요청하기 위한 함수
   const getNoticeList = () => {
-    if ( errorMessage ) return;
     setIsLoading( true );
-    baseFetch( `notice?page=${pageNum}`, {}, handleGetCookie() );
+    baseFetch( `notice?page=${pageNum}`, {}, cookieGet("token") );
   };
 
   // 초기 알람 데이터에 대한 요청
@@ -74,30 +77,23 @@ export const useGetNoticeList = () => {
             break;
 
         case 400:
-            // 서버에 다시 요청을하고, 호출횟수를 기록하고, 이후에 알림 적용할예정
-            setErrorMessage( "잠시후에 다시 시도해주세요" );
+            setMessage("잠시후에 다시 시도해주세요");
             break;
 
         case 401:
-            // commonModal 적용 예정
-            console.log("회원만 가능한 접근입니다.");
+            setMessage("로그인이 필요한 서비스입니다.");
             break;
 
         case 404:
-            if ( !noticeList ) return setErrorMessage( "아직 알람이 없어요!" );
-            setErrorMessage( "더이상 알람이 존재하지 않아요!" );
+            setIsEnd(true);
             break;
 
         case 500:
-            // commonModal 적용 예정
-            setErrorMessage( "잠시후에 다시 시도해주세요" );
+            errorRoute(500, "서버에러")
             break;
-        // 500 에러와 같이 사용?
-        default:
-            console.log("예상하지 못한 상황");
     }
 
   }, [ fetchData ]);
 
-  return [ getNoticeList, noticeList, isLoading, errorMessage ];
+  return [ getNoticeList, noticeList, isLoading, isEnd ];
 };

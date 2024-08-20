@@ -2,17 +2,21 @@
 import { useEffect, useState } from "react";
 // Layer
 import { useFetch, useCookie } from "@shared/hook";
+import { useMessage } from "@shared/store";
 
 export const useGetNewNotice = () => {
     
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet } = useCookie();
     const [ isNew, setIsNew ] = useState( false );
+    const setMessage = useMessage( state => state.setMessage );
 
-    const getNewNotice = () => baseFetch("notice/new", {}, handleGetCookie());
+    const getNewNotice = () => {
+        baseFetch("notice/new", {}, cookieGet("token"));
+    };
 
     useEffect(() => {
-        // getNewNotice();
+        getNewNotice();
     },[])
 
     useEffect( () => {
@@ -23,16 +27,10 @@ export const useGetNewNotice = () => {
                 setIsNew(fetchData.data.isNew);
                 break
             case 401:
-                // commonModal 적용 예정
-                console.log("회원만 가능한 접근입니다.");
                 break
             case 500:
-                // commonModal 적용 예정
-                console.log("잠시후에 다시 시도해주세요");
+                setMessage("오류로인해 새로운 알람을 불러오지 못했습니다");
                 break
-            // 500 에러와 같이 사용?
-            default:
-                console.log("예상하지 못한 상황");
         }
 
     },[fetchData])
