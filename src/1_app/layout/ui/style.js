@@ -17,7 +17,7 @@ const divideArea = styled.div`
 `;
 
 const aside = styled.div`
-  width: 200px;
+  min-width: 200px;
 `;
 
 const main = styled.div`

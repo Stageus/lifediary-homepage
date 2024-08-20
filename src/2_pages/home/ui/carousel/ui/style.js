@@ -54,8 +54,8 @@ const ThumbnailImgWrap = styled.div`
 const UserInfo = styled.div`
     display: flex;
     align-items: center;
-    padding: 5px;
-    gap: 10px;
+    padding: 10px;
+    gap: 12px;
     & > span{
             color: ${({theme}) => theme.black};
             font-size: ${({theme}) => theme.fontSize.medium};

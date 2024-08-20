@@ -1,18 +1,21 @@
 // Npm
 import { useEffect, useState } from "react";
 // Layer
-import { useFetch, useCookie } from "@shared/hook";
+import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useMessage } from "@shared/store";
 
 export const useGetAlarm = () => {
     
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet } = useCookie();
     const [ isNew, setIsNew ] = useState( false );
+    const setMessage = useMessage( state => state.setMessage );
+    const { errorRoute } = useRoute();
 
-    const getAlarm = ()=> baseFetch("report/new",{},handleGetCookie());
+    const getAlarm = ()=> baseFetch("report/new", {}, cookieGet("token"));
 
     useEffect(() => {
-        // getAlarm();
+        getAlarm();
     },[])
 
     useEffect(() => {
@@ -20,22 +23,19 @@ export const useGetAlarm = () => {
         
         switch ( fetchData.status ) {
             case 200:
-                setIsNew(fetchData.data.isNew)
+                setIsNew(fetchData.data.isNew);
                 break;
 
             case 401:
-                console.log("토큰이 잘못되거나 없는경우");
                 break;
 
             case 403:
-                console.log("관리자가 아닌경우");
+                setMessage("권한이 없습니다");
                 break;
 
             case 500:
-                console.log("서버 에러");
+                errorRoute(500, "서버에러");
                 break;
-            default:
-                console.log("예상하지못한 경우")
         }
 
     },[ fetchData ])

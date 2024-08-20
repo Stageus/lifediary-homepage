@@ -1,15 +1,15 @@
 // Slice
 import { S } from "./style";
 import { useCurrentPage } from "../model/useCurrentPage";
-import { useRoute } from "../model/useRoute";
 import { useGetAlarm } from "../api/useGetAlarm";
 // Layer
 import { DefaultBtn, Icon } from "@shared/ui";
+import { useRoute } from "@shared/hook";
 
 export const ComplainAlarm = () => {
 
     const [ isNew ] = useGetAlarm();
-    const { onClickRoute } = useRoute();
+    const { complainRoute } = useRoute();
     const { pathName } = useCurrentPage();
 
     return(
@@ -17,7 +17,7 @@ export const ComplainAlarm = () => {
             <S.ComplainAlarm>
                 <DefaultBtn
                 text="신고 보기"
-                onClick={ onClickRoute }
+                onClick={ complainRoute }
                 type={ pathName === "/complain" ? "select" : null}
                 />
 
