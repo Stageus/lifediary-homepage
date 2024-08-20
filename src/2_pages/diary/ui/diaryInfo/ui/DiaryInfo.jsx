@@ -16,27 +16,31 @@ export const DiaryInfo = ( props )=>{
   const { isOpenModal, onClickModal } = useOpenModal();
   const { clipBoard } = useClipBoard();
     
-  console.log(imgContents);
     return (
         <S.DiaryInfo>
-
+                {/* 슬라이더(일기이미지), 일기내용 */}
                 <S.ContentPart>
                   <S.DiarySliderContainer>
+                    {/* 슬라이더(일기이미지) */}
                     <Slider sliderList={ imgContents } />
                   </S.DiarySliderContainer>
 
+                  {/* 일기내용 */}
                   <S.DiaryContent>
                     { textContent }
                   </S.DiaryContent>
                 </S.ContentPart>
 
+                {/* 댓글모달 */}
                 <S.CommentPart $openModal={ isOpenModal }>
                   <S.Cancel onClick={ onClickModal }>
                     <Icon size="30px" type="cancel" color="#FF6767" />
                   </S.Cancel> 
-                  { isOpenModal ? <Comment likeCount={likeCnt} diaryIsMine={isMine} diaryIdx={idx}/> : null}
+                  {/* 댓글리스트 및 내용 */}
+                  {/* { isOpenModal ? <Comment likeCount={likeCnt} diaryIsMine={isMine} diaryIdx={idx}/> : null} */}
                 </S.CommentPart>
                 
+                {/* 좋아요, 댓글버튼, 공유버튼, 신고버튼 */}
                 <S.ButtonPart>
                     <DiaryLikeBtn
                     diaryIdx={ idx }

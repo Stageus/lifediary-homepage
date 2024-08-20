@@ -13,5 +13,10 @@ export const useSlider = ( listLength )=>{
         setPositionUnit( positionUnit - 1 );
     };
 
-    return { positionUnit, onClickLeft, onClickRight };
+    const onClickNumber = ( number ) => {
+        console.log(number)
+        setPositionUnit( number );
+    }
+
+    return { positionUnit, onClickLeft, onClickRight, onClickNumber };
 }

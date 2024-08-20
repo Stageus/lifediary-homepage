@@ -63,9 +63,9 @@ export const Diary = () => {
                 </S.DiaryHeader>
 
                 {/* 일기 이미지 및 일기내용 */}
-                {/* <S.DiaryInfoContainer>
+                <S.DiaryInfoContainer>
                     <DiaryInfo key={ diary.idx } diary={ diary } />
-                </S.DiaryInfoContainer> */}
+                </S.DiaryInfoContainer>
               </S.ScrollItem>
             );
           })}
