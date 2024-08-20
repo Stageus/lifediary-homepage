@@ -34,6 +34,7 @@ export const useGetSubscribeList = () => {
     };
 
     useEffect(() => {
+        setPageNum(1);
         getSubscribeList();
     },[isSubscribe]);
     
@@ -44,11 +45,22 @@ export const useGetSubscribeList = () => {
 
         switch ( fetchData.status ) {
             case 200:
-                setPageNum( pageNum + 1);
-                const mapperData = mapper( fetchData.data );
 
-                if ( !subscribeList ) return setSubscribeList( mapperData );
-                setSubscribeList([ ...subscribeList, ...mapperData ]);
+                /*
+                    무한스크롤은 문제가 되지않는다,
+                    구독자가 20명 미만일경으에도 문제가 되지않는다,
+                    단! 무한스크롤을하고, page=2가 되었을시에는 구독취소를하면?
+                    다시 1페이지로 요청하려면?
+                    
+                */
+                const mapperData = mapper( fetchData.data );
+                if ( pageNum === 1 ) return setSubscribeList(mapperData);
+                setSubscribeList(prevDiaryList => prevDiaryList ? [...prevDiaryList, ...mapperData] : mapperData);
+
+                const moreData = mapperData.length >= 20;
+                setPageNum(prevPageNum => moreData ? prevPageNum + 1 : prevPageNum);
+                setIsEnd(!moreData);
+                
                 break;
                 
             case 400:

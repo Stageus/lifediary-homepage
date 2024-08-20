@@ -29,7 +29,7 @@ export const useGetAccountInfo = () => {
 
   useEffect(() => {
     getAccountInfo();
-  },[]);
+  },[accountIdx]);
 
   useEffect(() => {
     if (!fetchData) return;

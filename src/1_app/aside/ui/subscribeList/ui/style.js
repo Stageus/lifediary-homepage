@@ -24,17 +24,21 @@ const SubscribeList = styled.div`
 `;
 
 const SubscribeItem = styled.div`
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
+    padding: 4px;
     cursor: pointer;
     border-radius: 5px;
+    background-color: ${({$isSame, theme}) => $isSame ? theme.highlight : "transparent"};
+    color: ${({$isSame, theme}) => $isSame ? theme.white : theme.black};
 
     &:hover {
-        background-color: ${( {theme} ) => theme.major};
+        background-color: ${( {theme} ) => theme.highlight};
+        color: ${({theme}) => theme.white};
     }
-
 
     & > img {
         width: 30px;
