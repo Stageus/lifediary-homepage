@@ -58,7 +58,8 @@ export const useGetGrassList = ( changeYear ) => {
                 break;
 
             case 401:
-                cookieRemove();
+                // 상위 레이아웃 자체에서 지워져도 될것같음
+                // cookieRemove();
                 break;
 
             case 500:

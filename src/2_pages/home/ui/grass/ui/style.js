@@ -51,7 +51,7 @@ const Grass = styled.div`
     max-width: fit-content;
     padding: 10px;
     padding-top: 30px;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     position: relative;
 
     display: flex;

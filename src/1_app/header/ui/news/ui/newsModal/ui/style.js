@@ -18,6 +18,14 @@ const NewsModal = styled.div`
     z-index: 2;
 `;
 
+const message = styled.p`
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({theme}) => theme.gray};
+`;
+
 const Loading = styled.div`
     width: 100%;
     height: 100%;
@@ -26,5 +34,6 @@ const Loading = styled.div`
 
 export const S = {
     NewsModal,
+    message,
     Loading
 }
