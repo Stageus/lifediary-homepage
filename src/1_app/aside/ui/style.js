@@ -13,6 +13,7 @@ const BtnList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex-grow: 1;
 `;
 
 const BtnWrap = styled.div`
@@ -23,8 +24,6 @@ const BtnWrap = styled.div`
 const SubscribeListWrap = styled.div`
     height: 700px;    
 `;
-
-
 
 export const S = {
     Aside,

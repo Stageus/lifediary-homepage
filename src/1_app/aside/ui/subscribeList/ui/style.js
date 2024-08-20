@@ -50,6 +50,12 @@ const SubscribeItem = styled.div`
     }
 `;
 
+const message = styled.p`
+    color: ${({theme}) => theme.gray};
+    font-size: 12px;
+    padding: 4px;
+`;
+
 const Loading = styled.div`
     width: 100%;
     height: 100%;
@@ -62,4 +68,5 @@ export const S = {
     SubscribeList,
     SubscribeItem,
     Loading,
+    message,
 }
