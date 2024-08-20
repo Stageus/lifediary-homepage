@@ -3,13 +3,17 @@ import { useEffect, useState } from "react";
 // Slice
 import { sliceDiaryCount } from "../lib/sliceDiaryCount";
 // Layer
-import { useFetch } from "@shared/hook";
+import { useFetch, useRoute } from "@shared/hook";
+import { useMessage } from "@shared/store";
 
 export const useGetDiaryList = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const [ diaryList, setDiaryList ] = useState( null );
+    const [ isEnd, setIsEnd ] = useState( false );
     const [ page, setPage ] = useState( 1 );
+    const { errorRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage );
 
     const nextPage = () => setPage( page + 1 );
 
@@ -38,31 +42,25 @@ export const useGetDiaryList = () => {
 
         switch ( fetchData.status ) {
             case 200:
+                
                 if ( !diaryList ) return setDiaryList(sliceDiaryCount( mapper(fetchData.data), 5 ));
                 setDiaryList([...diaryList, ...sliceDiaryCount( mapper(fetchData.data), 5 )]);
                 break;
 
             case 400:
-                // commonModal 적용 예정
-                console.log("잠시후에 다시 시도해주세요");
+                setMessage("일시적인 오류로\n일기목록을 볼수없습니다");
                 break;
 
             case 404:
-                // commonModal 적용 예정
-                console.log("페이지기입 안했을경우");
-                console.log("일기리소스가 없을경우");
+                setIsEnd( true );
                 break;
 
             case 500:
-                // commonModal 적용 예정
-                console.log("잠시후에 다시 시도해주세요");
+                errorRoute(500, "서버에러");
                 break;
-            // 500 에러와 같이 사용?
-            default:
-                console.log("예상하지 못한 상황");
         }
         
     },[fetchData]);
 
-    return [diaryList, nextPage]
+    return [ diaryList, nextPage, isEnd ];
 }

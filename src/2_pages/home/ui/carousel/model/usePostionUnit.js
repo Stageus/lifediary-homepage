@@ -11,7 +11,7 @@ export const usePostionUnit = ( diaryLength, nextPage ) => {
       };
 
       const onClickRight = () => {
-        if ( diaryLength - 1 === -postionUnit ) nextPage();
+        if ( diaryLength - 2 === -postionUnit ) nextPage();
         
         setPostionUnit(postionUnit - 1);
       };

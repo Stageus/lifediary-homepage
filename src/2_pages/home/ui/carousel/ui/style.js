@@ -34,10 +34,10 @@ const ItemBundle = styled.div`
 `;
 
 const Item = styled.div`
-    max-width: 190px;
+    width: 190px;
     box-shadow: 3px 3px 7px gray;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: ${({$isDiary}) =>  $isDiary ? "pointer" : "not-allowed"};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -68,6 +68,15 @@ const ProfileImgWrap = styled.div`
     height: 25px;
 `;
 
+const notFoundText = styled.div`
+    height: 100%;
+    background-color: #8080804d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+`;
+
 export const S = {
     Carousel,
     Button,
@@ -76,5 +85,6 @@ export const S = {
     Item,
     UserInfo,
     ProfileImgWrap,
-    ThumbnailImgWrap
+    ThumbnailImgWrap,
+    notFoundText
 }

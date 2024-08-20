@@ -11,6 +11,7 @@ import { useCookie } from "@shared/hook";
 import { DefaultBtn } from "@shared/ui";
 
 export const Home = () => {
+
   const { cookieGet } = useCookie();
   const navigate = useNavigate();
   const onClickRoute = () => navigate("diary");
@@ -19,7 +20,7 @@ export const Home = () => {
     <>
       <S.Home>
         {/* 소개 & 잔디 */}
-        {cookieGet() ? (
+        {cookieGet("token") ? (
           <Grass />
         ) : (
           <S.Introduction>
