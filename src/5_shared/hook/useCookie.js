@@ -1,21 +1,26 @@
 import { useCookies } from "react-cookie";
 
 export const useCookie = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["myCookie"]);
 
-  const handleSetCookie = (name, value) => {
-    const expires = new Date();
-    expires.setDate(expires.getDate() + 1);
-    setCookie(name, value, { expires });
+  const [ cookies, setCookie, removeCookie ] = useCookies();
+  
+  const cookieSet = ( name, value, period ) => {
+
+    const newPeriod = new Date();
+    newPeriod.setDate(newPeriod.getDate() + 12 * 60 * 60 * 1000);
+
+    setCookie(name, value, { expires: period ?? newPeriod, path: "/" });
   };
 
-  const handleGetCookie = () => {
-    return cookies.myCookie;
+  const cookieGet = ( cookieName ) => {
+    return cookies[cookieName];
+  }
+
+  const cookieRemove = () => {
+    Object.keys(cookies).forEach( cookie => {
+      removeCookie(cookie);
+    })
   };
 
-  const handleRemoveCookie = (name) => {
-    removeCookie(name);
-  };
-
-  return { handleSetCookie, handleGetCookie, handleRemoveCookie };
+  return { cookieSet, cookieGet, cookieRemove };
 };

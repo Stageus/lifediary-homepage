@@ -1,4 +1,4 @@
-export { Icon } from "./icon/Icon";
-export { TextInput } from "./textInput/TextInput";
+export { Icon } from "./icon";
 export { DefaultBtn } from "./defaultBtn/DefaultBtn";
-export { DynamicImage } from "./dynamicImage/DynamicImage";
+export { Thumbnail } from "./thumbnail";
+export { Profile } from "./profile";

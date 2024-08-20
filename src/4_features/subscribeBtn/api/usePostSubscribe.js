@@ -1,19 +1,25 @@
 // Npm
 import { useEffect, useState } from "react";
 // Layer
-import { useFetch, useCookie } from "@shared/hook";
-import { useSubscribe, useAlarm } from "@shared/store";
+import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useSubscribe, useAlarm, useMessage } from "@shared/store";
 
 export const usePostSubscribe = ( isSubscribed ) => {
 
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
-    const [ subscribe, setSubscribe ] = useState( isSubscribed );
+    const { cookieGet } = useCookie();
+    const [ subscribe, setSubscribe ] = useState( null );
     const updateSubscribe = useSubscribe( state => state.updateSubscribe );
     const alarmText = useAlarm( state => state.alarmText );
+    const setMessage = useMessage( state => state.setMessage );
+    const { errorRoute ,loginRoute } = useRoute();
+
+    useEffect(()=>{
+        setSubscribe(isSubscribed);
+    },[isSubscribed])
 
     const postSubscribe = ( accountIdx )=>{
-        baseFetch(`subscription/${accountIdx}`,{method: "POST"},handleGetCookie());
+        baseFetch(`subscription/${accountIdx}`,{method: "POST"},cookieGet("token"));
     };
 
     useEffect(() => {
@@ -28,23 +34,20 @@ export const usePostSubscribe = ( isSubscribed ) => {
                 break;
 
             case 400:
-                console.log("유효성 검사실패");
+                setMessage(`잠시후에 다시시도해주세요`);
                 break;
 
             case 401:
-                console.log("토큰이 잘못되거나 없는경우");
+                setMessage(`로그인이 필요한 서비스입니다\n로그인화면으로 이동하시겠습니까?`,loginRoute, true);
                 break;
 
             case 404:
-                console.log("해당 accountidx가 존재하지 않는경우");
+                setMessage(`해당계정이 존재하지않습니다.`);
                 break;
 
             case 500:
-                console.log("서버에러");
+                errorRoute(500,"서버에러");
                 break;
-
-            default:
-                console.log("예상하지 못한 에러");
         }
         
     },[ fetchData ]);

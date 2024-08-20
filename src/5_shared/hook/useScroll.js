@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 
 export const useScroll = ( callBack ) => {
     
-    const rootRef = useRef( null );
     const watchRef = useRef( null );
 
     useEffect(()=>{
@@ -11,12 +10,17 @@ export const useScroll = ( callBack ) => {
 
         const observeCallBack = ( entries ) => {
             const target = entries[0];
-            if ( target.isIntersecting ) callBack();
+            // console.log(target);
+            
+            if ( target.isIntersecting ) {
+                // console.log("보이누");
+                callBack();
+            }
         };
 
         const observeOptions = {
-            root: rootRef.current,
-            threshold: 0.5,
+            root: null,
+            threshold: 1,
         };
         
         const observer = new IntersectionObserver( observeCallBack ,observeOptions );
@@ -30,5 +34,5 @@ export const useScroll = ( callBack ) => {
 
     },[ callBack ]);
 
-    return [ rootRef, watchRef ];
+    return [ watchRef ];
 }

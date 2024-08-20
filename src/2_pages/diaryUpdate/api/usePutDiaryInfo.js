@@ -1,55 +1,65 @@
+// Npm
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+// Layer
+import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useMessage } from "@shared/store"
 
-import { useFetch, useCookie } from "@shared/hook";
+export const usePutDiaryInfo = () => {
 
-export const usePutDiaryInfo = (diaryIdx, imgContents, textContent, tags, isPublic, color) => {
-  const [diaryData, status, baseFetch] = useFetch();
-  const { handleGetCookie } = useCookie();
+    const [ fetchData, baseFetch ] = useFetch();
+    const { cookieGet } = useCookie();
+    const { loginRoute, backRoute, errorRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage);
+    const { diaryIdx } = useParams();
 
-  const putDiaryInfo = () => {
-    const fetchData = {
-      imgContents,
-      textContent,
-      tags,
-      isPublic,
-      color,
+    const putDiaryInfo = ( props ) => {
+        
+        const { textContent, tags, isPublic, color, imgContents, deletedImgs } = props;
+
+        const formData = new FormData();
+        if ( Array.isArray(tags) && tags.length ) tags.forEach( tag => formData.append("tags", tag));
+        if ( Array.isArray(imgContents) && imgContents.length ) imgContents.forEach( fileObj => formData.append("imgContents", fileObj));
+        if ( Array.isArray(deletedImgs) && deletedImgs.length ) deletedImgs.forEach( url => formData.append("deletedImgs", url));
+        formData.append("textContent", textContent);
+        formData.append("isPublic", isPublic);
+        formData.append("color", color);
+
+        baseFetch(`diary/${ diaryIdx }`, {method:"PUT", data:formData}, cookieGet("token"));
     };
 
-    baseFetch(
-      `diaryUpload/${diaryIdx}`,
-      {
-        method: "PUT",
-        data: fetchData,
-      },
-      handleGetCookie()
-    );
-  };
+    useEffect( () => {
 
-  useEffect(() => {
-    putDiaryInfo();
-  }, [diaryData]);
+        if ( !fetchData ) return;
 
-  useEffect(() => {
-    if (status === 400) {
-      return console.log("유효성 검사 실패");
-    }
+        switch ( fetchData.status ) {
+            case 200:
+                // 임시로 홈이지만, 이후에는 메인페이지로 리다이렉트하는걸로
+                homeRoute();
+                break;
 
-    if (status === 401) {
-      return console.log("잘못된 토큰입니다.");
-    }
+            case 400:
+                setMessage("일기수정은 작성한날짜에만\n수정할수 있습니다.", backRoute);
+                break;
 
-    if (status === 403) {
-      return console.log("권한이 없습니다.");
-    }
+            case 401:
+                setMessage("로그인이 필요한 서비스입니다.", loginRoute);
+                break;
 
-    if (status === 404) {
-      return console.log("일기를 찾을 수 없습니다.");
-    }
+            case 403:
+                setMessage("일기수정은 본인만 가능합니다", backRoute);
+                break;
 
-    if (status === 500) {
-      return console.log("서버 에러");
-    }
-  }, [status]);
+            case 404:
+                setMessage("존재하지 않는 일기입니다.", backRoute);
+                break;
 
-  return [diaryData, status, baseFetch];
-};
+            case 500:
+                errorRoute(500, "서버에러");
+                break;
+        }
+
+    },[fetchData]);
+ 
+    return [ putDiaryInfo ];
+}

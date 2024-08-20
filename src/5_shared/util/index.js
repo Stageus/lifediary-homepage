@@ -1,2 +1,2 @@
-export { checkValidation } from "./checkValidation";
+export { convertImageUrl } from "./convertImageUrl";
 export { parseTime } from "./parseTime";

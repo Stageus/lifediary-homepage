@@ -1,32 +1,33 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+// Slice
 import { S } from "./style";
-import { useGetRedirectUrl } from "../api/useGetRedirectUrl";
 import { useGetAccountExist } from "../api/useGetAccountExist";
+import { useGetGoogleUrl } from "../api/useGetGoogleUrl";
+import googleLogo from "../assets/googleLogo.png";
+// Layer
+import { useRoute } from "@shared/hook";
+import logo from "@shared/assets/img/logo.png";
+
 
 export const Login = () => {
-  const navigate = useNavigate();
-  const [getRedirectUrl] = useGetRedirectUrl();
-  const [getAccountExist] = useGetAccountExist();
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-
-    if (code) {
-      getAccountExist();
-    }
-  }, []);
+  const { homeRoute } = useRoute();
+  const [ onClickGetUrl ] = useGetGoogleUrl();
+  const _ = useGetAccountExist();
 
   return (
-    <S.PageContainer>
-      <S.LoginContainer>
-        <S.Logo onClick={() => navigate("/")} />
-        <S.GoogleLoginBtn onClick={getRedirectUrl}>
-          <S.GoogleLogo />
-        </S.GoogleLoginBtn>
-      </S.LoginContainer>
-    </S.PageContainer>
+    <S.login>
+      <S.innerBox>
+
+        <S.logoArea onClick={homeRoute}>
+          <img src={logo} />
+        </S.logoArea>
+
+        <S.googleLogin onClick={onClickGetUrl}>
+          <img src={googleLogo}/>
+          <button>{"Google 로그인"}</button>
+        </S.googleLogin>
+
+      </S.innerBox>
+    </S.login>
   );
 };

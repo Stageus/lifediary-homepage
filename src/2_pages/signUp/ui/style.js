@@ -1,104 +1,123 @@
 import styled from "styled-components";
 
-import logo from "@shared/assets/imges/logo.png";
-
-const PageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+const signUp = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 `;
 
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  border: 3px solid ${({ theme }) => theme.major};
-  border-radius: 10px;
-  padding: 120px 80px;
-  min-width: 500px;
-  max-width: 600px;
+const innerBox = styled.div`
+    min-width: 525px;
+    height: 600px;
+    border: 4px solid ${({theme}) => theme.major};
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: #c0c0c00a;
+    padding: 100px;
+    box-shadow: 1px 0 10px gray;
 `;
 
-const Logo = styled.img.attrs({
-  src: logo,
-  alt: "logo",
-})`
-  width: 160px;
-  border-radius: 10px;
-  cursor: pointer;
+const logoArea = styled.div`
+    width: fit-content;
+    display: flex;
+    border: 2px solid ${({theme}) => theme.major};
+    border-radius: 8px;
+    width: 250px;
+    cursor: pointer;
+
+    & > img {
+        width: 100%;
+        border-radius: 8px;
+    }
 `;
 
-const SignUpInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  width: 100%;
+const profileArea = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 `;
 
-const SignUpInfoProfileImgContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+const imgWrap = styled.div`
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    border-radius: 50%;
+    overflow: hidden;
+
+    & > label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left:0;
+        cursor: pointer;
+    }
+
+    & > input {
+        display: none;
+    }
 `;
 
-const SignUPInfoProfileImg = styled.img`
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  border-radius: 99px;
+const imgGuide = styled.div`
+    font-size: 14px;
+    color: gray;
 `;
 
-const SignUpInfoNicknameContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
+const nameArea = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 `;
 
-const SignUpInfoNicknameLabel = styled.label`
-  display: flex;
-  align-items: center;
-  height: 40px;
-  white-space: nowrap;
-  color: ${({ theme }) => theme.highlight};
-  font-size: ${({ theme }) => theme.fontSize.base};
+const nameWrap = styled.div`
+    width: 100%;
+    display: flex;
+    border: 2px solid ${({theme}) => theme.major};
+    border-radius: 8px;
+    padding: 4px;
 `;
 
-const SignUpInfoMessage = styled.p`
-  color: ${({ theme }) => theme.highlight};
-  font-size: ${({ theme }) => theme.fontSize.medium};
+const nameInput = styled.input`
+    outline: none;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    font-size: 12px;
 `;
 
-const SignUpInfoNicknameInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: space-between;
-  width: 100%;
+const checkBtn = styled.div`
+
 `;
 
-const SignUpInfoBtnContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 40px;
+const nameGuide = styled.span`
+    color: red;
+    font-size: 14px;
+`;
+
+const btnArea = styled.div`
+    display: flex;
+    gap: 10px;
 `;
 
 export const S = {
-  PageContainer,
-  ProfileContainer,
-  Logo,
-  SignUpInfoContainer,
-  SignUpInfoProfileImgContainer,
-  SignUPInfoProfileImg,
-  SignUpInfoNicknameContainer,
-  SignUpInfoNicknameLabel,
-  SignUpInfoMessage,
-  SignUpInfoNicknameInputContainer,
-  SignUpInfoBtnContainer,
+    signUp,
+    innerBox,
+    logoArea,
+    profileArea,
+    imgWrap,
+    imgGuide,
+    nameArea,
+    nameWrap,
+    nameInput,
+    checkBtn,
+    nameGuide,
+    btnArea,
 };

@@ -1,18 +1,18 @@
+// Npm
+import { useLocation } from "react-router-dom";
 // Slice
 import { S } from "./style";
 import { useRoute } from "../model/useRoute";
-import { useCurrentPage } from "../model/useCurrentPage";
 import { SubscribeList } from "./subscribeList";
 import { ComplainAlarm  } from "./complainAlarm"; 
 // Layer
-import { useGetAuth } from "@features/auth";
 import { DefaultBtn } from "@shared/ui";
 
-export const Aside = () => {
-  
-    const [ userInfo ] = useGetAuth();
-    const { isRoute } = useCurrentPage();
-    const { onClickRoute } = useRoute();
+export const Aside = ( props ) => {
+
+  const { userInfo } = props;
+  const loaction = useLocation();
+  const { onClickRoute } = useRoute();
     
   return (
     <>
@@ -30,7 +30,7 @@ export const Aside = () => {
             <DefaultBtn 
               text="둘러 보기"
               onClick={ ()=>onClickRoute("diary") }
-              type={ isRoute ? "select" : null }
+              type={ loaction.pathname === "diary" ? "select" : null }
                />
           </S.BtnWrap>
 

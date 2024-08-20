@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { S } from "./style";
-import defaultProfile from "@shared/assets/imges/profile.png";
+// import defaultProfile from "@shared/assets/imges/profile.png";
 
 /*
 

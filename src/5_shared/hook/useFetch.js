@@ -6,24 +6,23 @@ export const useFetch = () => {
 
   const baseFetch = async ( url, options, token ) => {
     try {
-      
       const { method = "GET", headers = "application/json", data = null } = options ?? {};
-  
+      const isFormData = data instanceof FormData;
+      
       const requestInfo = {
         method,
         headers: {
-          "Content-Type": headers,
+          ...(isFormData ? {} : {"Content-Type": headers}),
           ...(token && { token: token }),
         },
         ...(data && {
-          body: JSON.stringify( data ),
+          body: isFormData ? data : JSON.stringify( data ),
         }),
       };
-
+  
       const response = await fetch( `${import.meta.env.VITE_API_URL}/${url}`, { ...requestInfo } );
-      
       if ( response.status === 200 ) {
-        const jsonData = await response.json();
+        const jsonData = await response.json();  
         setFetchData( { status: response.status, data: jsonData.result} );
       } else {
         setFetchData( { status: response.status} ) ;

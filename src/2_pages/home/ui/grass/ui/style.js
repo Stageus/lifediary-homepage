@@ -19,9 +19,24 @@ const GrassWrap = styled.div`
 
 const YearList = styled.div`
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 0 30px 0;
+
+    & > h1{
+        flex-grow: 1;
+        text-align: justify;
+        padding-left: 10px;
+        font-size: ${({theme}) => theme.x_large};
+        color: ${({theme}) => theme.black};
+        font-weight: bold;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    & > div{
+        display: flex;
+        gap: 10px;
+    }
 `;
 
 const Loading = styled.div`
@@ -36,7 +51,7 @@ const Grass = styled.div`
     max-width: fit-content;
     padding: 10px;
     padding-top: 30px;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     position: relative;
 
     display: flex;

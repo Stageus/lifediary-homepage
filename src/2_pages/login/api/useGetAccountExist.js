@@ -1,33 +1,52 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useFetch, useCookie } from "@shared/hook";
+// Npm
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+// Slice
+import { convertImageUrl } from "@shared/util"
+// Layer
+import { useFetch, useCookie, useRoute } from "@shared/hook";
 
 export const useGetAccountExist = () => {
-  const [fetchData, baseFetch] = useFetch();
-  const { handleSetCookie } = useCookie();
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const code = searchParams.get("code");
 
-  const getAccountExist = () => {
-    baseFetch(`account/login/oauth/google/redirect?code=${code}`);
-  };
+  const [ fetchData, baseFetch ] = useFetch();
+  const [ searchParams ] = useSearchParams();
+  const { signupRoute, homeRoute, errorRoute } = useRoute();
+  const { cookieSet } = useCookie();
+
+  useEffect(()=>{
+
+    if ( searchParams.get("code") ) {
+      baseFetch(`account/login/oauth/google/redirect?code=${searchParams.get("code")}`);
+    }
+
+  },[searchParams]);
 
   useEffect(() => {
-    if (!fetchData) return;
+    if ( !fetchData ) return;
 
-    if (fetchData.status === 200) {
-      //계정이 없다면
-      if (!fetchData.data.isAccountExist) {
-        const oauthGoogleId = fetchData.data.oauthGoogleId;
-        navigate("/signup", { state: { oauthGoogleId } });
-      } else {
-        //계정이 있다면
-        handleSetCookie("myCookie", fetchData.data.token);
-        navigate("/");
-      }
+    switch ( fetchData.status ) {
+      case 200:
+        ( async () => {
+          try{
+            if ( !fetchData.data.isAccountExist && fetchData.data.googleProfileImg ) {
+
+              const convert = await convertImageUrl(fetchData.data.googleProfileImg);
+              signupRoute({...fetchData.data, googleProfileImg: convert,})
+
+              return;
+            }
+            
+            cookieSet("token",fetchData.data.token);
+            homeRoute();
+          }catch ( error ){
+            console.error("파일변환 에러");
+          }
+        })();
+        break;
+       
+      case 500:
+        errorRoute(500, "서버에러");
+        break;
     }
   }, [fetchData]);
-
-  return [getAccountExist];
 };

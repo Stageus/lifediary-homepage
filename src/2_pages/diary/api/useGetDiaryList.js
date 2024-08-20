@@ -5,9 +5,8 @@ import { useState, useEffect } from "react";
 import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetDiaryList = () => {
-
-    const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const [fetchData, baseFetch] = useFetch();
+    const { cookieGet } = useCookie();
     const { diaryidx } = useParams();
     const [ diaryList, setDiaryList ] = useState( null );
     const [ pageNum, setPageNum ] = useState(1);
@@ -41,10 +40,10 @@ export const useGetDiaryList = () => {
         setIsLoading( true );
 
         if ( diaryIdx ) {
-            baseFetch(`diary/${diaryidx}?page=${pageNum}`,{},handleGetCookie());
+            baseFetch(`diary/${diaryidx}?page=${pageNum}`, {}, cookieGet("token"));
             return;
         }
-        baseFetch(`diary?page=${pageNum}`,{},handleGetCookie());
+        baseFetch(`diary?page=${pageNum}`, {}, cookieGet("token"));
     };
 
     useEffect(()=>{

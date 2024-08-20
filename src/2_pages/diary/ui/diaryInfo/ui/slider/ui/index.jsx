@@ -1,6 +1,6 @@
 import { S } from "./style";
 import { useSlider } from "../model/useSlider";
-import { Icon, DynamicImage } from "@shared/ui";
+import { Icon, Thumbnail } from "@shared/ui";
 
 export const Slider = (props) => {
     const { sliderList } = props;
@@ -16,7 +16,7 @@ export const Slider = (props) => {
           {sliderList?.map((img, idx) => {
             return (
                 <div key={ idx }>
-                    <DynamicImage src={ img }/>
+                    <Thumbnail src={ img }/>
                 </div>
             );
           })}
