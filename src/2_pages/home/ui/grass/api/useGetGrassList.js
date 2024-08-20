@@ -14,7 +14,7 @@ export const useGetGrassList = ( changeYear ) => {
     const [ isLoading, setIsLoading ] = useState( false );
     const [ selectYear, setSelectYear ] = useState( null );
     const { errorRoute } = useRoute();
-    const setMessage = useMessage( state => state.setMessage )
+    const setMessage = useMessage( state => state.setMessage );
 
     const onClickYears = ( year )=> {
         changeYear( year );
@@ -54,7 +54,7 @@ export const useGetGrassList = ( changeYear ) => {
                 break;
 
             case 400:
-                setMessage("올바르지 않은 접근입니다.")
+                setMessage("일시적인 오류로\n잔디목록을 볼수없습니다");
                 break;
 
             case 401:

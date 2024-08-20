@@ -6,6 +6,12 @@ export const sliceDiaryCount = ( array, divide )=>{
     for ( let i = 0 ; i < array.length ; i += divide ){
 
         const sliceArray = array.slice( i, i + divide );
+        if ( sliceArray.length < 5 ) {
+
+            for ( let j = sliceArray.length ; j < divide ; j++) {
+                sliceArray.push( null );
+            }
+        }
         result.push( sliceArray );
     };
     

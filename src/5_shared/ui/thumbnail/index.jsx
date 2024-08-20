@@ -4,6 +4,7 @@ import loadingImg  from "../../assets/img/loading.gif";
 import preparingImg from "../../assets/img/defaultDiary.jpg";
 
 export const Thumbnail = (props)=>{
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const { src } = props;
