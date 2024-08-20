@@ -8,6 +8,7 @@ export const useRoute = () => {
     const homeRoute = () => navigate( "/" );
     const complainRoute = ( pageNum ) => navigate( `${paths.COMPLAIN}?page=${pageNum}` );
     const diaryRoute = ( diaryIdx ) => {
+        if ( !diaryIdx ) return;
         if ( diaryIdx ) return navigate( `${paths.DIARY}/${diaryIdx}` );
         navigate( paths.DIARY );
     };

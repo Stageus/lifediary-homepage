@@ -3,19 +3,24 @@ import { useEffect, useState } from "react";
 // Slice
 import { grassWrap } from "../lib/grassWrap";
 // Layer
-import { useFetch, useCookie } from "@shared/hook";
+import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useMessage } from "@shared/store";
 
-export const useGetGrassList = () => {
-
+export const useGetGrassList = ( changeYear ) => {
+    
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet, cookieRemove } = useCookie();
     const [ grassList, setGrassList ] = useState( null );
     const [ isLoading, setIsLoading ] = useState( false );
-    const [ selectYear, setSelectYear ] = useState(null);
+    const [ selectYear, setSelectYear ] = useState( null );
+    const { errorRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage )
 
-    const onClickYears = ( year )=> setSelectYear( year );
+    const onClickYears = ( year )=> {
+        changeYear( year );
+        setSelectYear( year );
+    };
 
-    // 데이터 mapper
     const mapper = ( mapperData )=>{
 
         const grassList = mapperData.map( data  => (
@@ -30,13 +35,9 @@ export const useGetGrassList = () => {
     };
 
     const getGrassList = () => {
+
         setIsLoading( true );
-
-        // 선택된 년도가 없다면
-        if ( !selectYear ) return baseFetch("grass",{},handleGetCookie());
-
-        // 선택된 년도가 있다면
-        baseFetch(`grass?year=${selectYear}`,{},handleGetCookie());
+        baseFetch(`grass${selectYear ? "?year=" + selectYear : ""}`, {}, cookieGet("token"));
     };
 
     useEffect(() => {
@@ -50,22 +51,19 @@ export const useGetGrassList = () => {
         switch ( fetchData.status ) {
             case 200:
                 setGrassList( grassWrap( mapper( fetchData.data ) ) );
-                break
+                break;
+
             case 400:
-                // 서버에 다시 요청을하고, 호출횟수를 기록하고, 이후에 알림 적용할예정
-                setErrorMessage( "잠시후에 다시 시도해주세요" );
-                break
+                setMessage("올바르지 않은 접근입니다.")
+                break;
+
             case 401:
-                // commonModal 적용 예정
-                console.log("회원만 가능한 접근입니다.");
-                break
+                cookieRemove();
+                break;
+
             case 500:
-                // commonModal 적용 예정
-                console.log("잠시후에 다시 시도해주세요");
-                break
-            // 500 에러와 같이 사용?
-            default:
-                console.log("예상하지 못한 상황");
+                errorRoute(500, "서버에러");
+                break;
         }
 
     },[fetchData]);

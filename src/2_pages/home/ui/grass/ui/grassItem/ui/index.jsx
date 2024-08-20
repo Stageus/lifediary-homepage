@@ -1,36 +1,36 @@
 // Slice
 import { S } from "./style";
 import { useHover } from "../model/useHover";
-import { useRoute } from "../model/useRoute"; 
 import { findFirstDay } from "../lib/findFirstDay";
+// Layer
+import { useRoute } from "@shared/hook";
+import { parseTime } from "@shared/util";
 
 export const GrassItem = ( props )=>{
 
     const { idx, color, date } = props.day ?? {};
     const { hover, onMuouserOver, onMouserOut } = useHover();
-    const { onClickRoute } = useRoute();
-
+    const { diaryRoute } = useRoute();
+    
     return(
         <>
-        {idx 
-        ?( <S.GrassItem 
-                $isExist={ color } 
+        <S.GrassItem 
+                $isColor={ color } 
                 $date={ date }
                 onMouseOver={ onMuouserOver }
                 onMouseOut={ onMouserOut }
-                onClick={ () => onClickRoute( idx ) }
+                onClick={ () => diaryRoute( idx ) }
             >
-                
+            { !color && "x"} 
             {findFirstDay( date ) 
             ? <S.Month>{ findFirstDay( date ) }</S.Month> 
             : null} 
 
             {hover 
-            ? <S.HoverInfo>{ date }</S.HoverInfo> 
+            ? <S.HoverInfo>{ parseTime(date) }</S.HoverInfo> 
             : null}
-            </S.GrassItem>)
 
-        : <S.GrassItem/>}
+        </S.GrassItem>
         </>
     );
 };
