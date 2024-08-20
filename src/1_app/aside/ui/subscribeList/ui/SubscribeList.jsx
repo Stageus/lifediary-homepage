@@ -1,38 +1,37 @@
 // Slice
 import { S } from "./style";
-import { useRoute } from "../model/useRoute";
+// import { useRoute } from "../model/useRoute";
 import { useGetSubscribeList } from "../api/useGetSubscribeList";
 // Layer
-import { useScroll } from "@shared/hook";
+import { useScroll, useRoute } from "@shared/hook";
 
 export const SubscribeList = () => {
 
-    const [ getSubscribeList, subscribeList, isLoading, errorMessage ] = useGetSubscribeList();
-    const [ rootRef, watchRef ] = useScroll( getSubscribeList );
-    const { onClickRoute } = useRoute();
+    const [ getSubscribeList, subscribeList, isLoading, isEnd ] = useGetSubscribeList();
+    const [ watchRef ] = useScroll( getSubscribeList );
+    const { userProfileRoute } = useRoute();
 
     return(
         <>
         <S.SubscribeInfo>
             <S.SubscribeTitle>구독목록</S.SubscribeTitle>
 
-            <S.SubscribeList ref={ rootRef }>
-                {subscribeList && subscribeList.map(( item )=>{
+            <S.SubscribeList>
+                {subscribeList ? subscribeList.map(( item )=>{
                 return(
-                    <S.SubscribeItem key={ item.toAccountIdx } onClick={ () => onClickRoute( item.toAccountIdx ) }>
+                    <S.SubscribeItem key={ item.toAccountIdx } onClick={ () => userProfileRoute( item.toAccountIdx ) }>
                         <img src={ item.profileImg } alt="#" />
                         <span>{ item.nickname }</span>
                     </S.SubscribeItem>
                 );
-                })}
+                }): <S.message>구독중인 유저가 없습니다</S.message>}
 
-                {subscribeList && subscribeList.length >= 20 
+                { !isEnd && subscribeList && subscribeList.length >= 20 
                     && <div ref={ watchRef }></div>
                 }
 
                 { isLoading ? <S.Loading>로딩중...</S.Loading> : null}
 
-                { errorMessage ?? <div>{ errorMessage }</div>}
 
             </S.SubscribeList>
 
