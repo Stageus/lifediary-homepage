@@ -16,6 +16,7 @@ export const DiaryInfo = ( props )=>{
   const { isOpenModal, onClickModal } = useOpenModal();
   const { clipBoard } = useClipBoard();
     
+  console.log(imgContents);
     return (
         <S.DiaryInfo>
 
