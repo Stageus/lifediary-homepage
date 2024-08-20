@@ -1,6 +1,5 @@
 // Slice
 import { S } from "./style";
-// import { useRoute } from "../model/useRoute";
 import { useGetSubscribeList } from "../api/useGetSubscribeList";
 // Layer
 import { useScroll, useRoute } from "@shared/hook";
