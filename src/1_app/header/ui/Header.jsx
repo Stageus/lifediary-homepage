@@ -33,7 +33,7 @@ export const Header = ( props ) => {
         { userInfo ? (
           <>
             <S.profileArea onClick={myProfileRoute}>
-              <Profile />
+              <Profile img={userInfo.profileImg}/>
             </S.profileArea>
 
             <div>
