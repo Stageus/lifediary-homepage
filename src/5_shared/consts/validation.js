@@ -26,4 +26,9 @@ export const nameValidation = ( name ) => {
 export const diaryContentValidation = ( text ) => {
     const regex= /^.{0,500}$/;
     return regex.test(text)
+};
+
+export const complainContentValidation = ( text ) => {
+    const regex = /^.{5,300}$/;
+    return regex.test(text)
 }

@@ -12,9 +12,9 @@ export const ComplainModal = ( props ) => {
 
     const { diaryidx } = props;
     const { isOpenModal, onClickModal } = useOpenModal();
-    const { complainTextRef, isValidation, validation } = useValidation();
+    const { complainTextRef, isValidation, onChangeCheck } = useValidation();
     const [ onClickSubmit ] = usePostComplain( onClickModal );
-    
+
     return (
         <>
             <DefaultBtn
@@ -25,8 +25,10 @@ export const ComplainModal = ( props ) => {
             ? <S.ComplainModal>
                 <S.ModalWrap $isText={ isValidation }> 
                     <textarea
+                    minLength={5}
+                    maxLength={300}
                     ref={ complainTextRef }
-                    onChange={ validation }
+                    onChange={ onChangeCheck }
                     placeholder="신고 사유를 입력해주세요 (최소 5자 ~ 최대 300자)"
                     />
                     <S.ModalEditerWrap>

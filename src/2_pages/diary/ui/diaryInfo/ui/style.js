@@ -52,14 +52,11 @@ const Cancel = styled.div`
 
 // ButtonPart _________________
 const ButtonPart = styled.div`
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transform: translateX(110%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     gap: 5px;
+    z-index: 9999999;
 `;
 
 const CommentBtn = styled.div`
