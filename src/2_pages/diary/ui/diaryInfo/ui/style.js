@@ -6,8 +6,6 @@ const DiaryInfo = styled.div`
     display: flex;
     justify-content: center;
     gap: 5px;
-    background-color: red;
-
     position: relative;
 `;
 

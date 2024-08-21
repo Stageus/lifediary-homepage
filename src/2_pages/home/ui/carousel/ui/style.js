@@ -66,6 +66,8 @@ const UserInfo = styled.div`
 const ProfileImgWrap = styled.div`
     width: 25px;
     height: 25px;
+    border-radius: 50%;
+    overflow: hidden;
 `;
 
 const notFoundText = styled.div`
