@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MessageModal = styled.div`
+const messageModal = styled.div`
     position: fixed;
     background-color: #0000003d;
     width: 100%;
@@ -11,7 +11,7 @@ const MessageModal = styled.div`
     align-items: center;
 `;
 
-const ModalWrap = styled.div`
+const modalWrap = styled.div`
     background-color: ${({theme}) => theme.major};
     border-radius: 10px;
     width: 300px;
@@ -24,7 +24,7 @@ const ModalWrap = styled.div`
     padding: 10px;
 `;
 
-const Message = styled.p`
+const message = styled.p`
     flex-grow: 1;
     color: ${({theme}) => theme.highlight};
     padding: 20px;
@@ -35,14 +35,14 @@ const Message = styled.p`
     align-items: center;
 `;
 
-const ButtonWrap = styled.div`
+const buttonWrap = styled.div`
     display: flex;
     gap: 10px;
 `;
 
 export const S = {
-    MessageModal,
-    ModalWrap,
-    Message,
-    ButtonWrap,
+    messageModal,
+    modalWrap,
+    message,
+    buttonWrap,
 }

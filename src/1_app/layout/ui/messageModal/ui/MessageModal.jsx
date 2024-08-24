@@ -10,20 +10,17 @@ export const MessageModal = () => {
   const btnOption = useMessage( (state) => state.btnOption );
 
   const onClickOk = () => {
-
-    if ( isCallback ){
-        isCallback();
-    };
+    if ( isCallback ) isCallback();
     cleanMessage();
   };
 
   return (
     <>
       {isMessage ? (
-        <S.MessageModal onClick={()=>cleanMessage()}>
-          <S.ModalWrap>
-            <S.Message>{isMessage}</S.Message>
-            <S.ButtonWrap>
+        <S.messageModal onClick={()=>cleanMessage()}>
+          <S.modalWrap>
+            <S.message>{isMessage}</S.message>
+            <S.buttonWrap>
               { btnOption 
               ?<>
                 <DefaultBtn
@@ -43,9 +40,9 @@ export const MessageModal = () => {
                 onClick={ onClickOk }
                 />
             }
-            </S.ButtonWrap>
-          </S.ModalWrap>
-        </S.MessageModal>
+            </S.buttonWrap>
+          </S.modalWrap>
+        </S.messageModal>
       ) : null}
     </>
   );
