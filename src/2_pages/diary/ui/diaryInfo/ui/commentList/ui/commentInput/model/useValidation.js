@@ -1,21 +1,21 @@
-import { useRef, useState } from "react";
+// Npm
+import { useState } from "react";
+// Layer 
+import { commentValidation } from "@shared/consts/validation";
 
 export const useValidation = () => {
 
-    const commentTextRef = useRef( null );
     const [ isValidation, isSetValidation ] = useState( false );
 
     const validation = ( text ) => {
-        const regex = /^.{5,300}$/;
         const result = text.target.value;
 
-        if ( !regex.test( result ) ) {
+        if ( !commentValidation( result ) ) {
             isSetValidation( false );
             return ;
         }
         isSetValidation( true );
+    };
 
-    }
-
-    return { commentTextRef, isValidation, validation };
+    return { isValidation, validation };
 }

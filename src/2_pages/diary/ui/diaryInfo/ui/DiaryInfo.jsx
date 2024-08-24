@@ -1,7 +1,7 @@
 // Slice
 import { S } from "./style"; 
 import { Slider } from "./slider/ui";
-import { Comment } from "./comment";
+import { CommentList } from "./commentList"
 import { useOpenModal } from "../model/useOpenModal";
 import { useClipBoard } from "../model/useClipBoard";
 import { DiaryLikeBtn } from "./diaryLikeBtn";
@@ -37,7 +37,7 @@ export const DiaryInfo = ( props )=>{
                     <Icon size="30px" type="cancel" color="#FF6767" />
                   </S.Cancel> 
                   {/* 댓글리스트 및 내용 */}
-                  {/* { isOpenModal ? <Comment likeCount={likeCnt} diaryIsMine={isMine} diaryIdx={idx}/> : null} */}
+                  { isOpenModal ? <CommentList diaryIsMine={isMine} commentCnt={commentCnt} diaryIdx={idx}/> : null}
                 </S.CommentPart>
                 
                 {/* 좋아요, 댓글버튼, 공유버튼, 신고버튼 */}

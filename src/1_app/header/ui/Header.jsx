@@ -13,7 +13,7 @@ export const Header = ( props ) => {
   const { userInfo } = props; 
   
   const { homeRoute, loginRoute, diaryCreateRoute, myProfileRoute } = useRoute();
-  const { cookieRemove } = useCookie();
+  const { cookieGet, cookieRemove } = useCookie();
   const setMessage = useMessage((state) => state.setMessage);
 
   const logoutHandler = () => {

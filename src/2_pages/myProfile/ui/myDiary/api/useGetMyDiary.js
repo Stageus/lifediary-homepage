@@ -8,11 +8,14 @@ import { parseTime } from "@shared/util";
 
 export const useGetMyDiary = (props) => {
   
+
   const { dateRange } = props;
-  const [fetchData, baseFetch] = useFetch();
   const { errorRoute, loginRoute } = useRoute();
   const setMessage = useMessage((state) => state.setMessage);
   const { cookieGet } = useCookie();
+  const [fetchData, baseFetch] = useFetch();
+  
+
   const [pageNum, setPageNum] = useState(1);
   const [diaryList, setDiaryList] = useState([]);
   const [isEnd, setIsEnd] = useState(false);

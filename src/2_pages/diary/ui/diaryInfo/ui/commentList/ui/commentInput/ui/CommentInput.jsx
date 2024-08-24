@@ -1,3 +1,5 @@
+// Npm
+import { useRef } from "react";
 // Slcie
 import { S } from "./style";
 import { useValidation } from "../model/useValidation";
@@ -7,16 +9,17 @@ import { DefaultBtn } from "@shared/ui";
 
 export const CommentInput = ( props ) => {
 
-    const { diaryIdx } = props;
-    const { complainTextRef, isValidation, validation } = useValidation();
-    const [ onClickSubmit ] = usePostComment();
+    const { diaryIdx, changeComment } = props;
+    const { isValidation, validation } = useValidation();
+    const commentTextRef = useRef( null );
+    const [ onClickCommentSubmit ] = usePostComment( changeComment );
 
 
     return(
         // 디자인 잠시대기
         <S.InputArea $isValidation={isValidation}>
           <input 
-          ref={complainTextRef}
+          ref={commentTextRef}
           onChange={ validation }
           placeholder="댓글을 달아주세요"/>
           <div>
@@ -24,7 +27,7 @@ export const CommentInput = ( props ) => {
             type= { isValidation ? "select" : "disabled"}
             text="작성" 
             size="medium"
-            onClick={ () => onClickSubmit(diaryIdx, complainTextRef.current.value)}
+            onClick={ () => onClickCommentSubmit( diaryIdx, commentTextRef.current?.value )}
              />
           </div>
         </S.InputArea>

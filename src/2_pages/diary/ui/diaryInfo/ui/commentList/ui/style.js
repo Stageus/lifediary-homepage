@@ -1,36 +1,38 @@
 import styled from "styled-components";
 
-const Comment = styled.div`
+const commentList = styled.div`
     height: 100%;
     padding: 15px;
     color: ${( {theme} ) => theme.black};
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    & > p{
+        white-space: pre-wrap;
+        width: 100%;
+        background-color: red;
+        /* word-wrap: break-word; */
+        /* overflow-wrap: break-word; */
+    }
 `;
 
-const CommentWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 5px;
-`;
-
-const TitleArea = styled.h2`
+const titleArea = styled.h2`
     font-size: ${( {theme} ) => theme.fontSize.x_large};
     font-weight: bolder;
 `;
 
-const ContentArea = styled.div`
+
+const commentListArea = styled.div`
     flex: 1 0 100px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-y: scroll;
+    flex-wrap: wrap;
 `;
 
 
-const ReComment = styled.div`
+const reply = styled.div`
     display: flex;
     gap: 12px;
 `;
@@ -59,12 +61,17 @@ const InputArea = styled.div`
     }
 `;
 
+const message = styled.p`
+    padding: 10px;
+    color: ${({theme}) => theme.gray};
+`;
+
 
 export const S = {
-    Comment,
-    CommentWrap,
-    TitleArea,
-    ContentArea,
-    ReComment,
+    commentList,
+    titleArea,
+    commentListArea,
+    reply,
     InputArea,
+    message,
 };

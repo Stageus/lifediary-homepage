@@ -51,10 +51,9 @@ export const useGetDiaryList = () => {
 
         switch ( fetchData.status ) {
             case 200:
-
                 const mapperData = mapper(fetchData.data);
                 setDiaryList(prevDiaryList => prevDiaryList ? [...prevDiaryList, ...mapperData] : mapperData);
-
+                
                 const moreData = mapperData.length >= 10;
                 setPageNum(prevPageNum => moreData ? prevPageNum + 1 : prevPageNum);
                 setIsEnd(!moreData);

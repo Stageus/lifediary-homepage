@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const InputArea = styled.div`
+    background-color: red;
     display: flex;
     align-items: center;
     border: 1px solid ${( {theme} ) => theme.major};

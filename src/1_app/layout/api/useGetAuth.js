@@ -7,7 +7,7 @@ export const useGetAuth = () => {
 
   const [ fetchData, baseFetch ] = useFetch();
   const [ userInfo, setUserInfo ] = useState( null );
-  const { cookieGet, cookieRemove } = useCookie();
+  const { cookieGet, cookieRemove, cookieSet } = useCookie();
   const { errorRoute } = useRoute();
 
   const mapper = ( resData ) => {
@@ -38,7 +38,10 @@ export const useGetAuth = () => {
 
     switch ( fetchData.status ) {
       case 200:
-        setUserInfo( mapper(fetchData.data) );
+        const mapperData = mapper(fetchData.data);
+        cookieSet("profile",mapperData.profileImg);
+        cookieSet("permission",mapperData.permission);
+        setUserInfo( mapperData );
         break;
 
       case 401:
