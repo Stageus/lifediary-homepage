@@ -23,7 +23,7 @@ export const Layout = () => {
   const isAside = Object.values(paths).some((item) => loaction.pathname.includes(item));
 
   return (
-    <S.Layout>
+    <S.layout>
       <MessageModal />
       {!isAuthPage && (
         <S.header>
@@ -42,6 +42,6 @@ export const Layout = () => {
           <Outlet />
         </S.main>
       </S.divideArea>
-    </S.Layout>
+    </S.layout>
   );
 };

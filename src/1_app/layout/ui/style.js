@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Layout = styled.div`
+const layout = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,6 @@ const divideArea = styled.div`
 
 const aside = styled.div`
   min-width: 200px;
-  /* background-color: blue; */
 `;
 
 const main = styled.div`
@@ -26,7 +25,7 @@ const main = styled.div`
 `;
 
 export const S = {
-  Layout,
+  layout,
   header,
   divideArea,
   aside,
