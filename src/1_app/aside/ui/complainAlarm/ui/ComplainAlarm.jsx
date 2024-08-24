@@ -17,7 +17,7 @@ export const ComplainAlarm = () => {
             <S.ComplainAlarm>
                 <DefaultBtn
                 text="신고 보기"
-                onClick={ complainRoute }
+                onClick={ () => complainRoute(1) }
                 type={ pathName === "/complain" ? "select" : null}
                 />
 

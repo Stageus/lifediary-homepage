@@ -1,20 +1,21 @@
 // Slice
 import { S } from "./style";
-import { useRoute } from "../model/useRoute";
+import { useRoute } from "@shared/hook";
 import { usePutComplain } from "../api/usePutComplain";
 // Layer
 import { DefaultBtn } from "@shared/ui";
 
 export const ComplainItem = ( props ) => {
 
-  const { onClickRoute } = useRoute();
-  const { idx, textContent, nickname, createdAt, diaryIdx, isInvalid } = props.list;
+  const { diaryRoute } = useRoute();
+  const { idx, textContent, nickname, createdAt, diaryIdx, isInvalid } = props;
+  const order = props.order;
   const [ putComplain ] = usePutComplain();
   
   return (
     <>
       <tr>
-        <td>{ idx + 1 }</td>
+        <td>{ order + 1 }</td>
         <td>{ textContent }</td>
         <td>{ nickname }</td>
         <td>{ createdAt }</td>
@@ -29,7 +30,7 @@ export const ComplainItem = ( props ) => {
               <DefaultBtn
                 text="상세보기"
                 size="medium"
-                onClick={() => onClickRoute( diaryIdx )}
+                onClick={() => diaryRoute( diaryIdx )}
               />
             </div>
             {isInvalid === true || isInvalid === false 
@@ -38,7 +39,7 @@ export const ComplainItem = ( props ) => {
                 <DefaultBtn
                   text="복구"
                   size="medium"
-                  onClick={() => putComplain( diaryIdx, null )}
+                  onClick={() => putComplain( idx, null )}
                 />
               </div>) 
             : null}
@@ -50,14 +51,14 @@ export const ComplainItem = ( props ) => {
                   <DefaultBtn
                     text="통과"
                     size="medium"
-                    onClick={() => putComplain( diaryIdx, false )}
+                    onClick={() => putComplain( idx, false )}
                   />
                 </div>
                 <div>
                   <DefaultBtn
                     text="삭제"
                     size="medium"
-                    onClick={() => putComplain( diaryIdx, true )}
+                    onClick={() => putComplain( idx, true )}
                   />
                 </div>
               </>) 

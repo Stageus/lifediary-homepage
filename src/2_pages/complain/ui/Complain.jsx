@@ -1,16 +1,20 @@
+// Npm
+import { useSearchParams } from "react-router-dom";
 // Slice
 import { S } from "./style";
-import { useUpdatePageUrl } from "../model/useUpdatePageUrl";
 import { useGetComplainList } from "../api/useGetComplainList";
-import { divideToArray } from "../lib/divideToArray";
+import { numberToArray } from "../lib/numberToArray";
 // Layer
 import { ComplainItem } from "./complainItem";
-import { DefaultBtn, Icon } from "@shared/ui";
+import { DefaultBtn } from "@shared/ui";
+import { useRoute } from "@shared/hook";
 
 export const Complain = () => {
 
   const [ complainList ] = useGetComplainList();
-  const { currentPage, onClickNum, onClickLeft, onClickRight } = useUpdatePageUrl();
+  const { complainRoute } = useRoute();
+  const [ searchParams ] = useSearchParams();
+  const currentPageNum = +searchParams.get( "page" );
 
   return (
     <>
@@ -24,57 +28,48 @@ export const Complain = () => {
               <th>작성자</th>
               <th>날짜</th>
               <th>상태</th>
-              <th/>
+              <th />
             </tr>
           </thead>
           <tbody>
             {/* 신고 리스트*/}
-            {complainList?.data.map(( list ) => {
-              return <ComplainItem key={ list.idx } list={ list }/>;
+            {complainList?.reports.map((list, idx) => {
+              return <ComplainItem key={idx} {...list} order={idx} />;
             })}
           </tbody>
         </S.Table>
-
-        {/* 페이지네이션 컴포넌트
-          button 비활성화 적용해야함
-        */}
         <S.PageBtnContainer>
+          {/* 왼쪽버튼 */}
+          <S.leftBtn 
+            $isdisabled={currentPageNum === 1}
+            onClick={() => currentPageNum === 1 ?  "" : complainRoute( currentPageNum - 1 )}
+            >
+            {"◀️"}
+          </S.leftBtn>
 
-              {/* 왼쪽버튼 */}
-              <S.PageArrowBtn>
-                {complainList
-                && <span onClick={ onClickLeft }>
-                    <Icon type="leftArrow" color="#FF6767" size="30px" />
-                  </span>}
-                  
-              </S.PageArrowBtn>
+          {/* 신고리스트 개수에 대한 번호들 */}
+          <S.PageBtnList>
+            {complainList &&
+              numberToArray(complainList.maxPage).map((num) => {
+                return (
+                  <DefaultBtn
+                    text={num}
+                    key={num}
+                    type={ currentPageNum === num ? "select" : ""}
+                    onClick={() => complainRoute(num)}
+                  />
+                );
+              })}
+          </S.PageBtnList>
 
-              {/* 신고리스트 개수에 대한 번호들 */}
-              <S.PageBtnList>
-                {complainList
-                && divideToArray( complainList.reportCnt, 5 ).map(( num ) => {
-                    return (
-                      <DefaultBtn
-                        text={ num }
-                        key={ num }
-                        type={ currentPage() === num ? "select" : null }
-                        onClick={ () => onClickNum(num) }
-                      />
-                    );
-                  })}
-              </S.PageBtnList>
-
-              {/* 오른쪽 버튼 */}
-              <S.PageArrowBtn>
-                {complainList 
-                && <span onClick={ () => onClickRight( divideToArray( complainList?.reportCnt,5 ).length )}>
-                      <Icon type="rightArrow" color="#FF6767" size="30px" />
-                  </span>}
-                    
-              </S.PageArrowBtn>
-
-          </S.PageBtnContainer>
-        
+          {/* 오른쪽 버튼 */}
+          <S.rightBtn 
+            $isdisabled={ currentPageNum >= +complainList?.maxPage}
+            onClick={() => currentPageNum >= +complainList?.maxPage ? "" : complainRoute( currentPageNum + 1)}
+            >
+            {"▶️"}
+          </S.rightBtn>
+        </S.PageBtnContainer>
       </S.ComplainContent>
     </>
   );

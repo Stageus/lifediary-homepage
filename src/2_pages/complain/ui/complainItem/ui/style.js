@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const BtnContainter = styled.div`
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    justify-content: center;
 `;
 
 export const S = {

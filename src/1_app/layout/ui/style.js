@@ -18,6 +18,7 @@ const divideArea = styled.div`
 
 const aside = styled.div`
   min-width: 200px;
+  /* background-color: blue; */
 `;
 
 const main = styled.div`

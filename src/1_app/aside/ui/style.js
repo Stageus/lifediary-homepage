@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Aside = styled.div`
-    min-height: 100%;
+    height: 100%;
     background-color: ${({theme})=> theme.minor};
     display: flex;
     flex-direction: column;
@@ -20,7 +20,8 @@ const BtnWrap = styled.div`
 `;
 
 const SubscribeListWrap = styled.div`
-    height: 700px;
+    /* 스크롤 문제로 임시 주석 */
+    /* height: 700px; */
 `;
 
 export const S = {

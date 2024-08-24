@@ -2,46 +2,56 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 // Layer
-import { useFetch, useCookie } from "@shared/hook";
+import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { parseTime } from "@shared/util";
 
 export const useGetComplainList = () => {
     
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet } = useCookie();
+    const { complainRoute } = useRoute();
+
     const [ complainList, setComplainList ] = useState( null );
     const [ searchParams ] = useSearchParams();
 
     const mapper = ( resData ) => {
 
-        const mapperWrap = resData.result.map( res => (
+        const mapperWrap = resData.reports.map( res => (
             {
                 idx: res.idx,
                 textContent: res.textContent,
                 nickname: res.nickname,
-                createdAt: res.createdAt,
+                createdAt: parseTime(res.createdAt),
                 isInvalid: res.isInvalid,
                 diaryIdx: res.diaryIdx,
                 processedAt: res.processedAt
             }
         ))
     
-        return {data: [...mapperWrap], reportCnt: resData.reportCnt}
+        return {reports: [...mapperWrap], maxPage: resData.maxPage}
     };
 
     const getComplainList = () => { 
-        baseFetch(`report?page=${searchParams.get( "page" )}`,{},handleGetCookie());
+        baseFetch(`report?page=${searchParams.get( "page" )}`, {}, cookieGet("token"));
     };
 
     useEffect(() => {
-        getComplainList();
-    },[useSearchParams]);
+        const selectPage = searchParams.get( "page" );
+        
+        if ( selectPage === null || selectPage === ""){
+            complainRoute(1)
+        }else {
+            getComplainList();
+        }
+    },[searchParams]);
 
     useEffect(() => {
         if ( !fetchData ) return;
 
         switch ( fetchData.status ) {
             case 200:
-                setComplainList( mapper( fetchData.data ) );
+                const mapperWrap = mapper( fetchData.data);
+                setComplainList( mapperWrap );
                 break;
             case 400:
                 console.log("유효성 검사 실패일 경우");
