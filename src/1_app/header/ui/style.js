@@ -2,37 +2,39 @@ import styled from "styled-components";
 
 const Header = styled.div`
   min-width: 1080px;
-  max-width: 1080px;
   width: 100%;
   height: 80px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;  
-  margin: 0 auto;
+  gap: 50px;
+  box-shadow: 0px 0px 3px gray;
 `;
 
 const logoArea = styled.div`
   display: flex;
+  justify-content: center;
   cursor: pointer;
-  width: 80px;
-  padding: 4px;
+  width: 200px;
+  padding: 8px;
 
   & > img {
-    width: 100%;
+    width: 80px;
     border-radius: 10px;
   }
 `;
 const searchArea = styled.div`
   flex: 1;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
 `;
 
 const menuArea = styled.div`
   gap: 8px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  width: 350px;
+  width: 300px;
 `;
 
 const profileArea = styled.div`

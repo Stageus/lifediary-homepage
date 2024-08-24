@@ -26,9 +26,11 @@ export const Header = ( props ) => {
       <S.logoArea onClick={homeRoute}>
         <img src={logo} />
       </S.logoArea>
+
       <S.searchArea>
         <Search/>
       </S.searchArea>
+      
       <S.menuArea>
         { userInfo ? (
           <>
