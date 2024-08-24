@@ -3,8 +3,8 @@ import { Outlet, useLocation } from "react-router-dom";
 // Slice
 import { S } from "./style";
 import { AlarmModal } from "../ui/alarmModal";
-import { MessageModal } from "./messageModal";
 import { useGetAuth } from "../api/useGetAuth";
+import { MessageModal } from "./messageModal";
 // Layer
 import { Header } from "@app/header";
 import { Aside } from "@app/aside";
@@ -12,14 +12,15 @@ import { paths } from "@shared/consts/paths";
 
 export const Layout = () => {
 
-  
-  const loaction = useLocation();
-  const authPaths = [paths.LOGIN, paths.SIGNUP];
-  const isAuthPage = authPaths.some((path) => location.pathname.includes(path));
-  const isAside = Object.values(paths).some((item) =>
-    loaction.pathname.includes(item)
-  );
   const [ userInfo ] = useGetAuth();
+  
+  // login, signup 페이지 구분
+  const loaction = useLocation();
+  const authPaths = [ paths.LOGIN, paths.SIGNUP ];
+  const isAuthPage = authPaths.some((path) => location.pathname.includes(path));
+
+  // asdie 페이지 구분
+  const isAside = Object.values(paths).some((item) => loaction.pathname.includes(item));
 
   return (
     <S.Layout>
