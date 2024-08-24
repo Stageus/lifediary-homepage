@@ -5,11 +5,11 @@ import { useFetch, useCookie } from "@shared/hook";
 export const usePutComplain = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet } = useCookie();
     const navigate = useNavigate();
 
     const putComplain = ( diaryIdx, isInvalid )=>{
-        baseFetch(`report/${diaryIdx}/status`, {method:"PUT", data: isInvalid }, handleGetCookie());
+        baseFetch(`report/${diaryIdx}/status`, {method:"PUT", data: {"isInvalid":isInvalid}}, cookieGet("token"));
     };
     
     useEffect(() => {

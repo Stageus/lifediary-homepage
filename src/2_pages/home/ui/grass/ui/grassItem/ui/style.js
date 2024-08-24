@@ -1,4 +1,4 @@
-import styled,{css} from "styled-components";
+import styled from "styled-components";
 
 const GrassItem = styled.div`
     width: 15px;
@@ -9,6 +9,7 @@ const GrassItem = styled.div`
     align-items: center;
     background: ${({$isColor}) => $isColor ?? "#80808057"};
     cursor: ${({$isColor}) => $isColor ? "pointer" : "not-allowed"};
+    border: 1px solid #80808057;
 `;
 
 const Month = styled.div`

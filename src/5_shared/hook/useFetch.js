@@ -19,7 +19,6 @@ export const useFetch = () => {
         }),
       };
   
-      console.log(requestInfo);
       const response = await fetch( `${import.meta.env.VITE_API_URL}/${url}`, { ...requestInfo } );
       if ( response.status === 200 ) {
         const jsonData = await response.json();  
