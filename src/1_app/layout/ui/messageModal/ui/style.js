@@ -5,7 +5,7 @@ const messageModal = styled.div`
     background-color: #0000003d;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 9999999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +26,7 @@ const modalWrap = styled.div`
 
 const message = styled.p`
     flex-grow: 1;
-    color: ${({theme}) => theme.highlight};
+    color: #0f0f0fc4;
     padding: 20px;
     white-space: pre;
     font-family: Arial, Helvetica, sans-serif;
