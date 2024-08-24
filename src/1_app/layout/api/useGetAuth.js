@@ -1,14 +1,14 @@
 // Npm
 import { useEffect, useState } from "react";
 // Layer
-import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useFetch, useCookie } from "@shared/hook";
 
 export const useGetAuth = () => {
 
   const [ fetchData, baseFetch ] = useFetch();
-  const [ userInfo, setUserInfo ] = useState( null );
   const { cookieGet, cookieRemove, cookieSet } = useCookie();
-  const { errorRoute } = useRoute();
+
+  const [ userInfo, setUserInfo ] = useState( null );
 
   const mapper = ( resData ) => {
     const permissionType = {
@@ -28,9 +28,7 @@ export const useGetAuth = () => {
   };
 
   useEffect(() => {
-    if ( cookieGet("token") ){
-      getAuth();
-    }
+    if ( cookieGet("token") ) getAuth();
   }, [ cookieGet("token") ]);
 
   useEffect(() => {
@@ -49,7 +47,7 @@ export const useGetAuth = () => {
         break;
 
       case 500:
-        errorRoute(500, "서버에러");
+        cookieRemove();
         break;
     }
   }, [fetchData]);
