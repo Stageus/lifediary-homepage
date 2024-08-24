@@ -1,24 +1,52 @@
+// Npm
 import { useEffect } from "react";
-import { useFetch, useCookie } from "@shared/hook";
+// Layer
+import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useMessage } from "@shared/store";
 
 export const useDeleteDiary = ()=>{
-    const [ _, status, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+
+    const [ fetchData, baseFetch ] = useFetch();
+    const { cookieGet } = useCookie();
+    const { diaryRoute, errorRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage);
+    
 
     const deleteDiary = ( diaryIdx ) => {
-        baseFetch(`diary/${diaryIdx}`, {method: "DELETE"}, handleGetCookie());
+        baseFetch(`diary/${diaryIdx}`, {method: "DELETE"}, cookieGet("token"));
     };
 
     useEffect(()=>{
+        if ( !fetchData ) return;
 
-        if  ( status === 200 ) return console.log("다른곳으로 리다이렉트");
-        if  ( status === 400 ) return console.log("유효성 감시 실패일 경우");
-        if  ( status === 401 ) return console.log("토큰이 잘못된 경우(없는경우)");
-        if  ( status === 403 ) return console.log("해당 일기의 주인이 아닌경우");
-        if  ( status === 404 ) return console.log("대상으로 하는 diaryIdx가 없는경우");
-        if  ( status === 500 ) return console.log("서버에러");
+        switch ( fetchData.status ) {
+            case 200:
+                // window.location을 사용해야하나? 질문 - 
+                setMessage("일기가 삭제되었습니다", diaryRoute);
+                break;
 
-    },[status])
+            case 400:
+                setMessage("해당 일기를 삭제할 수 없습니다.\n잠시후 다시 시도해주세요.");
+                break;
+
+            case 401:
+                setMessage("로그인이 필요한 서비스입니다.");
+                break;
+
+            case 403:
+                setMessage("일기는 작성자만 삭제할 수 있습니다.");
+                break;
+
+            case 404:
+                setMessage("해당일기는 존재하지 않는 일기입니다.");
+                break;
+
+            case 500:
+                errorRoute(500, "서버에러");
+                break;
+        }
+        
+    },[ fetchData ])
 
     return [ deleteDiary ];
 }

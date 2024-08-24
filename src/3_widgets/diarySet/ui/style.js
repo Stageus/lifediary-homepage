@@ -2,14 +2,18 @@ import styled from "styled-components";
 
 const diarySet = styled.div`
     display: flex;
-    flex-direction: column;
-    padding-top: 50px;
+    justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
 `;
 
 const innerBox = styled.div`
-    width: 600px;
+    height: 90%;
+    width: 700px;
+    margin: 0 50px 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `;
 
 const content = styled.textarea`

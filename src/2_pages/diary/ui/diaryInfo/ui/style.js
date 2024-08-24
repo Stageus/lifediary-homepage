@@ -1,18 +1,17 @@
 import styled from "styled-components";
 
 const DiaryInfo = styled.div`
-    margin-left: 100px;
-    height: 100%;
-    width: 90%;
+    min-height: 700px;
+    width: fit-content;
     display: flex;
     justify-content: center;
     gap: 5px;
+    position: relative;
 `;
 
 // ContentPart _________________
 const ContentPart = styled.div`
-    height: 100%;
-    flex: 0 1 350px;
+    width: 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,7 +23,7 @@ const DiarySliderContainer = styled.div`
 
 const DiaryContent = styled.div`
     white-space: pre-wrap;
-    flex: 1 0 300px;
+    flex: 1 0 100px;
     overflow-y: scroll;
     padding: 10px;
     border: 4px solid ${({theme}) => theme.minor};
@@ -39,6 +38,7 @@ const CommentPart = styled.div`
     border-radius: 10px;
     transition: width 0.3s ease-out;
     overflow: hidden;
+    z-index: 10;
 `;
 
 const Cancel = styled.div`
@@ -56,6 +56,7 @@ const ButtonPart = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     gap: 5px;
+    z-index: 9999999;
 `;
 
 const CommentBtn = styled.div`

@@ -39,7 +39,7 @@ export const Carousel = () => {
                               <S.UserInfo>
                                 <S.ProfileImgWrap>
                                       <Profile
-                                        src={diary.profileImg}
+                                        img={diary.profileImg}
                                       />
                                 </S.ProfileImgWrap>
                                 <span>{ diary.nickname }</span>

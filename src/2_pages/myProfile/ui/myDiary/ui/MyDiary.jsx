@@ -3,19 +3,20 @@ import { S } from "./style";
 import { useGetMyDiary } from "../api/useGetMyDiary";
 // Layer
 import { Thumbnail } from "@shared/ui";
-import { useScroll } from "@shared/hook";
+import { useScroll, useRoute } from "@shared/hook";
 
 export const MyDiary = ( props ) => {
 
   const [ isEnd, isLoading, diaryList, getMyDiary ] = useGetMyDiary( props );
   const [ watchRef ] = useScroll( getMyDiary );
+  const { diaryRoute } = useRoute();
 
   return (
     <>
       { diaryList.length ? (
         diaryList?.map((diary) => {
           return (
-            <S.diaryItem key={diary.idx}>
+            <S.diaryItem key={diary.idx} onClick={() => diaryRoute(diary.idx)}>
               <S.thumbnailWrap>
                 <Thumbnail src={diary.thumbnail} />
               </S.thumbnailWrap>

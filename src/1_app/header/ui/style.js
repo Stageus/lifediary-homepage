@@ -40,6 +40,8 @@ const profileArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
 `;
 
 export const S = {

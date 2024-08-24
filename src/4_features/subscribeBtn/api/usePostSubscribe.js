@@ -14,6 +14,8 @@ export const usePostSubscribe = ( isSubscribed ) => {
     const setMessage = useMessage( state => state.setMessage );
     const { errorRoute ,loginRoute } = useRoute();
 
+
+    // 확인 -> 왜썻나
     useEffect(()=>{
         setSubscribe(isSubscribed);
     },[isSubscribed])

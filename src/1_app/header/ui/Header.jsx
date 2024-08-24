@@ -13,7 +13,7 @@ export const Header = ( props ) => {
   const { userInfo } = props; 
   
   const { homeRoute, loginRoute, diaryCreateRoute, myProfileRoute } = useRoute();
-  const { cookieRemove } = useCookie();
+  const { cookieGet, cookieRemove } = useCookie();
   const setMessage = useMessage((state) => state.setMessage);
 
   const logoutHandler = () => {
@@ -33,7 +33,7 @@ export const Header = ( props ) => {
         { userInfo ? (
           <>
             <S.profileArea onClick={myProfileRoute}>
-              <Profile />
+              <Profile img={userInfo.profileImg}/>
             </S.profileArea>
 
             <div>

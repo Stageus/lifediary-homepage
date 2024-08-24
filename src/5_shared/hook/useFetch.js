@@ -8,7 +8,6 @@ export const useFetch = () => {
     try {
       const { method = "GET", headers = "application/json", data = null } = options ?? {};
       const isFormData = data instanceof FormData;
-      
       const requestInfo = {
         method,
         headers: {
@@ -20,6 +19,7 @@ export const useFetch = () => {
         }),
       };
   
+      console.log(requestInfo);
       const response = await fetch( `${import.meta.env.VITE_API_URL}/${url}`, { ...requestInfo } );
       if ( response.status === 200 ) {
         const jsonData = await response.json();  

@@ -2,17 +2,17 @@
 import { useLocation } from "react-router-dom";
 // Slice
 import { S } from "./style";
-import { useRoute } from "../model/useRoute";
 import { SubscribeList } from "./subscribeList";
 import { ComplainAlarm  } from "./complainAlarm"; 
 // Layer
 import { DefaultBtn } from "@shared/ui";
+import { useRoute } from "@shared/hook";
 
 export const Aside = ( props ) => {
 
   const { userInfo } = props;
   const loaction = useLocation();
-  const { onClickRoute } = useRoute();
+  const { homeRoute, diaryRoute } = useRoute();
     
   return (
     <>
@@ -22,15 +22,15 @@ export const Aside = ( props ) => {
           <S.BtnWrap>
             <DefaultBtn 
             text="홈"
-            onClick={ ()=>onClickRoute("/") }
+            onClick={homeRoute}
              />
           </S.BtnWrap>
 
           <S.BtnWrap>
             <DefaultBtn 
               text="둘러 보기"
-              onClick={ ()=>onClickRoute("diary") }
-              type={ loaction.pathname === "diary" ? "select" : null }
+              onClick={diaryRoute}
+              type={ loaction.pathname === "/diary" ? "select" : null }
                />
           </S.BtnWrap>
 

@@ -19,7 +19,7 @@ export const GrassItem = ( props )=>{
                 $date={ date }
                 onMouseOver={ onMuouserOver }
                 onMouseOut={ onMouserOut }
-                onClick={ () => diaryRoute( idx ) }
+                onClick={ idx ? () => diaryRoute( idx ) : null}
             >
             { !color && "x"} 
             {findFirstDay( date ) 

@@ -40,10 +40,11 @@ export const useGetAccountDiary = (props) => {
     if (dateRange.endDate && !dateValidation(dateRange.endDate))
       return setMessage("종료날짜 형식이 잘못되었습니다.");
 
+
     const baseQuery = `page=${pageNum}`;
     const startQuery = dateRange.startDate
-      ? `startDate=${dateRange.startDate}&`
-      : "";
+    ? `beginDate=${dateRange.startDate}&`
+    : "";
     const endQuery = dateRange.endDate ? `endDate=${dateRange.endDate}&` : "";
     const query = startQuery + endQuery + baseQuery;
 

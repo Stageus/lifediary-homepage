@@ -9,7 +9,7 @@ export const usePutDiaryInfo = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
-    const { loginRoute, backRoute, errorRoute } = useRoute();
+    const { loginRoute, backRoute, errorRoute, diaryRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage);
     const { diaryIdx } = useParams();
 
@@ -34,8 +34,7 @@ export const usePutDiaryInfo = () => {
 
         switch ( fetchData.status ) {
             case 200:
-                // 임시로 홈이지만, 이후에는 메인페이지로 리다이렉트하는걸로
-                homeRoute();
+                diaryRoute(diaryIdx);
                 break;
 
             case 400:

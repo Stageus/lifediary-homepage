@@ -13,9 +13,10 @@ const LeftBtn = styled.div`
     top: 50%;
     transform: translate(2px, -50%);
     border-radius: 50%;
-    background-color: ${({theme}) => theme.gray};
+    background-color: ${({$isNext, theme}) => $isNext ? theme.highlight : theme.gray};
     z-index: 1;
-    cursor: pointer;
+    cursor: ${({$isNext}) => $isNext ? "pointer" : "not-allowed"};
+
 `;
 const RightBtn = styled.div`
     display: flex;
@@ -24,9 +25,9 @@ const RightBtn = styled.div`
     top: 50%;
     transform: translate(-2px, -50%);
     border-radius: 50%;
-    background-color: ${({theme}) => theme.gray};
+    background-color: ${({$isNext, theme}) => $isNext ? theme.highlight : theme.gray};
     z-index: 1;
-    cursor: pointer;
+    cursor: ${({$isNext}) => $isNext ? "pointer" : "not-allowed"};
 `;
 
 const ItemContainer = styled.div`
@@ -60,6 +61,7 @@ const Item = styled.div`
     height: 10px;
     background-color: ${({$isSame, theme}) => $isSame ? theme.highlight : theme.white};
     border-radius: 20px;
+    cursor: pointer;
 `;
 
 export const S = {
