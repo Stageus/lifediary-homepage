@@ -10,7 +10,8 @@ const search = styled.div`
   height: 40px;
   border: 1px solid ${({ theme }) => theme.major};
   padding: 0 10px;
-  
+  position: relative;
+  gap: 10px;
 `;
 
 const tagArea = styled.div`
@@ -18,6 +19,10 @@ const tagArea = styled.div`
     flex: 1;
     overflow-x: scroll;
     width: 300px;
+
+    &::-webkit-scrollbar{
+      display: none;
+    }
 `;
 
 const tagList = styled.div`
@@ -72,6 +77,20 @@ const iconArea = styled.div`
   }
 `;
 
+const clean = styled.div`
+  width: ${({ $isShow }) => ($isShow ? 'fit-content' : 0)};
+  padding: ${({ $isShow }) => ($isShow ? "4px" : 0)};
+  position: absolute;
+  overflow: hidden;
+  transform: translateX(110%);
+  right: 0;
+  cursor: pointer;
+  background-color: ${({ theme }) => theme.highlight};
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+`;
+
 export const S = {
   search,
   tagArea,
@@ -79,4 +98,5 @@ export const S = {
   tag,
   tagInput,
   iconArea,
+  clean,
 };

@@ -11,6 +11,10 @@ export const Search = () => {
 
   const { searchRoute } = useRoute();
   const [ tagList, setTagList ] = useState([]);
+  const cleanAlltag = () => {
+    if ( tagList.length === 0) return;
+    setTagList([])
+  };
   
   return (
     <S.search>
@@ -20,6 +24,10 @@ export const Search = () => {
       <S.iconArea onClick={() => searchRoute(tagList)}>
         <Icon size="28px" color="#FFE6DE" type="search"/>
       </S.iconArea>
+      <S.clean 
+      $isShow={tagList.length !== 0}
+      onClick={cleanAlltag}>전체삭제
+      </S.clean>
     </S.search>
   );
 };
