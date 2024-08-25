@@ -7,8 +7,9 @@ export const usePutProfileImg = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
+    const { loginRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage );
-    const { errorRoute, loginRoute } = useRoute();
+    
     const [ isSuccess, setisSuccess ] = useState( false );
 
     const onClickAgain = () => {
@@ -34,11 +35,11 @@ export const usePutProfileImg = () => {
                 break;
 
             case 401:
-                setMessage("로그인후에 다시이용해주세요",loginRoute);
+                setMessage("로그인이 필요한 서비스입니다.\n로그인화면으로 이동하시겠습니까?",loginRoute);
                 break;
 
             case 500:
-                errorRoute(500, "서버에러");
+                setMessage("500 서버에러: 이미지를 변경할수 없습니다.");
                 break;
         }
 

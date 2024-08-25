@@ -20,9 +20,11 @@ export const AccountProfile = ( props ) => {
   const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( profileImg || profile );
   const [ isProfileSuccess, onClickProfileAgain, putProfileImg ] = usePutProfileImg();
   const { name, setName, nameEdit, onClickEdit } = useName();
-  const [ putName ] = usePutName();
+  const [ putName ] = usePutName( onClickEdit );
   const setMessage = useMessage( state => state.setMessage );
   const [ deleteAccount ] = useDeleteAccount();
+
+  console.log(name);
 
   return (
     <S.userInfoArea>
@@ -68,20 +70,15 @@ export const AccountProfile = ( props ) => {
         <S.userInfo>
           {isMyprifle 
           ? (
-            // 이름을 변경하고 성공하면, input창을 닫아야하고
-            // 다시눌렀을시에는 열리도록해야함 useName쪽이라 조합해야할듯
             <>
               { nameEdit 
               ? <>
-                <NameInput name={name} setName={setName} initState={nickname}/>
+                <NameInput name={name} setName={setName} initState={ name ?? nickname}/>
                 <DefaultBtn
                   size="medium"
                   type={ name ? "select" : "disabled"}
                   text="저장"
-                  onClick={ ()=> {
-                    putName(name);
-                    onClickEdit();
-                  }}
+                  onClick={ ()=> putName(name)}
                 />
                 <DefaultBtn
                   size="medium"

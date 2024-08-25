@@ -23,7 +23,7 @@ export const useDeleteAccount = ()=> {
                 break;
 
             case 401:
-                setMessage("탈퇴할수 없는 계정입니다.");
+                setMessage("회원탈퇴는 본인만 가능합니다");
                 break;
 
             case 500:
