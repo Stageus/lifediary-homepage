@@ -5,6 +5,7 @@ const Aside = styled.div`
     background-color: ${({theme})=> theme.minor};
     display: flex;
     flex-direction: column;
+    gap: 10px;
 `;
 
 const BtnList = styled.div`

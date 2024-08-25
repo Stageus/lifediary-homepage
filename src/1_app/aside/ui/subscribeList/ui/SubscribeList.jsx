@@ -33,15 +33,11 @@ export const SubscribeList = () => {
                   >
                     <Profile img={addItem.profileImg} />
                     <span>{addItem.nickname}</span>
-                    <div>{addItem.accountIdx}</div>
                   </S.SubscribeItem>
                 );
               }): <S.message>구독중인 유저가 없습니다</S.message>}
-
-          <div ref={ watchRef }>옵저버</div>
-          {/* { !isLoading && addSubscribeList.length !==0 && <div ref={ watchRef }>옵저버</div>} */}
-
         </S.SubscribeList>
+          { !isLoading && <div ref={ watchRef }/> }
           {isLoading ? <S.Loading>로딩중...</S.Loading> : null}
       </S.SubscribeInfo>
     </>

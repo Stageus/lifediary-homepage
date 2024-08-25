@@ -5,9 +5,8 @@ const SubscribeInfo = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 0 5px;
-    height: 200px;
+    height: 100%;
     overflow-y: scroll;
-    background-color: red;
 `;
 
 const SubscribeTitle = styled.h3`
