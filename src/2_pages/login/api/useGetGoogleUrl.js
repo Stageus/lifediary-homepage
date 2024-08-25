@@ -19,9 +19,9 @@ export const useGetGoogleUrl = () => {
             case 200:
                 window.location.href = fetchData.data.redirectUrl;
                 break;
-
-            case 500:
-                errorRoute(500, "서버에러");
+                
+                case 500:
+                errorRoute(500, "서버오류로 인해 Google 로그인을 할수 없습니다.");
                 break;
         };
 
