@@ -14,8 +14,6 @@ export const SubscribeList = () => {
   const { userProfileRoute } = useRoute();
   const { accountIdx } = useParams();
   const addSubscribeList = useSubscribe((state) => state.addSubscribeList);
-  console.log("구독리스트 스크롤 임시감시")
-
 
   return (
     <>
@@ -36,8 +34,8 @@ export const SubscribeList = () => {
                   </S.SubscribeItem>
                 );
               }): <S.message>구독중인 유저가 없습니다</S.message>}
-        </S.SubscribeList>
           { !isLoading && <div ref={ watchRef }/> }
+        </S.SubscribeList>
           {isLoading ? <S.Loading>로딩중...</S.Loading> : null}
       </S.SubscribeInfo>
     </>

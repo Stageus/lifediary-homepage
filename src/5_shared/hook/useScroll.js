@@ -27,7 +27,6 @@ export const useScroll = () => {
           }
     };
 
-
     useEffect(()=>{
 
         // observer 생성자
@@ -46,7 +45,7 @@ export const useScroll = () => {
                 observerRef.current.disconnect();
             }
         }
-    },[pageNum]);
+    },[]);
 
-    return [ watchRef, pageNum, stopObserver ];
+    return [ watchRef, pageNum, stopObserver];
 }

@@ -13,8 +13,8 @@ export const useGetSubscribeList = () => {
     const setMessage = useMessage( state => state.setMessage );
     const updateSubscribe = useSubscribe( state => state.updateSubscribe );
     const [ watchRef, pageNum, stopObserver ] = useScroll();
+    
     const [ isLoading, setIsLoading ] = useState( false ); 
-
     const mapper = ( resData ) => {
         const mapperWrap = resData?.map( data => (
             {
@@ -27,13 +27,13 @@ export const useGetSubscribeList = () => {
     };
 
     const getSubscribeList = ()=>{
-        setIsLoading( true );        
+        setIsLoading( true );
         baseFetch(`subscription?page=${pageNum}`,{}, cookieGet("token"));
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         getSubscribeList();
-    },[pageNum])
+    }, [pageNum]);
 
     useEffect(()=>{
         if ( !fetchData ) return;
@@ -42,7 +42,8 @@ export const useGetSubscribeList = () => {
         const mapperData = mapper( fetchData.data );
 
         switch ( fetchData.status ) {
-            case 200:         
+            case 200:
+
                 updateSubscribe(mapperData);
                 break;
                 
