@@ -1,5 +1,5 @@
 // Npm
-import { useState } from "react";
+import { useState, useRef } from "react";
 // Layer
 import { imgValidation } from "@shared/consts/validation";
 import { useMessage } from "@shared/store";
@@ -9,7 +9,10 @@ export const useProfileImg = ( googleProfileImg ) => {
     const [ selectImg, setSelectImg ] = useState( googleProfileImg );
     const [ previewImg, setPreviewImg ] = useState( URL.createObjectURL(googleProfileImg) );
     const setMessage = useMessage( state => state.setMessage );
+    const profileRef = useRef(null);
+
     const onClickImg = ( e ) => {
+        if ( !e.target.files[0] ) return;
     
         const imgCheckValidation = imgValidation( e.target.files[0] );
 
@@ -27,8 +30,9 @@ export const useProfileImg = ( googleProfileImg ) => {
     const onClickReset = () => {
         setPreviewImg( URL.createObjectURL(googleProfileImg) );
         setSelectImg( googleProfileImg );
+        profileRef.current.value = null;
     };
 
-    return { selectImg, previewImg, onClickImg, onClickReset }
+    return { selectImg, previewImg, onClickImg, onClickReset, profileRef}
 
 };

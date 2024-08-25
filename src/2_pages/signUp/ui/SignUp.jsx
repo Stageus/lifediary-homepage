@@ -16,9 +16,12 @@ export const SignUp = () => {
     const location = useLocation();
     const googleInfo = location.state;
     const { loginRoute, homeRoute } = useRoute();
-    const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( googleInfo.googleProfileImg );
+    const { selectImg, previewImg, onClickImg, onClickReset, profileRef } = useProfileImg( googleInfo.googleProfileImg );
     const [ postAccount ] = usePostAccount();
     const [ name, setName ] = useState(null);
+
+    console.log("selectImg:",selectImg);
+    console.log("previewImg:",previewImg);
 
   return (
     <S.signUp>
@@ -36,9 +39,10 @@ export const SignUp = () => {
              />
             <label htmlFor="file" />
             <input 
+            ref={profileRef}
             id="file"
             type="file"
-            accept=".jpg, .jpeg, .png, .gif" 
+            accept=".jpg, .jpeg, .png, .gif"
             onChange={onClickImg}
              />
           </S.imgWrap>

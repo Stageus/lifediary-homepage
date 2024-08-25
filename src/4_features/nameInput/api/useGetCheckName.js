@@ -8,13 +8,13 @@ import { nameValidation } from "@shared/consts/validation";
 export const useGetCheckName = ( props ) => {
 
     const [ fetchData, baseFetch ] = useFetch();
-    const setMessage = useMessage( state => state.setMessage );
     const { errorRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage );
+
     const [ saveName, setSaveName ] = useState( null );
     const { setName } = props;
 
     const getCheckName = ( name ) => {
-
         if ( !nameValidation(name) ) return setMessage("이름은 최소 3자이상 ~ 최대 20자 이하만 가능합니다.");
 
         setSaveName( name );
