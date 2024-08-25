@@ -8,8 +8,8 @@ import { DefaultBtn } from "@shared/ui";
 
 export const Grass = () => {
 
-  const { yearsList, selectYear, changeYear } = useYearsList();
-  const [ grassList, onClickYears, isLoading ] = useGetGrassList( changeYear );
+  const { yearsList } = useYearsList();
+  const [ grassList, selectYear, onClickYears, isLoading ] = useGetGrassList();
 
   return (
     <>
@@ -47,7 +47,10 @@ export const Grass = () => {
                     {/* 요일에 속한 일수 */}
                     <S.DayList>
                       {dayOfWeek[Object.keys(dayOfWeek)]?.map((day, idx) => {
-                        return <GrassItem day={day} key={idx} />;
+                    
+                        return (
+                          <GrassItem day={day} key={idx} />
+                        );
                       })}
                     </S.DayList>
                   </S.DayOfWeekItem>
