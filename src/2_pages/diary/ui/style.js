@@ -7,6 +7,8 @@ const Diary = styled.div`
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    padding: 0 100px 0 100px;
+    gap: 50px;
 `; 
 
 // 리스트
@@ -14,7 +16,7 @@ const ScrollItem = styled.div`
     scroll-snap-align: start;
     scroll-snap-stop: always;
     flex: 1 0 100%;
-    padding: 20px 15px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -25,6 +27,9 @@ const ScrollItem = styled.div`
 const DiaryHeader = styled.div`
     display: flex;
     justify-content: space-between;
+    background-color: ${({theme}) => theme.major};
+    padding: 4px;
+    border-radius: 8px;
 `;
 
 const DiaryHeaderWrap = styled.div`
@@ -39,7 +44,7 @@ const UserImg = styled.div`
     height: 34px;
     display: flex;
     border-radius: 50%;
-    background-color: red;
+    
     cursor: pointer;
     overflow: hidden;
 `;
