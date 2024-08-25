@@ -42,8 +42,9 @@ export const Diary = () => {
                     ? null
                     : <S.SubscribeWrap>
                         <SubscribeBtn
-                        isSubscribed={ diary.isSubscribed }
-                        accountIdx={ diary.accountIdx }
+                        {...diary}
+                        // isSubscribed={ diary.isSubscribed }
+                        // accountIdx={ diary.accountIdx }
                         />
                       </S.SubscribeWrap>
                     }

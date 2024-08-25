@@ -13,7 +13,7 @@ export const MyProfile = () => {
 
     return (
         <S.myProfile>
-            <AccountProfile {...myInfo}/>
+            { myInfo && <AccountProfile {...myInfo}/>}
             <Tab
                 tabLabel={["작성한 일기", "좋아요한 일기"]}
                 components={[MyDiary,MyLikeDiary]}

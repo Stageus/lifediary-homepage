@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export const useSubscribe = create((set)=>({
-    value: false,
-    updateSubscribe: () => set( (state) => ({value: !state.value})),
+    addSubscribeList: [],
+    updateSubscribe: ( newSubscribe ) => set((state) => ({addSubscribeList: [...state.addSubscribeList, ...newSubscribe]})),
+    deleteSubscribe: ( removeSubscribeIdx ) => set((state) => ({addSubscribeList: state.addSubscribeList.filter( item => item.accountIdx !==  removeSubscribeIdx)})),
 }))

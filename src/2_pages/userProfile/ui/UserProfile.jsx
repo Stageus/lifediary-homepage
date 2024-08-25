@@ -12,7 +12,7 @@ export const UserProfile = () => {
     
     return (
         <S.userProfile>
-            <AccountProfile {...accountInfo}/>
+            { accountInfo && <AccountProfile {...accountInfo}/>}
             <Tab
             tabLabel={["유저 일기"]}
             components={[AccountDiary]} 

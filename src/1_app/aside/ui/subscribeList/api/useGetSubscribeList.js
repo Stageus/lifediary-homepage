@@ -2,69 +2,70 @@
 import { useEffect, useState } from "react";
 // Layer
 import { useFetch, useCookie, useRoute } from "@shared/hook";
-import { useSubscribe, useMessage } from "@shared/store";
+import { useMessage, useSubscribe } from "@shared/store";
 
 
 export const useGetSubscribeList = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
-    const [ subscribeList, setSubscribeList ] = useState( null );
-    const [ isLoading, setIsLoading ] = useState( false ); 
-    const isSubscribe = useSubscribe( state => state.value );
-    const [ pageNum, setPageNum ] = useState(1);
-    const [ isEnd, setIsEnd ] = useState( false );
     const { errorRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage );
+    const updateSubscribe = useSubscribe( state => state.updateSubscribe );
+
+    const [ pageNum, setPageNum ] = useState(1); 
+    const [ subscribeList, setSubscribeList ] = useState( [] );
+    const [ isLoading, setIsLoading ] = useState( false ); 
+    const [ isEnd, setIsEnd ] = useState( false );
 
     const mapper = ( resData ) => {
-        const subscribeList = resData.map( data => (
+
+        const mapperWrap = resData?.map( data => (
             {
-                toAccountIdx : data.toAccountIdx,
+                accountIdx : data.toAccountIdx,
                 profileImg : data.profileImg,
                 nickname : data.nickname
             }
         ));
-        return subscribeList;
+        return mapperWrap;
     };
 
-    const getSubscribeList = ()=>{
+    /*
+        여기가 문제가 있음
+        무한스크롤 과 전역상타에 따라 함수를 호출해야한다.
+        문제는, 경우의 수때문인데, 전역상태관리가 바뀌면,
+        해당함수를 호출해야하는데, 일반적으로 호출하기때문에,
+        pageNum의 값은 undefined 인데....
+    */
+    const getSubscribeList = ( pageNum )=>{
         setIsLoading( true );
-        baseFetch(`subscription?page=${pageNum}`,{}, cookieGet("token"));
+        const page = pageNum ?? 1;
+        baseFetch(`subscription?page=${page}`,{}, cookieGet("token"));
     };
 
     useEffect(() => {
-        setPageNum(1);
-        getSubscribeList();
-    },[isSubscribe]);
+        if ( !subscribeList.length ) {
+            getSubscribeList();
+        }
+    },[]);
+
     
 
     useEffect(()=>{
         if ( !fetchData ) return;
+
         setIsLoading( false );
+        const mapperData = mapper( fetchData.data );
 
         switch ( fetchData.status ) {
             case 200:
-
-                /*
-                    무한스크롤은 문제가 되지않는다,
-                    구독자가 20명 미만일경으에도 문제가 되지않는다,
-                    단! 무한스크롤을하고, page=2가 되었을시에는 구독취소를하면?
-                    다시 1페이지로 요청하려면?
-                    
-                */
-                const mapperData = mapper( fetchData.data );
-                if ( pageNum === 1 ) return setSubscribeList(mapperData);
-                setSubscribeList(prevDiaryList => prevDiaryList ? [...prevDiaryList, ...mapperData] : mapperData);
-
-                const moreData = mapperData.length >= 20;
-                setPageNum(prevPageNum => moreData ? prevPageNum + 1 : prevPageNum);
-                setIsEnd(!moreData);
-                
+                // console.log(mapperData);
+                // setSubscribeList(mapperData);            
+                updateSubscribe(mapperData)
                 break;
                 
             case 400:
-                setMessage("구독자 목록을 불러올수 없습니다.")
+                setMessage("구독자 목록을 불러올수 없습니다.");
                 break;
 
             case 401:
@@ -72,7 +73,9 @@ export const useGetSubscribeList = () => {
                 break;
 
             case 404:
-                setIsEnd( true );
+                if ( subscribeList && !mapperData ) {
+                    setSubscribeList(null);
+                }
                 break;
 
             case 500:
