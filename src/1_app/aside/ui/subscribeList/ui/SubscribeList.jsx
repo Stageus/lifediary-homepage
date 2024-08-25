@@ -4,19 +4,18 @@ import { useParams } from "react-router-dom";
 import { S } from "./style";
 import { useGetSubscribeList } from "../api/useGetSubscribeList";
 // Layer
-import { useScroll, useRoute } from "@shared/hook";
+import { useRoute } from "@shared/hook";
 import { Profile } from "@shared/ui";
 import { useSubscribe } from "@shared/store";
 
 export const SubscribeList = () => {
-  const [getSubscribeList, subscribeList, isLoading, isEnd] =
-    useGetSubscribeList();
-  const [watchRef] = useScroll(getSubscribeList);
+
+  const [ isLoading, watchRef ] = useGetSubscribeList();
   const { userProfileRoute } = useRoute();
   const { accountIdx } = useParams();
   const addSubscribeList = useSubscribe((state) => state.addSubscribeList);
+  console.log("구독리스트 스크롤 임시감시")
 
-  console.log(addSubscribeList);
 
   return (
     <>
@@ -24,25 +23,7 @@ export const SubscribeList = () => {
         <S.SubscribeTitle>구독목록</S.SubscribeTitle>
 
         <S.SubscribeList>
-            {/* {subscribeList ? (
-              subscribeList.map((item) => {
-                return (
-                  <S.SubscribeItem
-                    key={item.toAccountIdx}
-                    onClick={() => userProfileRoute(item.toAccountIdx)}
-                    $isSame={+accountIdx === item.toAccountIdx}
-                  >
-                    <Profile img={item.profileImg} />
-                    <span>{item.nickname}</span>
-                    <div>{item.toAccountIdx}</div>
-                  </S.SubscribeItem>
-                );
-              })
-            ) : (
-              <S.message>구독중인 유저가 없습니다</S.message>
-            )} */}
-
-            {addSubscribeList.length !== 0 &&
+            {addSubscribeList.length !== 0 ?
               addSubscribeList.map((addItem) => {
                 return (
                   <S.SubscribeItem
@@ -55,13 +36,13 @@ export const SubscribeList = () => {
                     <div>{addItem.accountIdx}</div>
                   </S.SubscribeItem>
                 );
-              })}
+              }): <S.message>구독중인 유저가 없습니다</S.message>}
 
-          {/* <div ref={ watchRef }>옵저버</div> */}
-          {/* { !isLoading && subscribeList && <div ref={ watchRef }>옵저버</div>} */}
+          <div ref={ watchRef }>옵저버</div>
+          {/* { !isLoading && addSubscribeList.length !==0 && <div ref={ watchRef }>옵저버</div>} */}
 
-          {isLoading ? <S.Loading>로딩중...</S.Loading> : null}
         </S.SubscribeList>
+          {isLoading ? <S.Loading>로딩중...</S.Loading> : null}
       </S.SubscribeInfo>
     </>
   );
