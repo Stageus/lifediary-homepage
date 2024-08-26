@@ -1,5 +1,5 @@
 // Npm
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // Layer
 import { useFetch, useRoute, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
@@ -15,14 +15,13 @@ export const useGetMyDiary = (props) => {
   const { cookieGet } = useCookie();
   const [fetchData, baseFetch] = useFetch();
   
-
-  const [pageNum, setPageNum] = useState(1);
+  const pageNumRef = useRef(1);
   const [diaryList, setDiaryList] = useState([]);
   const [isEnd, setIsEnd] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const mapper = (resData) => {
-    const mapperData = resData.map((diary) => ({
+    const mapperData = resData?.map((diary) => ({
       idx: diary.idx,
       thumbnail: diary.thumbnailImg,
       isPublic: diary.isPublic,
@@ -32,16 +31,16 @@ export const useGetMyDiary = (props) => {
     return mapperData;
   };
 
-  const getMyDiary = () => {
+  const getMyDiary = ( newRange) => {
     // 데이터의 끝이라면 더이상 요청하지 않는다.
-    if (isEnd) return;
+    if (isEnd) return console.log("나의 작성한일기 끝");
 
     if (dateRange.startDate && !dateValidation(dateRange.startDate))
       return setMessage("시작날짜 형식이 잘못되었습니다.");
     if (dateRange.endDate && !dateValidation(dateRange.endDate))
       return setMessage("종료날짜 형식이 잘못되었습니다.");
 
-    const baseQuery = `page=${pageNum}`;
+    const baseQuery = `page=${ newRange ?? pageNumRef.current}`;
     const startQuery = dateRange.startDate
       ? `startDate=${dateRange.startDate}&`
       : "";
@@ -54,13 +53,7 @@ export const useGetMyDiary = (props) => {
   };
 
   useEffect(() => {
-    if (pageNum === 1) {
-      getMyDiary();
-    }
-  }, []);
-
-  useEffect(() => {
-    setPageNum(1);
+    getMyDiary( 1 );
     setDiaryList([]);
     setIsEnd(false);
   }, [dateRange]);
@@ -68,20 +61,13 @@ export const useGetMyDiary = (props) => {
   useEffect(() => {
     if (!fetchData) return;
 
+    const mapperData = mapper(fetchData.data);
     setIsLoading(false);
+
     switch (fetchData.status) {
       case 200:
-        // 일기데이터를 기존 데이와 합침
-        setDiaryList([...diaryList, ...mapper(fetchData.data)]);
-
-        // 응답받은 데이터가 10개 이상이라면
-        // 다음페이지가 있을수도 있기에 pageNum을 업데이트
-        // 열개 미만이라면 데이터가 끝난걸로 간주하고 데이터의 끝을알림
-        if (fetchData.data.length >= 10) {
-          setPageNum(pageNum + 1);
-        } else {
-          setIsEnd(true);
-        }
+        pageNumRef.current = pageNumRef.current + 1;
+        setDiaryList([...diaryList, ...mapperData]);
         break;
 
       case 400:
@@ -93,11 +79,7 @@ export const useGetMyDiary = (props) => {
         break;
 
       case 404:
-        // 데이터의 끝을 알림
-
-        if (pageNum === 1) {
-          setDiaryList([]);
-        }
+        pageNumRef.current = 1;
         setIsEnd(true);
         break;
 
@@ -107,5 +89,5 @@ export const useGetMyDiary = (props) => {
     }
   }, [fetchData]);
 
-  return [isEnd, isLoading, diaryList, getMyDiary];
+  return [isLoading, diaryList, getMyDiary];
 };
