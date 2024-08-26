@@ -1,7 +1,7 @@
 // Npm
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // Layer
-import { useFetch, useCookie, useRoute, useScroll } from "@shared/hook";
+import { useFetch, useCookie, useRoute,  } from "@shared/hook";
 import { useMessage, useSubscribe } from "@shared/store";
 
 
@@ -12,9 +12,11 @@ export const useGetSubscribeList = () => {
     const { errorRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage );
     const updateSubscribe = useSubscribe( state => state.updateSubscribe );
-    const [ watchRef, pageNum, stopObserver ] = useScroll();
-    
+
+    const [ isEnd, setIsEnd ] = useState(false);
+    const pageNumRef = useRef(1);
     const [ isLoading, setIsLoading ] = useState( false ); 
+
     const mapper = ( resData ) => {
         const mapperWrap = resData?.map( data => (
             {
@@ -27,13 +29,11 @@ export const useGetSubscribeList = () => {
     };
 
     const getSubscribeList = ()=>{
+        if ( isEnd ) return console.log("구독리스트 끝");
         setIsLoading( true );
-        baseFetch(`subscription?page=${pageNum}`,{}, cookieGet("token"));
+        baseFetch(`subscription?page=${pageNumRef.current}`,{}, cookieGet("token"));
     };
 
-    useEffect(() => {
-        getSubscribeList();
-    }, [pageNum]);
 
     useEffect(()=>{
         if ( !fetchData ) return;
@@ -43,7 +43,7 @@ export const useGetSubscribeList = () => {
 
         switch ( fetchData.status ) {
             case 200:
-
+                pageNumRef.current = pageNumRef.current + 1;
                 updateSubscribe(mapperData);
                 break;
                 
@@ -56,7 +56,7 @@ export const useGetSubscribeList = () => {
                 break;
 
             case 404:
-                stopObserver();
+                setIsEnd( true );
                 break;
 
             case 500:
@@ -66,5 +66,5 @@ export const useGetSubscribeList = () => {
 
     },[ fetchData ]);
 
-    return [ isLoading, watchRef];
+    return [ getSubscribeList, isLoading ];
 }

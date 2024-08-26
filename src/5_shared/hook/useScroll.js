@@ -1,51 +1,40 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-export const useScroll = () => {
-     
-    // 요청시 사용될 pageNumber
-    const [ pageNum, setPageNum ] = useState(1);
-    // observer역할 Element
+export const useScroll = ( callBack ) => {
+    
     const watchRef = useRef( null );
-    // IntersectionObserver Ref
-    const observerRef = useRef(null);
+    const observeRef = useRef( null );
 
-    // 요소가 보이면 실행될 함수
-    const observeCallBack = ( entries, observer ) => {
-        // entries: 관찰중인 요소에 대한 정보
-        // observer: IntersectionObserver의 인스턴스이며 시작-중지-해제 등을 관리
-        const target = entries[0];
-        // 지정한 Element가 보인다면
-        if ( target.isIntersecting ) {
-            setPageNum( pageNum + 1);
-        }
+    const observeCallBack = ( entries ) => {
+
+        entries.forEach((entry) => {
+
+            if ( entry.isIntersecting ) {
+                console.log("보임")
+                callBack();
+            }
+        })
     };
 
-    // observer 중지 함수
-    const stopObserver = () => {
-        if ( observerRef.current && watchRef.current ) {
-            observerRef.current.unobserve(watchRef.current);
-          }
+    const observeOptions = {
+        threshold: 0.1,
     };
 
     useEffect(()=>{
 
-        // observer 생성자
-        observerRef.current = new IntersectionObserver(observeCallBack, {
-            root: null,
-            threshold: 1,
-          });
+        if ( !watchRef.current ) return;
 
-        // 참조하는 DOM요소 있다면 주시시작
-        if ( watchRef.current ) observerRef.current.observe(watchRef.current);
+        observeRef.current =  new IntersectionObserver( observeCallBack ,observeOptions );
+        observeRef.current.observe(watchRef.current);
 
-        // clean-up
+
         return () => {
-            // 특정 대상 요소에 대한 주시를 해제
-            if ( observerRef.current ) {
-                observerRef.current.disconnect();
+            if ( watchRef.current ){
+                observeRef.current.unobserve(watchRef.current);
             }
         }
-    },[]);
 
-    return [ watchRef, pageNum, stopObserver];
+    },[callBack]);
+
+    return [ watchRef];
 }

@@ -7,8 +7,8 @@ const Diary = styled.div`
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    padding: 0 100px 0 100px;
-    gap: 50px;
+    /* padding: 0 100px 0 100px; */
+    /* gap: 50px; */
 `; 
 
 // 리스트

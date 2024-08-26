@@ -4,16 +4,17 @@ import { useParams } from "react-router-dom";
 import { S } from "./style";
 import { useGetSubscribeList } from "../api/useGetSubscribeList";
 // Layer
-import { useRoute } from "@shared/hook";
+import { useRoute, useScroll } from "@shared/hook";
 import { Profile } from "@shared/ui";
 import { useSubscribe } from "@shared/store";
 
 export const SubscribeList = () => {
 
-  const [ isLoading, watchRef ] = useGetSubscribeList();
+  const [ getSubscribeList, isLoading ] = useGetSubscribeList();
   const { userProfileRoute } = useRoute();
   const { accountIdx } = useParams();
   const addSubscribeList = useSubscribe((state) => state.addSubscribeList);
+  const [ watchRef ] = useScroll(getSubscribeList);
 
   return (
     <>
@@ -34,7 +35,7 @@ export const SubscribeList = () => {
                   </S.SubscribeItem>
                 );
               }): <S.message>구독중인 유저가 없습니다</S.message>}
-          { !isLoading && <div ref={ watchRef }/> }
+          { !isLoading && <div ref={ watchRef }/>}
         </S.SubscribeList>
           {isLoading ? <S.Loading>로딩중...</S.Loading> : null}
       </S.SubscribeInfo>
