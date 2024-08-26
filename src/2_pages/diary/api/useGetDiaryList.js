@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 // Layer
 import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useMessage } from "@shared/store";
 
 export const useGetDiaryList = () => {
 
@@ -56,7 +57,7 @@ export const useGetDiaryList = () => {
                 break;
 
             case 400:
-                console.log("유효성검사 실패일경우");
+                useMessage("일기리스트를 불러올수 없습니다");
                 break;
 
             case 404:
@@ -64,7 +65,7 @@ export const useGetDiaryList = () => {
                 break;
 
             case 500:
-                // console.log("서버 에러");
+                errorRoute(500, "서버에러로 일기리스트를 볼수없습니다.")
                 break;
         }
     },[ fetchData ]);

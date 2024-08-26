@@ -10,7 +10,7 @@ export const useScroll = ( callBack ) => {
         entries.forEach((entry) => {
 
             if ( entry.isIntersecting ) {
-                console.log("보임")
+                console.log("watchRef")
                 callBack();
             }
         })
