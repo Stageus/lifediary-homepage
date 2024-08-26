@@ -7,13 +7,13 @@ import { useScroll, useRoute } from "@shared/hook";
 
 export const MyLikeDiary = () => {
 
-  const [ isEnd, isLoading, diaryList, getMyDiary ] = useGetMyLikeDiary();
+  const [ isLoading, diaryList, getMyDiary ] = useGetMyLikeDiary();
   const [ watchRef ] = useScroll( getMyDiary );
   const { diaryRoute } = useRoute();
 
   return (
     <>
-      { diaryList.length ? (
+      { diaryList.length !== 0 ? (
         diaryList?.map((diary) => {
           return (
             <S.diaryItem key={diary.idx} onClick={() => diaryRoute(diary.idx)}>
@@ -31,10 +31,8 @@ export const MyLikeDiary = () => {
         <S.guideMessage>좋아요한 일기가 없습니다</S.guideMessage>
       )}
 
-      {!isEnd && !diaryList && <div ref={watchRef}/>}
-      {!isEnd && diaryList && diaryList?.length % 10 === 0 && !isLoading && (
-        <div ref={watchRef}/>
-      )}
+      {!isLoading && <div ref={ watchRef }/>}
+      { isLoading ? <div>로딩중...</div> : null}
     </>
   );
 };

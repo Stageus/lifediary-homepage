@@ -1,5 +1,5 @@
 // Npm
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // Layer
 import { useFetch, useRoute, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
@@ -8,16 +8,17 @@ import { parseTime } from "@shared/util";
 export const useGetMyLikeDiary = () => {
 
   const [ fetchData, baseFetch ] = useFetch();
+  const { cookieGet } = useCookie();
   const { errorRoute, loginRoute } = useRoute();
   const setMessage = useMessage((state) => state.setMessage);
-  const { cookieGet } = useCookie();
-  const [ pageNum, setPageNum ] = useState(1);
+
+  const pageNumRef = useRef( 1 );
   const [ diaryList, setDiaryList ] = useState( [] );
   const [ isEnd, setIsEnd ] = useState(false); 
   const [ isLoading, setIsLoading ] = useState( false );
 
   const mapper = (resData) => {
-    const mapperData = resData.map((diary) => ({
+    const mapperData = resData?.map((diary) => ({
       idx: diary.idx,
       thumbnail: diary.thumbnail,
       createdAt: parseTime(diary.createdAt),
@@ -27,33 +28,21 @@ export const useGetMyLikeDiary = () => {
   };
 
   const getMyLikeDiary = () => {
-    // 데이터의 끝이라면 더이상 요청하지 않는다.
     if ( isEnd ) return;
-    baseFetch(`diary/mypage/like?page=${pageNum}`, {}, cookieGet("token"));
-    // 요청을 한다면 로딩 상태
+    baseFetch(`diary/mypage/like?page=${pageNumRef.current}`, {}, cookieGet("token"));
     setIsLoading( true );  
   };
-
-  useEffect(() => {
-      getMyLikeDiary();
-  }, []);
 
 useEffect(() => {
     if (!fetchData) return;
 
+    const mapperData = mapper(fetchData.data);
     setIsLoading(false);
+
     switch (fetchData.status) {
       case 200:
-
-        // 일기데이터를 기존 데이와 합침
-        setDiaryList([...diaryList, ...mapper(fetchData.data)]);
-
-        if ( fetchData.data.length >= 10 ){
-            setPageNum( pageNum + 1 );
-        }else{
-            setIsEnd( true );
-        }
-
+        pageNumRef.current = pageNumRef.current + 1;
+        setDiaryList([...diaryList, ...mapperData]);
         break;
 
       case 400:
@@ -65,10 +54,6 @@ useEffect(() => {
         break;
 
       case 404:
-        if (pageNum === 1) {
-          setDiaryList([]);
-        }
-        // 데이터의 끝을 알림
         setIsEnd(true);
         break;
 
@@ -78,5 +63,5 @@ useEffect(() => {
     }
   }, [fetchData]);
 
-  return [ isEnd, isLoading, diaryList, getMyLikeDiary ];
+  return [ isLoading, diaryList, getMyLikeDiary ];
 };
