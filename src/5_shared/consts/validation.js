@@ -26,7 +26,7 @@ export const nameValidation = ( name ) => {
 };
 
 export const diaryContentValidation = ( text ) => {
-    const regex= /^.{0,500}$/;
+    const regex= /^[\s\S]{0,500}$/;
     return regex.test(text)
 };
 
