@@ -42,7 +42,7 @@ export const Tab = ( props ) => {
       </S.tabHeader>
       <S.tabContent>
         { 
-        components.map( (Component, idx) => tabNum === idx ? <Component key={idx} dateRange={dateRange}/> : null)
+          components.map( (Component, idx) => tabNum === idx ? <Component key={idx} dateRange={dateRange}/> : null)
          }
       </S.tabContent>
     </S.tabArea>

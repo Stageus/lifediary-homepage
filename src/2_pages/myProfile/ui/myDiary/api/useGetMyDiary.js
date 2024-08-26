@@ -10,10 +10,10 @@ export const useGetMyDiary = (props) => {
   
 
   const { dateRange } = props;
+  const [fetchData, baseFetch] = useFetch();
+  const { cookieGet } = useCookie();
   const { errorRoute, loginRoute } = useRoute();
   const setMessage = useMessage((state) => state.setMessage);
-  const { cookieGet } = useCookie();
-  const [fetchData, baseFetch] = useFetch();
   
   const pageNumRef = useRef(1);
   const [diaryList, setDiaryList] = useState([]);

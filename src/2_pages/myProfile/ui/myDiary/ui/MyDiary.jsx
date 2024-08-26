@@ -31,7 +31,7 @@ export const MyDiary = ( props ) => {
         <S.guideMessage>작성한 일기가 없습니다</S.guideMessage>
       )}
 
-      {!isLoading && <div ref={ watchRef }/>}
+      { diaryList.length !== 0 && !isLoading && <div ref={ watchRef }/>}
       { isLoading ? <div>로딩중...</div> : null}
     </>
   );
