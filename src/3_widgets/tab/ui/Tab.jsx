@@ -1,5 +1,5 @@
 // Npm
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // Slice
 import { S } from "./style";
 import { Picker } from "./picker";

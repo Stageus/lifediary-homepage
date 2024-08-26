@@ -29,8 +29,8 @@ export const useGetMyLikeDiary = () => {
 
   const getMyLikeDiary = () => {
     if ( isEnd ) return;
-    baseFetch(`diary/mypage/like?page=${pageNumRef.current}`, {}, cookieGet("token"));
     setIsLoading( true );  
+    baseFetch(`diary/mypage/like?page=${pageNumRef.current}`, {}, cookieGet("token"));
   };
 
 useEffect(() => {

@@ -7,14 +7,13 @@ import { dateValidation } from "@shared/consts/validation";
 import { parseTime } from "@shared/util";
 
 export const useGetMyDiary = (props) => {
-  
 
   const { dateRange } = props;
   const [fetchData, baseFetch] = useFetch();
   const { cookieGet } = useCookie();
   const { errorRoute, loginRoute } = useRoute();
   const setMessage = useMessage((state) => state.setMessage);
-  
+
   const pageNumRef = useRef(1);
   const [diaryList, setDiaryList] = useState([]);
   const [isEnd, setIsEnd] = useState(false);
@@ -31,39 +30,45 @@ export const useGetMyDiary = (props) => {
     return mapperData;
   };
 
-  const getMyDiary = ( newRange) => {
+  const getMyDiary = (  ) => {
     // 데이터의 끝이라면 더이상 요청하지 않는다.
-    if (isEnd) return console.log("나의 작성한일기 끝");
+    if ( isEnd) return console.log("나의 작성한일기 끝");
+    setIsLoading(true);
+    const startDate = dateRange?.startDate
+    const endDate = dateRange?.endDate
 
-    if (dateRange.startDate && !dateValidation(dateRange.startDate))
+    if (startDate && !dateValidation(startDate))
       return setMessage("시작날짜 형식이 잘못되었습니다.");
-    if (dateRange.endDate && !dateValidation(dateRange.endDate))
+    if (endDate && !dateValidation(endDate))
       return setMessage("종료날짜 형식이 잘못되었습니다.");
 
-    const baseQuery = `page=${ newRange ?? pageNumRef.current}`;
-    const startQuery = dateRange.startDate
-      ? `startDate=${dateRange.startDate}&`
+    const baseQuery = `page=${pageNumRef.current}`;
+    const startQuery = startDate
+      ? `startDate=${startDate}&`
       : "";
-    const endQuery = dateRange.endDate ? `endDate=${dateRange.endDate}&` : "";
+    const endQuery = endDate ? `endDate=${endDate}&` : "";
     const query = startQuery + endQuery + baseQuery;
 
     // 요청을 한다면 로딩 상태
-    setIsLoading(true);
     baseFetch(`diary/mypage/mine?${query}`, {}, cookieGet("token"));
   };
 
-  useEffect(() => {
-    getMyDiary( 1 );
+useEffect(() => {
+  if (dateRange) {
     setDiaryList([]);
     setIsEnd(false);
-  }, [dateRange]);
+    pageNumRef.current = 1;
+    getMyDiary();
+  }
+  setIsEnd(false);
+}, [dateRange]);
 
   useEffect(() => {
     if (!fetchData) return;
 
     const mapperData = mapper(fetchData.data);
     setIsLoading(false);
-
+    
     switch (fetchData.status) {
       case 200:
         pageNumRef.current = pageNumRef.current + 1;
