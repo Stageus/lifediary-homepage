@@ -12,7 +12,7 @@ export const CommentInput = ( props ) => {
     const { diaryIdx, changeComment } = props;
     const { isValidation, validation } = useValidation();
     const commentTextRef = useRef( null );
-    const [ onClickCommentSubmit ] = usePostComment( changeComment );
+    const [ onClickCommentSubmit ] = usePostComment( changeComment, commentTextRef);
 
 
     return(

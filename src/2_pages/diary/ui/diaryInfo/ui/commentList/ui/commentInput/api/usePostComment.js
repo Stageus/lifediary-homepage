@@ -6,7 +6,7 @@ import { useMessage } from "@shared/store";
 import { commentValidation } from "@shared/consts/validation";
 
 
-export const usePostComment = ( changeComment ) => {
+export const usePostComment = ( changeComment, commentTextRef ) => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
@@ -26,6 +26,7 @@ export const usePostComment = ( changeComment ) => {
 
         switch ( fetchData.status ) {
             case 200:
+                commentTextRef.current.value = null;
                 const profileImg = cookieGet("profile");
                 const date = new Date();
                 const newCommentIdx = fetchData.data.insertedIdx;
