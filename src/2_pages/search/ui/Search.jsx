@@ -8,12 +8,12 @@ import { parseTime } from "@shared/util";
 
 export const Search = () => {
 
-  const [ isEnd, getSearchList, diaryList, errorMessage ] = useGetSearchList();
+  const [ getSearchList, diaryList, isLoading ] = useGetSearchList();
   const [ watchRef ] = useScroll( getSearchList );
 
   return (
     <S.search>
-      {diaryList?.map((diary, idx) => {
+      { diaryList.length !== 0 ? diaryList.map((diary, idx) => {
         return (
           <S.diary key={idx}>
             <S.headerArea>
@@ -51,11 +51,11 @@ export const Search = () => {
             </S.footerArea>
           </S.diary>
         );
-      })}
+      }) : <S.errorArea> { `등록된 일기가 존재하지 않습니다 ❌` }</S.errorArea>}
       
-      { errorMessage && <S.errorArea> { `${errorMessage}  ❌` }</S.errorArea>}
-      { !isEnd && !diaryList && <div ref={watchRef}>워칭</div>}
-      { !isEnd && diaryList && diaryList?.length % 10 === 0 && <div ref={watchRef}>워칭</div>}
+      { !isLoading && <div ref={ watchRef }>워칭</div>}
+      { isLoading ? <div>로딩중...</div> : null}
+      
     </S.search>
   );
 };

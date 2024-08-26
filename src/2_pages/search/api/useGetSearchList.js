@@ -1,5 +1,5 @@
 // Npm
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 // Layer
 import { useFetch } from "@shared/hook/useFetch";
@@ -9,17 +9,18 @@ import { tagValidation } from "@shared/consts/validation";
 
 export const useGetSearchList = () => {
   
-  const [diaryList, setDiaryList] = useState(null);
-  const [fetchData, baseFetch] = useFetch();
-  const [pageNum, setPageNum] = useState(1);
-  const [searchParams] = useSearchParams();
-  const setMessage = useMessage((state) => state.setMessage);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [ fetchData, baseFetch ] = useFetch();
   const { errorRoute, backRoute } = useRoute();
-  const [isEnd, setIsEnd] = useState(false);
+  const [ searchParams ] = useSearchParams();
+  const setMessage = useMessage((state) => state.setMessage);
+
+  const [ diaryList, setDiaryList ] = useState([]);
+  const pageNumRef = useRef(1);
+  const [ isLoading, setIsLoading ] = useState( false );
+  const [ isEnd, setIsEnd ] = useState(false);
 
   const mapper = (resData) => {
-    const mapperData = resData.map((obj) => ({
+    const mapperData = resData?.map((obj) => ({
       idx: obj.idx,
       thumbnailImg: obj.thumbnailImg,
       textContent: obj.textContent,
@@ -33,12 +34,14 @@ export const useGetSearchList = () => {
     return mapperData;
   };
 
-  const getSearchList = () => {
+  const getSearchList = ( newSearch ) => {
+    if ( isEnd ) return console.log("검색리스트 끝")
+    setIsLoading(true);
     const decodedTags = searchParams.get("tags");
 
     // 태그가 입력되지 않았을경우
     if (!decodedTags) {
-      baseFetch(`diary/search?page=${pageNum}&tags=""`);
+      baseFetch(`diary/search?page=${pageNumRef.current}&tags=""`);
       return;
     }
 
@@ -54,44 +57,25 @@ export const useGetSearchList = () => {
     const tagsWrap = checkTags
       .map((tag) => `&tags=${decodeURIComponent(tag)}`)
       .join("");
-    baseFetch(`diary/search?page=${pageNum}${tagsWrap}`);
+    baseFetch(`diary/search?page=${ newSearch ?? pageNumRef.current}${tagsWrap}`);
   };
 
   useEffect(() => {
-    /*
-      초기렌더링시와, searchParams가 변경될때마다 해당구문을 실행한다
-      새로운 태그가 입력되면 값을 초기화하고, 다시요청한다
-    */
-    setPageNum(1);
-    setDiaryList(null);
+    getSearchList( 1 );
+    setDiaryList([]);
     setIsEnd(false);
-    setErrorMessage(null);
   }, [searchParams]);
 
   useEffect(() => {
-    if (!fetchData) return;
+    if ( !fetchData ) return;
+
+    const mapperData = mapper(fetchData.data);
+    setIsLoading(false);
 
     switch (fetchData.status) {
-      case 200:
-        /*
-          첫 검색시(즉,pageNum 1일때) diaryList null이기때문에 그대로할당
-          pageNum 1이 아닐때는 두번째요청이므로 기존 데이터와 병합
-          state의 초기값을 null아닌 []배열로 할당하면 좋을듯
-        */
-        if (pageNum === 1) {
-          setDiaryList(mapper(fetchData.data));
-        } else {
-          setDiaryList([...diaryList, ...mapper(fetchData.data)]);
-        }
-
-        if (fetchData.data.length >= 10) {
-          setPageNum(pageNum + 1);
-        } else {
-          setIsEnd(true);
-        }
-
-        // 특정검색 태그가 없고, 다른태그를 입력시 존재한다면 메세지를 초기화
-        setErrorMessage(null);
+      case 200:    
+        pageNumRef.current = pageNumRef.current + 1;
+        setDiaryList([...diaryList, ...mapperData]);
         break;
 
       case 400:
@@ -99,18 +83,6 @@ export const useGetSearchList = () => {
         break;
 
       case 404:
-        /*
-          pageNum이 1일때 404라면 일치하는 태그가 없기에 메세지를 보여줌
-          1일아닐경우에는 두번째 요청이므로 메세지를 초기화
-        */
-        //  search에서 데이터의 유무로 한다면 굳이 작성할 필요가 없을듯
-        if (pageNum === 1) {
-          setErrorMessage("등록된 일기가 존재하지 않습니다");
-        } else {
-          setErrorMessage(null);
-        }
-
-        // 데이터의 끝을 알림
         setIsEnd(true);
         break;
 
@@ -120,5 +92,5 @@ export const useGetSearchList = () => {
     }
   }, [fetchData]);
 
-  return [isEnd, getSearchList, diaryList, errorMessage];
+  return [getSearchList, diaryList, isLoading ];
 };

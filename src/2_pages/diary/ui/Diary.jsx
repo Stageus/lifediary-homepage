@@ -70,9 +70,7 @@ export const Diary = () => {
           })}
 
           { !isLoading && <div ref={ watchRef }>로딩중</div>}
-          {/* { console.log(isLoading)} */}
-
-          {/* { isLoading ? <div>로딩중...</div> : null} */}
+          { isLoading ? <div>로딩중...</div> : null}
       </S.Diary>
     </>
   );
