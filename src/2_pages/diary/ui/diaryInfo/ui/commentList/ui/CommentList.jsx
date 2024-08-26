@@ -10,10 +10,11 @@ import { useScroll } from "@shared/hook";
 export const CommentList = (props) => {
 
   const { diaryIsMine, diaryIdx, commentCnt } = props;
-  const [ getCommentList, commentList ] = useGetCommentList(diaryIdx);
+  const [ getCommentList, commentList, isLoading ] = useGetCommentList(diaryIdx);
   const [ newCommentList, setNewCommentList ] = useState([]);
   const changeComment = (value) => setNewCommentList(value);
-
+  const [ watchRef ] = useScroll( getCommentList );
+  
   return (
     <>
       <S.commentList>
@@ -40,6 +41,9 @@ export const CommentList = (props) => {
           ) : (
             <S.message>작성된 댓글이 없습니다...</S.message>
           )}
+
+          { !isLoading && <div ref={watchRef}>워치</div>}
+          { isLoading && <div>로딩중...</div>}
         </S.commentListArea>
 
         {/* 댓글 입력 */}

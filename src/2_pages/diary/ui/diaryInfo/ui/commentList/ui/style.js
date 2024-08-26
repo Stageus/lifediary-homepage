@@ -28,7 +28,7 @@ const commentListArea = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap;
+    overflow: scroll;
 `;
 
 
