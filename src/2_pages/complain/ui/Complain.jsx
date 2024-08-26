@@ -23,11 +23,11 @@ export const Complain = () => {
         <S.Table>
           <thead>
             <tr>
-              <th>번호</th>
+              <S.number>번호</S.number>
               <S.Content>사유</S.Content>
               <th>작성자</th>
               <th>날짜</th>
-              <th>상태</th>
+              <S.thState>상태</S.thState>
               <th />
             </tr>
           </thead>

@@ -42,7 +42,7 @@ export const CommentList = (props) => {
             <S.message>작성된 댓글이 없습니다...</S.message>
           )}
 
-          { !isLoading && <div ref={watchRef}>워치</div>}
+          { !isLoading && <div ref={watchRef}/>}
           { isLoading && <div>로딩중...</div>}
         </S.commentListArea>
 
