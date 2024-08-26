@@ -1,5 +1,5 @@
 // Npm
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // Layer
 import { useMessage } from "@shared/store";
 import { imgValidation } from "@shared/consts/validation";
@@ -9,6 +9,7 @@ export const useImg = ( imgContents ) => {
     const [ selectImg, setSelectImg ] = useState([]);
     const [ deleteUrlList, setDeleteUrlList ] = useState([]);
     const setMessage = useMessage( state => state.setMessage );
+    const profileRef = useRef(null);
 
     const onClickImg = ( e ) => {
         
@@ -26,6 +27,7 @@ export const useImg = ( imgContents ) => {
 
     const onClickDeleteImg = ( fileORurl ) => {
 
+        profileRef.current.value = null;
         const deleteSelect = selectImg.filter( item => item !== fileORurl);
         setSelectImg(deleteSelect);
 
@@ -42,5 +44,5 @@ export const useImg = ( imgContents ) => {
 
     },[])
 
-    return { selectImg, deleteUrlList, onClickImg, onClickDeleteImg };
+    return { selectImg, deleteUrlList, onClickImg, onClickDeleteImg, profileRef };
 }
