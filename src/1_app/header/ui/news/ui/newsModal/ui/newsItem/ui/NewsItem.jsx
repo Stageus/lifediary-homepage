@@ -1,16 +1,15 @@
 // Slice
 import { S } from "./style";
-import { useRoute } from "../model/useRoute";
 import { useDeleteNotice } from "../api/useDeleteNotice";
 // Layer
 import { Icon } from "@shared/ui";
+import { useRoute } from "@shared/hook";
 
 export const NewsItem = ( props ) => {
   
-  const { idx, nickname, noticeType, createdAt } = props.item;
-  const { onClickRoute } = useRoute();
+  const { idx, nickname, diaryIdx, noticeType, createdAt } = props.item;
+  const { diaryRoute } = useRoute();
   const [ deleteNotice, isDelete] = useDeleteNotice();
-  
 
   return (
     <>
@@ -19,7 +18,7 @@ export const NewsItem = ( props ) => {
           <S.NewsInfo>
             {nickname 
             ? (
-              <S.UserInfo onClick={ () => onClickRoute( idx )}>
+              <S.UserInfo onClick={ () => diaryRoute( diaryIdx )}>
                 <S.Name>{ nickname }</S.Name>
               </S.UserInfo>
             ) 
@@ -31,9 +30,9 @@ export const NewsItem = ( props ) => {
             </S.NewsContent>
           </S.NewsInfo>
 
-          {/* <S.DeleteBtnWrap onClick={ () => deleteNotice( idx ) }>
+          <S.DeleteBtnWrap onClick={ () => deleteNotice( idx ) }>
             <Icon type="cancel" color="red" />
-          </S.DeleteBtnWrap> */}
+          </S.DeleteBtnWrap>
         </S.NewsItem>
       ) : null}
     </>

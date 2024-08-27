@@ -7,7 +7,7 @@ import { useScroll } from "@shared/hook";
 
 export const NewsModal = () => {
 
-  const [ getNoticeList, noticeList, isLoading, isEnd ] = useGetNoticeList();
+  const [ getNoticeList, noticeList, isLoading ] = useGetNoticeList();
   const [ watchRef ] = useScroll(getNoticeList);
 
   return (
@@ -18,12 +18,8 @@ export const NewsModal = () => {
             return <NewsItem key={idx} item={item} />;
           }) : <S.message> 새로운 소식이 없습니다....</S.message>}
 
-        {!isEnd && noticeList && noticeList?.length % 10 === 0 && !isLoading && (
-          <div ref={watchRef}></div>
-        )}
-
-        {isLoading ? <S.Loading>로딩중...</S.Loading> : null}
-
+        { !isLoading &&  <div ref={watchRef}></div>}
+        { isLoading ? <S.Loading>로딩중...</S.Loading> : null }
       </S.NewsModal>
     </>
   );
