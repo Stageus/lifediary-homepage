@@ -1,7 +1,7 @@
 // Slice
 import { S } from "./style";
-import { useRoute } from "./model/useRoute";
-import { useDeleteNotice } from "./api/useDeleteNotice";
+import { useRoute } from "../model/useRoute";
+import { useDeleteNotice } from "../api/useDeleteNotice";
 // Layer
 import { Icon } from "@shared/ui";
 
@@ -31,9 +31,9 @@ export const NewsItem = ( props ) => {
             </S.NewsContent>
           </S.NewsInfo>
 
-          <S.DeleteBtnWrap onClick={ () => deleteNotice( idx ) }>
+          {/* <S.DeleteBtnWrap onClick={ () => deleteNotice( idx ) }>
             <Icon type="cancel" color="red" />
-          </S.DeleteBtnWrap>
+          </S.DeleteBtnWrap> */}
         </S.NewsItem>
       ) : null}
     </>

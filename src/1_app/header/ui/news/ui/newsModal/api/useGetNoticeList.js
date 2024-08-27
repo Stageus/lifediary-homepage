@@ -9,6 +9,7 @@ export const useGetNoticeList = () => {
 
   const [ fetchData, baseFetch ] = useFetch();
   const { cookieGet } = useCookie();
+  
   const [ noticeList, setNoticeList ] = useState( null );
   const [ isLoading, setIsLoading ] = useState( false );
   const [ pageNum, setPageNum ] = useState( 1 );
@@ -65,7 +66,9 @@ export const useGetNoticeList = () => {
   // 상태에 따른 예외처리
   useEffect(() => {
     if ( !fetchData ) return;
+
     setIsLoading( false );
+    console.log(fetchData.data);
 
     switch ( fetchData.status ) {
         case 200:

@@ -1,3 +1,5 @@
+// Npm
+import { useNavigate } from "react-router-dom";
 // Slice
 import { S } from "./style";
 import { News } from "./news";
@@ -11,6 +13,7 @@ import { useMessage } from "@shared/store";
 export const Header = ( props ) => {
   
   const { userInfo } = props; 
+  const navigate = useNavigate();
   
   const { homeRoute, loginRoute, diaryCreateRoute, myProfileRoute } = useRoute();
   const { cookieRemove } = useCookie();
@@ -19,6 +22,7 @@ export const Header = ( props ) => {
   const logoutHandler = () => {
     cookieRemove();
     loginRoute();
+    navigate(0);
   };
 
   return (

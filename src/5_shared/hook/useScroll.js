@@ -9,8 +9,7 @@ export const useScroll = ( callBack ) => {
 
         entries.forEach((entry) => {
 
-            if ( entry.isIntersecting ) {
-                console.log("watchRef")
+            if ( entry.isIntersecting ) {                
                 callBack();
             }
         })

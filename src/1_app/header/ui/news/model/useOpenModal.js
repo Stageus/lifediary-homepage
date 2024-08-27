@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export const useOpenModal = () => {
 
     const [ isOpenModal, setIsOpenModal ] = useState( false );
-    const onClickOpen = () => setIsOpenModal( !isOpenModal );
+    const isClickedRef = useRef(false);
+    const onClickOpen = () => {
+        setIsOpenModal( !isOpenModal );
+        isClickedRef.current = true;
+    }
     
-    return { isOpenModal, onClickOpen };
+    return { isOpenModal, onClickOpen, isClickedRef };
 }

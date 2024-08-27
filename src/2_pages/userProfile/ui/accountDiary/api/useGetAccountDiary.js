@@ -25,7 +25,7 @@ export const useGetAccountDiary = (props) => {
   const mapper = (resData) => {
     const mapperData = resData?.map((diary) => ({
       idx: diary.idx,
-      thumbnail: diary.thumbnail,
+      thumbnail: diary.thumbnailImg,
       createdAt: parseTime(diary.createdAt),
     }));
 
@@ -33,20 +33,22 @@ export const useGetAccountDiary = (props) => {
   };
 
   const getAccountDiary = ( newRange ) => {
-    // 데이터의 끝이라면 더이상 요청하지 않는다.
     if (isEnd) return console.log("유저 작성한일기 끝");
+    setIsLoading(true);
+    const startDate = dateRange?.startDate
+    const endDate = dateRange?.endDate
 
-    if (dateRange.startDate && !dateValidation(dateRange.startDate))
+    if (startDate && !dateValidation(startDate))
       return setMessage("시작날짜 형식이 잘못되었습니다.");
-    if (dateRange.endDate && !dateValidation(dateRange.endDate))
+    if (endDate && !dateValidation(endDate))
       return setMessage("종료날짜 형식이 잘못되었습니다.");
 
 
     const baseQuery = `page=${ newRange ?? pageNumRef.current}`;
-    const startQuery = dateRange.startDate
-    ? `beginDate=${dateRange.startDate}&`
+    const startQuery = startDate
+    ? `beginDate=${startDate}&`
     : "";
-    const endQuery = dateRange.endDate ? `endDate=${dateRange.endDate}&` : "";
+    const endQuery = endDate ? `endDate=${endDate}&` : "";
     const query = startQuery + endQuery + baseQuery;
 
     // 요청을 한다면 로딩 상태
@@ -55,8 +57,12 @@ export const useGetAccountDiary = (props) => {
   };
 
   useEffect(() => {
-    getAccountDiary( 1 );
-    setDiaryList([]);
+    if (dateRange) {
+      setDiaryList([]);
+      setIsEnd(false);
+      pageNumRef.current = 1;
+      getMyDiary();
+    }
     setIsEnd(false);
   }, [dateRange]);
 

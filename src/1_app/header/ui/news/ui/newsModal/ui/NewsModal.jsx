@@ -6,6 +6,7 @@ import { useGetNoticeList } from "../api/useGetNoticeList";
 import { useScroll } from "@shared/hook";
 
 export const NewsModal = () => {
+
   const [ getNoticeList, noticeList, isLoading, isEnd ] = useGetNoticeList();
   const [ watchRef ] = useScroll(getNoticeList);
 

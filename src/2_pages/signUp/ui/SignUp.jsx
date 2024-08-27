@@ -20,9 +20,6 @@ export const SignUp = () => {
     const [ postAccount ] = usePostAccount();
     const [ name, setName ] = useState(null);
 
-    console.log("selectImg:",selectImg);
-    console.log("previewImg:",previewImg);
-
   return (
     <S.signUp>
       <S.innerBox>
