@@ -42,7 +42,7 @@ export const Diary = () => {
       {
         root: null, // 뷰포트를 기준으로 감지
         rootMargin: '0px',
-        threshold: 0.1, // 10%가 보이면 감지
+        threshold: 0.5, // 10%가 보이면 감지
       }
     );
 
