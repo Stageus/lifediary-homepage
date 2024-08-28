@@ -3,24 +3,22 @@ import styled from "styled-components";
 // 리스트 부모
 const Diary = styled.div`
     height: calc(100vh - 80px);
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    /* padding: 0 100px 0 100px; */
-    /* gap: 50px; */
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    
 `; 
 
 // 리스트
 const ScrollItem = styled.div`
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     flex: 1 0 100%;
     padding: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-y: visible;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 `;
 
 // 리스트 헤더

@@ -63,7 +63,7 @@ export const DiaryInfo = (props) => {
         </S.CommentBtn>
 
         <S.SimpleBtnWrap>
-          <DefaultBtn text="공유" onClick={() => clipBoard(`diary/${idx}`)} />
+          <DefaultBtn text="공유" onClick={clipBoard} />
         </S.SimpleBtnWrap>
 
         {!isMine && (

@@ -12,8 +12,8 @@ export const useGetDiaryList = () => {
     const { diaryidx } = useParams();
     const { errorRoute } = useRoute();
 
+    const pageNumRef = useRef(1);
     const [ isEnd, setIsEnd ] = useState(false);
-    const pageNumRef = useRef( 1 );
     const [ diaryList, setDiaryList ] = useState([]);
     const [ isLoading, setIsLoading ] = useState( false );
 
@@ -72,5 +72,5 @@ export const useGetDiaryList = () => {
 
     
 
-    return [ getDiaryList, diaryList, isLoading];
+    return [ getDiaryList, diaryList, isLoading ];
 }
