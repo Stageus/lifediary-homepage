@@ -7,9 +7,10 @@ const NewsItem = styled.div`
     align-items: center;
     border-radius: 5px;
     padding: 5px;
+    cursor: pointer;
 
     &:hover {
-        background-color: ${( {theme}) => theme.major};
+        background-color: ${( {theme }) => theme.white};
         
     }
 `;

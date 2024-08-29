@@ -22,11 +22,11 @@ export const Search = () => {
         <HashTag tagList={tagList} setTagList={setTagList} scroll={true}/>
       </S.tagArea>
       <S.iconArea onClick={() => searchRoute(tagList)}>
-        <Icon size="28px" color="#FFE6DE" type="search"/>
+        <Icon size="28px" color="#333333" type="search"/>
       </S.iconArea>
       <S.clean 
       $isShow={tagList.length !== 0}
-      onClick={cleanAlltag}>전체삭제
+      onClick={cleanAlltag}>{"전체삭제"}
       </S.clean>
     </S.search>
   );

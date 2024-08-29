@@ -10,9 +10,11 @@ const SubscribeInfo = styled.div`
 `;
 
 const SubscribeTitle = styled.h3`
-    color: ${({theme}) => theme.gray};
+    color: ${({theme}) => theme.black};
     padding: 10px;
-    border-bottom: 1px solid ${({theme}) => theme.gray};
+    border-bottom: 2px solid ${({theme}) => theme.gray};
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 `;
 
 const SubscribeList = styled.div`

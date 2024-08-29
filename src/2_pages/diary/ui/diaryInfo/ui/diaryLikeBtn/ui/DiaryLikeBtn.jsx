@@ -16,7 +16,7 @@ export const DiaryLikeBtn = ( props ) => {
                 <div>
                     <Icon
                     type="like"
-                    color={ currentLike ? "#F1F1F1" : "#FF6767" }
+                    color={ currentLike ? "#F1F1F1" : "#E0F7FA" }
                     />
                 </div>
                 <div>

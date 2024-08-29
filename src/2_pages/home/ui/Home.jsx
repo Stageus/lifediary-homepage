@@ -39,6 +39,9 @@ export const Home = () => {
           </S.Introduction>
         )}
         {/* 일기리스트 */}
+        <S.componentsTitle>
+          {"🍀 다른 사람들의 일기를 둘러보세요 !"}
+        </S.componentsTitle>
         <Carousel />
       </S.Home>
     </>

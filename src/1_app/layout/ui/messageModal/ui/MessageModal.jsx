@@ -35,6 +35,7 @@ export const MessageModal = () => {
               ?<>
                 <DefaultBtn
                 size="medium"
+                type="select"
                 text="확인"
                 onClick={ onClickOk }
                 />
@@ -47,6 +48,7 @@ export const MessageModal = () => {
               : <DefaultBtn
                 size="medium"
                 text="확인"
+                type="select"
                 onClick={ onClickOk }
                 />
             }

@@ -8,7 +8,6 @@ const layout = styled.div`
 
 const header = styled.div`
   height: 80px;
-  background-color: ${({ theme }) => theme.major};
 `;
 
 const divideArea = styled.div`

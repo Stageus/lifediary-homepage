@@ -39,7 +39,7 @@ export const DiaryInfo = (props) => {
       {/* 댓글모달 */}
       <S.CommentPart $openModal={isOpenModal}>
         <S.Cancel onClick={onClickModal}>
-          <Icon size="30px" type="cancel" color="#FF6767" />
+          <Icon size="30px" type="cancel" color="#ff0000f6" />
         </S.Cancel>
         {/* 댓글리스트 및 내용 */}
         {isOpenModal ? (
@@ -57,7 +57,7 @@ export const DiaryInfo = (props) => {
 
         <S.CommentBtn $isOpen={isOpenModal} onClick={onClickModal}>
           <div>
-            <Icon type="comment" color={isOpenModal ? "#F1F1F1" : "#FF6767"} />
+            <Icon type="comment" color={isOpenModal ? "#F1F1F1" : "#E0F7FA"} />
           </div>
           <div>{`${commentCnt}개`}</div>
         </S.CommentBtn>

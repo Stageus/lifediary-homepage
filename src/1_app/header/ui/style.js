@@ -7,20 +7,20 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 50px;
-  box-shadow: 0px 0px 3px gray;
+  box-shadow: 0px 0px 10px #8080805e;
+  background-color: transparent;
 `;
 
 const logoArea = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
   width: 200px;
   padding: 8px;
-
-  & > img {
-    width: 80px;
-    border-radius: 10px;
-  }
+  font-size: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: ${({theme}) => theme.major};
 `;
 const searchArea = styled.div`
   flex: 1;

@@ -4,13 +4,14 @@ const NewsModal = styled.div`
     overflow-y: scroll;
     position: absolute;
     top: 150%;
-    left: 12%;
+    left: -260%;
     width: 350px;
     height: 400px;
     transform: translateX(-50%);
-    background-color: ${( {theme }) => theme.minor};
+    /* background-color: ${( {theme }) => theme.white}; */
+    background-color: white;
+    box-shadow: 3px 3px 8px ${( {theme }) => theme.gray};
     border-radius: 10px;
-    border: 1px solid ${( {theme} ) => theme.highlight};
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -23,7 +24,8 @@ const message = styled.p`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${({theme}) => theme.gray};
+    color: ${({theme}) => theme.black};
+    
 `;
 
 const Loading = styled.div`

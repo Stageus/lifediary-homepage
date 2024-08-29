@@ -12,8 +12,6 @@ const commentList = styled.div`
         white-space: pre-wrap;
         width: 100%;
         background-color: red;
-        /* word-wrap: break-word; */
-        /* overflow-wrap: break-word; */
     }
 `;
 

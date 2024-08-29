@@ -25,7 +25,6 @@ const ScrollItem = styled.div`
 const DiaryHeader = styled.div`
     display: flex;
     justify-content: space-between;
-    background-color: ${({theme}) => theme.major};
     padding: 4px;
     border-radius: 8px;
 `;
@@ -33,8 +32,12 @@ const DiaryHeader = styled.div`
 const DiaryHeaderWrap = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;;
-    
+    gap: 10px;
+    padding: 1px 10px;
+    border: 3px solid ${({theme}) => theme.minor};
+    border-radius: 8px;
+    color: ${({theme}) => theme.major};
+    font-weight: bold;
 `;
 
 const UserImg = styled.div`
@@ -48,13 +51,11 @@ const UserImg = styled.div`
 `;
 
 const UserName = styled.div`
-    font-size: ${({theme})=> theme.fontSize.base};
-    color: ${({theme}) => theme.black};
+    font-size: ${({theme})=> theme.fontSize.base}; 
 `;
 
 const CreateDate = styled.div`
     font-size: ${({theme})=> theme.fontSize.medium};
-    color: ${({theme}) => theme.black};
 `;
 
 const SubscribeWrap = styled.div`

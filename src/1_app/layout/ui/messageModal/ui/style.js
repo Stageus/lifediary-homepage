@@ -12,7 +12,7 @@ const messageModal = styled.div`
 `;
 
 const modalWrap = styled.div`
-    background-color: ${({theme}) => theme.major};
+    background-color: white;
     border-radius: 10px;
     width: 300px;
     height: 200px;
@@ -20,14 +20,14 @@ const modalWrap = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    box-shadow: 2px 2px 5px 2px gray;
     padding: 10px;
 `;
 
 const message = styled.p`
     flex-grow: 1;
-    color: #0f0f0fc4;
+    color: ${({theme}) => theme.black};
     padding: 20px;
+    font-weight: 600;
     white-space: pre;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;

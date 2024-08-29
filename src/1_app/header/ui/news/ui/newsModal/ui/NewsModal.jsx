@@ -9,11 +9,11 @@ export const NewsModal = () => {
 
   const [ getNoticeList, noticeList, isLoading ] = useGetNoticeList();
   const [ watchRef ] = useScroll(getNoticeList);
-
+  
   return (
     <>
       <S.NewsModal>
-        {noticeList ? 
+        {noticeList.length !== 0 ? 
           noticeList.map((item, idx) => {
             return <NewsItem key={idx} item={item} />;
           }) : <S.message> 새로운 소식이 없습니다....</S.message>}

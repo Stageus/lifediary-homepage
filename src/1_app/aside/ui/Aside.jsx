@@ -13,6 +13,8 @@ export const Aside = ( props ) => {
   const { userInfo } = props;
   const loaction = useLocation();
   const { homeRoute, diaryRoute } = useRoute();
+
+  console.log(loaction);
     
   return (
     <>
@@ -30,7 +32,7 @@ export const Aside = ( props ) => {
             <DefaultBtn 
               text="둘러 보기"
               onClick={diaryRoute}
-              type={ loaction.pathname === "/diary" ? "select" : null }
+              type={ loaction.pathname.startsWith("/diary") ? "select" : null }
                />
           </S.BtnWrap>
 

@@ -5,7 +5,6 @@ import { S } from "./style";
 import { News } from "./news";
 import { Search } from "./search";
 // Layer
-import logo from "@shared/assets/img/logo.png";
 import { DefaultBtn, Profile } from "@shared/ui";
 import { useRoute, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
@@ -29,7 +28,8 @@ export const Header = ( props ) => {
   return (
     <S.Header>
       <S.logoArea onClick={homeRoute}>
-        <img src={logo} />
+        {/* <img src={logo} /> */}
+        <span>{"LifeDiary"}</span>
       </S.logoArea>
 
       <S.searchArea>
@@ -60,7 +60,7 @@ export const Header = ( props ) => {
                 size="medium"
                 text="로그아웃"
                 onClick={() =>
-                  setMessage("로그아웃 하시겠습니까?", logoutHandler)
+                  setMessage("로그아웃 하시겠습니까?", logoutHandler, true)
                 }
               />
             </div>
