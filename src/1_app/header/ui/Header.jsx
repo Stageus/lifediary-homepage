@@ -25,6 +25,7 @@ export const Header = ( props ) => {
     navigate(0);
   };
 
+
   return (
     <S.Header>
       <S.logoArea onClick={homeRoute}>

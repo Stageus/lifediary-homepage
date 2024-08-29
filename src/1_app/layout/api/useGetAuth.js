@@ -30,7 +30,7 @@ export const useGetAuth = () => {
   useEffect(() => {
     // cookie 목록중 token이 있을경우에만 실행한다.
     if ( cookieGet("token") ) getAuth();
-  }, [ cookieGet("token") ]);
+  }, [ cookieGet("token"), cookieGet("permission") ]);
 
   useEffect(() => {
     if (!fetchData) return;
@@ -47,10 +47,12 @@ export const useGetAuth = () => {
         break;
 
       case 401:
+        setUserInfo(null);
         cookieRemove();
         break;
 
       case 500:
+        setUserInfo(null);
         cookieRemove();
         break;
     }
