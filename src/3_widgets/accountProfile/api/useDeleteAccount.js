@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFetch, useCookie, useRoute } from "@shared/hook";
 import { useMessage } from "@shared/store";
 
@@ -8,6 +9,7 @@ export const useDeleteAccount = ()=> {
     const { cookieGet, cookieRemove } = useCookie();
     const { errorRoute, loginRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage );
+    const navigate = useNavigate();
     
     const deleteAccount = () => {
         baseFetch("account", {method:"DELETE"}, cookieGet("token"));
@@ -20,6 +22,7 @@ export const useDeleteAccount = ()=> {
             case 200:
                 cookieRemove();
                 setMessage("이용해주셔서 감사합니다\n로그인화면으로 이동합니다",loginRoute);
+                navigate(0);
                 break;
 
             case 401:

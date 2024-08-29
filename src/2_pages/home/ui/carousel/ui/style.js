@@ -75,8 +75,8 @@ const UserInfo = styled.div`
 
 
 const ProfileImgWrap = styled.div`
-    width: 25px;
-    height: 25px;
+    min-width: 30px;
+    height: 30px;
     border-radius: 50%;
     overflow: hidden;
 `;

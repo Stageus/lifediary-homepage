@@ -31,6 +31,7 @@ const contents = styled.div`
 
 const contentsInfo = styled.div`
     display: flex;
+    align-items: center;
     gap: 10px;
     color: ${( {theme} ) => theme.black};
     font-weight: 600;
@@ -38,6 +39,7 @@ const contentsInfo = styled.div`
 
     & > span:nth-child(2){
         color: ${( {theme} ) => theme.gray};
+        white-space: nowrap;
     }
 `;
 
@@ -50,7 +52,7 @@ const editorBtnListWrap = styled.div`
     & > span {
         cursor: pointer;
         padding: 1px;
-        
+        white-space: nowrap;
     }
 `;
 

@@ -54,12 +54,12 @@ export const Router = createBrowserRouter(
         <Route path={paths.DIARY} element={<Diary />} >
           <Route path=":diaryidx"/>
         </Route>
+        <Route path={paths.SIGNUP} element={<SignUp />} />
 
         <Route path="/" element={<UserRoute/>}>
           <Route path={paths.DIARYCREATE} element={<DiaryCreate />}/>
           <Route path={`${paths.DIARYUPDATE}/:diaryIdx`} element={<DiaryUpdate />} />
           <Route path={paths.MYPROFILE} element={<MyProfile />} />
-          <Route path={paths.SIGNUP} element={<SignUp />} />
         </Route>
 
         <Route path="/" element={<ManagerRoute/>}>
