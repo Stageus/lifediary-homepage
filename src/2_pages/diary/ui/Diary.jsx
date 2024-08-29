@@ -1,69 +1,21 @@
-// Npm
-import { useEffect } from "react";
-
 // Slice
 import { S } from "./style";
 import { useGetDiaryList } from "../api/useGetDiaryList";
 import { DiaryInfo } from "../ui/diaryInfo";
 import { DiaryDeleteBtn } from "./diaryDeleteBtn";
+import { useUpdateUrl } from "../model/useUpdateUrl";
 // Layer
 import { SubscribeBtn } from "@features/subscribeBtn";
 import { DefaultBtn, Profile } from "@shared/ui";
 import { parseTime } from "@shared/util";
 import { useRoute, useScroll } from "@shared/hook";
-import { useRef } from "react";
 
 export const Diary = () => {
 
   const [ getDiaryList, diaryList, isLoading ] = useGetDiaryList();
   const { userProfileRoute, diaryUpdateRoute } = useRoute();
   const [ watchRef ] = useScroll(getDiaryList);
-  
-
-
-
-  // _______________________________
-
-  const parentRef = useRef(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const diaryIdx = entry.target.getAttribute('data-diary-idx');
-            if (diaryIdx) {
-              const newUrl = `${window.location.origin}/diary/${diaryIdx}`;
-              console.log('Updating URL to:', newUrl); // URL 업데이트 확인
-              window.history.pushState("", '', newUrl);
-            }
-          }
-        });
-      },
-      {
-        root: null, // 뷰포트를 기준으로 감지
-        rootMargin: '0px',
-        threshold: 0.5, // 10%가 보이면 감지
-      }
-    );
-
-    // 부모의 자식 요소들에 대해 observer를 설정
-    const children = parentRef.current?.children;
-    if (children) {
-      Array.from(children).forEach(child => {
-        observer.observe(child);
-      });
-    }
-    // Cleanup
-    return () => {
-      if (children) {
-        Array.from(children).forEach(child => {
-          observer.unobserve(child);
-        });
-      }
-    };
-  }, [diaryList]);
-
-  // _______________________________
+  const { parentRef } = useUpdateUrl( diaryList );
 
   return (
     <>
