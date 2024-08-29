@@ -31,7 +31,7 @@ export const useGetMyDiary = (props) => {
   };
 
   const getMyDiary = (  ) => {
-    if ( isEnd) return console.log("나의 작성한일기 끝");
+    if ( isEnd) return;
     setIsLoading(true);
     const startDate = dateRange?.startDate
     const endDate = dateRange?.endDate

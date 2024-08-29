@@ -20,7 +20,7 @@ export const useGetMyLikeDiary = () => {
   const mapper = (resData) => {
     const mapperData = resData?.map((diary) => ({
       idx: diary.idx,
-      thumbnail: diary.thumbnail,
+      thumbnail: diary.thumbnailImg,
       createdAt: parseTime(diary.createdAt),
     }));
 

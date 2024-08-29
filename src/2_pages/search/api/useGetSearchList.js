@@ -35,7 +35,7 @@ export const useGetSearchList = () => {
   };
 
   const getSearchList = ( newSearch ) => {
-    if ( isEnd ) return console.log("검색리스트 끝")
+    if ( isEnd ) return;
     setIsLoading(true);
     const decodedTags = searchParams.get("tags");
 
@@ -49,7 +49,7 @@ export const useGetSearchList = () => {
     const checkTags = decodedTags.split(",");
     const isRegex = checkTags.some((tag) => !tagValidation(tag));
 
-    if (isRegex) {
+    if ( isRegex ) {
       setMessage("사용할수 없는태그가 존재합니다.", backRoute);
       return;
     }
@@ -61,9 +61,10 @@ export const useGetSearchList = () => {
   };
 
   useEffect(() => {
-    getSearchList( 1 );
+    getSearchList(1);
     setDiaryList([]);
     setIsEnd(false);
+    pageNumRef.current = 1;
   }, [searchParams]);
 
   useEffect(() => {
@@ -71,6 +72,7 @@ export const useGetSearchList = () => {
 
     const mapperData = mapper(fetchData.data);
     setIsLoading(false);
+    // console.log("search:",mapperData)
 
     switch (fetchData.status) {
       case 200:    
@@ -83,7 +85,10 @@ export const useGetSearchList = () => {
         break;
 
       case 404:
-        setIsEnd(true);
+
+        if ( diaryList.length > 0 ) {
+          setIsEnd(true);
+        }
         break;
 
       case 500:

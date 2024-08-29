@@ -29,7 +29,7 @@ export const useGetSubscribeList = () => {
     };
 
     const getSubscribeList = ()=>{
-        if ( isEnd ) return console.log("구독리스트 끝");
+        if ( isEnd ) return ;
         setIsLoading( true );
         baseFetch(`subscription?page=${pageNumRef.current}`,{}, cookieGet("token"));
     };
@@ -40,6 +40,8 @@ export const useGetSubscribeList = () => {
 
         setIsLoading( false );
         const mapperData = mapper( fetchData.data );
+
+        console.log(fetchData.data);
 
         switch ( fetchData.status ) {
             case 200:

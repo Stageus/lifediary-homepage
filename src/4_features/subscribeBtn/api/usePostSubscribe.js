@@ -18,6 +18,7 @@ export const usePostSubscribe = ( props ) => {
     const alarmText = useAlarm( state => state.alarmText );
 
     const postSubscribe = ( accountIdx )=>{
+        if ( !cookieGet("token") ) return setMessage("로그인이 필요한 서비스입니다.\n로그인창으로 이동하시겠습니까?", loginRoute, true);
         baseFetch(`subscription/${accountIdx}`,{method: "POST"},cookieGet("token"));
     };
 

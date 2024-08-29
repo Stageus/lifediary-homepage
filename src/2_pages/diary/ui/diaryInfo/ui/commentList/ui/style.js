@@ -11,7 +11,6 @@ const commentList = styled.div`
     & > p{
         white-space: pre-wrap;
         width: 100%;
-        background-color: red;
     }
 `;
 

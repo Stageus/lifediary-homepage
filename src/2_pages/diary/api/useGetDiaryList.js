@@ -39,8 +39,13 @@ export const useGetDiaryList = () => {
     };
 
     const getDiaryList = ()=>{
-        if ( isEnd ) return console.log("메인리스트 끝");
+        if ( isEnd ) return;
         setIsLoading( true );
+
+        if ( diaryList.length ) {
+            baseFetch(`diary?page=${pageNumRef.current}`, {}, cookieGet("token"));
+            return;
+        }
         baseFetch(`diary?${diaryidx ? "startWith=" + diaryidx + "&" : ""}page=${pageNumRef.current}`, {}, cookieGet("token"));
     };
 

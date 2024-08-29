@@ -9,7 +9,7 @@ import { Tab } from "@widgets/tab";
 
 export const MyProfile = () => {
 
-    const [ myInfo ] = useGetMyInfo();
+    const [ myInfo ] = useGetMyInfo();    
 
     return (
         <S.myProfile>

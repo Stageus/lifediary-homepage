@@ -40,9 +40,7 @@ export const useGetNoticeList = () => {
   };
 
   const getNoticeList = () => {
-    console.log("실행")
-    console.log(pageNumRef.current)
-    if ( isEnd ) return console.log("알림리스트 끝");
+    if ( isEnd ) return;
     setIsLoading( true );
     baseFetch( `notice?page=${pageNumRef.current}`, {}, cookieGet("token") );
   };

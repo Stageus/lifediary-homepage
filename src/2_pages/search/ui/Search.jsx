@@ -3,13 +3,15 @@ import { S } from "./style";
 import { useGetSearchList } from "../api/useGetSearchList";
 // Layer
 import { Thumbnail, Profile, Icon } from "@shared/ui";
-import { useScroll } from "@shared/hook";
+import { useScroll, useRoute } from "@shared/hook";
 import { parseTime } from "@shared/util";
+
 
 export const Search = () => {
 
   const [ getSearchList, diaryList, isLoading ] = useGetSearchList();
   const [ watchRef ] = useScroll( getSearchList );
+  const { userProfileRoute } = useRoute();
 
   return (
     <S.search>
@@ -17,8 +19,8 @@ export const Search = () => {
         return (
           <S.diary key={idx}>
             <S.headerArea>
-              <S.accountImgWrap>
-                <Profile src={diary.profileImg} />
+              <S.accountImgWrap onClick={()=>userProfileRoute(diary.accountIdx)}>
+                <Profile img={diary.profileImg} />
               </S.accountImgWrap>
 
               <S.accountName>{diary.nickname}</S.accountName>
@@ -53,7 +55,7 @@ export const Search = () => {
         );
       }) : <S.errorArea> { `등록된 일기가 존재하지 않습니다 ❌` }</S.errorArea>}
       
-      { !isLoading && <div ref={ watchRef }>워칭</div>}
+      { diaryList.length >= 10 && !isLoading && <div ref={ watchRef }>워칭</div>}
       { isLoading ? <div>로딩중...</div> : null}
       
     </S.search>

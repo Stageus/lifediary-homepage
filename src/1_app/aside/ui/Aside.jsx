@@ -13,8 +13,6 @@ export const Aside = ( props ) => {
   const { userInfo } = props;
   const loaction = useLocation();
   const { homeRoute, diaryRoute } = useRoute();
-
-  console.log(loaction);
     
   return (
     <>
