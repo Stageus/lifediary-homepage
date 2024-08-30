@@ -15,7 +15,6 @@ export const CommentList = (props) => {
   const changeComment = (value) => setNewCommentList(value);
   const [ watchRef ] = useScroll( getCommentList );
   
-  console.log(commentList);
   return (
     <>
       <S.commentList>

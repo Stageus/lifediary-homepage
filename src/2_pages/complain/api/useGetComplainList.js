@@ -30,7 +30,7 @@ export const useGetComplainList = () => {
             }
         ))
     
-        return {reports: [...mapperWrap], maxPage: resData.maxPage};
+        return mapperWrap.length !== 0 && {reports: [...mapperWrap], maxPage: resData.maxPage};
     };
 
     const getComplainList = () => { 

@@ -41,8 +41,6 @@ export const useGetSubscribeList = () => {
         setIsLoading( false );
         const mapperData = mapper( fetchData.data );
 
-        console.log(fetchData.data);
-
         switch ( fetchData.status ) {
             case 200:
                 pageNumRef.current = pageNumRef.current + 1;

@@ -24,8 +24,6 @@ export const AccountProfile = ( props ) => {
   const setMessage = useMessage( state => state.setMessage );
   const [ deleteAccount ] = useDeleteAccount();
 
-  console.log(profileRef.current)
-
   return (
     <S.userInfoArea>
       {/* 프로필 */}

@@ -33,7 +33,7 @@ export const useGetCommentList = ( diaryIdx ) => {
     };
 
     const getCommentList = () => {
-        if ( isEnd ) return console.log("댓글의 끝입니다");
+        if ( isEnd ) return;
         setIsLoading(true);
         baseFetch(`comment?page=${pageNumRef.current}&diaryIdx=${diaryIdx}`, {}, cookieGet("token"));
     };

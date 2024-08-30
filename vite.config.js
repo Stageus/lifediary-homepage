@@ -12,5 +12,9 @@ export default defineConfig({
       {find: "@features", replacement: path.resolve(__dirname, "src/4_features")},
       {find: "@shared", replacement: path.resolve(__dirname, "src/5_shared")},
     ]
+  },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
   }
 })
