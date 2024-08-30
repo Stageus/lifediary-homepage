@@ -3,23 +3,20 @@ import { useEffect, useState } from "react";
 // Slice
 import { grassWrap } from "../lib/grassWrap";
 // Layer
-import { useFetch, useCookie, useRoute } from "@shared/hook";
+import { useFetch, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
 
-export const useGetGrassList = ( changeYear ) => {
+export const useGetGrassList = ( ) => {
     
     const [ fetchData, baseFetch ] = useFetch();
-    const { cookieGet, cookieRemove } = useCookie();
+    const { cookieGet } = useCookie();
+    const setMessage = useMessage( state => state.setMessage );
+
     const [ grassList, setGrassList ] = useState( null );
     const [ isLoading, setIsLoading ] = useState( false );
     const [ selectYear, setSelectYear ] = useState( null );
-    const { errorRoute } = useRoute();
-    const setMessage = useMessage( state => state.setMessage );
 
-    const onClickYears = ( year )=> {
-        changeYear( year );
-        setSelectYear( year );
-    };
+    const onClickYears = ( year )=> setSelectYear( year );
 
     const mapper = ( mapperData )=>{
 
@@ -35,7 +32,6 @@ export const useGetGrassList = ( changeYear ) => {
     };
 
     const getGrassList = () => {
-
         setIsLoading( true );
         baseFetch(`grass${selectYear ? "?year=" + selectYear : ""}`, {}, cookieGet("token"));
     };
@@ -58,16 +54,14 @@ export const useGetGrassList = ( changeYear ) => {
                 break;
 
             case 401:
-                // 상위 레이아웃 자체에서 지워져도 될것같음
-                // cookieRemove();
                 break;
 
             case 500:
-                errorRoute(500, "서버에러");
+                setMessage("일시적인 오류로\n잔디목록을 볼수없습니다");
                 break;
         }
 
     },[fetchData]);
 
-    return [ grassList, onClickYears, isLoading ];
+    return [ grassList, selectYear, onClickYears, isLoading ];
 }

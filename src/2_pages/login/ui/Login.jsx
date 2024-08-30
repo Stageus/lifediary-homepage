@@ -19,7 +19,7 @@ export const Login = () => {
       <S.innerBox>
 
         <S.logoArea onClick={homeRoute}>
-          <img src={logo} />
+          <span>{"LifeDiary"}</span>
         </S.logoArea>
 
         <S.googleLogin onClick={onClickGetUrl}>

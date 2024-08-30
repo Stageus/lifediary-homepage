@@ -15,6 +15,9 @@ const ContentPart = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border: 3px solid ${({theme}) => theme.major};
+    border-radius: 8px;
+    padding: 4px;
 `;
 
 const DiarySliderContainer = styled.div`
@@ -25,16 +28,15 @@ const DiaryContent = styled.div`
     white-space: pre-wrap;
     flex: 1 0 100px;
     overflow-y: scroll;
-    padding: 10px;
-    border: 4px solid ${({theme}) => theme.minor};
-    border-radius: 10px;
+    padding: 2px;
+    line-height: 150%;
 `;
 
 // CommentPart _________________
 const CommentPart = styled.div`
     position: relative;
     width: ${({$openModal}) => $openModal ? "450px" : "0px"};
-    background-color: ${({theme}) => theme.minor};
+    background-color: ${({theme}) => theme.white};
     border-radius: 10px;
     transition: width 0.3s ease-out;
     overflow: hidden;
@@ -61,9 +63,9 @@ const ButtonPart = styled.div`
 
 const CommentBtn = styled.div`
     width: 90px;
-    background-color: ${( {theme, $isOpen} )=> $isOpen ? theme.highlight : theme.minor};
-    color: ${( {theme, $isOpen} ) => $isOpen ? theme.white : theme.black};
-    border: 1px solid ${( {theme} )=> theme.highlight};
+    background-color: ${( {theme, $isOpen} )=> $isOpen ? theme.highlight : theme.major};
+    color: ${( {theme, $isOpen} ) => $isOpen ? theme.white : theme.white};
+    border: 1px solid ${( {theme} )=> theme.major};
     border-radius: 4px;
     padding: 4px 6px;
     font-size: ${( {theme} ) => theme.fontSize.medium};

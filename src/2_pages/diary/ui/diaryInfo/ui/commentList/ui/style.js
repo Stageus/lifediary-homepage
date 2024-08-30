@@ -11,9 +11,6 @@ const commentList = styled.div`
     & > p{
         white-space: pre-wrap;
         width: 100%;
-        background-color: red;
-        /* word-wrap: break-word; */
-        /* overflow-wrap: break-word; */
     }
 `;
 
@@ -28,7 +25,7 @@ const commentListArea = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap;
+    overflow: scroll;
 `;
 
 

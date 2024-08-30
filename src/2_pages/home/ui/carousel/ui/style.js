@@ -35,19 +35,26 @@ const ItemBundle = styled.div`
 
 const Item = styled.div`
     width: 190px;
-    box-shadow: 3px 3px 7px gray;
+    box-shadow: 3px 3px 8px gray;
     border-radius: 10px;
     cursor: ${({$isDiary}) =>  $isDiary ? "pointer" : "not-allowed"};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 400px;
-    overflow: hidden;
+    height: 300px;
+    overflow: hidden;    
+    
+    &:hover {
+       background-color: ${({theme}) => theme.minor};
+       transition: 0.5s;
+       transform: scale(1.04);
+       
+    }
 `;
 
 const ThumbnailImgWrap = styled.div`
     flex-grow: 1;
-    max-height: 300px;
+    max-height: 200px;
     padding: 10px;
 `;
 
@@ -56,16 +63,20 @@ const UserInfo = styled.div`
     align-items: center;
     padding: 10px;
     gap: 12px;
+
     & > span{
             color: ${({theme}) => theme.black};
             font-size: ${({theme}) => theme.fontSize.medium};
+            font-weight: 500;
+            font-family: Arial, Helvetica, sans-serif;
+            text-shadow: 0px 3px 3px ${({theme}) => theme.gray};
         }
 `;
 
 
 const ProfileImgWrap = styled.div`
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     overflow: hidden;
 `;
@@ -88,5 +99,5 @@ export const S = {
     UserInfo,
     ProfileImgWrap,
     ThumbnailImgWrap,
-    notFoundText
+    notFoundText,
 }

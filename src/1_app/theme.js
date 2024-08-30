@@ -8,13 +8,17 @@ const fontSize = {
 }
 
 const light = {
-    major: "#FFE6DE",
-    minor: "#FFF7F5",
-    highlight: "#FF6767",
-    white: "#F1F1F1",
-    black: "#0F0F0F",
-    gray: "#C0C0C0"
+    major: "#A7C7E7",    
+    minor: "#E0F7FA",    
+    highlight: "#37474F",
+    accent: "#607D8B",   
+    white: "#ECEFF1",    
+    black: "#333333",    
+    gray: "#8080805e"      
 };
+
+
+
 
 
 export const theme = {

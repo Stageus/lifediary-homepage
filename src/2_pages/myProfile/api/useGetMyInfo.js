@@ -1,12 +1,16 @@
+// Npm
 import { useEffect, useState } from "react";
+// Layer
 import { useFetch, useCookie, useRoute } from "@shared/hook";
 import { useMessage } from "@shared/store";
 
 export const useGetMyInfo = () => {
+
   const [fetchData, baseFetch] = useFetch();
   const { cookieGet } = useCookie();
   const { errorRoute, backRoute } = useRoute();
   const setMessage = useMessage((state) => state.setMessage);
+
   const [myInfo, setMyInfo] = useState(null);
 
   const mapper = (resData) => {
@@ -31,15 +35,16 @@ export const useGetMyInfo = () => {
 
     switch (fetchData.status) {
       case 200:
-        setMyInfo(mapper(fetchData.data));
+        const mapperData = mapper(fetchData.data);
+        setMyInfo(mapperData);
         break;
 
       case 401:
-        setMessage("잘못된 접근입니다", backRoute);
+        setMessage("로그인이 필요한 서비스입니다.", backRoute);
         break;
 
       case 500:
-        errorRoute(500, "서버에러");
+        errorRoute(500, "서버에러: 마이페이지 정보를 가져올수없습니다");
         break;
     }
   }, [fetchData]);

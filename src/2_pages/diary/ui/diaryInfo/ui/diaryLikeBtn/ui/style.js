@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 const DiaryLikeBtn = styled.div`
     width: 90px;
-    background-color: ${( {theme, $isLike} )=> $isLike ? theme.highlight : theme.minor};
-    color: ${( {theme, $isLike} ) => $isLike ? theme.white : theme.black};
-    border: 1px solid ${( {theme} )=> theme.highlight};
+    background-color: ${( {theme, $isLike} )=> $isLike ? theme.highlight : theme.major};
+    color: ${( {theme, $isLike} ) => $isLike ? theme.white : theme.white};
+    border: 1px solid ${( {theme} )=> theme.major};
     border-radius: 4px;
     padding: 4px 6px;
     font-size: ${( {theme} ) => theme.fontSize.medium};

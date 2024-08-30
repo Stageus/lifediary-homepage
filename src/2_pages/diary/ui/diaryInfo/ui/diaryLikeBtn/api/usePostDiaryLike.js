@@ -14,6 +14,7 @@ export const usePostDiaryLike = ( isLiked, likeCnt ) => {
     const { loginRoute, errorRoute } = useRoute();
 
     const postDiaryLike = ( diaryIdx ) => {
+        if ( !cookieGet("token") ) return setMessage("로그인이 필요한 서비스입니다.\n로그인창으로 이동하시겠습니까?", loginRoute, true);
         baseFetch( `diary/${diaryIdx}/like`, {method: "POST"}, cookieGet("token") );
     };
 

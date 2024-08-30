@@ -20,6 +20,8 @@ export const useGetAlarm = () => {
 
     useEffect(() => {
         if ( !fetchData ) return;
+
+        console.log(fetchData.data)
         
         switch ( fetchData.status ) {
             case 200:

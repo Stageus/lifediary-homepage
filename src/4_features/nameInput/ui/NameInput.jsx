@@ -13,7 +13,7 @@ export const NameInput = ( props ) => {
     <S.nameInput>
       <S.nameWrap>
         <S.name
-          maxLength="19"
+          maxLength="20"
           placeholder="닉네임 3자 이상 ~  20자 이하"
           defaultValue={initState ?? ""}
           ref={nameRef}

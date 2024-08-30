@@ -12,6 +12,11 @@ const GrassItem = styled.div`
     border: 1px solid #80808057;
 `;
 
+const notGrassItem = styled.div`
+    width: 15px;
+    height: 15px;
+`;
+
 const Month = styled.div`
     position: absolute;
     top: 0;    
@@ -32,6 +37,7 @@ const HoverInfo = styled.div`
 
 export const S = {
     GrassItem,
+    notGrassItem,
     Month,
     HoverInfo
 }

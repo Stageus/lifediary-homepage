@@ -16,7 +16,7 @@ export const SignUp = () => {
     const location = useLocation();
     const googleInfo = location.state;
     const { loginRoute, homeRoute } = useRoute();
-    const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( googleInfo.googleProfileImg );
+    const { selectImg, previewImg, onClickImg, onClickReset, profileRef } = useProfileImg( googleInfo.googleProfileImg );
     const [ postAccount ] = usePostAccount();
     const [ name, setName ] = useState(null);
 
@@ -25,7 +25,7 @@ export const SignUp = () => {
       <S.innerBox>
         {/* 로고영역 */}
         <S.logoArea onClick={homeRoute}>
-          <img src={logo} />
+        <span>{"LifeDiary"}</span>
         </S.logoArea>
 
         {/* 프로필 영역 */}
@@ -36,9 +36,10 @@ export const SignUp = () => {
              />
             <label htmlFor="file" />
             <input 
+            ref={profileRef}
             id="file"
             type="file"
-            accept=".jpg, .jpeg, .png, .gif" 
+            accept=".jpg, .jpeg, .png, .gif"
             onChange={onClickImg}
              />
           </S.imgWrap>

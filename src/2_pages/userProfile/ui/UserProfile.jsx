@@ -9,10 +9,10 @@ import { Tab } from "@widgets/tab";
 export const UserProfile = () => {
 
     const [ accountInfo ] = useGetAccountInfo();
-
+    
     return (
         <S.userProfile>
-            <AccountProfile {...accountInfo}/>
+            { accountInfo && <AccountProfile {...accountInfo}/>}
             <Tab
             tabLabel={["유저 일기"]}
             components={[AccountDiary]} 

@@ -9,11 +9,11 @@ import { Tab } from "@widgets/tab";
 
 export const MyProfile = () => {
 
-    const [ myInfo ] = useGetMyInfo();
+    const [ myInfo ] = useGetMyInfo();    
 
     return (
         <S.myProfile>
-            <AccountProfile {...myInfo}/>
+            { myInfo && <AccountProfile {...myInfo}/>}
             <Tab
                 tabLabel={["작성한 일기", "좋아요한 일기"]}
                 components={[MyDiary,MyLikeDiary]}

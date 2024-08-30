@@ -13,9 +13,9 @@ export const HashTag = (props) => {
           tagList?.map((text, idx) => {
             return (
               <S.tag onClick={() => deleteTag(text)} key={idx}>
-                <span>#</span>
-                <span>{text}</span>
-                <span>×</span>
+                <span>{"#"}</span>
+                <p>{`${text}`}</p>
+                <span>{"✖️"}</span>
               </S.tag>
             );
           })}

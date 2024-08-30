@@ -3,25 +3,27 @@ import { S } from "./style";
 import { useGetDiaryList } from "../api/useGetDiaryList";
 import { DiaryInfo } from "../ui/diaryInfo";
 import { DiaryDeleteBtn } from "./diaryDeleteBtn";
+import { useUpdateUrl } from "../model/useUpdateUrl";
 // Layer
 import { SubscribeBtn } from "@features/subscribeBtn";
 import { DefaultBtn, Profile } from "@shared/ui";
 import { parseTime } from "@shared/util";
-import { useScroll, useRoute } from "@shared/hook";
+import { useRoute, useScroll } from "@shared/hook";
 
 export const Diary = () => {
 
-  const [ diaryList, getDiaryList, isLoading ] = useGetDiaryList();
+  const [ getDiaryList, diaryList, isLoading ] = useGetDiaryList();
   const { userProfileRoute, diaryUpdateRoute } = useRoute();
-  const [ watchRef ] = useScroll( getDiaryList );    
+  const [ watchRef ] = useScroll(getDiaryList);
+  const { parentRef } = useUpdateUrl( diaryList );
 
   return (
     <>
-      <S.Diary>
-        {diaryList &&
+      <S.Diary ref={parentRef}>
+        {diaryList.length !==0 &&
           diaryList.map(( diary ) => {
             return (
-              <S.ScrollItem key={ diary.idx }>
+              <S.ScrollItem key={ diary.idx } data-diary-idx={diary.idx}>
                 {/* 상단: 유저이미지, 이름, 일기작성날짜,  구독버튼, 일기수정, 일기삭제 */}
                 <S.DiaryHeader>
                   <S.DiaryHeaderWrap>
@@ -42,8 +44,7 @@ export const Diary = () => {
                     ? null
                     : <S.SubscribeWrap>
                         <SubscribeBtn
-                        isSubscribed={ diary.isSubscribed }
-                        accountIdx={ diary.accountIdx }
+                        {...diary}
                         />
                       </S.SubscribeWrap>
                     }
@@ -70,10 +71,7 @@ export const Diary = () => {
             );
           })}
 
-          {diaryList && diaryList.length >= 10 
-                && <div ref={ watchRef }></div>
-          }
-
+          { !isLoading && <div ref={ watchRef }/>}
           { isLoading ? <div>로딩중...</div> : null}
       </S.Diary>
     </>

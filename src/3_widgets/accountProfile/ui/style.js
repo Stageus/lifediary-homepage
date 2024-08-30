@@ -8,6 +8,8 @@ const userInfoArea = styled.div`
   border-radius: 75px 20px 20px 75px;
   height: 150px;
   min-width: 600px;
+  padding: 1px;
+
 `;
 
 const imgWrap = styled.div`
@@ -29,8 +31,8 @@ const imgWrap = styled.div`
 `;
 
 const profileWrap = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 144px;
+  height: 144px;
   display: flex;
   border-radius: 50%;
   overflow: hidden;

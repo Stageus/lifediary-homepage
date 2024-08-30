@@ -1,5 +1,7 @@
+// Npm
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// Layer
 import { useFetch, useRoute, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
 
@@ -8,8 +10,9 @@ export const useGetAccountInfo = () => {
   const [fetchData, baseFetch] = useFetch();
   const { cookieGet } = useCookie();
   const { errorRoute, backRoute } = useRoute();
-  const { accountIdx } = useParams();
   const setMessage = useMessage((state) => state.setMessage);
+
+  const { accountIdx } = useParams();
   const [accountInfo, setAccountInfo] = useState(null);
 
   const mapper = ( resData ) => {
@@ -40,15 +43,15 @@ export const useGetAccountInfo = () => {
         break;
 
       case 400:
-        setMessage("잠시후에 다시시도해주세요", backRoute);
+        setMessage("400 예상하지못한 상황이 발생했습니다\n잠시후에 다시시도해주세요");
         break;
 
       case 404:
-        setMessage("해당유저는 존재하지 않습니다.", backRoute);
+        setMessage("존재하지 않는 회원입니다.", backRoute);
         break;
 
       case 500:
-        errorRoute(500, "서버에러");
+        errorRoute(500, "서버에러: 유저페이지 정보를 가져올수없습니다");
         break;
     }
   }, [fetchData]);

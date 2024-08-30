@@ -22,13 +22,21 @@ const tag = styled.div`
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  gap: 3px;
-  margin: 0 5px;
+  gap: 5px;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.highlight};
-  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.major};
   padding: 4px 5px;
   border-radius: 6px;
+
+  & > p {
+    color: white;
+  }
+
+  & > span{
+    display: inline-block; 
+    font-size: 14px;
+    color: ${({ theme }) => theme.gray};
+  }
 `;
 
 const tagInput = styled.div`

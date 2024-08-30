@@ -53,10 +53,21 @@ const SecondArea = styled.div`
     background: url(${({$img}) => $img}) no-repeat center center / cover;
 `;
 
+const componentsTitle = styled.h2`
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+    font-weight: 500;
+    color: ${({theme}) => theme.black};
+    border: none;
+    text-shadow: 0px 4px 2px ${({theme}) => theme.gray};
+`;
+
 export const S = {
     Home,
     Introduction,
     FirstArea,
     Content,
     SecondArea,
+    componentsTitle,
 }

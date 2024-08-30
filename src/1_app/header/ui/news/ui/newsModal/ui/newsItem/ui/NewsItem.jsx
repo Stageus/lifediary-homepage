@@ -1,25 +1,26 @@
 // Slice
 import { S } from "./style";
-import { useRoute } from "./model/useRoute";
-import { useDeleteNotice } from "./api/useDeleteNotice";
+import { useDeleteNotice } from "../api/useDeleteNotice";
 // Layer
 import { Icon } from "@shared/ui";
+import { useRoute } from "@shared/hook";
 
 export const NewsItem = ( props ) => {
   
-  const { idx, nickname, noticeType, createdAt } = props.item;
-  const { onClickRoute } = useRoute();
+  const { idx, nickname, diaryIdx, noticeType, createdAt, isRoutes } = props.item;
+  const { diaryRoute } = useRoute();
   const [ deleteNotice, isDelete] = useDeleteNotice();
-  
 
   return (
     <>
       {isDelete ? (
-        <S.NewsItem>
+        <S.NewsItem 
+        $isDelete={isRoutes !== "deletedMyDiary" || isRoutes !== "deletedDiary"}
+        onClick={ () => isRoutes !== "deletedMyDiary" && isRoutes !== "deletedDiary" && diaryRoute( diaryIdx )}>
           <S.NewsInfo>
             {nickname 
             ? (
-              <S.UserInfo onClick={ () => onClickRoute( idx )}>
+              <S.UserInfo>
                 <S.Name>{ nickname }</S.Name>
               </S.UserInfo>
             ) 

@@ -30,6 +30,7 @@ export const useTag = ( props ) => {
         if ( target.trim() !== "" ) {
           if ( !tagValidation(target) ) {
             setMessage("#은 사용할수 없습니다. \n\n태그는 최대 20자입니다."); 
+            e.target.value = "";
             inputRef.current.focus();
             return;
           }

@@ -1,5 +1,5 @@
 // Npm
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // Layer
 import { useFetch, useCookie } from "@shared/hook";
 
@@ -8,10 +8,14 @@ export const useGetCommentList = ( diaryIdx ) => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
-    const [ commentList, setCommentList ] = useState( null );
+
+    const [ isEnd, setIsEnd ] = useState( false );
+    const [ isLoading, setIsLoading ] = useState( false );
+    const pageNumRef = useRef(1);
+    const [ commentList, setCommentList ] = useState( [] );
     
     const mapper = ( resData ) => {
-        const resDataWrap = resData.map( item =>
+        const resDataWrap = resData?.map( item =>
             (
                 {
                     idx : item.idx,
@@ -29,20 +33,22 @@ export const useGetCommentList = ( diaryIdx ) => {
     };
 
     const getCommentList = () => {
-        baseFetch(`comment?page=${1}&diaryIdx=${diaryIdx}`,{},cookieGet("token"));
+        if ( isEnd ) return;
+        setIsLoading(true);
+        baseFetch(`comment?page=${pageNumRef.current}&diaryIdx=${diaryIdx}`, {}, cookieGet("token"));
     };
 
-    useEffect(()=>{
-        getCommentList();
-    },[])
 
     useEffect(()=>{
         if ( !fetchData ) return;
 
+        const mapperData = mapper( fetchData.data );
+        setIsLoading(false);
+
         switch ( fetchData.status ) {
             case 200:
-                const mapperData = mapper( fetchData.data );
-                setCommentList( prevState => prevState ? [...prevState, ...mapperData] : [...mapperData]);
+                pageNumRef.current = pageNumRef.current + 1;
+                setCommentList([...commentList, ...mapperData]);
                 break;
 
             case 400:
@@ -50,9 +56,7 @@ export const useGetCommentList = ( diaryIdx ) => {
                 break;
 
             case 404:
-                // 댓글이 없는경우와, diaryIdx가 없는경우가 같은 상태코드 이므로
-                // 잠시보류
-                // setErrorMessage("존재하지 않는 일기입니다.");
+                setIsEnd(true);
                 break;
 
             case 500:
@@ -62,5 +66,5 @@ export const useGetCommentList = ( diaryIdx ) => {
         }
     },[fetchData]);
 
-    return [ getCommentList, commentList];
+    return [ getCommentList, commentList, isLoading];
 }

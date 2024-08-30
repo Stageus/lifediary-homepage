@@ -11,10 +11,10 @@ export const GrassItem = ( props )=>{
     const { idx, color, date } = props.day ?? {};
     const { hover, onMuouserOver, onMouserOut } = useHover();
     const { diaryRoute } = useRoute();
-    
+
     return(
         <>
-        <S.GrassItem 
+        { props.day ? <S.GrassItem 
                 $isColor={ color } 
                 $date={ date }
                 onMouseOver={ onMuouserOver }
@@ -30,7 +30,7 @@ export const GrassItem = ( props )=>{
             ? <S.HoverInfo>{ parseTime(date) }</S.HoverInfo> 
             : null}
 
-        </S.GrassItem>
+        </S.GrassItem> : <S.notGrassItem></S.notGrassItem>}
         </>
     );
 };

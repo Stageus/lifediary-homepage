@@ -6,12 +6,15 @@ const SubscribeInfo = styled.div`
     gap: 10px;
     padding: 0 5px;
     height: 100%;
+    overflow-y: scroll;
 `;
 
 const SubscribeTitle = styled.h3`
-    color: ${({theme}) => theme.gray};
+    color: ${({theme}) => theme.black};
     padding: 10px;
-    border-bottom: 1px solid ${({theme}) => theme.gray};
+    border-bottom: 2px solid ${({theme}) => theme.gray};
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 `;
 
 const SubscribeList = styled.div`

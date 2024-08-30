@@ -7,9 +7,9 @@ const DefaultBtn = styled.button`
     border-width: 1px;
     border-style: solid;
     cursor: pointer;
-    color: ${({$type, theme}) => $type ? theme.white : theme.highlight};
+    color: white;
     white-space: nowrap;
-    box-shadow: ${({$shadow}) => $shadow ? "1px 1px 3px gray" : "none"};
+    box-shadow: ${({$shadow}) => $shadow ? "2px 2px 4px #8080808c" : "none"};
 
     ${({$size, theme})=>{
         switch($size){
@@ -51,8 +51,8 @@ const DefaultBtn = styled.button`
                 `
             default:
                 return `
-                    background-color:${theme.minor};
-                    border-color: ${theme.highlight};
+                    background-color:${theme.major};
+                    border-color: ${theme.major};
                 `
         }
     }};

@@ -4,9 +4,9 @@ import { usePostSubscribe } from "../api/usePostSubscribe";
 import { DefaultBtn } from "@shared/ui";
 
 export const SubscribeBtn = ( props )=>{
-    
-    const { isSubscribed, accountIdx } = props;
-    const [ subscribe, postSubscribe ] = usePostSubscribe(isSubscribed);
+
+    const { accountIdx } = props;
+    const [ subscribe, postSubscribe ] = usePostSubscribe(props);
     
     return(
         <>

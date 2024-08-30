@@ -1,87 +1,40 @@
-# 진행상황
-### clamp
-
-[app]
-### header
-- ui/search: 검색을 눌렀을시, 태그로 등록되지 않은 문자열삭제 필요
-- 레이아웃 css 다시적용 필요
-
-### aisde
-- 각버튼의 url위치 다시판단해야함
-- width가 고정적이지 않아 움직임
-- height 또한 짧아짐 현상
-
-### layout
-- 특정컴포넌트가 보일때, 일치하는 url판단을 다시해줘야함
-- signup, loging, messageModal 사용하기 위치 이동으로인해, header 및 asied 숨겨야함
-
----
-# [pages]
-### login ✅
-- ui: 완료
-- api: 완료
-- model: 없음
-
-### signup ✅
-- ui: 완료
-- api: 완료
-- model: 완료
-
-### search ✅
-- ui: 완료
-  - 다른페이지 이동시에 header에 남은 태그들 제거해야하나?
-  - 유저프로필 클릭하면 유저페이지로
-  - 일기이미지 or 일기내용 클릭하면 메인페이지로 리다이렉트
-- api: 완료
-- model: 없음
-
-### diaryCreate ✅
-- ui: 완료
-  - button은 맨밑으로 위치할까?
-  - 업로드버튼 클릭시에 오늘 날짜기준 일기를 작성했는지 판별하여 막을것인지?
-  - 휑한데 제목추가해야하나?
-- api: 완료
-  - 200 상태코드일때 홈이아닌, 메인페이지로 리다이렉트 시켜줄것
-- model: 없음
-
-### diaryUpdate ✅
-- ui: 완료
-  - 휑한데 제목추가해야하나?
-  - button은 맨밑으로 위치할까?
-- api: 완료
-  - 200 상태코드일때 홈이아닌, 메인페이지로 리다이렉트 시켜줄것
-- model:없음
+# 
 
 
----
-# [widgets]
-### diarySet ✅
-- ui: 완료
-- api: 없음
-- model: 완료
-  - create & update를 동시에 사용하고있어서 코드가 읽기가 힘든부분이 존재함, 동작에 문제가 있지 않지만 api부분또한 랩핑해야하는 현상이 있음
-  - 
-- ### profileSet ✅
-- ui: 
-- api:
-- model:
+![header](https://capsule-render.vercel.app/api?type=waving&color=FFE6DE&height=150&section=footer&text=Lifediary&fontAlign=50&fontAlignY=75&fontColor=F5F8FF&fontSize=35&descAlign=92&descAlignY=7&descSize=102)
+  <br/><br/>
+
+## 🎬 프로젝트 기간  
+<h3>2024.06.17 ~ 진행중</h3>
 
 
-comment 컴포넌트에서 너무많은 처리가 이루어지고 있음
-문제는 되지않지만, 가독성이 너무 많이 떨어짐,
-댓글,답글을 같은 공간에 둔이유는 ?
+## :clipboard: Documents
+> [⚙️ API 명세서](https://www.notion.so/stageus/API-65160e0a154c496898ed2ba6e5fe5f4f)
+> 
+> [⚙️ 요구사항 정의서](https://docs.google.com/spreadsheets/d/1X0wucMNIiP-2EpdakdUEjhG5WlXXucFnvNjtkSiCp2E/edit?gid=0#gid=0)
+>
+> [⚙️ 화면 정의서](https://www.figma.com/design/C0LrHGATvwKuYDZFdN8net/%EC%9D%B8%EC%83%9D%EC%9D%BC%EA%B8%B0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=143-5402&t=yj6F5puDeDhqc1Qc-0)
 
-1. 댓글,답글의 똑같은 ui로 인해 중복 css를 줄이기 위함
-2. 댓글수정, 답글수정 api가 똑같음
-3. 댓글삭제, 답글삭제 api가 똑같음
-4. 댓글에서 답글버튼 클릭시 UX적으로 바로밑에서 작성하는것으로 판단하기 위함
-5. 답글의 ui에서 바로 답글 api를 요청해야함
-6. 댓글수정, 답글수정시에 해당 컴포넌트만 렌더링 시키기 위함
-7. 댓글에 답글여부에따라 버튼을 보여주기 위함 
-   즉 디자인,api,렌더링 으로 인해 코드의 양이 증가함
+<br/>
+
+## 👨‍👨‍👧‍👧 팀원
+
+|Frontend|
+| :---: |
+|[장준익](https://github.com/JangIkIk)
+
+|Backend|Backend|
+| :---: | :---: |
+|[김영선](https://github.com/JangIkIk)|[박세현](https://github.com/hellosehyun)|
+
+<br/>
 
 
+## 💪 기술 스택
 
+### • Front-end
 
-
-
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/Vite-09D3AC?style=for-the-badge&logo=Create React App&logoColor=white"> 
+<img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+<img src="https://img.shields.io/badge/React Router-CA4245?style=for-the-badge&logo=React Router&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"> <img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"> <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">

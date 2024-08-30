@@ -1,5 +1,6 @@
 // Npm
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 // Layer
 import { useFetch, useCookie } from "@shared/hook";
 import { useMessage } from "@shared/store";
@@ -8,8 +9,9 @@ export const useGetNewNotice = () => {
     
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
-    const [ isNew, setIsNew ] = useState( false );
     const setMessage = useMessage( state => state.setMessage );
+    const [ isNew, setIsNew ] = useState( false );
+    const location = useLocation();
 
     const getNewNotice = () => {
         baseFetch("notice/new", {}, cookieGet("token"));
@@ -17,7 +19,7 @@ export const useGetNewNotice = () => {
 
     useEffect(() => {
         getNewNotice();
-    },[])
+    },[location.pathname])
 
     useEffect( () => {
         if ( !fetchData ) return;
@@ -25,16 +27,15 @@ export const useGetNewNotice = () => {
         switch ( fetchData.status ) {
             case 200:
                 setIsNew(fetchData.data.isNew);
-                break
+                break;
             case 401:
-                break
+                break;
             case 500:
                 setMessage("오류로인해 새로운 알람을 불러오지 못했습니다");
-                break
+                break;
         }
 
-    },[fetchData])
+    },[fetchData]);
 
-
-    return [isNew]
-}
+    return [isNew];
+};

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const ComplainContent = styled.div`
-    min-width: 900px;
-    min-height: 100%;
+    min-width: 920px;
+    min-height: 600px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -10,11 +10,12 @@ const ComplainContent = styled.div`
 `;
 
 const Table = styled.table`
-    flex-grow: 1;
+    /* flex-grow: 1; */
     width: 100%;
     padding: 10px;
     text-align: center;
     border-collapse: collapse;
+    position: relative;
 
     th{
         padding: 15px 5px;
@@ -32,6 +33,19 @@ const Table = styled.table`
 
 `;
 
+const notFound = styled.div`
+    position: absolute;
+    bottom: -100px;
+    right: 0;
+    left: 0;
+`;
+
+const number = styled.th`
+    width: 50px;
+`;
+const thState= styled.th`
+    width: 60px;
+`;
 const Content = styled.th`
     width: 400px;
 `;
@@ -78,5 +92,8 @@ export const S = {
     leftBtn,
     rightBtn,
     PageBtnList,
-    Content
+    number,
+    thState,
+    Content,
+    notFound
 }

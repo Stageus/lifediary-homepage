@@ -30,7 +30,7 @@ export const Aside = ( props ) => {
             <DefaultBtn 
               text="둘러 보기"
               onClick={diaryRoute}
-              type={ loaction.pathname === "/diary" ? "select" : null }
+              type={ loaction.pathname.startsWith("/diary") ? "select" : null }
                />
           </S.BtnWrap>
 

@@ -3,22 +3,26 @@ import { S } from "./style";
 import { useGetSearchList } from "../api/useGetSearchList";
 // Layer
 import { Thumbnail, Profile, Icon } from "@shared/ui";
-import { useScroll } from "@shared/hook";
+import { useScroll, useRoute } from "@shared/hook";
 import { parseTime } from "@shared/util";
+import { useCookie } from "@shared/hook";
+
 
 export const Search = () => {
 
-  const [ isEnd, getSearchList, diaryList, errorMessage ] = useGetSearchList();
+  const [ getSearchList, diaryList, isLoading ] = useGetSearchList();
   const [ watchRef ] = useScroll( getSearchList );
+  const { userProfileRoute, myProfileRoute } = useRoute();
+  const { cookieGet } = useCookie();
 
   return (
     <S.search>
-      {diaryList?.map((diary, idx) => {
+      { diaryList.length !== 0 ? diaryList.map((diary, idx) => {
         return (
           <S.diary key={idx}>
             <S.headerArea>
-              <S.accountImgWrap>
-                <Profile src={diary.profileImg} />
+              <S.accountImgWrap onClick={()=> cookieGet("accountIdx") === diary.accountIdx ? myProfileRoute() :userProfileRoute(diary.accountIdx)}>
+                <Profile img={diary.profileImg} />
               </S.accountImgWrap>
 
               <S.accountName>{diary.nickname}</S.accountName>
@@ -51,11 +55,11 @@ export const Search = () => {
             </S.footerArea>
           </S.diary>
         );
-      })}
+      }) : <S.errorArea> { `등록된 일기가 존재하지 않습니다 ❌` }</S.errorArea>}
       
-      { errorMessage && <S.errorArea> { `${errorMessage}  ❌` }</S.errorArea>}
-      { !isEnd && !diaryList && <div ref={watchRef}>워칭</div>}
-      { !isEnd && diaryList && diaryList?.length % 10 === 0 && <div ref={watchRef}>워칭</div>}
+      { diaryList.length >= 10 && !isLoading && <div ref={ watchRef }/>}
+      { isLoading ? <div>로딩중...</div> : null}
+      
     </S.search>
   );
 };

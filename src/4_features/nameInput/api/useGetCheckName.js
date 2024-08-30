@@ -7,14 +7,14 @@ import { nameValidation } from "@shared/consts/validation";
 
 export const useGetCheckName = ( props ) => {
 
-    const [ fetchData, baseFetch ] = useFetch();
-    const setMessage = useMessage( state => state.setMessage );
-    const { errorRoute } = useRoute();
-    const [ saveName, setSaveName ] = useState( null );
     const { setName } = props;
+    const [ fetchData, baseFetch ] = useFetch();
+    const { errorRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage );
+
+    const [ saveName, setSaveName ] = useState( null );
 
     const getCheckName = ( name ) => {
-
         if ( !nameValidation(name) ) return setMessage("이름은 최소 3자이상 ~ 최대 20자 이하만 가능합니다.");
 
         setSaveName( name );
@@ -40,11 +40,11 @@ export const useGetCheckName = ( props ) => {
                 break;
 
             case 400:
-                setMessage("이름은 최소 3자이상 ~ 최대 20자 이하 입니다");
+                setMessage("이름은 최소 3자이상 ~ 최대 20자 이하만 \n가능합니다.");
                 break;
 
             case 500:
-                errorRoute(500, "서버에러");
+                setMessage("500 서버에러: 닉네임을 변경할수 없습니다.");
                 break;
         }
 

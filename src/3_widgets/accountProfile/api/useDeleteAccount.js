@@ -10,6 +10,7 @@ export const useDeleteAccount = ()=> {
     const setMessage = useMessage( state => state.setMessage );
     
     const deleteAccount = () => {
+        if ( !cookieGet("token") ) return setMessage("회원탈퇴는 본인만 가능합니다");
         baseFetch("account", {method:"DELETE"}, cookieGet("token"));
     };
 
@@ -19,11 +20,11 @@ export const useDeleteAccount = ()=> {
         switch ( fetchData.status ) {
             case 200:
                 cookieRemove();
-                setMessage("이용해주셔서 감사합니다\n로그인화면으로 이동합니다",loginRoute);
+                setMessage("이용해주셔서 감사합니다\n로그인화면으로 이동합니다",window.location.href = '/login');
                 break;
 
             case 401:
-                setMessage("탈퇴할수 없는 계정입니다.");
+                setMessage("회원탈퇴는 본인만 가능합니다");
                 break;
 
             case 500:

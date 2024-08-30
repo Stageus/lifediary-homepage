@@ -25,24 +25,34 @@ const contentsArea = styled.div`
 const contents = styled.div`
     white-space: pre-wrap;
     display: flex;
+    color: ${({theme}) => theme.black};
 `;
 
 
 const contentsInfo = styled.div`
     display: flex;
+    align-items: center;
     gap: 10px;
-    color: ${( {theme} ) => theme.gray};
+    color: ${( {theme} ) => theme.black};
+    font-weight: 600;
     font-size: ${( {theme} ) => theme.fontSize.medium};
+
+    & > span:nth-child(2){
+        color: ${( {theme} ) => theme.gray};
+        white-space: nowrap;
+    }
 `;
 
 const editorBtnListWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
-    color: ${( {theme} ) => theme.highlight};
+    color: red;
     font-size: ${( {theme} ) => theme.fontSize.medium};
     & > span {
         cursor: pointer;
+        padding: 1px;
+        white-space: nowrap;
     }
 `;
 
@@ -62,8 +72,7 @@ const lineInput = styled.input`
     width: 0;
     border: none;
     outline: none;
-    border-bottom: 1px solid black;
-    border-radius: 1px;
+    border-bottom: 2px solid ${({theme}) => theme.black};
     background-color: transparent;
     height: 34px;
 
@@ -83,8 +92,8 @@ const editorBtnArea = styled.div`
    align-self: end;
    display: flex;
    gap: 10px;
-    color: ${( {theme} ) => theme.highlight};
-    font-size: ${( {theme} ) => theme.fontSize.base};
+   color: red;
+   font-size: 14px;
     & > span {
         cursor: pointer;
     }

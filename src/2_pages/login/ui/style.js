@@ -20,17 +20,15 @@ const innerBox = styled.div`
 `;
 
 const logoArea = styled.div`
-    width: fit-content;
-    display: flex;
-    border: 2px solid ${({theme}) => theme.major};
-    border-radius: 8px;
-    width: 250px;
-    cursor: pointer;
-
-    & > img {
-        width: 100%;
-        border-radius: 8px;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 200px;
+  padding: 8px;
+  font-size: 50px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: ${({theme}) => theme.major};
 `;
 
 const googleLogin = styled.div`

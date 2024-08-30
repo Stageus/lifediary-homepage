@@ -4,23 +4,21 @@ import { useEffect, useState } from "react";
 import { useFetch, useCookie, useRoute } from "@shared/hook";
 import { useSubscribe, useAlarm, useMessage } from "@shared/store";
 
-export const usePostSubscribe = ( isSubscribed ) => {
+export const usePostSubscribe = ( props ) => {
 
+    const { isSubscribed, nickname, profileImg, accountIdx} = props;
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
-    const [ subscribe, setSubscribe ] = useState( null );
-    const updateSubscribe = useSubscribe( state => state.updateSubscribe );
-    const alarmText = useAlarm( state => state.alarmText );
-    const setMessage = useMessage( state => state.setMessage );
     const { errorRoute ,loginRoute } = useRoute();
+    const setMessage = useMessage( state => state.setMessage );
+    const updateSubscribe = useSubscribe( state => state.updateSubscribe );
+    const deleteSubscribe = useSubscribe( state => state.deleteSubscribe );
 
-
-    // 확인 -> 왜썻나
-    useEffect(()=>{
-        setSubscribe(isSubscribed);
-    },[isSubscribed])
+    const [ subscribe, setSubscribe ] = useState( isSubscribed );
+    const alarmText = useAlarm( state => state.alarmText );
 
     const postSubscribe = ( accountIdx )=>{
+        if ( !cookieGet("token") ) return setMessage("로그인이 필요한 서비스입니다.\n로그인창으로 이동하시겠습니까?", loginRoute, true);
         baseFetch(`subscription/${accountIdx}`,{method: "POST"},cookieGet("token"));
     };
 
@@ -29,10 +27,17 @@ export const usePostSubscribe = ( isSubscribed ) => {
 
         switch ( fetchData.status ) {
             case 200:
-                if( subscribe === true ) alarmText("구독이 취소되었습니다.");
-                if( subscribe === false ) alarmText("구독이 추가되었습니다.");
+                const selectSubscribe = [{profileImg, nickname, accountIdx}];
+
+                if( subscribe === true ) {
+                    deleteSubscribe(accountIdx);
+                    alarmText("구독이 취소되었습니다.");
+                }
+                if( subscribe === false ) {
+                    updateSubscribe(selectSubscribe);
+                    alarmText("구독이 추가되었습니다.");
+                }
                 setSubscribe( !subscribe );
-                updateSubscribe();
                 break;
 
             case 400:

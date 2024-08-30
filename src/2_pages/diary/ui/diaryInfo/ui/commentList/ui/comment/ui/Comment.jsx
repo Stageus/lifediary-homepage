@@ -1,5 +1,3 @@
-// Npm
-import { useEffect, useRef, useState } from "react";
 // Slice
 import { S } from "./style";
 import { useIsOpen } from "../model/useIsOpen";
@@ -7,7 +5,7 @@ import { useDeleteCommentOrReply } from "../api/useDeleteCommentOrReply";
 import { usePutCommnetOrReply } from "../api/usePutCommnetOrReply";
 import { usePostReply } from "../api/usePostReply";
 // Layer
-import { Profile } from "@shared/ui";
+import { Profile, DefaultBtn } from "@shared/ui";
 import { parseTime } from "@shared/util";
 import { useCookie } from "@shared/hook";
 
@@ -42,17 +40,33 @@ export const Comment = (props) => {
     isReplied,
   } = props.comment;
   const diaryIsMine = props.diaryIsMine;
-  const { isOpenCommentArea, isOpensReplyArea, onClickOpenCommentInput, onClickOpenReplyInput, commentTextRef, replyTextRef } = useIsOpen();
-  
+  const {
+    isOpenCommentArea,
+    isOpensReplyArea,
+    onClickOpenCommentInput,
+    onClickOpenReplyInput,
+    commentTextRef,
+    replyTextRef,
+  } = useIsOpen();
+
   // 답글작성시 작성자 프로필이미지를 가져오기
   const { cookieGet } = useCookie();
-  const [ postReply, deleteNowReply, newReplyInfo ] = usePostReply( onClickOpenReplyInput );
-  const [ deleteCommentOrReply, isDeleteComment, isDeleteReply ] = useDeleteCommentOrReply( deleteNowReply );
-  const [ putCommentOrReply, commentText, replyText ] = usePutCommnetOrReply( textContent, onClickOpenCommentInput, onClickOpenReplyInput );
+  const [postReply, deleteNowReply, newReplyInfo] = usePostReply(
+    onClickOpenReplyInput
+  );
+  const [deleteCommentOrReply, isDeleteComment, isDeleteReply] =
+    useDeleteCommentOrReply(deleteNowReply);
+  const [putCommentOrReply, commentText, replyText] = usePutCommnetOrReply(
+    textContent,
+    onClickOpenCommentInput,
+    onClickOpenReplyInput
+  );
+
+  console.log(props)
 
   return (
     <>
-{/* 댓글일 경우 영역 _____________________________ */}
+      {/* 댓글일 경우 영역 _____________________________ */}
       {isParent ? (
         <>
           {!isDeleteComment ? (
@@ -101,14 +115,23 @@ export const Comment = (props) => {
                           />
                         </S.inputWrap>
                         <S.editorBtnArea>
-                          <span
+                          <DefaultBtn
+                            text="확인"
                             onClick={() =>
-                              putCommentOrReply(idx, commentTextRef.current.value, true)
+                              putCommentOrReply(
+                                idx,
+                                commentTextRef.current.value,
+                                true
+                              )
                             }
-                          >
-                            확인
-                          </span>
-                          <span onClick={onClickOpenCommentInput}>취소</span>
+                            type="select"
+                            size="medium"
+                          />
+                          <DefaultBtn
+                            text="취소"
+                            onClick={onClickOpenCommentInput}
+                            size="medium"
+                          />
                         </S.editorBtnArea>
                       </S.inputArea>
                     ) : (
@@ -118,8 +141,10 @@ export const Comment = (props) => {
                 </S.contentsArea>
               </S.comment>
             </>
-          ): <p>댓글이 삭제되었습니다.</p>}
-{/* 댓글에 새로운답글을 작성하는 영역 _____________________________ */}
+          ) : (
+            <p>댓글이 삭제되었습니다.</p>
+          )}
+          {/* 댓글에 새로운답글을 작성하는 영역 _____________________________ */}
           {!newReplyInfo && isOpensReplyArea && (
             <S.inputArea>
               <S.inputWrap>
@@ -137,87 +162,101 @@ export const Comment = (props) => {
                 <S.lineInput ref={replyTextRef} />
               </S.inputWrap>
               <S.editorBtnArea>
-                <span
+                <DefaultBtn
+                  text="확인"
                   onClick={() => postReply(idx, replyTextRef.current.value)}
-                >
-                  확인
-                </span>
-                <span onClick={onClickOpenReplyInput}>취소</span>
+                  type="select"
+                  size="medium"
+                />
+                <DefaultBtn
+                  text="취소"
+                  onClick={onClickOpenReplyInput}
+                  size="medium"
+                />
               </S.editorBtnArea>
             </S.inputArea>
           )}
-{/* 댓글에 새로운 답글이 작성되었을때 영역 _____________________________*/}
-          { newReplyInfo && (
+          {/* 댓글에 새로운 답글이 작성되었을때 영역 _____________________________*/}
+          {newReplyInfo && (
             <S.comment>
               <svg
-                  height="30px"
-                  viewBox="0 -960 960 960"
-                  width="30px"
-                  fill="black"
-                >
-                  <path d="m560-120-57-57 144-143H200v-480h80v400h367L503-544l56-57 241 241-240 240Z" />
-                </svg>
-            {/* 작성된 답글 이미지 영역 */}
-            <S.imgArea>
-              <Profile img={cookieGet("profile")} />
-            </S.imgArea>
+                height="30px"
+                viewBox="0 -960 960 960"
+                width="30px"
+                fill="black"
+              >
+                <path d="m560-120-57-57 144-143H200v-480h80v400h367L503-544l56-57 241 241-240 240Z" />
+              </svg>
+              {/* 작성된 답글 이미지 영역 */}
+              <S.imgArea>
+                <Profile img={cookieGet("profile")} />
+              </S.imgArea>
 
-            <S.contentsArea>
-              {/* 작성된 답글 이름, 작성된 답글 작성시간*/}
-              <S.contentsInfo>
-                <span>{newReplyInfo.nickname}</span>
-                <span>{parseTime(newReplyInfo.createdAt)}</span>
-                {/* 수정, 삭제, 버튼들 */}
-                <S.editorBtnListWrap>
-                  {/* 자신의 답글이면서, 수정버튼이 안눌렸다면 노출*/}
-                  { newReplyInfo.isMine && !isOpensReplyArea && (
-                    <span onClick={onClickOpenReplyInput}>답글수정</span>
-                  )}
-                  {/* 자신의 답글이라면 삭제버튼 항시노출 */}
-                  { newReplyInfo.isMine && (
-                    <span onClick={() => deleteCommentOrReply(newReplyInfo.idx, false)}>
-                      답글삭제
-                    </span>
-                  )}
-                </S.editorBtnListWrap>
-              </S.contentsInfo>
-              {/* 댓글내용 및 댓글수정 영역*/}
-              <S.contents>
-                {/* 수정버튼이 눌렸다면 */}
-                {isOpensReplyArea ? (
-                  <S.inputArea>
-                    <S.inputWrap>
-                      <S.lineInput
-                        defaultValue={newReplyInfo.textContent}
-                        ref={replyTextRef}
-                      />
-                    </S.inputWrap>
-                    <S.editorBtnArea>
+              <S.contentsArea>
+                {/* 작성된 답글 이름, 작성된 답글 작성시간*/}
+                <S.contentsInfo>
+                  <span>{newReplyInfo.nickname}</span>
+                  <span>{parseTime(newReplyInfo.createdAt)}</span>
+                  {/* 수정, 삭제, 버튼들 */}
+                  <S.editorBtnListWrap>
+                    {/* 자신의 답글이면서, 수정버튼이 안눌렸다면 노출*/}
+                    {newReplyInfo.isMine && !isOpensReplyArea && (
+                      <span onClick={onClickOpenReplyInput}>답글수정</span>
+                    )}
+                    {/* 자신의 답글이라면 삭제버튼 항시노출 */}
+                    {newReplyInfo.isMine && (
                       <span
                         onClick={() =>
-                          putCommentOrReply(newReplyInfo.idx, replyTextRef.current.value, false)
+                          deleteCommentOrReply(newReplyInfo.idx, false)
                         }
                       >
-                        확인
+                        답글삭제
                       </span>
-                      <span onClick={onClickOpenCommentInput}>취소</span>
-                    </S.editorBtnArea>
-                  </S.inputArea>
-                ) : (
-                  replyText ?? newReplyInfo.textContent
-                )}
-              </S.contents>
-            </S.contentsArea>
-          </S.comment>
+                    )}
+                  </S.editorBtnListWrap>
+                </S.contentsInfo>
+                {/* 댓글내용 및 댓글수정 영역*/}
+                <S.contents>
+                  {/* 수정버튼이 눌렸다면 */}
+                  {isOpensReplyArea ? (
+                    <S.inputArea>
+                      <S.inputWrap>
+                        <S.lineInput
+                          defaultValue={newReplyInfo.textContent}
+                          ref={replyTextRef}
+                        />
+                      </S.inputWrap>
+                      <S.editorBtnArea>
+                        
+                        <span
+                          onClick={() =>
+                            putCommentOrReply(
+                              newReplyInfo.idx,
+                              replyTextRef.current.value,
+                              false
+                            )
+                          }
+                        >
+                          확인
+                        </span>
+                        <span onClick={onClickOpenCommentInput}>취소</span>
+                      </S.editorBtnArea>
+                    </S.inputArea>
+                  ) : (
+                    replyText ?? newReplyInfo.textContent
+                  )}
+                </S.contents>
+              </S.contentsArea>
+            </S.comment>
           )}
         </>
       ) : (
-      <>
-{/* 답글일경우 영역 _____________________________ */}
-        {!isDeleteReply ? (
+        <>
+          {/* 답글일경우 영역 _____________________________ */}
+          {!isDeleteReply ? (
             <>
               <S.comment>
-              <svg
+                <svg
                   height="30px"
                   viewBox="0 -960 960 960"
                   width="30px"
@@ -261,14 +300,24 @@ export const Comment = (props) => {
                           />
                         </S.inputWrap>
                         <S.editorBtnArea>
-                          <span
+
+                        <DefaultBtn
+                            text="확인"
                             onClick={() =>
-                              putCommentOrReply(idx, commentTextRef.current.value, true)
+                              putCommentOrReply(
+                                idx,
+                                commentTextRef.current.value,
+                                true
+                              )
                             }
-                          >
-                            확인
-                          </span>
-                          <span onClick={onClickOpenCommentInput}>취소</span>
+                            type="select"
+                            size="medium"
+                          />
+                            <DefaultBtn
+                            text="취소"
+                            onClick={onClickOpenCommentInput}
+                            size="medium"
+                          />
                         </S.editorBtnArea>
                       </S.inputArea>
                     ) : (
@@ -278,10 +327,11 @@ export const Comment = (props) => {
                 </S.contentsArea>
               </S.comment>
             </>
-          ) : <p>답글이 삭제되엇습니다.</p>}
-      </>
-      )
-    }
+          ) : (
+            <p>답글이 삭제되엇습니다.</p>
+          )}
+        </>
+      )}
     </>
   );
 };

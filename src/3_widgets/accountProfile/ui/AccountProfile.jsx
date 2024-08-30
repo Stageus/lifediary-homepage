@@ -17,10 +17,10 @@ export const AccountProfile = ( props ) => {
 
   const { nickname, profileImg, subscribeCnt, diaryCnt, isSubscribed, accountIdx } = props;  
   const { isMyprifle } = usePageCheck();
-  const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( profileImg || profile );
+  const { selectImg, previewImg, onClickImg, onClickReset, profileRef } = useProfileImg( profileImg || profile );
   const [ isProfileSuccess, onClickProfileAgain, putProfileImg ] = usePutProfileImg();
   const { name, setName, nameEdit, onClickEdit } = useName();
-  const [ putName ] = usePutName();
+  const [ putName ] = usePutName( onClickEdit );
   const setMessage = useMessage( state => state.setMessage );
   const [ deleteAccount ] = useDeleteAccount();
 
@@ -35,6 +35,7 @@ export const AccountProfile = ( props ) => {
             </S.profileWrap>
             <label htmlFor="file" onClick={onClickProfileAgain}/>
             <input
+              ref={profileRef}
               id="file"
               type="file"
               accept=".jpg, .jpeg, .png, .gif"
@@ -68,20 +69,15 @@ export const AccountProfile = ( props ) => {
         <S.userInfo>
           {isMyprifle 
           ? (
-            // 이름을 변경하고 성공하면, input창을 닫아야하고
-            // 다시눌렀을시에는 열리도록해야함 useName쪽이라 조합해야할듯
             <>
               { nameEdit 
               ? <>
-                <NameInput name={name} setName={setName} initState={nickname}/>
+                <NameInput name={name} setName={setName} initState={ name ?? nickname}/>
                 <DefaultBtn
                   size="medium"
                   type={ name ? "select" : "disabled"}
                   text="저장"
-                  onClick={ ()=> {
-                    putName(name);
-                    onClickEdit();
-                  }}
+                  onClick={ ()=> putName(name)}
                 />
                 <DefaultBtn
                   size="medium"
@@ -108,7 +104,7 @@ export const AccountProfile = ( props ) => {
           ? <DefaultBtn 
             text="회원탈퇴" 
             size="medium"
-            onClick={()=> setMessage("정말 탈퇴하시겠습니까?",deleteAccount,true)}
+            onClick={()=> setMessage("정말 탈퇴하시겠습니까?", deleteAccount, true)}
             />
           : <SubscribeBtn isSubscribed={isSubscribed} accountIdx={accountIdx}/>
           }

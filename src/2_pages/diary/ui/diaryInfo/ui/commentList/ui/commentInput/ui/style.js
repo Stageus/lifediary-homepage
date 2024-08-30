@@ -4,7 +4,7 @@ const InputArea = styled.div`
     background-color: red;
     display: flex;
     align-items: center;
-    border: 1px solid ${( {theme} ) => theme.major};
+    border: 2px solid ${( {theme} ) => theme.major};
     border-radius: 10px;
     overflow: hidden;
     background-color: white;

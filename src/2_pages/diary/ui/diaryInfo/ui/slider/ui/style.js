@@ -59,7 +59,7 @@ const ItemPosition = styled.div`
 const Item = styled.div`
     width: 30px;
     height: 10px;
-    background-color: ${({$isSame, theme}) => $isSame ? theme.highlight : theme.white};
+    background-color: ${({$isSame, theme}) => $isSame ?theme.white :  theme.highlight };
     border-radius: 20px;
     cursor: pointer;
 `;

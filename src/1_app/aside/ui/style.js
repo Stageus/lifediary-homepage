@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 const Aside = styled.div`
+    padding: 10px;
     height: 100%;
-    background-color: ${({theme})=> theme.minor};
+    background-color: transparent;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 `;
 
 const BtnList = styled.div`

@@ -7,13 +7,13 @@ import { useScroll, useRoute } from "@shared/hook";
 
 export const AccountDiary = ( props ) => {
 
-  const [ isEnd, isLoading, diaryList, getMyDiary ] = useGetAccountDiary( props );
+  const [ isLoading, diaryList, getMyDiary ] = useGetAccountDiary( props );
   const [ watchRef ] = useScroll( getMyDiary );
   const { diaryRoute } = useRoute();
 
   return (
     <>
-      { diaryList.length ? (
+      { diaryList.length !== 0? (
         diaryList?.map((diary) => {
           return (
             <S.diaryItem key={diary.idx} onClick={() => diaryRoute(diary.idx)}>
@@ -30,9 +30,8 @@ export const AccountDiary = ( props ) => {
         <S.guideMessage>작성한 일기가 없습니다</S.guideMessage>
       )}
 
-      {!isEnd && diaryList && diaryList?.length % 10 === 0 && !isLoading && (
-        <div ref={watchRef}>연속</div>
-      )}
+      {!isLoading && <div ref={ watchRef }/>}
+      { isLoading ? <div>로딩중...</div> : null}
     </>
   );
 };

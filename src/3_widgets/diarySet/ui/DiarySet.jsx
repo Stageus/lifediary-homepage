@@ -20,7 +20,7 @@ export const DiarySet = ( props ) => {
     const [ tagList, setTagList ] = useState( tags );
     const { toggle, isToogle } = useToogle( isPublic );
     const { selectColor, changeColor, randomColor } = useColor( color );  
-    const { selectImg, deleteUrlList, onClickImg, onClickDeleteImg } = useImg( imgContents );
+    const { selectImg, deleteUrlList, onClickImg, onClickDeleteImg, profileRef} = useImg( imgContents );
 
     return(
        <S.diarySet>
@@ -61,6 +61,7 @@ export const DiarySet = ( props ) => {
                     {"이미지 (최대 3개)"}
                     <label htmlFor='file'>{"이미지 업로드"}</label>
                     <input 
+                        ref={profileRef}
                         type='file' 
                         id='file' 
                         accept=".jpg, .jpeg, .png, .gif"

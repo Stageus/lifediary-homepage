@@ -3,36 +3,37 @@ import { useEffect, useRef } from "react";
 export const useScroll = ( callBack ) => {
     
     const watchRef = useRef( null );
+    const observeRef = useRef( null );
+
+    const observeCallBack = ( entries ) => {
+
+        entries.forEach((entry) => {
+
+            if ( entry.isIntersecting ) {                
+                callBack();
+            }
+        })
+    };
+
+    const observeOptions = {
+        threshold: 0.1,
+    };
 
     useEffect(()=>{
 
         if ( !watchRef.current ) return;
 
-        const observeCallBack = ( entries ) => {
-            const target = entries[0];
-            // console.log(target);
-            
-            if ( target.isIntersecting ) {
-                // console.log("보이누");
-                callBack();
-            }
-        };
+        observeRef.current =  new IntersectionObserver( observeCallBack ,observeOptions );
+        observeRef.current.observe(watchRef.current);
 
-        const observeOptions = {
-            root: null,
-            threshold: 1,
-        };
-        
-        const observer = new IntersectionObserver( observeCallBack ,observeOptions );
-        if ( watchRef.current ) observer.observe(watchRef.current);
 
         return () => {
-
-            if ( watchRef.current ) observer.unobserve(watchRef.current);
-            observer.disconnect(watchRef.current);
+            if ( watchRef.current ){
+                observeRef.current.unobserve(watchRef.current);
+            }
         }
 
-    },[ callBack ]);
+    },[callBack]);
 
-    return [ watchRef ];
+    return [ watchRef];
 }

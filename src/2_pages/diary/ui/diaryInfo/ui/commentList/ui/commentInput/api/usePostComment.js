@@ -6,7 +6,7 @@ import { useMessage } from "@shared/store";
 import { commentValidation } from "@shared/consts/validation";
 
 
-export const usePostComment = ( changeComment ) => {
+export const usePostComment = ( changeComment, commentTextRef ) => {
 
     const [ fetchData, baseFetch ] = useFetch();
     const { cookieGet } = useCookie();
@@ -16,6 +16,7 @@ export const usePostComment = ( changeComment ) => {
 
     const onClickCommentSubmit = ( diaryIdx, commentContent) => {
         if ( !commentValidation(commentContent) ) return setMessage("댓글은 최소 3자 이상 ~ 300자 이하 입니다.");
+        if ( !cookieGet("token") ) return setMessage("로그인이 필요한 서비스입니다.\n로그인창으로 이동하시겠습니까?", loginRoute, true);
 
         saveValueRef.current = commentContent;
         baseFetch(`comment?diaryIdx=${diaryIdx}`, {method:"POST", data:{"textContent":commentContent}}, cookieGet("token"));
@@ -26,6 +27,7 @@ export const usePostComment = ( changeComment ) => {
 
         switch ( fetchData.status ) {
             case 200:
+                commentTextRef.current.value = null;
                 const profileImg = cookieGet("profile");
                 const date = new Date();
                 const newCommentIdx = fetchData.data.insertedIdx;

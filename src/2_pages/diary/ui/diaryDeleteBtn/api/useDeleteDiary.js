@@ -1,5 +1,6 @@
 // Npm
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // Layer
 import { useFetch, useCookie, useRoute } from "@shared/hook";
 import { useMessage } from "@shared/store";
@@ -10,6 +11,7 @@ export const useDeleteDiary = ()=>{
     const { cookieGet } = useCookie();
     const { diaryRoute, errorRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage);
+    const navigate = useNavigate();
     
 
     const deleteDiary = ( diaryIdx ) => {
@@ -21,7 +23,7 @@ export const useDeleteDiary = ()=>{
 
         switch ( fetchData.status ) {
             case 200:
-                // window.location을 사용해야하나? 질문 - 
+                navigate(0);
                 setMessage("일기가 삭제되었습니다", diaryRoute);
                 break;
 

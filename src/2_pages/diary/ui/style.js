@@ -3,35 +3,41 @@ import styled from "styled-components";
 // 리스트 부모
 const Diary = styled.div`
     height: calc(100vh - 80px);
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    
 `; 
 
 // 리스트
 const ScrollItem = styled.div`
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     flex: 1 0 100%;
-    padding: 20px 15px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-y: visible;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 `;
 
 // 리스트 헤더
 const DiaryHeader = styled.div`
     display: flex;
     justify-content: space-between;
+    padding: 4px;
+    border-radius: 8px;
 `;
 
 const DiaryHeaderWrap = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;;
-    
+    gap: 10px;
+    padding: 1px 10px;
+    border: 3px solid ${({theme}) => theme.minor};
+    border-radius: 8px;
+    color: ${({theme}) => theme.major};
+    font-weight: bold;
 `;
 
 const UserImg = styled.div`
@@ -39,19 +45,17 @@ const UserImg = styled.div`
     height: 34px;
     display: flex;
     border-radius: 50%;
-    background-color: red;
+    
     cursor: pointer;
     overflow: hidden;
 `;
 
 const UserName = styled.div`
-    font-size: ${({theme})=> theme.fontSize.base};
-    color: ${({theme}) => theme.black};
+    font-size: ${({theme})=> theme.fontSize.base}; 
 `;
 
 const CreateDate = styled.div`
     font-size: ${({theme})=> theme.fontSize.medium};
-    color: ${({theme}) => theme.black};
 `;
 
 const SubscribeWrap = styled.div`

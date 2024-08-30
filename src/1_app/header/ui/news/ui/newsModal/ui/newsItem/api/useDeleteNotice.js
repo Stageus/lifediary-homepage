@@ -2,15 +2,18 @@
 import { useState, useEffect } from "react";
 // Layer
 import { useFetch, useCookie } from "@shared/hook";
+import { useMessage } from "@shared/store";
 
 export const useDeleteNotice = () => {
 
     const [ fetchData, baseFetch ] = useFetch();
-    const { handleGetCookie } = useCookie();
+    const { cookieGet } = useCookie();
     const [ isDelete, setIsDelete ] = useState( true );
+    const setMessage = useMessage( state => state.setMessage );
+    
 
     const deleteNotice = ( noticeIdx ) => {
-        baseFetch(`notice/${noticeIdx}`, {method: "DELETE"}, handleGetCookie());
+        baseFetch(`notice/${noticeIdx}`, {method: "DELETE"}, cookieGet("token"));
     };
 
     useEffect( () => {
@@ -22,28 +25,21 @@ export const useDeleteNotice = () => {
                 break;
 
             case 400:
-                // commonModal 적용 예정
-                console.log("잠시후에 다시 시도해주세요");
+                setMessage("잠시후 다시 시도해주세요!")
                 break;
 
             case 401:
-                // commonModal 적용 예정
-                console.log("회원만 가능한 접근입니다.");
+                setMessage("본인만 삭제 할수 있습니다.");
                 break;
 
             case 404:
-                // commonModal 적용 예정
-                console.log("이미 삭제된 알림입니다.");
+                setMessage("이미 삭제된 알람입니다.");
                 break;
 
             case 500:
-                // commonModal 적용 예정
-                console.log("잠시후에 다시 시도해주세요");
+                setMessage("500 서버에러");
                 break;
-            // 500 에러와 같이 사용?
-            default:
-                console.log("예상하지 못한 상황")
-        }
+        };
 
     },[ fetchData ]);
 

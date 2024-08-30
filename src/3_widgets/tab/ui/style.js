@@ -7,7 +7,7 @@ const tabArea = styled.div`
 const tabHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid ${({ theme }) => theme.major};
+  border-bottom: 2px solid ${({ theme }) => theme.major}; 
 `;
 
 const tabBtnWrap = styled.div`
