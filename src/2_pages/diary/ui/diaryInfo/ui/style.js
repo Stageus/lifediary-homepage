@@ -29,6 +29,7 @@ const DiaryContent = styled.div`
     flex: 1 0 100px;
     overflow-y: scroll;
     padding: 2px;
+    line-height: 150%;
 `;
 
 // CommentPart _________________

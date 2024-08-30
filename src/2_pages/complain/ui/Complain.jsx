@@ -33,19 +33,21 @@ export const Complain = () => {
           </thead>
           <tbody>
             {/* 신고 리스트*/}
-            {complainList?.reports.map((list, idx) => {
+            { complainList?.reports.map((list, idx) => {
               return <ComplainItem key={idx} {...list} order={idx} />;
             })}
+          <S.notFound>신고리스트가 존재하지 않습니다</S.notFound>
           </tbody>
         </S.Table>
         <S.PageBtnContainer>
           {/* 왼쪽버튼 */}
-          <S.leftBtn 
+          { complainList && <S.leftBtn 
             $isdisabled={currentPageNum === 1}
             onClick={() => currentPageNum === 1 ?  "" : complainRoute( currentPageNum - 1 )}
             >
             {"◀️"}
-          </S.leftBtn>
+          </S.leftBtn>}
+          
 
           {/* 신고리스트 개수에 대한 번호들 */}
           <S.PageBtnList>
@@ -63,12 +65,13 @@ export const Complain = () => {
           </S.PageBtnList>
 
           {/* 오른쪽 버튼 */}
-          <S.rightBtn 
+          { complainList && <S.rightBtn 
             $isdisabled={ currentPageNum >= +complainList?.maxPage}
             onClick={() => currentPageNum >= +complainList?.maxPage ? "" : complainRoute( currentPageNum + 1)}
             >
             {"▶️"}
-          </S.rightBtn>
+          </S.rightBtn>}
+          
         </S.PageBtnContainer>
       </S.ComplainContent>
     </>

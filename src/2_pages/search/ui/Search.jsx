@@ -5,13 +5,15 @@ import { useGetSearchList } from "../api/useGetSearchList";
 import { Thumbnail, Profile, Icon } from "@shared/ui";
 import { useScroll, useRoute } from "@shared/hook";
 import { parseTime } from "@shared/util";
+import { useCookie } from "@shared/hook";
 
 
 export const Search = () => {
 
   const [ getSearchList, diaryList, isLoading ] = useGetSearchList();
   const [ watchRef ] = useScroll( getSearchList );
-  const { userProfileRoute } = useRoute();
+  const { userProfileRoute, myProfileRoute } = useRoute();
+  const { cookieGet } = useCookie();
 
   return (
     <S.search>
@@ -19,7 +21,7 @@ export const Search = () => {
         return (
           <S.diary key={idx}>
             <S.headerArea>
-              <S.accountImgWrap onClick={()=>userProfileRoute(diary.accountIdx)}>
+              <S.accountImgWrap onClick={()=> cookieGet("accountIdx") === diary.accountIdx ? myProfileRoute() :userProfileRoute(diary.accountIdx)}>
                 <Profile img={diary.profileImg} />
               </S.accountImgWrap>
 
@@ -55,7 +57,7 @@ export const Search = () => {
         );
       }) : <S.errorArea> { `등록된 일기가 존재하지 않습니다 ❌` }</S.errorArea>}
       
-      { diaryList.length >= 10 && !isLoading && <div ref={ watchRef }>워칭</div>}
+      { diaryList.length >= 10 && !isLoading && <div ref={ watchRef }/>}
       { isLoading ? <div>로딩중...</div> : null}
       
     </S.search>

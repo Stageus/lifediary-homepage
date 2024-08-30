@@ -7,7 +7,8 @@ const NewsItem = styled.div`
     align-items: center;
     border-radius: 5px;
     padding: 5px;
-    cursor: pointer;
+    
+    cursor: ${({$isDelete}) => $isDelete ? "pointer" : "not-allowed;"};
 
     &:hover {
         background-color: ${( {theme }) => theme.white};

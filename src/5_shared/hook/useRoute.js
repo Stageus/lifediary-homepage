@@ -17,7 +17,7 @@ export const useRoute = () => {
         const encodedTags = tags.map(tag => encodeURIComponent(tag));
         navigate( `/${paths.SEARCH}?tags=${encodedTags}` );
     };
-    const myProfileRoute = () => navigate( paths.MYPROFILE );
+    const myProfileRoute = () => navigate( `/${paths.MYPROFILE}` );
     const userProfileRoute = ( accountIdx ) => navigate( `/${paths.USERPROFILE}/${accountIdx}` );
     const loginRoute = () => navigate( `/${paths.LOGIN}` );
     const signupRoute = ( googleInfo ) => {

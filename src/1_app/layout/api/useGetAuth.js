@@ -42,6 +42,7 @@ export const useGetAuth = () => {
         // 권한은 신고페이지에 대한 접근권한때문에 저장
         // 프로필이미지는 댓글에 답글달경우에, ux적으로 이용하기 위해
         cookieSet("profile",mapperData.profileImg);
+        cookieSet("accountIdx",mapperData.accountIdx);
         cookieSet("permission",mapperData.permission);
         setUserInfo( mapperData );
         break;

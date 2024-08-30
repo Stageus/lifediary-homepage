@@ -9,7 +9,9 @@ export const NewsModal = () => {
 
   const [ getNoticeList, noticeList, isLoading ] = useGetNoticeList();
   const [ watchRef ] = useScroll(getNoticeList);
-  
+
+  console.log(noticeList);
+
   return (
     <>
       <S.NewsModal>

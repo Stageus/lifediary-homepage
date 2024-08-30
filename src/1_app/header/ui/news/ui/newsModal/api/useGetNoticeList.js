@@ -23,8 +23,8 @@ export const useGetNoticeList = () => {
     const noticeTypeText = {
       newComment: "님이 새로운 댓글을 달았습니다.",
       newDiary: "님이 새로운 일기를 작성했습니다.",
-      deletedMyDiary: "내일기가 신고받아 삭제되었습니다.",
-      deletedDiary: "신고한 일기가 삭제되었습니다.",
+      deletedMyDiary: "내일기가 신고받아 삭제되었습니다.", // -> 클릭 or 404
+      deletedDiary: "신고한 일기가 삭제되었습니다.",// -> 클릭 or 404
       recoveredDiary: "삭제된 내일기가 복구 되었습니다",
     };
 
@@ -34,6 +34,7 @@ export const useGetNoticeList = () => {
       nickname: item.nickname,
       noticeType: noticeTypeText[item.noticeType],
       createdAt: parseTime(item.createdAt),
+      isRoutes: item.noticeType,
     }))
 
     return prevDataWrap;

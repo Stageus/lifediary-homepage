@@ -41,7 +41,7 @@ const Item = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 400px;
+    height: 300px;
     overflow: hidden;    
     
     &:hover {
@@ -54,7 +54,7 @@ const Item = styled.div`
 
 const ThumbnailImgWrap = styled.div`
     flex-grow: 1;
-    max-height: 300px;
+    max-height: 200px;
     padding: 10px;
 `;
 
@@ -75,7 +75,7 @@ const UserInfo = styled.div`
 
 
 const ProfileImgWrap = styled.div`
-    min-width: 30px;
+    width: 30px;
     height: 30px;
     border-radius: 50%;
     overflow: hidden;

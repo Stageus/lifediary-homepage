@@ -62,6 +62,8 @@ export const Comment = (props) => {
     onClickOpenReplyInput
   );
 
+  console.log(props)
+
   return (
     <>
       {/* 댓글일 경우 영역 _____________________________ */}

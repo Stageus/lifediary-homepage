@@ -28,7 +28,6 @@ export const Header = ( props ) => {
   return (
     <S.Header>
       <S.logoArea onClick={homeRoute}>
-        {/* <img src={logo} /> */}
         <span>{"LifeDiary"}</span>
       </S.logoArea>
 

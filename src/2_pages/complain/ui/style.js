@@ -15,6 +15,7 @@ const Table = styled.table`
     padding: 10px;
     text-align: center;
     border-collapse: collapse;
+    position: relative;
 
     th{
         padding: 15px 5px;
@@ -30,6 +31,13 @@ const Table = styled.table`
         width: fit-content;
     }
 
+`;
+
+const notFound = styled.div`
+    position: absolute;
+    bottom: -100px;
+    right: 0;
+    left: 0;
 `;
 
 const number = styled.th`
@@ -86,5 +94,6 @@ export const S = {
     PageBtnList,
     number,
     thState,
-    Content
+    Content,
+    notFound
 }

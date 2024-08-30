@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useFetch, useCookie, useRoute } from "@shared/hook";
 import { useMessage } from "@shared/store";
 
@@ -9,9 +8,9 @@ export const useDeleteAccount = ()=> {
     const { cookieGet, cookieRemove } = useCookie();
     const { errorRoute, loginRoute } = useRoute();
     const setMessage = useMessage( state => state.setMessage );
-    const navigate = useNavigate();
     
     const deleteAccount = () => {
+        if ( !cookieGet("token") ) return setMessage("회원탈퇴는 본인만 가능합니다");
         baseFetch("account", {method:"DELETE"}, cookieGet("token"));
     };
 
@@ -21,8 +20,7 @@ export const useDeleteAccount = ()=> {
         switch ( fetchData.status ) {
             case 200:
                 cookieRemove();
-                setMessage("이용해주셔서 감사합니다\n로그인화면으로 이동합니다",loginRoute);
-                navigate(0);
+                setMessage("이용해주셔서 감사합니다\n로그인화면으로 이동합니다",window.location.href = '/login');
                 break;
 
             case 401:

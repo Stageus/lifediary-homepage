@@ -10,7 +10,7 @@ export const MyLikeDiary = () => {
   const [ isLoading, diaryList, getMyLikeDiary ] = useGetMyLikeDiary();
   const [ watchRef ] = useScroll( getMyLikeDiary );
   const { diaryRoute } = useRoute();
-  // console.log(diaryList)
+  // console.log("좋아요일기")
 
   return (
     <>

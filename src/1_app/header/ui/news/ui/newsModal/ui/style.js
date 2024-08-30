@@ -8,7 +8,6 @@ const NewsModal = styled.div`
     width: 350px;
     height: 400px;
     transform: translateX(-50%);
-    /* background-color: ${( {theme }) => theme.white}; */
     background-color: white;
     box-shadow: 3px 3px 8px ${( {theme }) => theme.gray};
     border-radius: 10px;

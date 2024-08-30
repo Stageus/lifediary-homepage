@@ -8,7 +8,7 @@ import { parseTime } from "@shared/util";
 
 export const useGetMyDiary = (props) => {
 
-  const { dateRange } = props;
+  const { dateRange, isClicked } = props;
   const [fetchData, baseFetch] = useFetch();
   const { cookieGet } = useCookie();
   const { errorRoute, loginRoute } = useRoute();
@@ -53,14 +53,16 @@ export const useGetMyDiary = (props) => {
   };
 
 useEffect(() => {
-  if (dateRange) {
+  if ( dateRange ) {
+    console.log(dateRange);
     setDiaryList([]);
     setIsEnd(false);
     pageNumRef.current = 1;
     getMyDiary();
   }
   setIsEnd(false);
-}, [dateRange]);
+
+}, [isClicked]);
 
   useEffect(() => {
     if (!fetchData) return;
@@ -70,8 +72,15 @@ useEffect(() => {
     
     switch (fetchData.status) {
       case 200:
+        
+        // 해당 부분 처리방식이 이상함
         pageNumRef.current = pageNumRef.current + 1;
-        setDiaryList([...diaryList, ...mapperData]);
+
+        if ( fetchData.data.length <= 10 ) {
+          setDiaryList(mapperData);  
+        } else {
+          setDiaryList([...diaryList, ...mapperData]);
+        }
         break;
 
       case 400:

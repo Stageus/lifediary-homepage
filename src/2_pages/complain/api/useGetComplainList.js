@@ -18,7 +18,7 @@ export const useGetComplainList = () => {
 
     const mapper = ( resData ) => {
 
-        const mapperWrap = resData?.reports.map( res => (
+        const mapperWrap = resData?.reports?.map( res => (
             {
                 idx: res.idx,
                 textContent: res.textContent,
@@ -30,7 +30,7 @@ export const useGetComplainList = () => {
             }
         ))
     
-        return mapperWrap.length !== 0 && {reports: [...mapperWrap], maxPage: resData.maxPage};
+        return {reports: [...mapperWrap], maxPage: resData.maxPage};
     };
 
     const getComplainList = () => { 
@@ -46,10 +46,9 @@ export const useGetComplainList = () => {
     useEffect(() => {
         if ( !fetchData ) return;
 
-        const mapperWrap = mapper( fetchData.data);
-
         switch ( fetchData.status ) {
             case 200:
+                const mapperWrap = mapper( fetchData.data);
                 setComplainList( mapperWrap );
                 break;
             case 400:

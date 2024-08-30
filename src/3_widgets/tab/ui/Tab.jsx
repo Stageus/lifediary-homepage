@@ -12,7 +12,7 @@ export const Tab = ( props ) => {
   const { components, tabLabel } = props;
   const dateRef = useRef(null);
   const [ tabNum, setTabNum ] = useState(0);
-  const { dateRange, handleButtonClick } = useSubmit( dateRef );
+  const { dateRange, handleButtonClick, isClicked } = useSubmit( dateRef );
 
   return (
     <S.tabArea>
@@ -42,7 +42,7 @@ export const Tab = ( props ) => {
       </S.tabHeader>
       <S.tabContent>
         { 
-          components.map( (Component, idx) => tabNum === idx ? <Component key={idx} dateRange={dateRange}/> : null)
+          components.map( (Component, idx) => tabNum === idx ? <Component key={idx} dateRange={dateRange} isClicked={isClicked}/> : null)
          }
       </S.tabContent>
     </S.tabArea>

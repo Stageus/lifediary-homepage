@@ -104,7 +104,7 @@ export const AccountProfile = ( props ) => {
           ? <DefaultBtn 
             text="회원탈퇴" 
             size="medium"
-            onClick={()=> setMessage("정말 탈퇴하시겠습니까?",deleteAccount,true)}
+            onClick={()=> setMessage("정말 탈퇴하시겠습니까?", deleteAccount, true)}
             />
           : <SubscribeBtn isSubscribed={isSubscribed} accountIdx={accountIdx}/>
           }

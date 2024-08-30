@@ -7,18 +7,20 @@ import { useRoute } from "@shared/hook";
 
 export const NewsItem = ( props ) => {
   
-  const { idx, nickname, diaryIdx, noticeType, createdAt } = props.item;
+  const { idx, nickname, diaryIdx, noticeType, createdAt, isRoutes } = props.item;
   const { diaryRoute } = useRoute();
   const [ deleteNotice, isDelete] = useDeleteNotice();
 
   return (
     <>
       {isDelete ? (
-        <S.NewsItem>
+        <S.NewsItem 
+        $isDelete={isRoutes !== "deletedMyDiary" || isRoutes !== "deletedDiary"}
+        onClick={ () => isRoutes !== "deletedMyDiary" && isRoutes !== "deletedDiary" && diaryRoute( diaryIdx )}>
           <S.NewsInfo>
             {nickname 
             ? (
-              <S.UserInfo onClick={ () => diaryRoute( diaryIdx )}>
+              <S.UserInfo>
                 <S.Name>{ nickname }</S.Name>
               </S.UserInfo>
             ) 

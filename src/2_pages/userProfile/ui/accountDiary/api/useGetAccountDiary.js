@@ -61,7 +61,7 @@ export const useGetAccountDiary = (props) => {
       setDiaryList([]);
       setIsEnd(false);
       pageNumRef.current = 1;
-      getMyDiary();
+      getAccountDiary();
     }
     setIsEnd(false);
   }, [dateRange]);

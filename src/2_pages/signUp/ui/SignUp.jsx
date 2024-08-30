@@ -25,7 +25,7 @@ export const SignUp = () => {
       <S.innerBox>
         {/* 로고영역 */}
         <S.logoArea onClick={homeRoute}>
-          <img src={logo} />
+        <span>{"LifeDiary"}</span>
         </S.logoArea>
 
         {/* 프로필 영역 */}
