@@ -25,7 +25,7 @@
 
 |Backend|Backend|
 | :---: | :---: |
-|김영선(https://github.com/JangIkIk)|박세현(https://github.com/hellosehyun)|
+|[김영선](https://github.com/JangIkIk)|[박세현](https://github.com/hellosehyun)|
 
 <br/>
 
