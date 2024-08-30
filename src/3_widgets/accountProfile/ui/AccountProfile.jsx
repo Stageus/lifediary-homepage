@@ -17,12 +17,14 @@ export const AccountProfile = ( props ) => {
 
   const { nickname, profileImg, subscribeCnt, diaryCnt, isSubscribed, accountIdx } = props;  
   const { isMyprifle } = usePageCheck();
-  const { selectImg, previewImg, onClickImg, onClickReset } = useProfileImg( profileImg || profile );
+  const { selectImg, previewImg, onClickImg, onClickReset, profileRef } = useProfileImg( profileImg || profile );
   const [ isProfileSuccess, onClickProfileAgain, putProfileImg ] = usePutProfileImg();
   const { name, setName, nameEdit, onClickEdit } = useName();
   const [ putName ] = usePutName( onClickEdit );
   const setMessage = useMessage( state => state.setMessage );
   const [ deleteAccount ] = useDeleteAccount();
+
+  console.log(profileRef.current)
 
   return (
     <S.userInfoArea>
@@ -35,6 +37,7 @@ export const AccountProfile = ( props ) => {
             </S.profileWrap>
             <label htmlFor="file" onClick={onClickProfileAgain}/>
             <input
+              ref={profileRef}
               id="file"
               type="file"
               accept=".jpg, .jpeg, .png, .gif"

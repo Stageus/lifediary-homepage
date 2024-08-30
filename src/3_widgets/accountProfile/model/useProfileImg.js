@@ -1,5 +1,5 @@
 // Npm
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // Layer
 import { imgValidation } from "@shared/consts/validation";
 import { useMessage } from "@shared/store";
@@ -9,6 +9,7 @@ export const useProfileImg = ( urlImg ) => {
     const [ selectImg, setSelectImg ] = useState( null );
     const [ previewImg, setPreviewImg ] = useState( null );
     const setMessage = useMessage( state => state.setMessage );
+    const profileRef = useRef(null);
     
     const onClickImg = ( e ) => {
         setSelectImg( null );
@@ -30,12 +31,13 @@ export const useProfileImg = ( urlImg ) => {
     const onClickReset = () => {
         setPreviewImg(urlImg);
         setSelectImg( null );
+        profileRef.current.value = null;
     };
 
     useEffect(()=>{
         setPreviewImg(urlImg);
     },[urlImg])
 
-    return { selectImg, previewImg, onClickImg, onClickReset };
+    return { selectImg, previewImg, onClickImg, onClickReset, profileRef };
 
 };
